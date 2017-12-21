@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Jörn Alexander Quent's Open Lab Diary</title>
+<meta property="og:title" content="Jörn Alexander Quent's Open Lab Diary" />
+<meta property="og:locale" content="en_GB" />
+<meta name="description" content="Open Lab Diary" />
+<meta property="og:description" content="Open Lab Diary"" />
+<meta property="og:site_name" content="Jörn Alexander Quent's Open Lab Diary" />
+<!-- End Jekyll SEO tag -->
+    </head>
+    <body>
+        <h1>Jörn Alexander Quent's Open Lab Diary</h1>
+        <p style="font-size: 10pt">
+        This diary is part of my website <a href="">jaquent.me</a>. Please be aware that this is work in progress. For more information on this diary see <a href="">here</a>. The content for this site is <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>. The <a href="https://github.com/jaquent/jaquent.github.io">code</a> for this site is <a href="https://github.com/jaquent/jaquent.github.io/blob/master/LICENSE">GPL-2.0</a>.
+        </p>
