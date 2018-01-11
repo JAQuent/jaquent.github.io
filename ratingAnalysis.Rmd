@@ -89,7 +89,7 @@ ggplot(locationRatingsDF, aes(ratings)) + geom_histogram(binwidth = 1) + theme(p
         coord_cartesian(xlim = c(-100, 100), expand = FALSE)
 ```
 
-The ratings are spread across the scale. However it is also interesting to look at the individual distributions. There were I plot one histograms for each participant. 
+The ratings are spread across the scale. However it is also interesting to look at the individual distributions. Therefor I plot one histograms for each participant. 
 
 ```{r}
 ggplot(locationRatingsDF, aes(ratings)) + facet_grid(. ~ ID) + geom_histogram() + theme(panel.margin = unit(1, "cm"), text = element_text(size = 12)) + 
@@ -121,6 +121,7 @@ sdObjectRatingsDF       <- data.frame(Object = factor(1:20, labels = objectNames
 plot1 <- ggplot(averageLocationRatingsDF, aes(Location, Object)) + geom_tile(aes(fill = Ratings)) + scale_fill_gradient(low = "white", high = "red") + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(title = 'Average: Object/location') + theme(legend.position = 'none')
 
 plot2 <- ggplot(averageObjectRatingsDF, aes(x = 1, y = Object)) + geom_tile(aes(fill = Ratings)) + scale_fill_gradient(low = "white", high = "red") + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(x = '', title = 'Overall') + theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(), plot.margin=unit(c(0.2, 0, 0.62, 0),"cm"))
+
 grid.arrange(plot1, plot2, ncol = 2, widths = c(5.5, 1))
 ```
 
