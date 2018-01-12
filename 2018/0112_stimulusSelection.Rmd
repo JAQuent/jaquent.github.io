@@ -1,0 +1,140 @@
+---
+title: "Stimulus selection"
+author: "Jörn Alexander Quent"
+date: "12 January 2018"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Introduction
+The aim is to select a certain number (20) of combinations of objects and locations that cover the whole range of expectancy values. 
+The previous analysis of this data set can be found [here](https://jaquent.github.io/2018/0110_ratingAnalysis.html).
+The code for the task can be found [here](https://github.com/JAQuent/ratingStudy).
+
+## Used libraries and functions
+```{r}
+library(ggplot2)
+```
+
+## Loading the rating data
+I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants. 
+
+```{r}
+# Prepare
+subNo           <- 1:6
+N               <- length(subNo)
+locationRatings <- array(data = NA, dim = c(20, 20, N))
+
+# Sequently loading data
+for(i in 1:N){
+  locationRatings[,,i] <- matrix(scan(paste('data/locationRatings_', as.character(subNo[i]) ,'.dat', sep = '')), byrow = TRUE, ncol = 20)
+}
+```
+
+## Raking the ratings within each participants
+Now I will rank all ratings within each participant and to create one matrix containing the averaged ranks. I first try to use *order()* to rank this data, but this does not work at all and then I found that there is function called *rank()*, which does the job perfectly. 
+
+```{r}
+# Calculate ranks
+rankedRatings <- array(data = NA, dim = c(20, 20, N))
+
+for(i in 1:N){
+  rankedRatings[,,i] <- rank(locationRatings[,,i])
+}
+
+
+# Calculate mean rank per object/ location
+meanRankedRatings <- apply(rankedRatings, 1:2, mean)
+
+# Plot heatmap
+objectNames <- c('microwave','kitchen roll','saucepan', 'toaster','fruit bowl','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
+
+meanRankedRatingsDF <- data.frame(Object = rep(factor(1:20, labels = objectNames), 20), Location = as.factor(rep(1:20, each = 20)), Ranks = c(meanRankedRatings))
+
+ggplot(meanRankedRatingsDF, aes(Location, Object)) + geom_tile(aes(fill = Ranks)) + scale_fill_gradient(low = "white", high = "red") + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(title = 'Mean ranks')
+```
+
+The heatmap basically looks exactly like the heatmap based on the mean unranked ratings (to be found [here](https://jaquent.github.io/2018/0110_ratingAnalysis.html)).
+
+## Selection of object/location combinations
+Now, my aim is to find the best set of object/location combinations. The first step is to find a location for each object in a way that ensures that range of expectancy values spreads across the whole scale. The aim is to find a set of values that closely matches our linearly spaced target spread:
+
+```{r}
+targetSpread <- seq(1, 400,length = 20)
+targetSpread
+```
+
+I try that with a brute force approach by randomly selecting twenty object/location combinations and has the lowest summed squared deviation from our target spread (see above).  
+
+```{r}
+# Preparation
+numberObjects <- 20
+iterations    <- 100000 
+locations     <- matrix(NA, nrow = numberObjects, ncol = iterations)
+meanRanks     <- matrix(NA, nrow = numberObjects, ncol = iterations)
+differences   <- rep(NA, iterations)
+
+# Sample differences 
+for(i in 1:iterations){
+  locations[,i] <- sample(1:numberObjects)
+  for(j in 1:numberObjects){
+    meanRanks[j, i] <- meanRankedRatings[j, locations[j,i]] # Extracting the mean ranks
+  }
+  differences[i] <- sum((sort(meanRanks[, i]) - targetSpread)^2) # Calculating summed squared deviation
+}
+
+```
+
+The lowest summed squared deviation is `r min(differences)` found after `r iterations` iterations.
+
+
+```{r}
+round(sort(meanRanks[, differences == min(differences)]))
+targetSpread
+```
+
+The selected combination comes very close to the target spread as you see above where I juxtaposed both. 
+
+```{r}
+# Visualisation
+ggplot(data.frame(differences), aes(differences)) + geom_histogram(binwidth = 500) + theme(panel.margin = unit(1, "cm"), text = element_text(size = 12)) + 
+        labs(y = 'Number of occurences', x = 'Summed squared deviation', title = paste('Distribution of summed squared deviations after', iterations, 'iterations')) + coord_cartesian(xlim = c(0, 109000), expand = FALSE)
+```
+
+## Selection of foils
+Now it is time to find the two foils for each object that have the closest in terms of expectancy to the selected test location. 
+
+```{r}
+selectedLocations <- locations[, differences == min(differences)]
+foils             <- matrix(NA, nrow = numberObjects, ncol = 2)
+foilsRank         <- matrix(NA, nrow = numberObjects, ncol = 2)
+
+for(i in 1:numberObjects){
+  absDifference      <- abs(meanRankedRatings[i, selectedLocations[i]] - meanRankedRatings[i,]) # Calculating the absolute difference
+  foil1absDifference <- sort(abs(meanRankedRatings[i, selectedLocations[i]] - meanRankedRatings[i,]))[2] # Sort differences and compare to select location and select nearest
+  foil2absDifference <- sort(abs(meanRankedRatings[i, selectedLocations[i]] - meanRankedRatings[i,]))[3] # Sort differences and compare to select location and select second neasted
+  # The following sections jsut deals if the case when more than one values is the nearest
+  if(length(c(1:20)[absDifference == foil1absDifference]) == 1){
+     foils[i, 1]     <-  c(1:20)[absDifference == foil1absDifference][1] #
+     foils[i, 2]     <-  c(1:20)[absDifference == foil2absDifference][1]
+     foilsRank[i, 1] <- meanRankedRatings[i, absDifference == foil1absDifference][1]
+     foilsRank[i, 2] <- meanRankedRatings[i, absDifference == foil2absDifference][1]
+  } else if(length(c(1:20)[absDifference == foil1absDifference]) == 2){
+     foils[i, 1]     <-  c(1:20)[absDifference == foil1absDifference][1]
+     foils[i, 2]     <-  c(1:20)[absDifference == foil2absDifference][2]
+     foilsRank[i, 1] <- meanRankedRatings[i, absDifference == foil1absDifference][1]
+     foilsRank[i, 2] <- meanRankedRatings[i, absDifference == foil2absDifference][2]
+  } else {
+    error('Too many values')
+  }
+}
+```
+
+## Final selection
+```{r}
+finalSelection <- data.frame(Object = objectNames, Location = selectedLocations, olRank = meanRanks[, differences == min(differences)], foil1 = foils[, 1], foil1Rank = foilsRank[,1], foil2 = foils[, 2], foil2Rank = foilsRank[, 2])
+
+finalSelection[order(finalSelection$olRank),]
+```
