@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 # Introduction
-On Friday I found a good combination of objects and locations (see [here](https://jaquent.github.io/2018/0112_stimulusSelection.html)). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calulate a repeated measure ANOVA and visualise it.  
+On Friday I found a good combination of objects and locations (see [here](https://jaquent.github.io/2018/0112_stimulusSelection.html)). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.  
 
 ## Used libraries and functions
 ```{r}
@@ -81,4 +81,4 @@ ggplot(data = dataLong, aes(x = Type, y = Rank)) + geom_jitter(width = 0.2)
 ```
 
 ## Conclusion
-Both the ANOVA and the visualiasation shows that the ranks of targets and foils do not differ from eachother. Therefore the next step is to try the set in VR. 
+Both the ANOVA and the visualization shows that the ranks of targets and foils do not differ from each other. Therefore the next step is to try the set in VR. 
