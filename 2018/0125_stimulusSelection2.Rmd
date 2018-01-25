@@ -1,0 +1,231 @@
+---
+title: "Stimulus selection: 2"
+author: "Jörn Alexander Quent"
+date: "25 January 2018"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+options(scipen = 30)
+```
+
+# Introduction
+This is actually the second attempt to find a suitable set of object/location pairs ([click here for the first attempt](https://jaquent.github.io/2018/0112_stimulusSelection.html)). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won't work as a foil anymore. 
+
+Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets. 
+The previous analysis of this data set can be found [here](https://jaquent.github.io/2018/0110_ratingAnalysis.html).
+The code for the task can be found [here](https://github.com/JAQuent/ratingStudy). 
+
+## Used libraries and functions
+```{r}
+library(ggplot2)
+library(ez)
+library(tidyr)
+
+pValue <-function(x, sign = '='){
+  if (inherits(x, "lm")){
+    s <- summary.lm(x)
+    x <- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.tail = FALSE)
+    if(x > 1){
+      stop("There is no p-value greater than 1")
+    } else if(x < 0.001){
+      x.converted <- '< .001'
+    } else{
+      x.converted <- paste(sign,substr(as.character(round(x, 3)), 2,5))
+    } 
+  } else {
+    if(x > 1){
+      stop("There is no p-value greater than 1")
+    } else if(x < 0.001){
+      x.converted <- '< .001'
+    } else{
+      x.converted <- paste(sign,substr(as.character(round(x, 3)), 2,5))
+    } 
+  }
+  return(x.converted)
+}
+
+rValue <-function(x){
+  if (inherits(x, "lm")){
+    r.squared <- summary(x)$r.squared
+    x.converted <- paste('=',substr(as.character(round(r.squared, 3)), 2,5)) 
+  } else {
+    if (x < 0){
+      x.converted <- paste('= -',substr(as.character(abs(round(x, 3))), 2,5), sep = '') 
+    } else {
+      x.converted <- paste('=',substr(as.character(abs(round(x, 3))), 2,5)) 
+    }
+  }
+  return(x.converted) 
+}
+```
+
+## Calculating the number of possible sets
+First I want to get an idea how many combinations are possible. With a little help ([click here](https://stackoverflow.com/questions/48321546/choosing-all-possible-combinations-for-pairing-the-elements-of-two-vectors-in-r)), I found out that there are  20*!* or `r factorial(20)` possible sets of combinations for placing twenty objects at twenty locations, which means I cannot generate all possible solutions. The number of combinations is way higher then the maximal length for a vector in R, which by the way is `r 2^31-1`. 
+
+If I didn't care whether an object or location is drawn more than once, the number of possible combinations would be even higher (`r choose(400,20)`).  because one would draw a set of k = 20 out of n = 400 possible pairs or ${n}\choose{k}$.
+
+To show that it is the case consider this:
+```{r}
+k                    <- 3
+a                    <- 1:3
+b                    <- 1:3
+possibleCombinations <- expand.grid(a, b)
+n                    <- length(a)^2
+numberCombinations   <- choose(n, k)
+indexCombinations    <- combn(1:n, k)
+invalidIndex         <- rep(TRUE, numberCombinations)
+allSets              <- array(data = 0, dim = c(k, 2, numberCombinations))
+
+for(i in 1:numberCombinations){
+  allSets[1:3, 1:2, i] <- c(possibleCombinations$Var1[indexCombinations[1:3, i]], possibleCombinations$Var2[indexCombinations[1:3, i]])
+  if(max(table(allSets[1:3, 1, i])) > 1 | max(table(allSets[1:3, 2, i])) > 1){
+    invalidIndex[i] <- FALSE
+  }
+}
+sum(invalidIndex)
+```
+
+If I reduce the number of objects and locations to three, it is a bit easier to calculate. Without bothering about whether an object or a location is drawn more than once, the number of possible combinations is `r choose(9, 3)` because one would draw a set of k = 3 out of n = 9 possible pairs or ${n}\choose{k}$. If calculate all possible combinations by using *combn()* and then check how often a number is repeating in columns (i.e. object and location column) of the array *allSets*, then I find that the result is 6 or in other word 3*!*.
+
+The example above doesn't consider the contraints I impose nor does it take the foils into account. The message is that there are a lot of combinations and therefore I need high number of iterations to actually find a good set. 
+
+## Two foils solution
+After a quick research I couldn't find any other solution that work because R seems to be more on continuous optimisation. For instance I tried to implement a grid search, but I was not successful.
+
+In my second attempt, I randomly select locations for the targets and for foil 1 as well as foil 2 with *sample()* without replacement. After that I make sure that same location is not used for foil 1, foil 2 and/or the target by repeating the step until it is not the case. I then calculate the sum of squared differences between the ranks of the targets and the intended spread (i.e. *targetSpread*; SS of targets) and the sum of squared differences between the ranks of the targets and both foils (SS of foils), which will be used later to select a sets in two-step process. 
+
+Because the number of combination is so high, I decided to use the CBU's computer cluster. I used a machine with 2.67 GHz CPU with 16 cores and 128 RAM. 
+
+```{r , eval = FALSE}
+# Functions
+progressDisplay <- function(i, iterations){
+  cat('\rProgress: |',rep('=',floor((i/iterations)*50)),rep(' ',50 - floor((i/iterations)*50)),'|', sep = '')
+}
+
+# Preparing
+subNo           <- 1:6
+N               <- length(subNo)
+numberObjects   <- 20
+locationRatings <- array(data = NA, dim = c(numberObjects, numberObjects, N))
+
+# Sequently loading data
+for(i in 1:N){
+  locationRatings[,,i] <- matrix(scan(paste('data/locationRatings_', as.character(subNo[i]) ,'.dat', sep = '')), byrow = TRUE, ncol = 20)
+}
+
+# Calculating ranks
+rankedRatings <- array(data = NA, dim = c(numberObjects, numberObjects, N))
+
+for(i in 1:N){
+  rankedRatings[,,i] <- rank(locationRatings[,,i])
+}
+
+# Calculating mean rank per object/ location and declaring that it is a gobal variable so that I can used it inside an optimising function
+meanRankedRatings <- apply(rankedRatings, 1:2, mean)
+
+# Declaring it to be a gobal variable so that I can used it inside an optimising function
+targetSpread <- seq(1, 400,length = numberObjects)
+
+iterations <- 9999999
+SS_target  <- rep(NA, iterations)
+SS_foils   <- rep(NA, iterations)
+targets    <- matrix(NA, nrow = numberObjects, ncol = iterations)
+foils1     <- matrix(NA, nrow = numberObjects, ncol = iterations)
+foils2     <- matrix(NA, nrow = numberObjects, ncol = iterations)
+minima     <- rep(NA, iterations)
+for(i in 1:iterations){
+  targets[, i] <- sample(20)
+  foils1[, i]  <- sample(20)
+  foils2[, i]  <- sample(20)
+  while(any(foils1[, i] == foils2[, i]) | any(targets[, i] == foils2[, i]) | any(targets[, i] == foils1[, i])){
+    targets[, i] <- sample(20)
+    foils1[, i]  <- sample(20)
+    foils2[, i]  <- sample(20)
+  }
+  # Checking if same location is used more than once
+  progressDisplay(i, iterations)
+  # x contains the target and foil locations
+  # Calculating SS
+  SS_target[i] <- sum((sort(meanRankedRatings[cbind(seq_along(targets[, i]),  targets[, i])]) - targetSpread)^2)
+  SS_foils[i]   <- sum((meanRankedRatings[cbind(seq_along(targets[, i]),  targets[, i])] - meanRankedRatings[cbind(seq_along(foils1[, i]),  foils1[, i])])^2, (meanRankedRatings[cbind(seq_along(targets[, i]),  targets[, i])] - meanRankedRatings[cbind(seq_along(foils2[, i]),  foils2[, i])])^2)
+  # For retrieval it is more imporant that foils are more similar than the targets spread is good enough
+}
+
+save.image(paste('data_twoFoils_',format(Sys.time(), "%Y%m%d_%H%M"), '.RData', sep = ""))
+```
+
+```{r, echo = FALSE}
+load("data_twoFoils_20180124_2207.RData")
+```
+
+After a couple of hours computing, I finally got the results. Below you see the distribution of the SS of foils. In previous attempts (not shown here), I didn't save the SS of foils and the SS of targets in separate vectors. This however is very useful for a two-step selection process. 
+
+```{r}
+# Selecting lowest values for further selection
+cutOffDecimal <- 0.0001
+cutOffValue   <- sort(SS_foils)[round(iterations * cutOffDecimal)]
+sub_SS_foils  <- SS_foils[which(SS_foils <= cutOffValue)]
+sub_SS_target <- SS_target[which(SS_foils <= cutOffValue)]
+
+ggplot(data.frame(SS_foils), aes(SS_foils)) + geom_histogram(binwidth = 100) + geom_vline(xintercept = cutOffValue) + theme(panel.margin = unit(2, "cm"), text = element_text(size = 12),  plot.margin = margin(10, 10, 10, 10)) + 
+        labs(y = 'Number of occurences', x = 'Sum of squared differences', title = 'Distribution of SS of foils') + coord_cartesian(expand = FALSE)
+```
+
+It is more important that SS of foils is low because high SS of foils could bias participants to choose foils if the expetectancy values are higher or lower. This would be especially problematic for me because I want to use . To reduce this bias, I selected the `r cutOffDecimal`th percentile of the SS of foils. This cut off is shown in the histogram above. In the next step, I plot the distributions of the SS of targets for this subset. 
+
+```{r}
+ggplot(data.frame(sub_SS_target), aes(sub_SS_target)) + geom_histogram(binwidth = 100) + theme(panel.margin = unit(2, "cm"), text = element_text(size = 12),  plot.margin = margin(10, 10, 10, 10)) + 
+        labs(y = 'Number of occurences', x = 'Summed squared differences', title = 'Distribution of SS of targets (subset)') + coord_cartesian(expand = FALSE)
+```
+
+Now, I sort the subset of `r length(sub_SS_target)` values that all have low SS of of foils values to select the set that has very low value in this subset. Before that I will test whether the code did what is was supposed to do. By recalculating all values for one set.
+
+```{r}
+# Getting set with lowest SS of targets in that subset
+indexValue     <- sort(sub_SS_target)[1]
+
+# Checking whether extracted ranks are really the correct ones
+# Microwave is object 1 and should a values of 16.83333 if location is 13
+meanRankedRatings[1, 13]
+
+# Next it is important to recalculate SS of targets
+sum((sort(meanRankedRatings[cbind(seq_along(targets[, which(SS_target == indexValue)]),  targets[, which(SS_target == indexValue)])]) - targetSpread)^2) == indexValue
+# And of Foils
+sum((meanRankedRatings[cbind(seq_along(targets[, which(SS_target == indexValue)]),  targets[, which(SS_target == indexValue)])] - meanRankedRatings[cbind(seq_along(foils1[, which(SS_target == indexValue)]),  foils1[, which(SS_target == indexValue)])])^2, (meanRankedRatings[cbind(seq_along(targets[, which(SS_target == indexValue)]),  targets[, which(SS_target == indexValue)])] - meanRankedRatings[cbind(seq_along(foils2[, which(SS_target == indexValue)]),  foils2[, which(SS_target == indexValue)])])^2) == SS_foils[which(SS_target == indexValue)]
+```
+
+Doing this helped me to spot an error, which led to the wrong extraction of values for the sets.
+
+```{r}
+objectNames <- c('microwave','kitchen roll','saucepan', 'toaster','fruit bowl','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
+
+indexValue     <- sort(sub_SS_target)[18]
+index          <- which(SS_target == indexValue)[1]
+finalSelection <- data.frame(Object = objectNames, 
+                             f1Rank = meanRankedRatings[cbind(seq_along(foils1[, index]), foils1[, index])],
+                             tRank  = meanRankedRatings[cbind(seq_along(targets[, index]), targets[, index])],
+                             f2Rank = meanRankedRatings[cbind(seq_along(foils2[, index]), foils2[, index])],
+                             f1Loc  = foils1[, index],
+                             tLoc   = targets[, index],
+                             f2Loc  = foils2[, index])
+
+finalSelection$diff1 <- finalSelection$tRank - finalSelection$f1Rank
+finalSelection$diff2 <- finalSelection$tRank - finalSelection$f2Rank
+finalSelection[order(finalSelection$tRank),]
+```
+
+## Checking the set
+In a last step, I check that foils don't differ from targets in term of expectancy. 
+
+```{r}
+# Converting data to long format
+finalSelectionLong <- gather(finalSelection, Type, Rank, tRank, f1Rank, f2Rank)
+
+resultANOVA <- ezANOVA(data = finalSelectionLong, dv = .(Rank), wid = .(Object), within = .(Type), detailed = TRUE)
+resultANOVA
+
+ggplot(data = finalSelectionLong, aes(x = Type, y = Rank)) + geom_jitter(width = 0.2)
+```
+
+Type (target vs. foil 1 vs. foil 2) has no significant effect on the ranks, *F*(`r resultANOVA$ANOVA[2,'DFn']`, `r resultANOVA$ANOVA[2,'DFd']`) = `r round(resultANOVA$ANOVA[2,'F'],2)`, *p* `r pValue(resultANOVA$ANOVA[2,'p'])`. The next step now is to load all in the VE and check if this set would work. 
