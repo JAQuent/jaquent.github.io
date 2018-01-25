@@ -88,7 +88,7 @@ sum(invalidIndex)
 
 If I reduce the number of objects and locations to three, it is a bit easier to calculate. Without bothering about whether an object or a location is drawn more than once, the number of possible combinations is `r choose(9, 3)` because one would draw a set of k = 3 out of n = 9 possible pairs or ${n}\choose{k}$. If calculate all possible combinations by using *combn()* and then check how often a number is repeating in columns (i.e. object and location column) of the array *allSets*, then I find that the result is 6 or in other word 3*!*.
 
-The example above doesn't consider the contraints I impose nor does it take the foils into account. The message is that there are a lot of combinations and therefore I need high number of iterations to actually find a good set. 
+The example above doesn't consider the constraints I impose nor does it take the foils into account. The message is that there are a lot of combinations and therefore I need high number of iterations to actually find a good set. 
 
 ## Two foils solution
 After a quick research I couldn't find any other solution that work because R seems to be more on continuous optimisation. For instance I tried to implement a grid search, but I was not successful.
@@ -172,7 +172,7 @@ ggplot(data.frame(SS_foils), aes(SS_foils)) + geom_histogram(binwidth = 100) + g
         labs(y = 'Number of occurences', x = 'Sum of squared differences', title = 'Distribution of SS of foils') + coord_cartesian(expand = FALSE)
 ```
 
-It is more important that SS of foils is low because high SS of foils could bias participants to choose foils if the expetectancy values are higher or lower. This would be especially problematic for me because I want to use . To reduce this bias, I selected the `r cutOffDecimal`th percentile of the SS of foils. This cut off is shown in the histogram above. In the next step, I plot the distributions of the SS of targets for this subset. 
+It is more important that SS of foils is low because high SS of foils could bias participants to choose foils if the expectancy values are higher or lower. This would be especially problematic for me because I want to use . To reduce this bias, I selected the `r cutOffDecimal`th percentile of the SS of foils. This cut off is shown in the histogram above. In the next step, I plot the distributions of the SS of targets for this subset. 
 
 ```{r}
 ggplot(data.frame(sub_SS_target), aes(sub_SS_target)) + geom_histogram(binwidth = 100) + theme(panel.margin = unit(2, "cm"), text = element_text(size = 12),  plot.margin = margin(10, 10, 10, 10)) + 
@@ -216,7 +216,7 @@ finalSelection[order(finalSelection$tRank),]
 ```
 
 ## Checking the set
-In a last step, I check that foils don't differ from targets in term of expectancy. 
+In a last step, I check that foils don't differ from targets in terms of expectancy. 
 
 ```{r}
 # Converting data to long format
