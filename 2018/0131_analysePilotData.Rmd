@@ -11,7 +11,7 @@ options(scipen = 30)
 ```
 
 ## Introduction
-This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) works to avoid either floor or ceiling effects. My aim is to use vectorisation more often while coding. This is what I try here. The data is not real. 
+This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. My aim is to use vectorisation more often while coding. This is what I try here. The data is not real. 
 
 ## Libraries
 ```{r}
