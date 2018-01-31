@@ -1,0 +1,107 @@
+---
+title: "Analyse pilot data"
+author: "Jörn Alexander Quent"
+date: "31 January 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+options(scipen = 30)
+```
+
+## Introduction
+This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) works to avoid either floor or ceiling effects. My aim is to use vectorisation more often while coding. This is what I try here. The data is not real. 
+
+## Libraries
+```{r}
+library(data.table)
+library(plyr)
+library(ggplot2)
+```
+
+## Loading data
+```{r}
+# Using fread instead of read.table because it is faster but rbindlist(lapply(fileNames, read.table)) would also work. This is my attempt to use vectorisation more often. 
+population        <- 1:2
+fileNames         <- paste('data/retrievalTask_', as.character(population),'.dat', sep = '')
+dataRetrievalTask <- rbindlist(lapply(fileNames, fread))
+
+# Variable and objects names
+names(dataRetrievalTask) <- c('subNo', 'date', 'time', 'trial','objectNumber', 'targetLocation', 'targetRankPre', 'foil1Location', 'foil1RankPre', 'foil2Location', 'foil2RankPre', 'AFCPreTime','rtAFC', 'resAFC', 'accAFC', 'conPreTime', 'rtCon', 'resCon', 'left', 'middle', 'right')
+objectNames              <- c('microwave','kitchen roll','saucepan', 'toaster','bowl of fruits','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
+
+# Assign factor labels
+dataRetrievalTask$objectName <- factor(dataRetrievalTask$objectNumber, labels = objectNames)
+dataRetrievalTask$left       <- factor(dataRetrievalTask$left, labels = c('target', 'foil1', 'foil2'))
+dataRetrievalTask$middle     <- factor(dataRetrievalTask$middle, labels = c('target', 'foil1', 'foil2'))
+dataRetrievalTask$right      <- factor(dataRetrievalTask$left, labels = c('target', 'foil1', 'foil2'))
+```
+
+## Confidence decision
+```{r}
+# Legend: 1 = Did not see object | 2 = Guess the object was there | 3 = Know the object was there
+# For each participant
+ddply(dataRetrievalTask, c('subNo'), summarise, notSeen = table(resCon)[1], guessed = table(resCon)[2], knew = table(resCon)[3])
+
+# Overall
+table(dataRetrievalTask$resCon)
+```
+
+## Accuracy for AFC decision
+### Not exlcuding trials with 'didn't see the object' responses
+
+```{r}
+# For each participant
+agg1 <- ddply(dataRetrievalTask, c('subNo'), summarise, accAFC = mean(accAFC))
+agg1
+
+# overall mean 
+mean(dataRetrievalTask$accAFC)
+# Overal median
+median(dataRetrievalTask$accAFC)
+# SD
+sd(dataRetrievalTask$accAFC)
+# Min
+min(dataRetrievalTask$accAFC)
+# Max
+max(dataRetrievalTask$accAFC)
+
+```
+
+### Exlcuding trials with 'didn't see the object' responses (subset 1)
+```{r}
+# For each participant
+dataRetrievalTask_subset1 <- subset(dataRetrievalTask, dataRetrievalTask$resCon != 3)
+agg2                      <- ddply(dataRetrievalTask_subset1, c('subNo'), summarise, accAFC = mean(accAFC))
+agg2
+
+# overall mean 
+mean(dataRetrievalTask_subset1$accAFC)
+# Overal median
+median(dataRetrievalTask_subset1$accAFC)
+# SD
+sd(dataRetrievalTask_subset1$accAFC)
+# Min
+min(dataRetrievalTask_subset1$accAFC)
+# Max
+max(dataRetrievalTask_subset1$accAFC)
+```
+
+### Visualisation 
+```{r}
+agg1$include1Responses <- rep('yes', length(population))
+agg2$include1Responses <- rep('no', length(population))
+aggCombined            <- rbind(agg1, agg2)
+aggOverall             <- ddply(aggCombined, c('include1Responses'), summarise, mean = mean(accAFC))
+
+
+ggplot(aggCombined, aes(x = include1Responses, y = accAFC)) + 
+  geom_jitter(width = 0.2, height = 0, alpha = 0.5) + geom_hline(yintercept = 1/3) + 
+  geom_segment(aes(x = 0.8, y = aggOverall$mean[1], xend = 1.2, yend = aggOverall$mean[1])) +
+  geom_segment(aes(x = 1.8, y = aggOverall$mean[2], xend = 2.2, yend = aggOverall$mean[2])) + 
+  annotate('text', x = 0.6, y = (1/3) - 0.03, label = 'Chance (1/3)') + 
+  labs(y = 'Accuracy (3AFC)', x = "Includes 'Did not see object' responses") + 
+  coord_cartesian(ylim = c(0, 1)) + 
+  theme(plot.margin = margin(10, 10, 10, 10))
+```
