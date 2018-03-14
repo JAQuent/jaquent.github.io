@@ -1,0 +1,489 @@
+---
+title: "Mixed Linear Models"
+author: "Jörn Alexander Quent"
+date: "8 March 2018"
+output:
+  html_document:
+    toc: true
+    toc_depth: 6
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Preface
+This work documents my attempt to understand the model structure of mixed linear models or multilevel models. I adpated a formula that I found on [Wikipedia](https://en.wikipedia.org/wiki/Multilevel_model) and work myself through the different models and test whether I am able to retrieve the different parameteres with *lmerTest*. Bodo Winter's [tutorial](http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf) on the *lme* was very useful for this. The main motivation for doing all this is to use basically model 5 in my analysis of my first experiment. This work is also part of the process of pre-registering the study with a complete analysis script, which I will upload soon. 
+  
+  The design of the fictive experiment that 100 subjects see 20 objects and provide a continuous measure of memory for each objects. The expectancy of the objects ($X$) servers as a predictor for the memory performance ($Y$).
+  
+  I start with very easy models and add more effects in order to finally arrive at my target model (model 5). 
+
+## Libraries & functions
+```{r}
+library(lmerTest)
+library(ggplot2)
+
+pValue <-function(x, sign = '='){
+  if (inherits(x, "lm")){
+    s <- summary.lm(x)
+    x <- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.tail = FALSE)
+    if(x > 1){
+      stop("There is no p-value greater than 1")
+    } else if(x < 0.001){
+      x.converted <- '< .001'
+    } else{
+      x.converted <- paste(sign,substr(as.character(round(x, 3)), 2,5))
+    } 
+  } else {
+    if(x > 1){
+      stop("There is no p-value greater than 1")
+    } else if(x < 0.001){
+      x.converted <- '< .001'
+    } else{
+      x.converted <- paste(sign,substr(as.character(round(x, 3)), 2,5))
+    } 
+  }
+  return(x.converted)
+}
+
+rValue <-function(x){
+  if (inherits(x, "lm")){
+    r.squared <- summary(x)$r.squared
+    x.converted <- paste('=',substr(as.character(round(r.squared, 3)), 2,5)) 
+  } else {
+    if (x < 0){
+      x.converted <- paste('= -',substr(as.character(abs(round(x, 3))), 2,5), sep = '') 
+    } else {
+      x.converted <- paste('=',substr(as.character(abs(round(x, 3))), 2,5)) 
+    }
+  }
+  return(x.converted) 
+}
+```
+
+## Model 1: Simple regression model with 1 level
+Assume that expectancy and memory performance was aggregated across subjects.In this model, objects' memorability is predicted by their average expectancy values. The corresponding formula looks like this: 
+$$Y_{i} = \beta_0 + \beta_1X_i + e_i$$
+
+* $Y_{i}$ refers to memorability of object i.
+* $X_{i}$ refers to average expectancy of object i.
+* $\beta_{0}$ refers to the intercept.
+* $\beta_{1}$ refers to the linear slope.
+* $e_{i}$ refers to the random errors of prediction.
+
+```{r}
+# Generating data set
+# General values and variables
+numObj <- 20
+e      <- rnorm(numObj, mean = 0, sd = 0.1)
+x      <- scale(runif(numObj, min = -100, max = 100))
+y      <- c()
+
+# Coefficients
+beta0  <- 8
+beta1  <- 0.3
+
+for(i in 1:numObj){
+  y[i] <- beta0 + beta1*x[i] + e[i]
+}
+
+dataFrame1 <- data.frame(y = y, x = x, objNum = factor(1:20)) 
+
+model1 <- lm(y ~  x, data = dataFrame1)
+summary(model1)
+```
+Unsurpirisingly, *lm* returns estimates that are very close the the true values $\hat{\beta_{0}} =$ `r model1$coefficients[1]` (vs `r beta0`) and $\hat{\beta_{1}} =$ `r model1$coefficients[2]` (vs `r beta1`). 
+
+## Model 2: A random intercept for each subject
+Now, I don't aggregated anymore and there is one value for each subject and each object and I allow for different intercepts for each subject, which basically means that I assume that my subjects' general memory performance varies. 
+
+Level 1:
+$$Y_{ij} = \beta_{0j} + \beta_1X_{ij} + e_{ij}$$
+Level 2:
+$$\beta_{0j} = \gamma_{00} + \gamma_{01}W_{j} + u_{0j}$$
+
+* $Y_{ij}$ refers to memory score for object i and subject j.
+* $\beta_{0j}$ refers to the intercept of the dependent variable in subject j (level 2) in other words the individual difference in general performance across subjects.
+* $\beta_{1}$ refers to the linear slope.
+* $X_{ij}$ refers to the level 1 predictor.
+* $e_{ij}$ refers to the random errors of prediction for the level 1 equation.
+* $\gamma _{00}$ refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.
+* $\gamma_{01}$ refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.
+* $W_{j}$ refers to the level 2 predictor.
+* $u_{0j}$ refers to the random error component for the deviation of the intercept of a subject from the overall intercept.
+
+```{r}
+# Generating data set
+# General values and variables
+numObj <- 20
+numSub <- 100
+e      <- rnorm(numObj * numSub, mean = 0, sd = 0.1)
+x      <- scale(runif(numObj * numSub, min = -100, max = 100))
+y      <- c()
+index  <- 1
+
+# Coefficients
+gamma00 <- 18
+gamma01 <- 0.5
+beta1   <- -100
+w       <- runif(numSub, min = -3, max = 3)
+u0      <- rnorm(numSub, mean = 0, sd = 0.1)
+meanBeta0 <- mean(gamma00 + gamma01*w + u0) # I should be able to retrieve that parameter. 
+
+for(j in 1:numSub){
+  for(i in 1:numObj){
+    y[index] <- gamma00 + gamma01*w[j]+ u0[j] + beta1*x[index] + e[index]
+    index <- index + 1
+  } 
+}
+
+dataFrame2 <- data.frame(y = y, x = x, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub))) 
+
+model2 <- lmer(y ~  x + 
+                 (1 | subNo), data = dataFrame2)
+summary(model2)
+anova(model2)
+# Extract intercept for each subject by coef(model2). 
+```
+
+As you can see above (fixed effects), $\hat{\beta_{0.}} =$ `r model2@beta[1]` is approximating the true (`r meanBeta0`). The same is true for $\hat{\beta_{1}} =$ `r model2@beta[2]` (vs  `r beta1`). The estimated level 1 intercept for subject 1 was also close to the true value (`r coef(model2)$subNo[1,1]` vs `r gamma00 + gamma01*w[1] + u0[1]`). 
+
+
+## Model 3: Random intercept and slope for each subject
+In the next model, I am additionally allowing the slope randomly different for each subject. This means that the strength of the relationship between the level 1 predictor $X$ and the memory scores $Y$ varies across subjects. 
+
+Level 1:
+$$Y_{ij} = \beta_{0j} + \beta_{1j}X_{ij} + e_{ij}$$
+
+Level 2:
+$$\beta_{0j} = \gamma_{00} + \gamma_{01}W_{j} + u_{0j}$$
+$$\beta_{1j} = \gamma_{10} + u_{1j}$$
+
+* $Y_{ij}$ refers to memory score for object i and subject j.
+* $\beta_{0j}$ refers to the intercept of the dependent variable in subject j (level 2) in other words the individual difference in general performance across subjects.
+* $\beta_{1j}$ refers to the linear slope that varies across subjects in other words the relationship $X$ and $Y$ is different across subjects.
+* $X_{ij}$ refers to the level 1 predictor.
+* $e_{ij}$ refers to the random errors of prediction for the level 1 equation.
+* $\gamma _{00}$ refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.
+* $\gamma_{01}$ refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.
+* $W_{j}$ refers to the level 2 predictor.
+* $u_{0j}$ refers to the random error component for the deviation of the intercept of a subject from the overall intercept.
+* $\gamma_{10}$ overall slope of the level 2. 
+* $u_{1j}$ refers to the random error component for the deviation of the slope of a subject from the overall intercept.
+
+```{r}
+# Generating data set
+# General values and variables
+numObj <- 20
+numSub <- 100
+e      <- rnorm(numObj * numSub, mean = 0, sd = 0.1)
+x      <- scale(runif(numObj * numSub, min = -100, max = 100))
+y      <- c()
+index  <- 1
+
+# Coefficients
+gamma00 <- 18
+gamma01 <- 0.5
+gamma10 <- -100
+w       <- runif(numSub, min = -3, max = 3)
+u0      <- rnorm(numSub, mean = 0, sd = 0.1)
+u1      <- rnorm(numSub, mean = 0, sd = 0.1)
+meanBeta0 <- mean(gamma00 + gamma01*w + u0) # I should be able to retrieve that parameter. 
+
+for(j in 1:numSub){
+  for(i in 1:numObj){
+    y[index] <- gamma00 + gamma01*w[j]+ u0[j] + (gamma10 + u1[j])*x[index] + e[index]
+    index <- index + 1
+  } 
+}
+
+dataFrame3 <- data.frame(y = y, x = x, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub))) 
+
+model3 <- lmer(y ~  x + 
+                 (1 + x | subNo), data = dataFrame3)
+summary(model3)
+anova(model3)
+```
+
+Again, $\hat{\beta_{0.}} =$ `r model2@beta[1]` and $\hat{\beta_{1.}} =$ `r model2@beta[2]` were correctly estimated (i.e. 18 vs -100) for level 1. Level 2 estimates for subject 1 were also correctly estimated: $\hat{\beta_{01}}$ = `r  coef(model3)$subNo[1, 1]` vs $\beta_{11}$ = `r gamma00 + gamma01*w[1] + u0[1]` and $\hat{\beta_{11}}$ = `r  coef(model3)$subNo[1, 2]` vs $\beta_{11}$ = `r gamma10 + u1[1]`. 
+
+## Model 4: Random intercepts for each object and each subject
+As explained, above each subject rates each of twenty objects. In addition to the varying performance among the participants, one can assume that there are objects, which can be remembered more easily than others. Therefore, I add a random intercept for each object representing at varying baseline memorability. 
+
+Level 1:
+$$Y_{ij} = \beta_{0ij}  + \beta_{1}X_{ij} + e_{ij}$$
+
+Level 2:
+$$\beta_{0ij} = \gamma_{00} + \gamma_{01}W_{1i} + u_{01i} + \gamma_{02}W_{2j} + u_{02j}$$
+
+* $Y_{ij}$ refers to memory score for object i and subject j.
+* $\beta_{0ij}$ refers to the intercept of the dependent variable that is different for each subject and object.
+* $\beta_{1}$ refers to the linear slope.
+* $X_{ij}$ refers to the level 1 predictor.
+* $e_{ij}$ refers to the random errors of prediction for the level 1 equation.
+* $\gamma _{00}$ refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.
+* $\gamma_{01}$ refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.
+* $W_{1i}$ refers to the level 2 predictor for objects.
+* $u_{01i}$ refers to the random error component for the deviation of the intercept of a object from the overall intercept.
+* $\gamma_{02}$ refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.
+* $W_{2j}$ refers to the level 2 predictor for subjects.
+* $u_{02j}$ refers to the random error component for the deviation of the intercept of a subject from the overall intercept.
+```{r}
+# Generating data set
+# General values and variables
+numObj <- 20
+numSub <- 100
+e      <- rnorm(numObj * numSub, mean = 0, sd = 0.1)
+x      <- scale(runif(numObj * numSub, min = -100, max = 100))
+y      <- c()
+index  <- 1
+
+# Coefficients
+gamma00 <- 18
+gamma01 <- 0.5
+gamma02 <- -10
+beta1    <- -100
+w1       <- runif(numObj, min = 0, max = 3)
+w2       <- runif(numSub, min = -3, max = 3)
+u01       <- rnorm(numObj, mean = 0, sd = 0.1)
+u02       <- rnorm(numSub, mean = 0, sd = 0.1)
+
+for(j in 1:numSub){
+  for(i in 1:numObj){
+    y[index] <-gamma00 + gamma01*w1[i] + u01[i] + gamma02*w2[j] + u02[j] + beta1*x[index] + e[index]
+    index <- index + 1
+  } 
+}
+
+dataFrame4 <- data.frame(y = y, x = x, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub))) 
+
+model4 <- lmer(y ~  x + 
+                 (1 | subNo) + 
+                 (1 | objNum), data = dataFrame4)
+summary(model4)
+anova(model4)
+```
+Firstly, on level 1 estimates were close to the true values: $\hat{\beta_{0..}} =$  `r model4@beta[1]` (vs `r gamma00 + mean(gamma01*w1 + u01) + mean(gamma02*w2 +u02)`) as well as $\hat{\beta_{1}} =$ `r model4@beta[2]` (vs -100). Now looking at the level 2 estimates: the intercept for the object 1 across all subjects is $\hat{\beta_{01.}}$ = `r coef(model4)$objNum[1,1]` (vs `r gamma00 + gamma01*w1[1] + u01[1] + mean(gamma02*w2 + u02)`), while the intercept for subject 1 across all objects is $\hat{\beta_{0.1}}$ = `r coef(model4)$subNo[1,1]` (vs `r gamma00 + mean(gamma01*w1 + u01) + gamma02*w2[1] + u02[1]`). 
+
+## Model 5: Random intercepts for each object, each subject, quadratic term and random slopes for subjects
+### Model 5.1
+I am finally arriving at the model, which I want to use to model my data in the upcoming analysis. This models contains random intercepts for each object and each subject. A second quadratic term is added to test for non-linearities. Both the slope of the linear term and the slope of the quadratic term are random for each subject. At this point it is crucial to note that the predictor $X$ is random for each subject and object just as if the subjects had to rate the expectancy of each object after their memory was tested. This will be the case of my experiment, but I also collected normative data, where $X$ varies only across objects representing aggregate values (see model 5.2). 
+
+Level 1:
+$$Y_{ij} = \beta_{0ij} + \beta_{1j}X_{ij} + \beta_{2j}X_{ij}^2 + e_{ij}$$
+Level 2:
+$$\beta_{0ij} = \gamma_{00} + \gamma_{01}W_{1i} + u_{01i} + \gamma_{02}W_{2j} + u_{02j}$$
+$$\beta_{1j} = \gamma_{10} + u_{1j}$$
+$$\beta_{2j} = \gamma_{20} + u_{2j}$$
+
+* $Y_{ij}$ refers to memory score for object i and subject j.
+* $\beta_{0ij}$ refers to the intercept of the dependent variable that is different for each subject and object.
+* $\beta_{1j}$ refers to the linear slope for the relationship in subject j (level 2) between the level 1 predictor and the dependent variable.
+* $X_{ij}$ refers to the linear level 1 predictor that varies for across objects and subjects.
+* $\beta_{2j}$ refers to the quadratic slope for the relationship in subject j (level 2) between the level 1 predictor and the dependent variable.
+* $X_{ij}^2$ refers to the quadratic level 1 predictor that varies for across objects and subjects.
+* $e_{ij}$ refers to the random errors of prediction for the level 1 equation.
+* $\gamma _{00}$ refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.
+* $\gamma_{01}$ refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.
+* $W_{1i}$ refers to the level 2 predictor for objects.
+* $u_{01i}$ refers to the random error component for the deviation of the intercept of a object from the overall intercept.
+* $\gamma_{02}$ refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.
+* $W_{2j}$ refers to the level 2 predictor for subjects.
+* $u_{02j}$ refers to the random error component for the deviation of the intercept of a subject from the overall intercept.
+* $\gamma_{10}$ overall linear slope of the level 2. 
+* $u_{1j}$ refers to the random error component for the deviation from the linear slope of a subject from the overall intercept.
+* $\gamma_{20}$ overall quadratic slope of the level 2. 
+* $u_{2j}$ refers to the random error component for the deviation from the quadratic slope of a subject from the overall intercept.
+```{r}
+# Generating data set
+# General values
+numObj <- 20
+numSub <- 100
+index  <- 1
+y      <- c()
+x      <- scale(runif(numObj * numSub, min = -100, max = 100)) # randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated
+x2     <- x*x
+e      <- rnorm(numObj * numSub, mean = 0, sd = 0.1) 
+
+# Coefficients
+gamma00 <- 0.5
+gamma01 <- 2
+gamma02 <- 8
+gamma10 <- 0
+gamma20 <- 10
+
+# Varying stuff
+w1 <- runif(numObj, min = -4, max = 4)
+w2 <- runif(numSub, min =  0, max = 4)
+u01 <- rnorm(numObj, mean = 0, sd = 0.1)
+u02 <- rnorm(numSub, mean = 0, sd = 0.1)
+u1 <- rnorm(numSub, mean = 0, sd = 0.1)
+u2 <- rnorm(numSub, mean = 0, sd = 0.1)
+
+for(j in 1:numSub){
+  for(i in 1:numObj){
+    # Long format
+    y[index] <- gamma00 + gamma01 * w1[i]  + u01[i] + gamma02 * w2[j] + u02[j] + (gamma10 + u1[j]) * x[index] + (gamma20 + u2[j]) * x2[index] + e[index]
+    index <- index + 1
+  }
+}
+
+dataFrame5 <- data.frame(y = y, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub)), x = x, x2 = x2)
+
+model5 <- lmer(y ~  x + 
+                    x2 + 
+                    (1 | subNo) + 
+                    (1 | objNum) + 
+                    (x2|subNo) +
+                    (x|subNo), data = dataFrame5)
+
+summary(model5)
+anova(model5)
+corrResult <- cor.test(coef(model5)$subNo$`(Intercept)`, gamma00 + mean(gamma01*w1 + u01) + gamma02*w2 + u02)
+```
+The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ `r coef(model5)$objNum[1,1]`  (vs `r gamma00 + gamma01*w1[1] + u01[1] + mean(gamma02*w2 + u02)`), while subject's 1 performance across all objects was $\hat{\beta_{0.1}} =$ `r coef(model5)$subNo[1,1]`  (vs `r gamma00 + mean(gamma01*w1 + u01) + gamma02*w2[1] + u02[1]`). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, *r* `r rValue(corrResult$estimate)`, *p* `r pValue(corrResult$p.value)`. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ `r gamma10 + u1[1]` (vs `r coef(model5)$subNo[1,2]`), while the quadratic slope was $\hat{\beta_{21}} =$ `r gamma20 + u2[1]` (vs `r coef(model5)$subNo[1,3]`). 
+
+### Model 5.2
+This model is basically the same than the previous except one different. $X$ varies only across objects like as if it was aggregated values from a different poplulation. This is case in the experiment, in which one could use the normative data instead of participants' ratings to predict the memory score. 
+
+Level 1:
+$$Y_{ij} = \beta_{0ij} + \beta_{1j}X_{i} + \beta_{2j}X_{i}^2 + e_{ij}$$
+Level 2:
+$$\beta_{0ij} = \gamma_{00} + \gamma_{01}W_{1i} + u_{01i} + \gamma_{02}W_{2j} + u_{02j}$$
+$$\beta_{1j} = \gamma_{10} + u_{1j}$$
+$$\beta_{2j} = \gamma_{20} + u_{2j}$$
+
+* $Y_{ij}$ refers to memory score for object i and subject j.
+* $\beta_{0ij}$ refers to the intercept of the dependent variable that is different for each subject and object.
+* $\beta_{1j}$ refers to the linear slope for the relationship in subject j (level 2) between the level 1 predictor and the dependent variable.
+* $X_{i}$ refers to the linear level 1 predictor that varies for across objects but not across subjects.
+* $\beta_{2j}$ refers to the quadratic slope for the relationship in subject j (level 2) between the level 1 predictor and the dependent variable.
+* $X_{i}^2$ refers to the quadratic level 1 predictor that varies for across objects but not across subjects.
+* $e_{ij}$ refers to the random errors of prediction for the level 1 equation.
+* $\gamma _{00}$ refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.
+* $\gamma_{01}$ refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.
+* $W_{1i}$ refers to the level 2 predictor for objects.
+* $u_{01i}$ refers to the random error component for the deviation of the intercept of a object from the overall intercept.
+* $\gamma_{02}$ refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.
+* $W_{2j}$ refers to the level 2 predictor for subjects.
+* $u_{02j}$ refers to the random error component for the deviation of the intercept of a subject from the overall intercept.
+* $\gamma_{10}$ overall linear slope of the level 2. 
+* $u_{1j}$ refers to the random error component for the deviation from the linear slope of a subject from the overall intercept.
+* $\gamma_{20}$ overall quadratic slope of the level 2. 
+* $u_{2j}$ refers to the random error component for the deviation from the quadratic slope of a subject from the overall intercept.
+```{r}
+# Generating data set
+# General values
+numObj <- 20
+numSub <- 100
+index  <- 1
+y      <- c()
+x      <- scale(runif(numObj, min = -100, max = 100)) # randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated
+x2     <- x*x
+e      <- rnorm(numObj * numSub, mean = 0, sd = 0.1) 
+
+# Coefficients
+gamma00 <- 0.5
+gamma01 <- 2
+gamma02 <- 8
+gamma10 <- 0
+gamma20 <- 10
+
+# Varying stuff
+w1 <- runif(numObj, min = -4, max = 4)
+w2 <- runif(numSub, min =  0, max = 4)
+u01 <- rnorm(numObj, mean = 0, sd = 0.1)
+u02 <- rnorm(numSub, mean = 0, sd = 0.1)
+u1 <- rnorm(numSub, mean = 0, sd = 0.1)
+u2 <- rnorm(numSub, mean = 0, sd = 0.1)
+
+for(j in 1:numSub){
+  for(i in 1:numObj){
+    # Long format
+    y[index] <- gamma00 + gamma01 * w1[i]  + u01[i] + gamma02 * w2[j] + u02[j] + (gamma10 + u1[j]) * x[i] + (gamma20 + u2[j]) * x2[i] + e[index]
+    index <- index + 1
+  }
+}
+
+dataFrame5 <- data.frame(y = y, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub)), x = x, x2 = x2)
+
+model5 <- lmer(y ~  x + 
+                    x2 + 
+                    (1 | subNo) + 
+                    (1 | objNum) + 
+                    (x2|subNo) +
+                    (x|subNo), data = dataFrame5)
+
+summary(model5)
+anova(model5)
+corrResult <- cor.test(coef(model5)$subNo$`(Intercept)`, gamma00 + mean(gamma01*w1 + u01) + gamma02*w2 + u02)
+```
+The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ `r coef(model5)$objNum[1,1]`  (vs `r gamma00 + gamma01*w1[1] + u01[1] + mean(gamma02*w2 + u02)`), while subject's 1 performance across all objects was $\hat{\beta_{0.1}} =$ `r coef(model5)$subNo[1,1]`  (vs `r gamma00 + mean(gamma01*w1 + u01) + gamma02*w2[1] + u02[1]`). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, *r* `r rValue(corrResult$estimate)`, *p* `r pValue(corrResult$p.value)`. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ `r gamma10 + u1[1]` (vs `r coef(model5)$subNo[1,2]`), while the quadratic slope was $\hat{\beta_{21}} =$ `r gamma20 + u2[1]` (vs `r coef(model5)$subNo[1,3]`). 
+
+### Inaccurate estimations of random intercepts for each subject
+There seems to be a problem in both simulation above that the estimate of $\hat{\beta_{0.j}}$ was quite inaccurate sometimes, but this could be due the fact that I used 16 subjects in previous analyses. To test this, I run number of simulation with the same parameteres. 
+```{r, eval = FALSE}
+n <- 100
+# Fixed values:
+  numObj <- 20
+  numSub <- 100
+  gamma00 <- 0.5
+  gamma01 <- 2
+  gamma02 <- 8
+  gamma10 <- 0
+  gamma20 <- 10
+  corrResults <- c()
+  
+# Loop for n simulations
+for(run in 1:n){
+  # Generating data set
+  # General values
+  index  <- 1
+  y      <- c()
+  x      <- scale(runif(numObj, min = -100, max = 100)) # randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated
+  x2     <- x*x
+  e      <- rnorm(numObj * numSub, mean = 0, sd = 0.1) 
+  # Varying stuff
+  w1 <- runif(numObj, min = -4, max = 4)
+  w2 <- runif(numSub, min =  0, max = 4)
+  u01 <- rnorm(numObj, mean = 0, sd = 0.1)
+  u02 <- rnorm(numSub, mean = 0, sd = 0.1)
+  u1 <- rnorm(numSub, mean = 0, sd = 0.1)
+  u2 <- rnorm(numSub, mean = 0, sd = 0.1)
+  
+  for(j in 1:numSub){
+    for(i in 1:numObj){
+      # Long format
+      y[index] <- gamma00 + gamma01 * w1[i]  + u01[i] + gamma02 * w2[j] + u02[j] + (gamma10 + u1[j]) * x[i] + (gamma20 + u2[j]) * x2[i] + e[index]
+      index <- index + 1
+    }
+  }
+  
+  dataFrame5 <- data.frame(y = y, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub)), x = x, x2 = x2)
+  
+  try(model5 <- lmer(y ~  x + 
+                      x2 + 
+                      (1 | subNo) + 
+                      (1 | objNum) + 
+                      (x2|subNo) +
+                      (x|subNo), data = dataFrame5))
+  
+  corrResults[run] <- cor.test(coef(model5)$subNo$`(Intercept)`, gamma00 + mean(gamma01*w1 + u01) + gamma02*w2 + u02)$estimate
+}
+```
+
+Even when increasing the number of subjects to 100, there were models that couldn't be estimated or had every low correlations coefficients. See the histogram below for the distribution. 
+```{r, echo = FALSE}
+load("U:/Projects/reports/exp1/simulationData.RData")
+```
+
+```{r}
+ggplot(data.frame(corrResults), aes(corrResults)) + geom_histogram() + theme(panel.margin = unit(1, "cm"), text = element_text(size = 12), plot.margin = margin(10, 10, 10, 10)) + 
+        labs(y = 'Frequency', x = 'Correlation coefficients') + 
+        coord_cartesian(xlim = c(0, 1), expand = FALSE)
+```
+
+##  Conclusion
+All models except the last two can be estimated with a decent accuracy. The problem for the last two models is that on rare occassion the model fails to converge or the correlation coefficients for $\hat{\beta_{0.j}}$ and their true value is very low. At the moment, I don't really know what to do about it. 
