@@ -138,8 +138,8 @@ $(document).ready(function () {
 <li><a href="#model-5.2">Model 5.2</a></li>
 <li><a href="#inaccurate-estimations-of-the-random-intercepts-for-each-subject">Inaccurate estimations of the random intercepts for each subject</a></li>
 </ul></li>
-<li><a href="#conclusion">Conclusion</a></li>
 </ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
 </ul>
 </div>
 
@@ -224,20 +224,20 @@ summary(model1)</code></pre>
 ## lm(formula = y ~ x, data = dataFrame1)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.14994 -0.07463  0.01711  0.06283  0.13036 
+##       Min        1Q    Median        3Q       Max 
+## -0.238310 -0.071472  0.007047  0.064316  0.237211 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  8.00561    0.01849  432.94  &lt; 2e-16 ***
-## x            0.28198    0.01897   14.86  1.5e-11 ***
+## (Intercept)  7.99868    0.02806 285.055  &lt; 2e-16 ***
+## x            0.28629    0.02879   9.944 9.73e-09 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.0827 on 18 degrees of freedom
-## Multiple R-squared:  0.9247, Adjusted R-squared:  0.9205 
-## F-statistic: 220.9 on 1 and 18 DF,  p-value: 1.503e-11</code></pre>
-<p>Unsurprisingly, <em>lm</em> returns estimates that are very close the the true values <span class="math inline">\(\hat{\beta_{0}} =\)</span> 8.0056129 (vs 8) and <span class="math inline">\(\hat{\beta_{1}} =\)</span> 0.2819818 (vs 0.3).</p>
+## Residual standard error: 0.1255 on 18 degrees of freedom
+## Multiple R-squared:  0.846,  Adjusted R-squared:  0.8375 
+## F-statistic: 98.89 on 1 and 18 DF,  p-value: 9.731e-09</code></pre>
+<p>Unsurprisingly, <em>lm</em> returns estimates that are very close the the true values <span class="math inline">\(\hat{\beta_{0}} =\)</span> 7.9986752 (vs 8) and <span class="math inline">\(\hat{\beta_{1}} =\)</span> 0.2862898 (vs 0.3).</p>
 </div>
 <div id="model-2-a-random-intercept-for-each-subject" class="section level2">
 <h2>Model 2: A random intercept for each subject</h2>
@@ -288,22 +288,22 @@ summary(model2)</code></pre>
 ## Formula: y ~ x + (1 | subNo)
 ##    Data: dataFrame2
 ## 
-## REML criterion at convergence: -2875.2
+## REML criterion at convergence: -2903.6
 ## 
 ## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -3.3870 -0.6485 -0.0026  0.6392  3.6171 
+##      Min       1Q   Median       3Q      Max 
+## -3.06286 -0.66375  0.00169  0.65728  2.99181 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  subNo    (Intercept) 0.67873  0.82385 
-##  Residual             0.00962  0.09808 
+##  subNo    (Intercept) 0.656088 0.80999 
+##  Residual             0.009494 0.09744 
 ## Number of obs: 2000, groups:  subNo, 100
 ## 
 ## Fixed effects:
-##               Estimate Std. Error         df  t value Pr(&gt;|t|)    
-## (Intercept)  1.800e+01  8.241e-02  9.910e+01    218.5   &lt;2e-16 ***
-## x           -1.000e+02  2.264e-03  1.899e+03 -44166.9   &lt;2e-16 ***
+##               Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)  1.799e+01  8.103e-02  9.900e+01     222   &lt;2e-16 ***
+## x           -1.000e+02  2.236e-03  1.899e+03  -44729   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -314,11 +314,11 @@ summary(model2)</code></pre>
 <pre><code>## Analysis of Variance Table of type III  with  Satterthwaite 
 ## approximation for degrees of freedom
 ##     Sum Sq  Mean Sq NumDF  DenDF    F.value    Pr(&gt;F)    
-## x 18766884 18766884     1 1899.2 1950718376 &lt; 2.2e-16 ***
+## x 18995109 18995109     1 1899.2 2000646776 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre class="r"><code># Extract intercept for each subject by coef(model2). </code></pre>
-<p>As you can see above (fixed effects), <span class="math inline">\(\hat{\beta_{0.}} =\)</span> 18.004286 is approximating the true (18.0033123). The same is true for <span class="math inline">\(\hat{\beta_{1}} =\)</span> -99.9993823 (vs -100). The estimated level 1 intercept for subject 1 was also close to the true value (18.3935175 vs 18.3471519).</p>
+<p>As you can see above (fixed effects), <span class="math inline">\(\hat{\beta_{0.}} =\)</span> 17.986858 is approximating the true (17.9836611). The same is true for <span class="math inline">\(\hat{\beta_{1}} =\)</span> -99.9995396 (vs -100). The estimated level 1 intercept for subject 1 was also close to the true value (17.8598629 vs 17.8225987).</p>
 </div>
 <div id="model-3-random-intercept-and-slope-for-each-subject" class="section level2">
 <h2>Model 3: Random intercept and slope for each subject</h2>
@@ -373,37 +373,37 @@ summary(model3)</code></pre>
 ## Formula: y ~ x + (1 + x | subNo)
 ##    Data: dataFrame3
 ## 
-## REML criterion at convergence: -2421.9
+## REML criterion at convergence: -2448.8
 ## 
 ## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -3.8620 -0.6143 -0.0287  0.6549  3.1472 
+##      Min       1Q   Median       3Q      Max 
+## -3.07599 -0.66806 -0.03042  0.68046  2.93575 
 ## 
 ## Random effects:
-##  Groups   Name        Variance Std.Dev. Corr
-##  subNo    (Intercept) 0.89702  0.9471       
-##           x           0.01370  0.1171   0.00
-##  Residual             0.01015  0.1008       
+##  Groups   Name        Variance Std.Dev. Corr 
+##  subNo    (Intercept) 0.81640  0.9035        
+##           x           0.01158  0.1076   -0.11
+##  Residual             0.01016  0.1008        
 ## Number of obs: 2000, groups:  subNo, 100
 ## 
 ## Fixed effects:
 ##               Estimate Std. Error         df t value Pr(&gt;|t|)    
-## (Intercept)   17.93334    0.09474   99.04000   189.3   &lt;2e-16 ***
-## x           -100.00523    0.01194   99.35000 -8373.9   &lt;2e-16 ***
+## (Intercept)   17.95924    0.09039   99.04000   198.7   &lt;2e-16 ***
+## x           -100.01190    0.01102   98.83000 -9073.0   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Correlation of Fixed Effects:
 ##   (Intr)
-## x -0.004</code></pre>
+## x -0.106</code></pre>
 <pre class="r"><code>anova(model3)</code></pre>
 <pre><code>## Analysis of Variance Table of type III  with  Satterthwaite 
 ## approximation for degrees of freedom
 ##   Sum Sq Mean Sq NumDF  DenDF  F.value    Pr(&gt;F)    
-## x 712017  712017     1 99.349 70122309 &lt; 2.2e-16 ***
+## x 836595  836595     1 98.831 82319857 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p>Again, <span class="math inline">\(\hat{\beta_{0.}} =\)</span> 18.004286 and <span class="math inline">\(\hat{\beta_{1.}} =\)</span> -99.9993823 were correctly estimated (i.e. 18 vs -100) for level 1. Level 2 estimates for subject 1 were also correctly estimated: <span class="math inline">\(\hat{\beta_{01}}\)</span> = 17.894858 vs <span class="math inline">\(\beta_{11}\)</span> = 17.9059988 and <span class="math inline">\(\hat{\beta_{11}}\)</span> = -100.1365447 vs <span class="math inline">\(\beta_{11}\)</span> = -100.1306112.</p>
+<p>Again, <span class="math inline">\(\hat{\beta_{0.}} =\)</span> 17.986858 and <span class="math inline">\(\hat{\beta_{1.}} =\)</span> -99.9995396 were correctly estimated (i.e. 18 vs -100) for level 1. Level 2 estimates for subject 1 were also correctly estimated: <span class="math inline">\(\hat{\beta_{01}}\)</span> = 17.5757378 vs <span class="math inline">\(\beta_{11}\)</span> = 17.5971511 and <span class="math inline">\(\hat{\beta_{11}}\)</span> = -100.0583105 vs <span class="math inline">\(\beta_{11}\)</span> = -100.0599873.</p>
 </div>
 <div id="model-4-random-intercepts-for-each-object-and-each-subject" class="section level2">
 <h2>Model 4: Random intercepts for each object and each subject</h2>
@@ -461,23 +461,23 @@ summary(model4)</code></pre>
 ## Formula: y ~ x + (1 | subNo) + (1 | objNum)
 ##    Data: dataFrame4
 ## 
-## REML criterion at convergence: -1959
+## REML criterion at convergence: -2014.7
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -3.3335 -0.6449  0.0118  0.6679  3.5139 
+## -3.4633 -0.6605  0.0095  0.6576  3.3734 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance  Std.Dev.
-##  subNo    (Intercept) 276.85077 16.6388 
-##  objNum   (Intercept)   0.13283  0.3645 
-##  Residual               0.01061  0.1030 
+##  subNo    (Intercept) 309.20491 17.5842 
+##  objNum   (Intercept)   0.27440  0.5238 
+##  Residual               0.01016  0.1008 
 ## Number of obs: 2000, groups:  subNo, 100; objNum, 20
 ## 
 ## Fixed effects:
 ##               Estimate Std. Error         df   t value Pr(&gt;|t|)    
-## (Intercept)  2.120e+01  1.666e+00  1.223e+03     12.73   &lt;2e-16 ***
-## x           -1.000e+02  2.373e-03  1.976e+03 -42134.76   &lt;2e-16 ***
+## (Intercept)  1.931e+01  1.762e+00  1.237e+03     10.96   &lt;2e-16 ***
+## x           -1.000e+02  2.316e-03  1.976e+03 -43184.92   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -488,10 +488,10 @@ summary(model4)</code></pre>
 <pre><code>## Analysis of Variance Table of type III  with  Satterthwaite 
 ## approximation for degrees of freedom
 ##     Sum Sq  Mean Sq NumDF  DenDF    F.value    Pr(&gt;F)    
-## x 18833764 18833764     1 1975.6 1775337628 &lt; 2.2e-16 ***
+## x 18955582 18955582     1 1975.6 1864937637 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p>Firstly, on level 1 estimates were close to the true values: <span class="math inline">\(\hat{\beta_{0..}} =\)</span> 21.2026986 (vs 21.2013358) as well as <span class="math inline">\(\hat{\beta_{1}} =\)</span> -99.9992302 (vs -100). Now looking at the level 2 estimates: the intercept for the object 1 across all subjects is <span class="math inline">\(\hat{\beta_{01.}}\)</span> = 20.8651639 (vs 20.8596078), while the intercept for subject 1 across all objects is <span class="math inline">\(\hat{\beta_{0.1}}\)</span> = 5.6705932 (vs 5.6382138).</p>
+<p>Firstly, on level 1 estimates were close to the true values: <span class="math inline">\(\hat{\beta_{0..}} =\)</span> 19.3131619 (vs 19.3127994) as well as <span class="math inline">\(\hat{\beta_{1}} =\)</span> -100.0025395 (vs -100). Now looking at the level 2 estimates: the intercept for the object 1 across all subjects is <span class="math inline">\(\hat{\beta_{01.}}\)</span> = 19.1269314 (vs 19.1249384), while the intercept for subject 1 across all objects is <span class="math inline">\(\hat{\beta_{0.1}}\)</span> = -2.8745026 (vs -2.8654707).</p>
 </div>
 <div id="model-5-random-intercepts-for-each-object-each-subject-quadratic-term-and-random-slopes-for-subjects" class="section level2">
 <h2>Model 5: Random intercepts for each object, each subject, quadratic term and random slopes for subjects</h2>
@@ -562,48 +562,51 @@ model5 &lt;- lmer(y ~  x +
                     (x|subNo), data = dataFrame5)
 
 summary(model5)</code></pre>
-<pre><code>## Linear mixed model fit by REML ['lmerMod']
+<pre><code>## Linear mixed model fit by REML t-tests use Satterthwaite approximations
+##   to degrees of freedom [lmerMod]
 ## Formula: y ~ x + x2 + (1 | subNo) + (1 | objNum) + (x2 | subNo) + (x |  
 ##     subNo)
 ##    Data: dataFrame5
 ## 
-## REML criterion at convergence: -1574.2
+## REML criterion at convergence: -1561.9
 ## 
 ## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -3.4567 -0.6057  0.0051  0.5826  3.4306 
+##      Min       1Q   Median       3Q      Max 
+## -3.03566 -0.62912 -0.02829  0.58142  2.71312 
 ## 
 ## Random effects:
-##  Groups   Name        Variance  Std.Dev. Corr 
-##  subNo    (Intercept) 11.184552 3.34433       
-##           x            0.010720 0.10354  0.22 
-##  subNo.1  (Intercept) 19.287124 4.39171       
-##           x2           0.008488 0.09213  -0.20
-##  subNo.2  (Intercept) 50.461509 7.10363       
-##  objNum   (Intercept) 28.007378 5.29220       
-##  Residual              0.009769 0.09884       
+##  Groups   Name        Variance  Std.Dev. Corr
+##  subNo    (Intercept) 17.696956 4.20678      
+##           x            0.007460 0.08637  0.14
+##  subNo.1  (Intercept) 50.097104 7.07793      
+##           x2           0.011510 0.10729  0.14
+##  subNo.2  (Intercept) 23.614826 4.85951      
+##  objNum   (Intercept) 22.855930 4.78079      
+##  Residual              0.009808 0.09903      
 ## Number of obs: 2000, groups:  subNo, 100; objNum, 20
 ## 
 ## Fixed effects:
-##              Estimate Std. Error t value
-## (Intercept) 16.129290   1.486510    10.9
-## x           -0.004643   0.010639    -0.4
-## x2           9.996392   0.009625  1038.6
+##               Estimate Std. Error         df t value Pr(&gt;|t|)    
+## (Intercept)  16.745775   1.434189 284.140000  11.676   &lt;2e-16 ***
+## x            -0.006660   0.008967  99.950000  -0.743    0.459    
+## x2           10.011245   0.011079  99.070000 903.628   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Correlation of Fixed Effects:
-##    (Intr) x     
-## x   0.049       
-## x2 -0.058 -0.006
-## convergence code: 0
-## unable to evaluate scaled gradient
-## Model failed to converge: degenerate  Hessian with 1 negative eigenvalues</code></pre>
+##    (Intr) x    
+## x  0.038       
+## x2 0.067  0.000</code></pre>
 <pre class="r"><code>anova(model5)</code></pre>
-<pre><code>## Analysis of Variance Table
-##    Df  Sum Sq Mean Sq    F value
-## x   1     0.4     0.4      38.85
-## x2  1 10538.8 10538.8 1078767.99</code></pre>
+<pre><code>## Analysis of Variance Table of type III  with  Satterthwaite 
+## approximation for degrees of freedom
+##    Sum Sq Mean Sq NumDF  DenDF F.value Pr(&gt;F)    
+## x     0.0     0.0     1 99.955       1 0.4594    
+## x2 8008.6  8008.6     1 99.073  816544 &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre class="r"><code>corrResult &lt;- cor.test(coef(model5)$subNo$`(Intercept)`, gamma00 + mean(gamma01*w1 + u01) + gamma02*w2 + u02)</code></pre>
-<p>The intercept of object 1 across all subjects is <span class="math inline">\(\hat{\beta_{01.}} =\)</span> 23.1599937 (vs 23.1384731), while subject’s 1 performance across all objects was <span class="math inline">\(\hat{\beta_{0.1}} =\)</span> 21.9405174 (vs 25.3272365). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .883, <em>p</em> &lt; .001. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was <span class="math inline">\(\hat{\beta_{11}} =\)</span> 0.1379325 (vs 0.0912056), while the quadratic slope was <span class="math inline">\(\hat{\beta_{21}} =\)</span> 10.107769 (vs 10.0792793).</p>
+<p>The intercept of object 1 across all subjects is <span class="math inline">\(\hat{\beta_{01.}} =\)</span> 14.4912111 (vs 14.4971756), while subject’s 1 performance across all objects was <span class="math inline">\(\hat{\beta_{0.1}} =\)</span> 18.9779272 (vs 20.0973103). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .969, <em>p</em> &lt; .001. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was <span class="math inline">\(\hat{\beta_{11}} =\)</span> 0.035072 (vs 0.0042065), while the quadratic slope was <span class="math inline">\(\hat{\beta_{21}} =\)</span> 9.9665142 (vs 9.988436).</p>
 </div>
 <div id="model-5.2" class="section level3">
 <h3>Model 5.2</h3>
@@ -677,43 +680,43 @@ summary(model5)</code></pre>
 ##     subNo)
 ##    Data: dataFrame5
 ## 
-## REML criterion at convergence: -1534.1
+## REML criterion at convergence: -1582.8
 ## 
 ## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -2.7297 -0.5981  0.0192  0.5897  3.9881 
+##      Min       1Q   Median       3Q      Max 
+## -3.08286 -0.61913  0.01853  0.62207  2.69470 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance  Std.Dev. Corr 
-##  subNo    (Intercept)  0.462509 0.68008       
-##           x            0.009362 0.09676  -0.97
-##  subNo.1  (Intercept)  0.000000 0.00000       
-##           x2           0.008114 0.09008   NaN 
-##  subNo.2  (Intercept) 77.147228 8.78335       
-##  objNum   (Intercept) 26.378231 5.13597       
-##  Residual              0.010315 0.10156       
+##  subNo    (Intercept) 26.932979 5.18970       
+##           x            0.008787 0.09374  0.19 
+##  subNo.1  (Intercept)  0.055574 0.23574       
+##           x2           0.010822 0.10403  -0.28
+##  subNo.2  (Intercept) 61.928370 7.86946       
+##  objNum   (Intercept) 18.814142 4.33753       
+##  Residual              0.009716 0.09857       
 ## Number of obs: 2000, groups:  subNo, 100; objNum, 20
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error t value
-## (Intercept)  17.2546     2.0202   8.541
-## x             0.8654     1.1792   0.734
-## x2            9.9064     1.4836   6.677
+## (Intercept) 16.89157    1.70828   9.888
+## x           -0.06481    1.06457  -0.061
+## x2           9.09754    1.09819   8.284
 ## 
 ## Correlation of Fixed Effects:
 ##    (Intr) x     
-## x  -0.027       
-## x2 -0.698  0.039
+## x  -0.216       
+## x2 -0.611  0.355
 ## convergence code: 0
 ## unable to evaluate scaled gradient
-## Model failed to converge: degenerate  Hessian with 1 negative eigenvalues</code></pre>
+## Model failed to converge: degenerate  Hessian with 2 negative eigenvalues</code></pre>
 <pre class="r"><code>anova(model5)</code></pre>
 <pre><code>## Analysis of Variance Table
 ##    Df  Sum Sq Mean Sq F value
-## x   1 0.00232 0.00232  0.2247
-## x2  1 0.45991 0.45991 44.5856</code></pre>
+## x   1 0.10030 0.10030  10.323
+## x2  1 0.66676 0.66676  68.627</code></pre>
 <pre class="r"><code>corrResult &lt;- cor.test(coef(model5)$subNo$`(Intercept)`, gamma00 + mean(gamma01*w1 + u01) + gamma02*w2 + u02)</code></pre>
-<p>The intercept of object 1 across all subjects is <span class="math inline">\(\hat{\beta_{01.}} =\)</span> 24.8330087 (vs 23.540596), while subject’s 1 performance across all objects was <span class="math inline">\(\hat{\beta_{0.1}} =\)</span> 22.8844641 (vs 31.8300226). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .082, <em>p</em> = .42. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was <span class="math inline">\(\hat{\beta_{11}} =\)</span> -0.2862847 (vs 0.5910644), while the quadratic slope was <span class="math inline">\(\hat{\beta_{21}} =\)</span> 9.8718226 (vs 9.7887904).</p>
+<p>The intercept of object 1 across all subjects is <span class="math inline">\(\hat{\beta_{01.}} =\)</span> 18.1767803 (vs 18.1734038), while subject’s 1 performance across all objects was <span class="math inline">\(\hat{\beta_{0.1}} =\)</span> 20.1355938 (vs 17.1431682). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .973, <em>p</em> &lt; .001. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was <span class="math inline">\(\hat{\beta_{11}} =\)</span> 0.0929432 (vs 0.0373702), while the quadratic slope was <span class="math inline">\(\hat{\beta_{21}} =\)</span> 9.8407853 (vs 8.9302937).</p>
 </div>
 <div id="inaccurate-estimations-of-the-random-intercepts-for-each-subject" class="section level3">
 <h3>Inaccurate estimations of the random intercepts for each subject</h3>
@@ -772,10 +775,10 @@ for(run in 1:n){
 <p><img src="data:image/png;base64,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" width="672" /></p>
 </div>
 </div>
-<div id="conclusion" class="section level2">
-<h2>Conclusion</h2>
-<p>All models except the last two can be estimated with a decent accuracy. The problem for the last two models is that on rare occasion the model fails to converge or the correlation coefficients for <span class="math inline">\(\hat{\beta_{0.j}}\)</span> and their true value is very low. At the moment, I don’t really know what to do about it.</p>
 </div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>All models except the last two can be estimated with a decent accuracy. The problem for the last two models is that on rare occasions the model fails to converge or the correlation coefficients for <span class="math inline">\(\hat{\beta_{0.j}}\)</span> and their true value is very low. At the moment, I don’t really know what to do about it.</p>
 </div>
 
 
