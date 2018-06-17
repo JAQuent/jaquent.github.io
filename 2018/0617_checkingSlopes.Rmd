@@ -1,0 +1,88 @@
+---
+title: "Checking slopes to test consistency across participants"
+author: "Jörn Alexander Quent"
+date: "16 June 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(eval.after = 'fig.cap')
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE, 
+                      message = FALSE,
+                      fig.width = 10, 
+                      fig.height= 7, 
+                      dpi=300, 
+                      out.width="1200px", 
+                      out.height="700px")
+options(scipen = 30)
+```
+
+# Aim
+I am currently writing up my first year report (see [here](https://jaquent.me/category/project-1/) for information about this project). Currently, the data set includes 23 participants and I am really happy to report that I found a significant quadratic relationship between object/location expectancy and memory performance. Now, the question is whether the quadratic effect is consistent across participants or whether some participants even show the reverse effect. 
+
+# Libraries & data
+```{r}
+library(ggplot2)
+library(lmerTest)
+
+# Loading 
+load("data/exp2Data.RData")
+dataSchemaVR2 <- combData
+rm(combData)
+
+# Preparation
+dataSchemaVR2                           <- subset(dataSchemaVR2, subNum >= 25)
+dataSchemaVR2_Scaled                    <- dataSchemaVR2
+dataSchemaVR2_Scaled$objLocTargetRating <- scale(dataSchemaVR2_Scaled$objLocTargetRating)
+dataSchemaVR2_AFC                       <- subset(dataSchemaVR2_Scaled, dataSchemaVR2_Scaled$resCon != 0)
+```
+
+
+# Model
+In order to test the consistency of the quadratic effect I allowed the slopes to vary across participants. The model is a logistic regression/Generalized Linear Mixed-Effects model with a random intercept and random linear and quadratic slope predicting accuracy on each trial for each participant.  
+
+```{r}
+schemaVR2_model15_slopes <- glmer(accAFC ~  objLocTargetRating +
+                                    I(objLocTargetRating*objLocTargetRating) +
+                                    (objLocTargetRating | subNum) + 
+                                    (I(objLocTargetRating*objLocTargetRating) | subNum),
+                                  data = dataSchemaVR2_AFC,
+                                  family = binomial,
+                                  control = glmerControl(optimizer = "bobyqa"),
+                                  nAGQ = 1)
+
+summary(schemaVR2_model15_slopes)
+coef(schemaVR2_model15_slopes)$subNum
+slopeMean <- round(mean(unlist(coef(schemaVR2_model15_slopes)$subNum[3])), 2)
+slopeSD   <- round(sd(unlist(coef(schemaVR2_model15_slopes)$subNum[3])), 2)
+```
+
+The mean quadratic slope is `r slopeMean` and the standard deviation is only `r slopeSD`, which shows that the effect is remarkably consistent across participants. There are no participants, for whom the effect is reversed. 
+
+# Visualisation
+The slopes are plotted below to visualise them. 
+
+```{r} 
+minExp <- min(dataSchemaVR2_AFC$objLocTargetRating)
+maxEp  <- max(dataSchemaVR2_AFC$objLocTargetRating)
+n      <- dim(coef(schemaVR2_model15_slopes)$subNum)[1]
+
+x      <- seq(minExp, maxEp, 0.01)
+nCol   <- length(x)
+x      <- matrix(rep(x, n), nrow = n, ncol = nCol)
+
+# Important: The coefficients need to be unlisted otherwise the multiplication doesn't work. 
+b0     <- unlist(coef(schemaVR2_model15_slopes)$subNum[1])
+b1     <- unlist(coef(schemaVR2_model15_slopes)$subNum[2])
+b2     <- unlist(coef(schemaVR2_model15_slopes)$subNum[3])
+
+y      <- b2*(x*x) + b1*x + b0
+
+slopes        <- data.frame(subNum = rep(1:n, each = nCol), x = c(t(x)), y = c(t(y)))
+slopes$subNum <- as.factor(slopes$subNum)
+
+ggplot(slopes, aes(x = x, y = y, group = subNum, colour = subNum)) + 
+  geom_line(show.legend = FALSE) + 
+  labs(y = 'Accuracy', x = 'Expectancy')
+```
