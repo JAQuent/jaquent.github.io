@@ -61,7 +61,7 @@ I start with loading the data and creating a 20 x 20 x N matrix holding all 400 
 
 ```{r}
 # Prepare
-subNo           <- 1:5
+subNo           <- 1:6
 N               <- length(subNo)
 locationRatings <- array(data = NA, dim = c(20, 20, N))
 objectRatings   <- matrix(NA, 20, N)
@@ -89,7 +89,7 @@ ggplot(locationRatingsDF, aes(ratings)) + geom_histogram(binwidth = 1) + theme(p
         coord_cartesian(xlim = c(-100, 100), expand = FALSE)
 ```
 
-The ratings are spread across the scale. However it is also interesting to look at the individual distributions. Therefor I plot one histograms for each participant. 
+The ratings are spread across the scale. However it is also interesting to look at the individual distributions. There were I plot one histograms for each participant. 
 
 ```{r}
 ggplot(locationRatingsDF, aes(ratings)) + facet_grid(. ~ ID) + geom_histogram() + theme(panel.margin = unit(1, "cm"), text = element_text(size = 12)) + 
@@ -121,7 +121,6 @@ sdObjectRatingsDF       <- data.frame(Object = factor(1:20, labels = objectNames
 plot1 <- ggplot(averageLocationRatingsDF, aes(Location, Object)) + geom_tile(aes(fill = Ratings)) + scale_fill_gradient(low = "white", high = "red") + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(title = 'Average: Object/location') + theme(legend.position = 'none')
 
 plot2 <- ggplot(averageObjectRatingsDF, aes(x = 1, y = Object)) + geom_tile(aes(fill = Ratings)) + scale_fill_gradient(low = "white", high = "red") + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(x = '', title = 'Overall') + theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(), plot.margin=unit(c(0.2, 0, 0.62, 0),"cm"))
-
 grid.arrange(plot1, plot2, ncol = 2, widths = c(5.5, 1))
 ```
 
@@ -146,7 +145,7 @@ correlationDF         <- data.frame(Object = factor(1:20, labels = objectNames),
 
 correlation <- cor.test(~ Overall + Location, data = correlationDF)
 
-ggplot(correlationDF, aes(x = Location, y = Overall)) + geom_point() + geom_smooth(method = 'lm') + coord_cartesian(xlim = c(-35, 30), ylim = c(-75, 150), expand = FALSE) + labs(title = 'Average rating across locations vs. overall ratings') + annotate("text", x = 20, y = -50, label = paste('r ', rValue(correlation$estimate), ', p ' , pValue(correlation$p.value), sep = '') , size = 5)
+ggplot(correlationDF, aes(x = Location, y = Overall)) + geom_point() + geom_smooth(method = 'lm') + coord_cartesian(xlim = c(-25, 35), ylim = c(-75, 150), expand = FALSE) + labs(title = 'Average rating across locations vs. overall ratings') + annotate("text", x = 20, y = -50, label = paste('r ', rValue(correlation$estimate), ', p ' , pValue(correlation$p.value), sep = '') , size = 5)
 ```
 
 As it turns out, there is a significant positive correlation between the average ratings across locations and the overall ratingsr, *r* `r rValue(correlation$estimate)`, *p* `r pValue(correlation$p.value)`. 
