@@ -11,13 +11,13 @@
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="es"
-                href="https://example.com/es/"
+                hreflang="de"
+                href="https://example.com/de/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="de"
-                href="https://example.com/de/"
+                hreflang="es"
+                href="https://example.com/es/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -31,13 +31,13 @@
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="es"
-                href="https://example.com/es/categories/"
+                hreflang="de"
+                href="https://example.com/de/categories/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="de"
-                href="https://example.com/de/categories/"
+                hreflang="es"
+                href="https://example.com/es/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -55,13 +55,13 @@
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="es"
-                href="https://example.com/es/tags/"
+                hreflang="de"
+                href="https://example.com/de/tags/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="de"
-                href="https://example.com/de/tags/"
+                hreflang="es"
+                href="https://example.com/es/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -75,13 +75,13 @@
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="es"
-                href="https://example.com/es/ua-47268287-3/"
+                hreflang="de"
+                href="https://example.com/de/ua-47268287-3/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="de"
-                href="https://example.com/de/ua-47268287-3/"
+                hreflang="es"
+                href="https://example.com/es/ua-47268287-3/"
                 />
     <xhtml:link
                 rel="alternate"
