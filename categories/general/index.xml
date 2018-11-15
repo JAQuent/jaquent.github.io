@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>General on Jörn Alexander Quent&#39;s notebook</title>
+    <link>/categories/general/</link>
+    <description>Recent content in General on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/general/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Thoughts concerning Lew &amp; Howe (2016)</title>
+      <link>/2017/10/thoughts-concerning-lew-howe-2016/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/thoughts-concerning-lew-howe-2016/</guid>
+      <description>After examining the stimuli photos from Lew &amp;amp; Howe (2016), I came to the conclusion that even schema-irrelevant objects have more or less expected locations. For instance, placing boots in the middle of the kitchen is unusual, but putting a hat on the kitchen table is less so.
+Reference Lew, A. R., &amp;amp; Howe, M. L. (2016). Out of Place, Out of Mind: Schema-Driven False Memory Effects for Object-Location Bindings.</description>
+    </item>
+    
+    <item>
+      <title>Lighting and 3D models</title>
+      <link>/2017/10/lighting-and-3d-models/</link>
+      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/lighting-and-3d-models/</guid>
+      <description> To create realistic light, set environment lighting to colour and use white. To find suitable 3D models for my virtual kitchen, I looked for models on https://archive3d.net.  </description>
+    </item>
+    
+    <item>
+      <title>HPC activity and graphics in Unity</title>
+      <link>/2017/10/hpc-activity-and-graphics-in-unity/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/hpc-activity-and-graphics-in-unity/</guid>
+      <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
+    </item>
+    
+  </channel>
+</rss>

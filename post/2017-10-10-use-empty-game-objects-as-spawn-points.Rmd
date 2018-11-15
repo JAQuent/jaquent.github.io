@@ -1,0 +1,13 @@
+---
+title: Use empty game objects as spawn points
+author: Alex Quent
+date: '2017-10-10'
+slug: use-empty-game-objects-as-spawn-points
+categories:
+  - experiments
+tags:
+  - schemaVR
+  - unity3d
+---
+
+Use empty game objects as spawn points to spawn objects in your environment. These can be dragged to certain position in the scene without specifying points in a Cartesian coordinate system. 

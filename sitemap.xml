@@ -3,55 +3,128 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jaquent.github.io/2018/01/analysing-normative-data-set/</loc>
+    <loc>/2018/01/analysing-normative-data-set/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/about/</loc>
+    <loc>/2017/10/lab-meeting-and-feedback-to-first-experiment/</loc>
+    <lastmod>2017-10-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/categories/</loc>
+    <loc>/2017/10/thoughts-concerning-lew-howe-2016/</loc>
+    <lastmod>2017-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/10/lighting-and-3d-models/</loc>
+    <lastmod>2017-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/10/hpc-activity-and-graphics-in-unity/</loc>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/10/use-empty-game-objects-as-spawn-points/</loc>
+    <lastmod>2017-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/contact/</loc>
+    <loc>/contact/</loc>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/categories/experiments/</loc>
+    <loc>/categories/experiments/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/</loc>
+    <loc>/categories/general/</loc>
+    <lastmod>2017-10-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/graphics/</loc>
+    <lastmod>2017-10-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/hippocampus/</loc>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/post/</loc>
+    <loc>/tags/memory/</loc>
+    <lastmod>2017-10-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/mpfc/</loc>
+    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/tags/schemavr/</loc>
+    <loc>/tags/rmarkdown/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/tags/</loc>
+    <loc>/tags/schema/</loc>
+    <lastmod>2017-10-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/schemavr/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/ua-47268287-3/</loc>
+    <loc>/tags/</loc>
+    <lastmod>2017-10-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/ua-47268287-3/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/unity3d/</loc>
+    <lastmod>2017-10-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -2,39 +2,86 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/</link>
+    <link>/</link>
     <description>Recent content on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 10 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Analysing normative data set</title>
-      <link>https://jaquent.github.io/2018/01/analysing-normative-data-set/</link>
+      <link>/2018/01/analysing-normative-data-set/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/analysing-normative-data-set/</guid>
+      <guid>/2018/01/analysing-normative-data-set/</guid>
       <description>IntroductionThe aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
     </item>
     
     <item>
+      <title>Lab meeting and feedback to first experiment</title>
+      <link>/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
+      <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
+      <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
+ I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
+    </item>
+    
+    <item>
+      <title>Thoughts concerning Lew &amp; Howe (2016)</title>
+      <link>/2017/10/thoughts-concerning-lew-howe-2016/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/thoughts-concerning-lew-howe-2016/</guid>
+      <description>After examining the stimuli photos from Lew &amp;amp; Howe (2016), I came to the conclusion that even schema-irrelevant objects have more or less expected locations. For instance, placing boots in the middle of the kitchen is unusual, but putting a hat on the kitchen table is less so.
+Reference Lew, A. R., &amp;amp; Howe, M. L. (2016). Out of Place, Out of Mind: Schema-Driven False Memory Effects for Object-Location Bindings.</description>
+    </item>
+    
+    <item>
+      <title>Lighting and 3D models</title>
+      <link>/2017/10/lighting-and-3d-models/</link>
+      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/lighting-and-3d-models/</guid>
+      <description> To create realistic light, set environment lighting to colour and use white. To find suitable 3D models for my virtual kitchen, I looked for models on https://archive3d.net.  </description>
+    </item>
+    
+    <item>
+      <title>HPC activity and graphics in Unity</title>
+      <link>/2017/10/hpc-activity-and-graphics-in-unity/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/hpc-activity-and-graphics-in-unity/</guid>
+      <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
+    </item>
+    
+    <item>
+      <title>Use empty game objects as spawn points</title>
+      <link>/2017/10/use-empty-game-objects-as-spawn-points/</link>
+      <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/use-empty-game-objects-as-spawn-points/</guid>
+      <description>Use empty game objects as spawn points to spawn objects in your environment. These can be dragged to certain position in the scene without specifying points in a Cartesian coordinate system.</description>
+    </item>
+    
+    <item>
       <title>About</title>
-      <link>https://jaquent.github.io/about/</link>
+      <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/about/</guid>
+      <guid>/about/</guid>
       <description>Under construction. Test</description>
     </item>
     
     <item>
       <title>Contact</title>
-      <link>https://jaquent.github.io/contact/</link>
+      <link>/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/contact/</guid>
+      <guid>/contact/</guid>
       <description>Under construction. Test</description>
     </item>
     

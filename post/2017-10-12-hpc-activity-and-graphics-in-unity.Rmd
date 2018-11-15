@@ -1,0 +1,23 @@
+---
+title: HPC activity and graphics in Unity
+author: Alex Quent
+date: '2017-10-12'
+slug: hpc-activity-and-graphics-in-unity
+categories:
+  - general
+tags:
+  - graphics
+  - hippocampus
+  - memory
+  - mPFC
+  - unity3d
+---
+
+- Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.
+- Unity tutorial on graphics:
+    + If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.
+    +  Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?
+    + Use linear colour space because it is more realistic. This goes well with using HDR. When using HDR cameras, the Tonemapping Image Effect from Standard Assets (Assets>Import Package>Effects) must be added to the camera.
+
+# References
+Frankland, P. W., & Bontempi, B. (2005). The organization of recent and remote memories. Nat Rev Neurosci, 6(2), 119–130. Retrieved from http://dx.doi.org/10.1038/nrn1607
