@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Word Properties on Jörn Alexander Quent&#39;s notebook</title>
+    <link>https://jaquent.github.io/tags/word-properties/</link>
+    <description>Recent content in Word Properties on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jaquent.github.io/tags/word-properties/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Selecting and checking living/non-living words</title>
+      <link>https://jaquent.github.io/2018/11/selecting-and-checking-living-non-living-words/</link>
+      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/11/selecting-and-checking-living-non-living-words/</guid>
+      <description>Aim Here, I am selecting 200 words for a new project called noveltyVR, in which I am going to try to study the effect of novelty on something that was learned before. In this case, it will be a list of words that were incidentally encoded in a living/non-living judgement task. I will select 200 words from a published study, look up their properties in the MRC Psycholinguistic Database and create two lists that are used as old and new stimuli in a recognition task.</description>
+    </item>
+    
+  </channel>
+</rss>

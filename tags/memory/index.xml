@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Memory on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/memory/</link>
+    <link>https://jaquent.github.io/tags/memory/</link>
     <description>Recent content in Memory on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 19 Oct 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/memory/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/memory/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lab meeting and feedback to first experiment</title>
-      <link>/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
+      <link>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
+      <guid>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
       <title>HPC activity and graphics in Unity</title>
-      <link>/2017/10/hpc-activity-and-graphics-in-unity/</link>
+      <link>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/hpc-activity-and-graphics-in-unity/</guid>
+      <guid>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</guid>
       <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
     </item>
     
