@@ -456,8 +456,8 @@ wordListsMetrics &lt;- ddply(combinedLists,
                           BROWN.FREQMean = mean(BROWN.FREQ, na.rm = TRUE),
                           BROWN.FREQSD   = sd(BROWN.FREQ, na.rm = TRUE),
                           BROWN.FREQN    = sum(!is.na(BROWN.FREQ)),
-                          FAMMean        = mean(wordLength, na.rm = TRUE),
-                          FAMSD          = sd(wordLength, na.rm = TRUE),
+                          FAMMean        = mean(FAM, na.rm = TRUE),
+                          FAMSD          = sd(FAM, na.rm = TRUE),
                           FAMN           = sum(!is.na(FAM)),
                           CONCMean       = mean(CONC, na.rm = TRUE),
                           CONCSD         = sd(CONC, na.rm = TRUE),
@@ -544,11 +544,11 @@ kable(wordListsMetrics_table)
 
 <tr>
 <td align="left">FAM</td>
-<td align="right">5.680000</td>
-<td align="right">1.398990</td>
+<td align="right">495.968300</td>
+<td align="right">47.913220</td>
 <td align="right">63</td>
-<td align="right">5.860000</td>
-<td align="right">1.356019</td>
+<td align="right">484.947400</td>
+<td align="right">47.300490</td>
 <td align="right">57</td>
 </tr>
 
