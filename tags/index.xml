@@ -2,120 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Oct 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Graphics</title>
-      <link>https://jaquent.github.io/tags/graphics/</link>
-      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
+      <link>/tags/graphics/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/graphics/</guid>
+      <guid>/tags/graphics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hippocampus</title>
-      <link>https://jaquent.github.io/tags/hippocampus/</link>
+      <link>/tags/hippocampus/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/hippocampus/</guid>
+      <guid>/tags/hippocampus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lab Meeting</title>
+      <link>/tags/lab-meeting/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lab-meeting/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Memory</title>
-      <link>https://jaquent.github.io/tags/memory/</link>
-      <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
+      <link>/tags/memory/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/memory/</guid>
+      <guid>/tags/memory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mpfc</title>
-      <link>https://jaquent.github.io/tags/mpfc/</link>
+      <link>/tags/mpfc/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/mpfc/</guid>
+      <guid>/tags/mpfc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Noveltyvr</title>
-      <link>https://jaquent.github.io/tags/noveltyvr/</link>
+      <link>/tags/noveltyvr/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/noveltyvr/</guid>
+      <guid>/tags/noveltyvr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ratingstudy</title>
-      <link>https://jaquent.github.io/tags/ratingstudy/</link>
+      <link>/tags/ratingstudy/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/ratingstudy/</guid>
+      <guid>/tags/ratingstudy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rmarkdown</title>
-      <link>https://jaquent.github.io/tags/rmarkdown/</link>
+      <link>/tags/rmarkdown/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/rmarkdown/</guid>
+      <guid>/tags/rmarkdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Schema</title>
-      <link>https://jaquent.github.io/tags/schema/</link>
-      <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
+      <link>/tags/schema/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/schema/</guid>
+      <guid>/tags/schema/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Schemavr</title>
-      <link>https://jaquent.github.io/tags/schemavr/</link>
-      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
+      <link>/tags/schemavr/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/schemavr/</guid>
+      <guid>/tags/schemavr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Unity3d</title>
-      <link>https://jaquent.github.io/tags/unity3d/</link>
-      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
+      <link>/tags/unity3d/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/unity3d/</guid>
+      <guid>/tags/unity3d/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Word Properties</title>
-      <link>https://jaquent.github.io/tags/word-properties/</link>
+      <link>/tags/word-properties/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/word-properties/</guid>
+      <guid>/tags/word-properties/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Words</title>
-      <link>https://jaquent.github.io/tags/words/</link>
+      <link>/tags/words/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/words/</guid>
+      <guid>/tags/words/</guid>
       <description></description>
     </item>
     

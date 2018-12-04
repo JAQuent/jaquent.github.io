@@ -2,31 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Schema on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/schema/</link>
+    <link>/tags/schema/</link>
     <description>Recent content in Schema on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 04 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/tags/schema/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/schema/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Lab meeting and feedback to first experiment</title>
-      <link>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
-      <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
+      <title>Lab meeting</title>
+      <link>/2018/12/lab-meeting/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
+      <guid>/2018/12/lab-meeting/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
+      <title>Lab meeting and feedback to first experiment</title>
+      <link>/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
+      <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
+      <description>During our weekly lab meeting I got the following feedback pertaining to schemaVR:
+ I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
+    </item>
+    
+    <item>
       <title>Thoughts concerning Lew &amp; Howe (2016)</title>
-      <link>https://jaquent.github.io/2017/10/thoughts-concerning-lew-howe-2016/</link>
+      <link>/2017/10/thoughts-concerning-lew-howe-2016/</link>
       <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2017/10/thoughts-concerning-lew-howe-2016/</guid>
+      <guid>/2017/10/thoughts-concerning-lew-howe-2016/</guid>
       <description>After examining the stimuli photos from Lew &amp;amp; Howe (2016), I came to the conclusion that even schema-irrelevant objects have more or less expected locations. For instance, placing boots in the middle of the kitchen is unusual, but putting a hat on the kitchen table is less so.
 Reference Lew, A. R., &amp;amp; Howe, M. L. (2016). Out of Place, Out of Mind: Schema-Driven False Memory Effects for Object-Location Bindings.</description>
     </item>
