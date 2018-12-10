@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>/tags/about/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Familiarity</title>
+      <link>/tags/familiarity/</link>
+      <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/familiarity/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Graphics</title>
@@ -32,7 +50,7 @@
     <item>
       <title>Lab Meeting</title>
       <link>/tags/lab-meeting/</link>
-      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/lab-meeting/</guid>
       <description></description>
@@ -41,7 +59,7 @@
     <item>
       <title>Memory</title>
       <link>/tags/memory/</link>
-      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/memory/</guid>
       <description></description>
@@ -68,7 +86,7 @@
     <item>
       <title>Pilot Study</title>
       <link>/tags/pilot-study/</link>
-      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/pilot-study/</guid>
       <description></description>
@@ -84,6 +102,24 @@
     </item>
     
     <item>
+      <title>Recognition Memory</title>
+      <link>/tags/recognition-memory/</link>
+      <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/recognition-memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recollection</title>
+      <link>/tags/recollection/</link>
+      <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/recollection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Rmarkdown</title>
       <link>/tags/rmarkdown/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
@@ -95,7 +131,7 @@
     <item>
       <title>Schema</title>
       <link>/tags/schema/</link>
-      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/schema/</guid>
       <description></description>
@@ -104,7 +140,7 @@
     <item>
       <title>Schemavr</title>
       <link>/tags/schemavr/</link>
-      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/schemavr/</guid>
       <description></description>

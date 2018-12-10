@@ -29,5 +29,16 @@
       <description>IntroductionThe aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
     </item>
     
+    <item>
+      <title>Running RMarkdown on CBU computer and first pilot session</title>
+      <link>/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</guid>
+      <description>The issues I am describing here are probably most interesting for people also working on a MRC-CBU computer because MRC-CBU’s specific cyber-security regulations. When I tried to create a new RMarkdown file, I got an error message that the package ‘rprojroot’ could not be found.
+These the things that I tried and eventually worked:
+ I installed the package as a source package, because there is no binary version of it.</description>
+    </item>
+    
   </channel>
 </rss>

@@ -6,20 +6,10 @@
     <description>Recent content in Schemavr on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/schemavr/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Lab meeting</title>
-      <link>/2018/12/lab-meeting/</link>
-      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/12/lab-meeting/</guid>
-      <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
- I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
-    </item>
     
     <item>
       <title>Analysing normative data set</title>
@@ -28,6 +18,15 @@
       
       <guid>/2018/01/analysing-normative-data-set/</guid>
       <description>IntroductionThe aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
+    </item>
+    
+    <item>
+      <title>Lab meeting</title>
+      <link>/2017/11/lab-meeting/</link>
+      <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/11/lab-meeting/</guid>
+      <description>Today I met with my supervisor and we also had lab meeting.  We have discussed the difficulty to counter-balance the expectedness of the objects and their locations in a true factorial design. For instance, it is nearly impossible to pair objects so that the expected location of one object is the unexpected location of the other object. We are interested in how the expectedness of an object and its location is related to memory and whether it is possible to get a u-shaped function.</description>
     </item>
     
     <item>
@@ -56,6 +55,16 @@ Originally posted on the 08/11/2018: I decided to drop the guess response option
       
       <guid>/2017/10/thoughts-on-counterbalancing/</guid>
       <description>Trying to find pairs of objects to counterbalance expected versus unexpected locations. * The first option, is to build pairs of relevant objects (e.g. knife – toaster) and think of three expected location for the first one that are unexpected for the second one. The problem here is that these are not the super expected locations and I would probably need to show in the normative studies that the expectancy is as hoped.</description>
+    </item>
+    
+    <item>
+      <title>Lab meeting</title>
+      <link>/2017/10/lab-meeting/</link>
+      <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/lab-meeting/</guid>
+      <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
+ I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>

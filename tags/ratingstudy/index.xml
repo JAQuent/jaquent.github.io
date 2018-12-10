@@ -20,5 +20,14 @@
       <description>IntroductionThe aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
     </item>
     
+    <item>
+      <title>Designing rating study</title>
+      <link>/2017/12/designing-rating-study/</link>
+      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/designing-rating-study/</guid>
+      <description>11/12/2017: I finished the script, with which participants can rate a) the expectancy of an object in the room (kitchen) and b) the expectancy of a particular object at all possible twenty locations. To that regard, we decided to reverse the original order of ratings so that the overall expectancy of the objects for that room is rated at the very end. The reason for that is that otherwise one might be prone to rate schema irrelevant objects as highly unexpected (-100) in any location even though some are more expected than others.</description>
+    </item>
+    
   </channel>
 </rss>

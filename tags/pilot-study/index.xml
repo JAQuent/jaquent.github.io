@@ -6,10 +6,30 @@
     <description>Recent content in Pilot Study on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Nov 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/pilot-study/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Summary of piloting</title>
+      <link>/2017/11/summary-of-piloting/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/11/summary-of-piloting/</guid>
+      <description>17/11/2017: Today, I run another pilot session and I realized that I should introduce practice trials of both the n-back distractor task and the recognition task to reduce the difference between the first and subsequent blocks. Before I can start with the normative study, I need to make sure how many objects I am going to need, how these objects are going to look like and whether these objects are appropriate because some had problems naming some objects.</description>
+    </item>
+    
+    <item>
+      <title>Running RMarkdown on CBU computer and first pilot session</title>
+      <link>/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</guid>
+      <description>The issues I am describing here are probably most interesting for people also working on a MRC-CBU computer because MRC-CBU’s specific cyber-security regulations. When I tried to create a new RMarkdown file, I got an error message that the package ‘rprojroot’ could not be found.
+These the things that I tried and eventually worked:
+ I installed the package as a source package, because there is no binary version of it.</description>
+    </item>
     
     <item>
       <title>Retrieval task of pilot study</title>
