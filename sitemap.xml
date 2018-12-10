@@ -18,6 +18,21 @@
   </url>
   
   <url>
+    <loc>/2017/11/retrieval-task-of-pilot-study/</loc>
+    <lastmod>2017-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/11/consideration-on-objects/</loc>
+    <lastmod>2017-11-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/10/thoughts-on-counterbalancing/</loc>
+    <lastmod>2017-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2017/10/various-graphic-settings-in-unity/</loc>
     <lastmod>2017-10-23T00:00:00+00:00</lastmod>
   </url>
@@ -107,6 +122,12 @@
   <url>
     <loc>/tags/noveltyvr/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/pilot-study/</loc>
+    <lastmod>2017-11-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

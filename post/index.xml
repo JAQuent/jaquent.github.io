@@ -40,6 +40,34 @@
     </item>
     
     <item>
+      <title>Retrieval task of pilot study</title>
+      <link>/2017/11/retrieval-task-of-pilot-study/</link>
+      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/11/retrieval-task-of-pilot-study/</guid>
+      <description>I decided to write the retrieval task as MATLAB function not as script, so that this and the distractor task can be called multiple times from a simple script.
+Originally posted on the 08/11/2018: I decided to drop the guess response option because there won’t be enough trials to analyse this conditio.n</description>
+    </item>
+    
+    <item>
+      <title>Consideration on objects</title>
+      <link>/2017/11/consideration-on-objects/</link>
+      <pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/11/consideration-on-objects/</guid>
+      <description> There could be the problem that unexpected objects have weird y-rotations if spawned at random locations. The towel could expected as kitchen towel.  </description>
+    </item>
+    
+    <item>
+      <title>Thoughts on counterbalancing</title>
+      <link>/2017/10/thoughts-on-counterbalancing/</link>
+      <pubDate>Tue, 31 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/thoughts-on-counterbalancing/</guid>
+      <description>Trying to find pairs of objects to counterbalance expected versus unexpected locations. * The first option, is to build pairs of relevant objects (e.g. knife – toaster) and think of three expected location for the first one that are unexpected for the second one. The problem here is that these are not the super expected locations and I would probably need to show in the normative studies that the expectancy is as hoped.</description>
+    </item>
+    
+    <item>
       <title>Various graphic settings in unity</title>
       <link>/2017/10/various-graphic-settings-in-unity/</link>
       <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
@@ -66,7 +94,7 @@
       
       <guid>/2017/10/thoughts-concerning-lew-howe-2016/</guid>
       <description>After examining the stimuli photos from Lew &amp;amp; Howe (2016), I came to the conclusion that even schema-irrelevant objects have more or less expected locations. For instance, placing boots in the middle of the kitchen is unusual, but putting a hat on the kitchen table is less so.
-Reference Lew, A. R., &amp;amp; Howe, M. L. (2016). Out of Place, Out of Mind: Schema-Driven False Memory Effects for Object-Location Bindings.</description>
+Originally posted on the 26/10/2018: Schema-relevancy was measured on a scale of 1 to 10 (very usual to very unusual). Low rating (below 3) were regarded as relevant and rating above 5 were regarded as irrelevant.</description>
     </item>
     
     <item>
