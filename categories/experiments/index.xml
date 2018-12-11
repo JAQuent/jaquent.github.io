@@ -21,12 +21,42 @@
     </item>
     
     <item>
+      <title>Testing whether targets differ in rank from foils</title>
+      <link>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</link>
+      <pubDate>Mon, 15 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</guid>
+      <description>Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
+Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &amp;lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &amp;quot;lm&amp;quot;)){ s &amp;lt;- summary.</description>
+    </item>
+    
+    <item>
+      <title>Stimulus selection for schemaVR1 (Attempt 1)</title>
+      <link>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</link>
+      <pubDate>Fri, 12 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</guid>
+      <description>Introduction The aim is to select a certain number (20) of combinations of objects and locations that cover the whole range of expectancy values. The previous analysis of this data set can be found here. The code for the task can be found here.
+Used libraries and functions library(ggplot2)  Loading the rating data I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants.</description>
+    </item>
+    
+    <item>
       <title>Analysing normative data set</title>
       <link>/2018/01/analysing-normative-data-set/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/01/analysing-normative-data-set/</guid>
-      <description>IntroductionThe aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
+      <description>Introduction The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
+    </item>
+    
+    <item>
+      <title>Change of design based on pilot study</title>
+      <link>/2018/01/change-of-design-based-on-pilot-study/</link>
+      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/change-of-design-based-on-pilot-study/</guid>
+      <description>I had the vague idea to do multivariate pattern analysis on the mPFC to decode specific schemas and to see how new objects/information is integrated in to those, but the problem might be that there are far too few trials to do that with the current design. It might also be interesting to look at memory reinstatement and how it is influence by schemas.
+Today, I met with my supervisor and talked about the current design, about the ratings and general plan for this year.</description>
     </item>
     
     <item>

@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Analysing normative data set" />
-<meta property="og:description" content="IntroductionThe aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results." />
+<meta property="og:description" content="Introduction The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/2018/01/analysing-normative-data-set/" /><meta property="article:published_time" content="2018-01-10T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2018-01-10T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Analysing normative data set"/>
-<meta name="twitter:description" content="IntroductionThe aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results."/>
+<meta name="twitter:description" content="Introduction The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results."/>
 
 
 
@@ -117,23 +117,23 @@
 <article class="blog-post">
     
 
+<h1 id="introduction">Introduction</h1>
 
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
-<p>The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results. Participants were helpful member of the research group. The code for the task can be found <a href="https://github.com/JAQuent/ratingStudy" class="uri">https://github.com/JAQuent/ratingStudy</a>.</p>
-<div id="used-libraries-and-functions" class="section level2">
-<h2>Used libraries and functions</h2>
-<pre class="r"><code>library(ggplot2)
+<p>The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results. Participants were helpful member of the research group. The code for the task can be found <a href="https://github.com/JAQuent/ratingStudy">https://github.com/JAQuent/ratingStudy</a>.</p>
+
+<h2 id="used-libraries-and-functions">Used libraries and functions</h2>
+
+<pre><code class="language-r">library(ggplot2)
 library(gridExtra)
 
-pValue &lt;-function(x, sign = &#39;=&#39;){
+pValue &lt;-function(x, sign = '='){
   if (inherits(x, &quot;lm&quot;)){
     s &lt;- summary.lm(x)
     x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.tail = FALSE)
     if(x &gt; 1){
       stop(&quot;There is no p-value greater than 1&quot;)
     } else if(x &lt; 0.001){
-      x.converted &lt;- &#39;&lt; .001&#39;
+      x.converted &lt;- '&lt; .001'
     } else{
       x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
     } 
@@ -141,7 +141,7 @@ pValue &lt;-function(x, sign = &#39;=&#39;){
     if(x &gt; 1){
       stop(&quot;There is no p-value greater than 1&quot;)
     } else if(x &lt; 0.001){
-      x.converted &lt;- &#39;&lt; .001&#39;
+      x.converted &lt;- '&lt; .001'
     } else{
       x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
     } 
@@ -152,21 +152,23 @@ pValue &lt;-function(x, sign = &#39;=&#39;){
 rValue &lt;-function(x){
   if (inherits(x, &quot;lm&quot;)){
     r.squared &lt;- summary(x)$r.squared
-    x.converted &lt;- paste(&#39;=&#39;,substr(as.character(round(r.squared, 3)), 2,5)) 
+    x.converted &lt;- paste('=',substr(as.character(round(r.squared, 3)), 2,5)) 
   } else {
     if (x &lt; 0){
-      x.converted &lt;- paste(&#39;= -&#39;,substr(as.character(abs(round(x, 3))), 2,5), sep = &#39;&#39;) 
+      x.converted &lt;- paste('= -',substr(as.character(abs(round(x, 3))), 2,5), sep = '') 
     } else {
-      x.converted &lt;- paste(&#39;=&#39;,substr(as.character(abs(round(x, 3))), 2,5)) 
+      x.converted &lt;- paste('=',substr(as.character(abs(round(x, 3))), 2,5)) 
     }
   }
   return(x.converted) 
-}</code></pre>
-</div>
-<div id="loading-the-rating-data" class="section level2">
-<h2>Loading the rating data</h2>
+}
+</code></pre>
+
+<h2 id="loading-the-rating-data">Loading the rating data</h2>
+
 <p>I start with loading the data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants. Similarly, I create a 20 x N matrix to hold the 20 objects ratings. After that, I shuffle the data because people in the group could otherwise infer the identity of the other participants.</p>
-<pre class="r"><code># Prepare
+
+<pre><code class="language-r"># Prepare
 subNo           &lt;- 1:6
 N               &lt;- length(subNo)
 locationRatings &lt;- array(data = NA, dim = c(20, 20, N))
@@ -174,31 +176,43 @@ objectRatings   &lt;- matrix(NA, 20, N)
 
 # Sequently loading data
 for(i in 1:N){
-  locationRatings[,,i] &lt;- matrix(scan(paste(&#39;U:/Projects/schemaVR/normativeStudy/normativeData/locationRatings_&#39;, as.character(subNo[i]) ,&#39;.dat&#39;, sep = &#39;&#39;)), byrow = TRUE, ncol = 20)
-  objectRatings[,i]    &lt;- scan(paste(&#39;U:/Projects/schemaVR/normativeStudy/normativeData/objectRatings_&#39;, as.character(subNo[i]) ,&#39;.dat&#39;, sep = &#39;&#39;))
+  locationRatings[,,i] &lt;- matrix(scan(paste('U:/Projects/schemaVR/normativeStudy/normativeData/locationRatings_', as.character(subNo[i]) ,'.dat', sep = '')), byrow = TRUE, ncol = 20)
+  objectRatings[,i]    &lt;- scan(paste('U:/Projects/schemaVR/normativeStudy/normativeData/objectRatings_', as.character(subNo[i]) ,'.dat', sep = ''))
 }
 
 # Shuffle to anonymise the data
 shuffle         &lt;- sample(1:N)
 locationRatings &lt;- locationRatings[,,shuffle]
-objectRatings   &lt;- objectRatings[,shuffle]</code></pre>
+objectRatings   &lt;- objectRatings[,shuffle]
+</code></pre>
+
 <p>After successfully loading the data and saving it in the matrices, I want to look at distribution of the location ratings. I collapse the data across all 6 participants and create a histogram:</p>
-<pre class="r"><code># Create a data frame and split by participant
+
+<pre><code class="language-r"># Create a data frame and split by participant
 locationRatingsDF &lt;- data.frame(ID = as.factor(rep(1:N, each = 400)), ratings = c(locationRatings))
 
 # Create plot
 ggplot(locationRatingsDF, aes(ratings)) + geom_histogram(binwidth = 1) + theme(panel.margin = unit(1, &quot;cm&quot;), text = element_text(size = 12)) + 
-        labs(y = &#39;Number of ratings&#39;, x = &#39;Unexpected to expected&#39;) + 
-        coord_cartesian(xlim = c(-100, 100), expand = FALSE)</code></pre>
-<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+        labs(y = 'Number of ratings', x = 'Unexpected to expected') + 
+        coord_cartesian(xlim = c(-100, 100), expand = FALSE)
+</code></pre>
+
+<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-3-1.png" alt="" /></p>
+
 <p>The ratings are spread across the scale. However it is also interesting to look at the individual distributions. There were I plot one histograms for each participant.</p>
-<pre class="r"><code>ggplot(locationRatingsDF, aes(ratings)) + facet_grid(. ~ ID) + geom_histogram() + theme(panel.margin = unit(1, &quot;cm&quot;), text = element_text(size = 12)) + 
-        labs(y = &#39;Number of ratings&#39;, x = &#39;Unexpected to expected&#39;) + 
-        coord_cartesian(xlim = c(-100, 100), expand = FALSE)</code></pre>
-<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+
+<pre><code class="language-r">ggplot(locationRatingsDF, aes(ratings)) + facet_grid(. ~ ID) + geom_histogram() + theme(panel.margin = unit(1, &quot;cm&quot;), text = element_text(size = 12)) + 
+        labs(y = 'Number of ratings', x = 'Unexpected to expected') + 
+        coord_cartesian(xlim = c(-100, 100), expand = FALSE)
+</code></pre>
+
+<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-4-1.png" alt="" /></p>
+
 <p>Looking at the individual data, it is quite apparent that the distributions differ quite profoundly in terms how their responses are spread. On looks a bit Gaussian with a small dip around zero, while other distributions tended to include many extreme responses.</p>
+
 <p>As I want to use this data to create a distribution to draw a combination of objects and locations from, I average the matrices and calculate the standard deviations to have an idea how the raters differed from each other. Therefore, I create heatmaps to visualise the results.</p>
-<pre class="r"><code>objectNames &lt;- c(&#39;microwave&#39;,&#39;kitchen roll&#39;,&#39;saucepan&#39;, &#39;toaster&#39;,&#39;fruit bowl&#39;,&#39;tea pot&#39;,&#39;knife&#39;,&#39;mixer&#39;,&#39;bread&#39;,&#39;glass jug&#39;,&#39;mug&#39;,&#39;dishes&#39;,&#39;towels&#39;,&#39;toy&#39;,&#39;pile of books&#39;,&#39;umbrella&#39;,&#39;hat&#39;,&#39;helmet&#39;,&#39;calendar&#39;,&#39;fan&#39;)
+
+<pre><code class="language-r">objectNames &lt;- c('microwave','kitchen roll','saucepan', 'toaster','fruit bowl','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
 
 # Calculate metrics
 averageLocationRatings &lt;- apply(locationRatings, 1:2, mean)
@@ -214,31 +228,41 @@ averageObjectRatingsDF  &lt;- data.frame(Object = factor(1:20, labels = objectNa
 sdObjectRatingsDF       &lt;- data.frame(Object = factor(1:20, labels = objectNames), SD = c(sdObjectRatings))
 
 # Create average heatmaps
-plot1 &lt;- ggplot(averageLocationRatingsDF, aes(Location, Object)) + geom_tile(aes(fill = Ratings)) + scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;) + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(title = &#39;Average: Object/location&#39;) + theme(legend.position = &#39;none&#39;)
+plot1 &lt;- ggplot(averageLocationRatingsDF, aes(Location, Object)) + geom_tile(aes(fill = Ratings)) + scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;) + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(title = 'Average: Object/location') + theme(legend.position = 'none')
 
-plot2 &lt;- ggplot(averageObjectRatingsDF, aes(x = 1, y = Object)) + geom_tile(aes(fill = Ratings)) + scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;) + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(x = &#39;&#39;, title = &#39;Overall&#39;) + theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(), plot.margin=unit(c(0.2, 0, 0.62, 0),&quot;cm&quot;))
-grid.arrange(plot1, plot2, ncol = 2, widths = c(5.5, 1))</code></pre>
-<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+plot2 &lt;- ggplot(averageObjectRatingsDF, aes(x = 1, y = Object)) + geom_tile(aes(fill = Ratings)) + scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;) + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(x = '', title = 'Overall') + theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(), plot.margin=unit(c(0.2, 0, 0.62, 0),&quot;cm&quot;))
+grid.arrange(plot1, plot2, ncol = 2, widths = c(5.5, 1))
+</code></pre>
+
+<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-5-1.png" alt="" /></p>
+
 <p>The first twelve objects (from microwave to dishes) are supposed to be expected in a kitchen. This is also visible in the heatmaps both in the heatmap showing the average ratings for every object/location combination and in the overall heatmap showing the average ratings for the overall expectancy of a particular object in kitchen. From the white vertical stripes, it is also apparent that no object is really expected for some locations. One of those location for instance is on the floor in a corner of the room.</p>
-<pre class="r"><code># Create Sd heatmap
-plot3 &lt;- ggplot(sdLocationRatingsDF, aes(Location, Object)) + geom_tile(aes(fill = SD)) + scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;) + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(title = &#39;SD: Object/location&#39;) + theme(legend.position = &#39;none&#39;)
 
-plot4 &lt;- ggplot(sdObjectRatingsDF, aes(x = 1, y = Object)) + geom_tile(aes(fill = SD)) + scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;) + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(x = &#39;&#39;, title = &#39;Overall&#39;) + theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(), plot.margin=unit(c(0.2, 0, 0.62, 0),&quot;cm&quot;))
+<pre><code class="language-r"># Create Sd heatmap
+plot3 &lt;- ggplot(sdLocationRatingsDF, aes(Location, Object)) + geom_tile(aes(fill = SD)) + scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;) + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(title = 'SD: Object/location') + theme(legend.position = 'none')
 
-grid.arrange(plot3, plot4, ncol = 2, widths = c(5.5, 1))</code></pre>
-<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+plot4 &lt;- ggplot(sdObjectRatingsDF, aes(x = 1, y = Object)) + geom_tile(aes(fill = SD)) + scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;) + scale_x_discrete(expand = c(0, 0)) +  scale_y_discrete(expand = c(0, 0)) + labs(x = '', title = 'Overall') + theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(), plot.margin=unit(c(0.2, 0, 0.62, 0),&quot;cm&quot;))
+
+grid.arrange(plot3, plot4, ncol = 2, widths = c(5.5, 1))
+</code></pre>
+
+<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-6-1.png" alt="" /></p>
+
 <p>The SD are quite high in general. This stems from the fact that participants seem to have used difference response criterions. It is notable there is a lot of disagreement among the participant with regard to expectancy of the towel. This definitely needs more attention and I am considering not to use the towels.</p>
+
 <p>Finally, I am also interest to see whether there is a relationship between the average expectancy across all locations and the overall expectancy rated at the end of the experiment.</p>
-<pre class="r"><code>objectAverageLocation &lt;- rowMeans(averageLocationRatings)
+
+<pre><code class="language-r">objectAverageLocation &lt;- rowMeans(averageLocationRatings)
 correlationDF         &lt;- data.frame(Object = factor(1:20, labels = objectNames), Location = objectAverageLocation, Overall = averageObjectRatings)
 
 correlation &lt;- cor.test(~ Overall + Location, data = correlationDF)
 
-ggplot(correlationDF, aes(x = Location, y = Overall)) + geom_point() + geom_smooth(method = &#39;lm&#39;) + coord_cartesian(xlim = c(-25, 35), ylim = c(-75, 150), expand = FALSE) + labs(title = &#39;Average rating across locations vs. overall ratings&#39;) + annotate(&quot;text&quot;, x = 20, y = -50, label = paste(&#39;r &#39;, rValue(correlation$estimate), &#39;, p &#39; , pValue(correlation$p.value), sep = &#39;&#39;) , size = 5)</code></pre>
-<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+ggplot(correlationDF, aes(x = Location, y = Overall)) + geom_point() + geom_smooth(method = 'lm') + coord_cartesian(xlim = c(-25, 35), ylim = c(-75, 150), expand = FALSE) + labs(title = 'Average rating across locations vs. overall ratings') + annotate(&quot;text&quot;, x = 20, y = -50, label = paste('r ', rValue(correlation$estimate), ', p ' , pValue(correlation$p.value), sep = '') , size = 5)
+</code></pre>
+
+<p><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-7-1.png" alt="" /></p>
+
 <p>As it turns out, there is a significant positive correlation between the average ratings across locations and the overall ratingsr, <em>r</em> = .556, <em>p</em> = .011.</p>
-</div>
-</div>
 
 
     
@@ -248,6 +272,8 @@ ggplot(correlationDF, aes(x = Location, y = Overall)) + geom_point() + geom_smoo
     <h4>See also</h4>
     <ul>
         
+            <li><a href="/2018/01/change-of-design-based-on-pilot-study/">Change of design based on pilot study</a></li>
+        
             <li><a href="/2017/12/designing-rating-study/">Designing rating study</a></li>
         
             <li><a href="/2017/11/lab-meeting/">Lab meeting</a></li>
@@ -255,8 +281,6 @@ ggplot(correlationDF, aes(x = Location, y = Overall)) + geom_point() + geom_smoo
             <li><a href="/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/">Running RMarkdown on CBU computer and first pilot session</a></li>
         
             <li><a href="/2017/11/retrieval-task-of-pilot-study/">Retrieval task of pilot study</a></li>
-        
-            <li><a href="/2017/11/consideration-on-objects/">Consideration on objects</a></li>
         
     </ul>
 
@@ -281,19 +305,19 @@ ggplot(correlationDF, aes(x = Location, y = Overall)) + geom_point() + geom_smoo
         </li>
         
         <li>
+            <a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a>
+        </li>
+        
+        <li>
             <a href="/2018/01/analysing-normative-data-set/">Analysing normative data set</a>
         </li>
         
         <li>
-            <a href="/2018/01/about-my-open-notebook/">About my open notebook</a>
-        </li>
-        
-        <li>
-            <a href="/2017/12/designing-rating-study/">Designing rating study</a>
-        </li>
-        
-        <li>
-            <a href="/2017/11/summary-of-piloting/">Summary of piloting</a>
+            <a href="/2018/01/change-of-design-based-on-pilot-study/">Change of design based on pilot study</a>
         </li>
         
     </ol>
@@ -344,11 +368,15 @@ ggplot(correlationDF, aes(x = Location, y = Overall)) + geom_point() + geom_smoo
             
             <a class="badge badge-primary" href="/tags/recollection">recollection</a>
             
+            <a class="badge badge-primary" href="/tags/research-design">research-design</a>
+            
             <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
             
             <a class="badge badge-primary" href="/tags/schema">schema</a>
             
             <a class="badge badge-primary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr1">schemavr1</a>
             
             <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
             

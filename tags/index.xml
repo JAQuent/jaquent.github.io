@@ -86,7 +86,7 @@
     <item>
       <title>Pilot Study</title>
       <link>/tags/pilot-study/</link>
-      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/pilot-study/</guid>
       <description></description>
@@ -120,6 +120,15 @@
     </item>
     
     <item>
+      <title>Research Design</title>
+      <link>/tags/research-design/</link>
+      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/research-design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Rmarkdown</title>
       <link>/tags/rmarkdown/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
@@ -143,6 +152,15 @@
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/schemavr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Schemavr1</title>
+      <link>/tags/schemavr1/</link>
+      <pubDate>Mon, 15 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/schemavr1/</guid>
       <description></description>
     </item>
     

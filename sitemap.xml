@@ -8,7 +8,22 @@
   </url>
   
   <url>
+    <loc>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</loc>
+    <lastmod>2018-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</loc>
+    <lastmod>2018-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/01/analysing-normative-data-set/</loc>
+    <lastmod>2018-01-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/01/change-of-design-based-on-pilot-study/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
   </url>
   
@@ -169,7 +184,7 @@
   
   <url>
     <loc>/tags/pilot-study/</loc>
-    <lastmod>2017-11-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -198,6 +213,12 @@
   </url>
   
   <url>
+    <loc>/tags/research-design/</loc>
+    <lastmod>2018-01-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/rmarkdown/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -212,6 +233,12 @@
   <url>
     <loc>/tags/schemavr/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/schemavr1/</loc>
+    <lastmod>2018-01-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
