@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mpfc on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/mpfc/</link>
+    <link>https://jaquent.github.io/tags/mpfc/</link>
     <description>Recent content in Mpfc on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 12 Oct 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/mpfc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/mpfc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HPC activity and graphics in Unity</title>
-      <link>/2017/10/hpc-activity-and-graphics-in-unity/</link>
+      <link>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/hpc-activity-and-graphics-in-unity/</guid>
+      <guid>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</guid>
       <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
     </item>
     

@@ -2,97 +2,97 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Schemavr on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/schemavr/</link>
+    <link>https://jaquent.github.io/tags/schemavr/</link>
     <description>Recent content in Schemavr on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 10 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/schemavr/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/schemavr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Analysing normative data set</title>
-      <link>/2018/01/analysing-normative-data-set/</link>
+      <link>https://jaquent.github.io/2018/01/analysing-normative-data-set/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/analysing-normative-data-set/</guid>
+      <guid>https://jaquent.github.io/2018/01/analysing-normative-data-set/</guid>
       <description>Introduction The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
     </item>
     
     <item>
       <title>Change of design based on pilot study</title>
-      <link>/2018/01/change-of-design-based-on-pilot-study/</link>
+      <link>https://jaquent.github.io/2018/01/change-of-design-based-on-pilot-study/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/change-of-design-based-on-pilot-study/</guid>
+      <guid>https://jaquent.github.io/2018/01/change-of-design-based-on-pilot-study/</guid>
       <description>I had the vague idea to do multivariate pattern analysis on the mPFC to decode specific schemas and to see how new objects/information is integrated in to those, but the problem might be that there are far too few trials to do that with the current design. It might also be interesting to look at memory reinstatement and how it is influence by schemas.
 Today, I met with my supervisor and talked about the current design, about the ratings and general plan for this year.</description>
     </item>
     
     <item>
       <title>Lab meeting</title>
-      <link>/2017/11/lab-meeting/</link>
+      <link>https://jaquent.github.io/2017/11/lab-meeting/</link>
       <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/lab-meeting/</guid>
+      <guid>https://jaquent.github.io/2017/11/lab-meeting/</guid>
       <description>Today I met with my supervisor and we also had lab meeting.  We have discussed the difficulty to counter-balance the expectedness of the objects and their locations in a true factorial design. For instance, it is nearly impossible to pair objects so that the expected location of one object is the unexpected location of the other object. We are interested in how the expectedness of an object and its location is related to memory and whether it is possible to get a u-shaped function.</description>
     </item>
     
     <item>
       <title>Retrieval task of pilot study</title>
-      <link>/2017/11/retrieval-task-of-pilot-study/</link>
+      <link>https://jaquent.github.io/2017/11/retrieval-task-of-pilot-study/</link>
       <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/retrieval-task-of-pilot-study/</guid>
+      <guid>https://jaquent.github.io/2017/11/retrieval-task-of-pilot-study/</guid>
       <description>I decided to write the retrieval task as MATLAB function not as script, so that this and the distractor task can be called multiple times from a simple script.
 Originally posted on the 08/11/2018: I decided to drop the guess response option because there won’t be enough trials to analyse this conditio.n</description>
     </item>
     
     <item>
       <title>Consideration on objects</title>
-      <link>/2017/11/consideration-on-objects/</link>
+      <link>https://jaquent.github.io/2017/11/consideration-on-objects/</link>
       <pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/consideration-on-objects/</guid>
+      <guid>https://jaquent.github.io/2017/11/consideration-on-objects/</guid>
       <description> There could be the problem that unexpected objects have weird y-rotations if spawned at random locations. The towel could expected as kitchen towel.  </description>
     </item>
     
     <item>
       <title>Thoughts on counterbalancing</title>
-      <link>/2017/10/thoughts-on-counterbalancing/</link>
+      <link>https://jaquent.github.io/2017/10/thoughts-on-counterbalancing/</link>
       <pubDate>Tue, 31 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/thoughts-on-counterbalancing/</guid>
+      <guid>https://jaquent.github.io/2017/10/thoughts-on-counterbalancing/</guid>
       <description>Trying to find pairs of objects to counterbalance expected versus unexpected locations. * The first option, is to build pairs of relevant objects (e.g. knife – toaster) and think of three expected location for the first one that are unexpected for the second one. The problem here is that these are not the super expected locations and I would probably need to show in the normative studies that the expectancy is as hoped.</description>
     </item>
     
     <item>
       <title>Lab meeting</title>
-      <link>/2017/10/lab-meeting/</link>
+      <link>https://jaquent.github.io/2017/10/lab-meeting/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lab-meeting/</guid>
+      <guid>https://jaquent.github.io/2017/10/lab-meeting/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
       <title>Lab meeting and feedback to first experiment</title>
-      <link>/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
+      <link>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
+      <guid>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to schemaVR:
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
       <title>Use empty game objects as spawn points</title>
-      <link>/2017/10/use-empty-game-objects-as-spawn-points/</link>
+      <link>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</link>
       <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/use-empty-game-objects-as-spawn-points/</guid>
+      <guid>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</guid>
       <description>Use empty game objects as spawn points to spawn objects in your environment. These can be dragged to certain position in the scene without specifying points in a Cartesian coordinate system.</description>
     </item>
     

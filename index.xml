@@ -2,116 +2,125 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jörn Alexander Quent&#39;s notebook</title>
-    <link>/</link>
+    <link>https://jaquent.github.io/</link>
     <description>Recent content on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 21 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Selecting and checking living/non-living words</title>
-      <link>/2018/11/selecting-and-checking-living-non-living-words/</link>
+      <link>https://jaquent.github.io/2018/11/selecting-and-checking-living-non-living-words/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/11/selecting-and-checking-living-non-living-words/</guid>
+      <guid>https://jaquent.github.io/2018/11/selecting-and-checking-living-non-living-words/</guid>
       <description>Aim Here, I am selecting 200 words for a new project called noveltyVR, in which I am going to try to study the effect of novelty on something that was learned before. In this case, it will be a list of words that were incidentally encoded in a living/non-living judgement task. I will select 200 words from a published study, look up their properties in the MRC Psycholinguistic Database and create two lists that are used as old and new stimuli in a recognition task.</description>
     </item>
     
     <item>
+      <title>Issue with stimulus selection and some thoughts</title>
+      <link>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</link>
+      <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</guid>
+      <description>This entry contains thoughts and observations for the last couple of days because I was stuck with a problem and didn’t have a lot say. The problem was that I hadn&amp;rsquo;t controlled the number of times a location can serve as a foil when I had picked the set of object/locations pairs. This is indeed problematic because some locations were used four times. If you know which object was at a specific location, it isn’t really a foil anymore influencing subsequent trials.</description>
+    </item>
+    
+    <item>
       <title>Testing whether targets differ in rank from foils</title>
-      <link>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</link>
+      <link>https://jaquent.github.io/2018/01/testing-whether-targets-differ-in-rank-from-foils/</link>
       <pubDate>Mon, 15 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</guid>
+      <guid>https://jaquent.github.io/2018/01/testing-whether-targets-differ-in-rank-from-foils/</guid>
       <description>Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
 Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &amp;lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &amp;quot;lm&amp;quot;)){ s &amp;lt;- summary.</description>
     </item>
     
     <item>
       <title>Stimulus selection for schemaVR1 (Attempt 1)</title>
-      <link>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</link>
+      <link>https://jaquent.github.io/2018/01/stimulus-selection-for-schemavr1-attempt-1/</link>
       <pubDate>Fri, 12 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</guid>
+      <guid>https://jaquent.github.io/2018/01/stimulus-selection-for-schemavr1-attempt-1/</guid>
       <description>Introduction The aim is to select a certain number (20) of combinations of objects and locations that cover the whole range of expectancy values. The previous analysis of this data set can be found here. The code for the task can be found here.
 Used libraries and functions library(ggplot2)  Loading the rating data I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants.</description>
     </item>
     
     <item>
       <title>Analysing normative data set</title>
-      <link>/2018/01/analysing-normative-data-set/</link>
+      <link>https://jaquent.github.io/2018/01/analysing-normative-data-set/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/analysing-normative-data-set/</guid>
+      <guid>https://jaquent.github.io/2018/01/analysing-normative-data-set/</guid>
       <description>Introduction The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
     </item>
     
     <item>
       <title>Change of design based on pilot study</title>
-      <link>/2018/01/change-of-design-based-on-pilot-study/</link>
+      <link>https://jaquent.github.io/2018/01/change-of-design-based-on-pilot-study/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/change-of-design-based-on-pilot-study/</guid>
+      <guid>https://jaquent.github.io/2018/01/change-of-design-based-on-pilot-study/</guid>
       <description>I had the vague idea to do multivariate pattern analysis on the mPFC to decode specific schemas and to see how new objects/information is integrated in to those, but the problem might be that there are far too few trials to do that with the current design. It might also be interesting to look at memory reinstatement and how it is influence by schemas.
 Today, I met with my supervisor and talked about the current design, about the ratings and general plan for this year.</description>
     </item>
     
     <item>
       <title>About my open notebook </title>
-      <link>/2018/01/about-my-open-notebook/</link>
+      <link>https://jaquent.github.io/2018/01/about-my-open-notebook/</link>
       <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/about-my-open-notebook/</guid>
+      <guid>https://jaquent.github.io/2018/01/about-my-open-notebook/</guid>
       <description>Note (10/12/2018): This is outdated. See here for current approach.
 I have just finished uploading old diary entries, which gives me the opportunity to reflect on what I have done so far and to get a bit more meta on the whole topic with this entry, which is the first one I am actually going to publish at the end of my (working) day. Some of the previous entries are quite short and initially weren’t written for the general public.</description>
     </item>
     
     <item>
       <title>Designing rating study</title>
-      <link>/2017/12/designing-rating-study/</link>
+      <link>https://jaquent.github.io/2017/12/designing-rating-study/</link>
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/12/designing-rating-study/</guid>
+      <guid>https://jaquent.github.io/2017/12/designing-rating-study/</guid>
       <description>11/12/2017: I finished the script, with which participants can rate a) the expectancy of an object in the room (kitchen) and b) the expectancy of a particular object at all possible twenty locations. To that regard, we decided to reverse the original order of ratings so that the overall expectancy of the objects for that room is rated at the very end. The reason for that is that otherwise one might be prone to rate schema irrelevant objects as highly unexpected (-100) in any location even though some are more expected than others.</description>
     </item>
     
     <item>
       <title>Summary of piloting</title>
-      <link>/2017/11/summary-of-piloting/</link>
+      <link>https://jaquent.github.io/2017/11/summary-of-piloting/</link>
       <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/summary-of-piloting/</guid>
+      <guid>https://jaquent.github.io/2017/11/summary-of-piloting/</guid>
       <description>17/11/2017: Today, I run another pilot session and I realized that I should introduce practice trials of both the n-back distractor task and the recognition task to reduce the difference between the first and subsequent blocks. Before I can start with the normative study, I need to make sure how many objects I am going to need, how these objects are going to look like and whether these objects are appropriate because some had problems naming some objects.</description>
     </item>
     
     <item>
       <title>Lab meeting</title>
-      <link>/2017/11/lab-meeting/</link>
+      <link>https://jaquent.github.io/2017/11/lab-meeting/</link>
       <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/lab-meeting/</guid>
+      <guid>https://jaquent.github.io/2017/11/lab-meeting/</guid>
       <description>Today I met with my supervisor and we also had lab meeting.  We have discussed the difficulty to counter-balance the expectedness of the objects and their locations in a true factorial design. For instance, it is nearly impossible to pair objects so that the expected location of one object is the unexpected location of the other object. We are interested in how the expectedness of an object and its location is related to memory and whether it is possible to get a u-shaped function.</description>
     </item>
     
     <item>
       <title>Recognition instructions for recollection and familiarity</title>
-      <link>/2017/11/recognition-instructions-for-recollection-and-familiarity/</link>
+      <link>https://jaquent.github.io/2017/11/recognition-instructions-for-recollection-and-familiarity/</link>
       <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/recognition-instructions-for-recollection-and-familiarity/</guid>
+      <guid>https://jaquent.github.io/2017/11/recognition-instructions-for-recollection-and-familiarity/</guid>
       <description>Following feedback I changed the instruction for the recognition task so that they are in line with Bastin et al. (2014). The respective part of the instruction were changed to:
  If you pressed &amp;lt;&amp;lt;y&amp;gt;&amp;gt; for yes, you will need to indicate whether you recollected this by pressing &amp;lt;&amp;lt;r&amp;gt;&amp;gt; or whether this object was only familiar by pressing &amp;lt;&amp;lt;f&amp;gt;&amp;gt;. You recollected an object if you see it and recall specific details about it (e.</description>
     </item>
     
     <item>
       <title>Running RMarkdown on CBU computer and first pilot session</title>
-      <link>/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</link>
+      <link>https://jaquent.github.io/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</link>
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</guid>
+      <guid>https://jaquent.github.io/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</guid>
       <description>The issues I am describing here are probably most interesting for people also working on a MRC-CBU computer because MRC-CBU’s specific cyber-security regulations. When I tried to create a new RMarkdown file, I got an error message that the package ‘rprojroot’ could not be found.
 These the things that I tried and eventually worked:
  I installed the package as a source package, because there is no binary version of it.</description>
@@ -119,105 +128,105 @@ These the things that I tried and eventually worked:
     
     <item>
       <title>Retrieval task of pilot study</title>
-      <link>/2017/11/retrieval-task-of-pilot-study/</link>
+      <link>https://jaquent.github.io/2017/11/retrieval-task-of-pilot-study/</link>
       <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/retrieval-task-of-pilot-study/</guid>
+      <guid>https://jaquent.github.io/2017/11/retrieval-task-of-pilot-study/</guid>
       <description>I decided to write the retrieval task as MATLAB function not as script, so that this and the distractor task can be called multiple times from a simple script.
 Originally posted on the 08/11/2018: I decided to drop the guess response option because there won’t be enough trials to analyse this conditio.n</description>
     </item>
     
     <item>
       <title>Consideration on objects</title>
-      <link>/2017/11/consideration-on-objects/</link>
+      <link>https://jaquent.github.io/2017/11/consideration-on-objects/</link>
       <pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/consideration-on-objects/</guid>
+      <guid>https://jaquent.github.io/2017/11/consideration-on-objects/</guid>
       <description> There could be the problem that unexpected objects have weird y-rotations if spawned at random locations. The towel could expected as kitchen towel.  </description>
     </item>
     
     <item>
       <title>Thoughts on counterbalancing</title>
-      <link>/2017/10/thoughts-on-counterbalancing/</link>
+      <link>https://jaquent.github.io/2017/10/thoughts-on-counterbalancing/</link>
       <pubDate>Tue, 31 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/thoughts-on-counterbalancing/</guid>
+      <guid>https://jaquent.github.io/2017/10/thoughts-on-counterbalancing/</guid>
       <description>Trying to find pairs of objects to counterbalance expected versus unexpected locations. * The first option, is to build pairs of relevant objects (e.g. knife – toaster) and think of three expected location for the first one that are unexpected for the second one. The problem here is that these are not the super expected locations and I would probably need to show in the normative studies that the expectancy is as hoped.</description>
     </item>
     
     <item>
       <title>Various graphic settings in unity</title>
-      <link>/2017/10/various-graphic-settings-in-unity/</link>
+      <link>https://jaquent.github.io/2017/10/various-graphic-settings-in-unity/</link>
       <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/various-graphic-settings-in-unity/</guid>
+      <guid>https://jaquent.github.io/2017/10/various-graphic-settings-in-unity/</guid>
       <description>Graphical setting used for stimulus presentation:
  Use Legacy Cinematic Image Effects. Player &amp;gt; Other Settings &amp;gt; Color space &amp;gt; linear. Quality &amp;gt; Anti-Aliasing &amp;gt; 8x Multi Sampling.  </description>
     </item>
     
     <item>
       <title>Lab meeting</title>
-      <link>/2017/10/lab-meeting/</link>
+      <link>https://jaquent.github.io/2017/10/lab-meeting/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lab-meeting/</guid>
+      <guid>https://jaquent.github.io/2017/10/lab-meeting/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
       <title>Lab meeting and feedback to first experiment</title>
-      <link>/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
+      <link>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
+      <guid>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to schemaVR:
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
       <title>Thoughts concerning Lew &amp; Howe (2016)</title>
-      <link>/2017/10/thoughts-concerning-lew-howe-2016/</link>
+      <link>https://jaquent.github.io/2017/10/thoughts-concerning-lew-howe-2016/</link>
       <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/thoughts-concerning-lew-howe-2016/</guid>
+      <guid>https://jaquent.github.io/2017/10/thoughts-concerning-lew-howe-2016/</guid>
       <description>After examining the stimuli photos from Lew &amp;amp; Howe (2016), I came to the conclusion that even schema-irrelevant objects have more or less expected locations. For instance, placing boots in the middle of the kitchen is unusual, but putting a hat on the kitchen table is less so.
 Originally posted on the 26/10/2018: Schema-relevancy was measured on a scale of 1 to 10 (very usual to very unusual). Low rating (below 3) were regarded as relevant and rating above 5 were regarded as irrelevant.</description>
     </item>
     
     <item>
       <title>Lighting and 3D models</title>
-      <link>/2017/10/lighting-and-3d-models/</link>
+      <link>https://jaquent.github.io/2017/10/lighting-and-3d-models/</link>
       <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lighting-and-3d-models/</guid>
+      <guid>https://jaquent.github.io/2017/10/lighting-and-3d-models/</guid>
       <description> To create realistic light, set environment lighting to colour and use white. To find suitable 3D models for my virtual kitchen, I looked for models on https://archive3d.net.  </description>
     </item>
     
     <item>
       <title>HPC activity and graphics in Unity</title>
-      <link>/2017/10/hpc-activity-and-graphics-in-unity/</link>
+      <link>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/hpc-activity-and-graphics-in-unity/</guid>
+      <guid>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</guid>
       <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
     </item>
     
     <item>
       <title>Use empty game objects as spawn points</title>
-      <link>/2017/10/use-empty-game-objects-as-spawn-points/</link>
+      <link>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</link>
       <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/use-empty-game-objects-as-spawn-points/</guid>
+      <guid>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</guid>
       <description>Use empty game objects as spawn points to spawn objects in your environment. These can be dragged to certain position in the scene without specifying points in a Cartesian coordinate system.</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>/about/</link>
+      <link>https://jaquent.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>https://jaquent.github.io/about/</guid>
       <description>This is my open notebook. My main homepage can be found here. This should be regarded as an attempt though to live up to the ideals that I have. It will take some time to develop good routines and incorporate those into my typical working day. This notebook will also witness my development as a researcher. Note that not everything will be perfect on here. If you find mistakes, please tell me!</description>
     </item>
     

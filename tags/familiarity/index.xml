@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Familiarity on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/familiarity/</link>
+    <link>https://jaquent.github.io/tags/familiarity/</link>
     <description>Recent content in Familiarity on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 15 Nov 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/familiarity/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/familiarity/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Recognition instructions for recollection and familiarity</title>
-      <link>/2017/11/recognition-instructions-for-recollection-and-familiarity/</link>
+      <link>https://jaquent.github.io/2017/11/recognition-instructions-for-recollection-and-familiarity/</link>
       <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/recognition-instructions-for-recollection-and-familiarity/</guid>
+      <guid>https://jaquent.github.io/2017/11/recognition-instructions-for-recollection-and-familiarity/</guid>
       <description>Following feedback I changed the instruction for the recognition task so that they are in line with Bastin et al. (2014). The respective part of the instruction were changed to:
  If you pressed &amp;lt;&amp;lt;y&amp;gt;&amp;gt; for yes, you will need to indicate whether you recollected this by pressing &amp;lt;&amp;lt;r&amp;gt;&amp;gt; or whether this object was only familiar by pressing &amp;lt;&amp;lt;f&amp;gt;&amp;gt;. You recollected an object if you see it and recall specific details about it (e.</description>
     </item>

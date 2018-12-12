@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rmarkdown on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/rmarkdown/</link>
+    <link>https://jaquent.github.io/tags/rmarkdown/</link>
     <description>Recent content in Rmarkdown on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 21 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Selecting and checking living/non-living words</title>
-      <link>/2018/11/selecting-and-checking-living-non-living-words/</link>
+      <link>https://jaquent.github.io/2018/11/selecting-and-checking-living-non-living-words/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/11/selecting-and-checking-living-non-living-words/</guid>
+      <guid>https://jaquent.github.io/2018/11/selecting-and-checking-living-non-living-words/</guid>
       <description>Aim Here, I am selecting 200 words for a new project called noveltyVR, in which I am going to try to study the effect of novelty on something that was learned before. In this case, it will be a list of words that were incidentally encoded in a living/non-living judgement task. I will select 200 words from a published study, look up their properties in the MRC Psycholinguistic Database and create two lists that are used as old and new stimuli in a recognition task.</description>
     </item>
     
     <item>
       <title>Testing whether targets differ in rank from foils</title>
-      <link>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</link>
+      <link>https://jaquent.github.io/2018/01/testing-whether-targets-differ-in-rank-from-foils/</link>
       <pubDate>Mon, 15 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</guid>
+      <guid>https://jaquent.github.io/2018/01/testing-whether-targets-differ-in-rank-from-foils/</guid>
       <description>Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
 Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &amp;lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &amp;quot;lm&amp;quot;)){ s &amp;lt;- summary.</description>
     </item>
     
     <item>
       <title>Stimulus selection for schemaVR1 (Attempt 1)</title>
-      <link>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</link>
+      <link>https://jaquent.github.io/2018/01/stimulus-selection-for-schemavr1-attempt-1/</link>
       <pubDate>Fri, 12 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</guid>
+      <guid>https://jaquent.github.io/2018/01/stimulus-selection-for-schemavr1-attempt-1/</guid>
       <description>Introduction The aim is to select a certain number (20) of combinations of objects and locations that cover the whole range of expectancy values. The previous analysis of this data set can be found here. The code for the task can be found here.
 Used libraries and functions library(ggplot2)  Loading the rating data I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants.</description>
     </item>
     
     <item>
       <title>Analysing normative data set</title>
-      <link>/2018/01/analysing-normative-data-set/</link>
+      <link>https://jaquent.github.io/2018/01/analysing-normative-data-set/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/analysing-normative-data-set/</guid>
+      <guid>https://jaquent.github.io/2018/01/analysing-normative-data-set/</guid>
       <description>Introduction The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.</description>
     </item>
     
     <item>
       <title>Running RMarkdown on CBU computer and first pilot session</title>
-      <link>/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</link>
+      <link>https://jaquent.github.io/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</link>
       <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</guid>
+      <guid>https://jaquent.github.io/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/</guid>
       <description>The issues I am describing here are probably most interesting for people also working on a MRC-CBU computer because MRC-CBU’s specific cyber-security regulations. When I tried to create a new RMarkdown file, I got an error message that the package ‘rprojroot’ could not be found.
 These the things that I tried and eventually worked:
  I installed the package as a source package, because there is no binary version of it.</description>

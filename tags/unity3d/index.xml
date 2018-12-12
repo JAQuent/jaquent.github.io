@@ -2,49 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Unity3d on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/unity3d/</link>
+    <link>https://jaquent.github.io/tags/unity3d/</link>
     <description>Recent content in Unity3d on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Oct 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/unity3d/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/unity3d/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Various graphic settings in unity</title>
-      <link>/2017/10/various-graphic-settings-in-unity/</link>
+      <link>https://jaquent.github.io/2017/10/various-graphic-settings-in-unity/</link>
       <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/various-graphic-settings-in-unity/</guid>
+      <guid>https://jaquent.github.io/2017/10/various-graphic-settings-in-unity/</guid>
       <description>Graphical setting used for stimulus presentation:
  Use Legacy Cinematic Image Effects. Player &amp;gt; Other Settings &amp;gt; Color space &amp;gt; linear. Quality &amp;gt; Anti-Aliasing &amp;gt; 8x Multi Sampling.  </description>
     </item>
     
     <item>
       <title>Lighting and 3D models</title>
-      <link>/2017/10/lighting-and-3d-models/</link>
+      <link>https://jaquent.github.io/2017/10/lighting-and-3d-models/</link>
       <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lighting-and-3d-models/</guid>
+      <guid>https://jaquent.github.io/2017/10/lighting-and-3d-models/</guid>
       <description> To create realistic light, set environment lighting to colour and use white. To find suitable 3D models for my virtual kitchen, I looked for models on https://archive3d.net.  </description>
     </item>
     
     <item>
       <title>HPC activity and graphics in Unity</title>
-      <link>/2017/10/hpc-activity-and-graphics-in-unity/</link>
+      <link>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/hpc-activity-and-graphics-in-unity/</guid>
+      <guid>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</guid>
       <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
     </item>
     
     <item>
       <title>Use empty game objects as spawn points</title>
-      <link>/2017/10/use-empty-game-objects-as-spawn-points/</link>
+      <link>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</link>
       <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/use-empty-game-objects-as-spawn-points/</guid>
+      <guid>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</guid>
       <description>Use empty game objects as spawn points to spawn objects in your environment. These can be dragged to certain position in the scene without specifying points in a Cartesian coordinate system.</description>
     </item>
     

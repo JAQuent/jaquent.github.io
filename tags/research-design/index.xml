@@ -2,21 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Research Design on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/research-design/</link>
+    <link>https://jaquent.github.io/tags/research-design/</link>
     <description>Recent content in Research Design on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/research-design/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/research-design/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Issue with stimulus selection and some thoughts</title>
+      <link>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</link>
+      <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</guid>
+      <description>This entry contains thoughts and observations for the last couple of days because I was stuck with a problem and didn’t have a lot say. The problem was that I hadn&amp;rsquo;t controlled the number of times a location can serve as a foil when I had picked the set of object/locations pairs. This is indeed problematic because some locations were used four times. If you know which object was at a specific location, it isn’t really a foil anymore influencing subsequent trials.</description>
+    </item>
+    
+    <item>
       <title>Change of design based on pilot study</title>
-      <link>/2018/01/change-of-design-based-on-pilot-study/</link>
+      <link>https://jaquent.github.io/2018/01/change-of-design-based-on-pilot-study/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/change-of-design-based-on-pilot-study/</guid>
+      <guid>https://jaquent.github.io/2018/01/change-of-design-based-on-pilot-study/</guid>
       <description>I had the vague idea to do multivariate pattern analysis on the mPFC to decode specific schemas and to see how new objects/information is integrated in to those, but the problem might be that there are far too few trials to do that with the current design. It might also be interesting to look at memory reinstatement and how it is influence by schemas.
 Today, I met with my supervisor and talked about the current design, about the ratings and general plan for this year.</description>
     </item>
