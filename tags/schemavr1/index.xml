@@ -6,10 +6,40 @@
     <description>Recent content in Schemavr1 on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jaquent.github.io/tags/schemavr1/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Final analysis of pilot data</title>
+      <link>https://jaquent.github.io/2018/02/final-analysis-of-pilot-data/</link>
+      <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/02/final-analysis-of-pilot-data/</guid>
+      <description>Introduction This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.
+Preliminary stuff Libraries &amp;amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &amp;lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &amp;quot;lm&amp;quot;)){ s &amp;lt;- summary.lm(x) x &amp;lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.</description>
+    </item>
+    
+    <item>
+      <title>Checking whether my data is saved correctly</title>
+      <link>https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/</link>
+      <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/</guid>
+      <description>Comment For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found here). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.
+Introduction I am about to start collecting pilot data to see whether the number of objects etc.</description>
+    </item>
+    
+    <item>
+      <title>Second attempt to select set of object/location pairs</title>
+      <link>https://jaquent.github.io/2018/01/second-attempt-to-select-set-of-object-location-pairs/</link>
+      <pubDate>Thu, 25 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/01/second-attempt-to-select-set-of-object-location-pairs/</guid>
+      <description>Introduction This is actually the second attempt to find a suitable set of object/location pairs (click here for the first attempt). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&amp;rsquo;t work as a foil anymore.
+Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets.</description>
+    </item>
     
     <item>
       <title>Issue with stimulus selection and some thoughts</title>

@@ -8,6 +8,21 @@
   </url>
   
   <url>
+    <loc>https://jaquent.github.io/2018/02/final-analysis-of-pilot-data/</loc>
+    <lastmod>2018-02-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/</loc>
+    <lastmod>2018-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/2018/01/second-attempt-to-select-set-of-object-location-pairs/</loc>
+    <lastmod>2018-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</loc>
     <lastmod>2018-01-19T00:00:00+00:00</lastmod>
   </url>
@@ -128,6 +143,12 @@
   </url>
   
   <url>
+    <loc>https://jaquent.github.io/tags/data-check/</loc>
+    <lastmod>2018-01-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://jaquent.github.io/categories/experiments/</loc>
     <lastmod>2018-11-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -189,7 +210,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/pilot-study/</loc>
-    <lastmod>2018-01-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -243,7 +264,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/schemavr1/</loc>
-    <lastmod>2018-01-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

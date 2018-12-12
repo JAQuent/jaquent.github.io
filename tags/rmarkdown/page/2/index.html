@@ -9,7 +9,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jaquent.github.io/tags/rmarkdown/" />
-<meta property="og:updated_time" content="2018-01-10T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2018-01-25T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Rmarkdown"/>
@@ -87,14 +87,14 @@
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/analysing-normative-data-set/">Analysing normative data set</a>
+            <a class="text-dark" href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Jan 10, 2018
+        Jan 25, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -105,11 +105,9 @@
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/schemavr">schemaVR</a>
-    
         <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
     
-        <a class="badge badge-primary" href="/tags/ratingstudy">ratingStudy</a>
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
     
 </div>
 
@@ -122,10 +120,11 @@
 </div>
 
     </header>
-    Introduction The aim of the experiment of which I present some the results here was to get expectancy values for specific objects at specific location in a virtual kitchen. There were twenty possible objects and locations. After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. The scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results.
+    Introduction This is actually the second attempt to find a suitable set of object/location pairs (click here for the first attempt). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&rsquo;t work as a foil anymore.
+Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets.
     
     <p></p>
-    <a href="/2018/01/analysing-normative-data-set/">Read More →</a>
+    <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Read More →</a>
     
 </article>
 
@@ -138,14 +137,14 @@
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/">Running RMarkdown on CBU computer and first pilot session</a>
+            <a class="text-dark" href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Nov 13, 2017
+        Jan 15, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -156,7 +155,7 @@
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/pilot-study">pilot study</a>
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
     
         <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
     
@@ -166,19 +165,66 @@
 <div class="blog-post-categories text-secondary">
     <strong>Categories:</strong>
     
-        <a class="badge badge-primary" href="/categories/general">general</a>
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+    
+</div>
+
+    </header>
+    Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
+Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &lt;-function(x, sign = '='){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.
+    
+    <p></p>
+    <a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Read More →</a>
+    
+</article>
+
+
+    
+
+
+
+    
+        <article class="blog-post">
+    <header>
+        <h2 class="blog-post-title">
+            <a class="text-dark" href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a>
+        </h2>
+        
+
+
+<div class="blog-post-date text-secondary">
+    
+        Jan 12, 2018
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+        
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+    
+</div>
+
+        
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
     
         <a class="badge badge-primary" href="/categories/experiments">experiments</a>
     
 </div>
 
     </header>
-    The issues I am describing here are probably most interesting for people also working on a MRC-CBU computer because MRC-CBU’s specific cyber-security regulations. When I tried to create a new RMarkdown file, I got an error message that the package ‘rprojroot’ could not be found.
-These the things that I tried and eventually worked:
- I installed the package as a source package, because there is no binary version of it.
+    Introduction The aim is to select a certain number (20) of combinations of objects and locations that cover the whole range of expectancy values. The previous analysis of this data set can be found here. The code for the task can be found here.
+Used libraries and functions library(ggplot2)  Loading the rating data I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants.
     
     <p></p>
-    <a href="/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/">Read More →</a>
+    <a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Read More →</a>
     
 </article>
 
@@ -227,12 +273,25 @@ These the things that I tried and eventually worked:
                 </li>
             
         
-        <li class="page-item disabled">
-            <a class="page-link" href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+            
+            
+            
+            
+                
+                
+            
+            
+                <li class="page-item ">
+                    <a class="page-link" href="/tags/rmarkdown/page/3/">3</a>
+                </li>
+            
+        
+        <li class="page-item ">
+            <a class="page-link" href="/tags/rmarkdown/page/3/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
         </li>
         
             <li class="page-item">
-                <a class="page-link" href="/tags/rmarkdown/page/2/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+                <a class="page-link" href="/tags/rmarkdown/page/3/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
             </li>
         
     </ul>
@@ -257,19 +316,19 @@ These the things that I tried and eventually worked:
         </li>
         
         <li>
+            <a href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
+        </li>
+        
+        <li>
             <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
-        </li>
-        
-        <li>
-            <a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a>
-        </li>
-        
-        <li>
-            <a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a>
-        </li>
-        
-        <li>
-            <a href="/2018/01/analysing-normative-data-set/">Analysing normative data set</a>
         </li>
         
     </ol>
@@ -297,6 +356,8 @@ These the things that I tried and eventually worked:
         <p>
             
             <a class="badge badge-primary" href="/tags/about">about</a>
+            
+            <a class="badge badge-primary" href="/tags/data-check">data-check</a>
             
             <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
             

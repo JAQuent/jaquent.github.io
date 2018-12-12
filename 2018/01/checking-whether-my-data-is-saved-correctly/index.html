@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Checking whether my data is saved correctly" />
+<meta property="og:description" content="Comment For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found here). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.
+Introduction I am about to start collecting pilot data to see whether the number of objects etc." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/" /><meta property="article:published_time" content="2018-01-30T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-01-30T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Checking whether my data is saved correctly"/>
+<meta name="twitter:description" content="Comment For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found here). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.
+Introduction I am about to start collecting pilot data to see whether the number of objects etc."/>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/">
+
+    <title>
+      
+        Checking whether my data is saved correctly | Jörn Alexander Quent&#39;s notebook
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      <header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            Jörn Alexander Quent&#39;s notebook
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/">Home</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/about/">About</a>
+                    
+                </li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-8 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+        <a class="text-dark" href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+    </h2>
+    
+
+
+<div class="blog-post-date text-secondary">
+    
+        Jan 30, 2018
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+    
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+        <a class="badge badge-primary" href="/tags/data-check">data check</a>
+    
+        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+    
+</div>
+
+    
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+    
+</div>
+
+    <hr>
+</header>
+<article class="blog-post">
+    
+
+<h1 id="comment">Comment</h1>
+
+<p>For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found <a href="https://github.com/JAQuent/ratingStudy/tree/postEncodingRatings">here</a>). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>I am about to start collecting pilot data to see whether the number of objects etc. works and isn&rsquo;t to easy for instance. It is crucial to throroughly check whether my scripts save the data correctly and it can be used for data analysis before starting piloting.</p>
+
+<h1 id="libaries">Libaries</h1>
+
+<pre><code class="language-r">library(plyr)
+</code></pre>
+
+<h1 id="retrieval-task">Retrieval task</h1>
+
+<h2 id="is-everything-saved-appropriately">Is everything saved appropriately?</h2>
+
+<p>I realised that I forgot to save which location (target, foil 1 or 2) in earlier check. This is the second attempt after adapting the script accordingly.</p>
+
+<pre><code class="language-r"># Loading data and adding objects names and specify factors
+dataRetrievalTask &lt;- read.table('C:/Users/aq01/Desktop/schemVR_pilot/pilotData/retrievalTask_0.dat', header = FALSE)
+
+names(dataRetrievalTask) &lt;- c('subNo', 'date', 'time', 'trial','objectNumber', 'targetLocation', 'targetRankPre', 'foil1Location', 'foil1RankPre', 'foil2Location', 'foil2RankPre', 'AFCPreTime','rtAFC', 'resAFC', 'accAFC', 'conPreTime', 'rtCon', 'resCon', 'left', 'middle', 'right')
+
+objectNames &lt;- c('microwave','kitchen roll','saucepan', 'toaster','bowl of fruits','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
+
+dataRetrievalTask$objectName &lt;- factor(dataRetrievalTask$objectNumber, labels = objectNames)
+dataRetrievalTask$left       &lt;- factor(dataRetrievalTask$left, labels = c('target', 'foil1', 'foil2'))
+dataRetrievalTask$middle     &lt;- factor(dataRetrievalTask$middle, labels = c('target', 'foil1', 'foil2'))
+dataRetrievalTask$right      &lt;- factor(dataRetrievalTask$left, labels = c('target', 'foil1', 'foil2'))
+
+# First AFC response was 1
+dataRetrievalTask$resAFC[1]
+</code></pre>
+
+<pre><code>## [1] 2
+</code></pre>
+
+<pre><code class="language-r"># First confidence response was 2
+dataRetrievalTask$resCon[1]
+</code></pre>
+
+<pre><code>## [1] 1
+</code></pre>
+
+<pre><code class="language-r"># Tagert was on the left
+dataRetrievalTask$left[1]
+</code></pre>
+
+<pre><code>## [1] foil2
+## Levels: target foil1 foil2
+</code></pre>
+
+<pre><code class="language-r"># Foil 2 was in middle
+dataRetrievalTask$middle[1]
+</code></pre>
+
+<pre><code>## [1] target
+## Levels: target foil1 foil2
+</code></pre>
+
+<pre><code class="language-r"># Foil 1 was on the right
+dataRetrievalTask$right[1]
+</code></pre>
+
+<pre><code>## [1] foil2
+## Levels: target foil1 foil2
+</code></pre>
+
+<pre><code class="language-r"># The AFC response was therefore correct
+dataRetrievalTask$accAFC[1]
+</code></pre>
+
+<pre><code>## [1] 1
+</code></pre>
+
+<p>Everything seems to be saved correctly and seems to be useable.</p>
+
+<h1 id="rating-task">Rating task</h1>
+
+<h2 id="is-everything-saved-appropriately-1">Is everything saved appropriately?</h2>
+
+<pre><code class="language-r"># Loading data and adding objects names
+dataRatingTask        &lt;- read.table('C:/Users/aq01/Desktop/schemVR_pilot/pilotData/ratingTask_0.dat', header = FALSE)
+names(dataRatingTask) &lt;- c('subNo', 'date', 'time', 'trial','objectNumber', 'location', 'rating', 'RT')
+
+objectNames &lt;- c('microwave','kitchen roll','saucepan', 'toaster','bowl of fruits','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
+
+dataRatingTask$objectName &lt;- factor(dataRatingTask$objectNumber, labels = objectNames)
+head(dataRatingTask)
+</code></pre>
+
+<pre><code>##   subNo     date   time trial objectNumber location   rating        RT
+## 1     0 20180201 101346     1           15        2 9.446254 2622.9422
+## 2     0 20180201 101346     2            3        3 0.000000  287.1267
+## 3     0 20180201 101346     3           18        5 0.000000  292.5857
+## 4     0 20180201 101346     4            9       12 0.000000  252.6865
+## 5     0 20180201 101346     5           14        1 0.000000  266.0464
+## 6     0 20180201 101346     6           13        3 0.000000  264.0139
+##      objectName
+## 1 pile of books
+## 2      saucepan
+## 3        helmet
+## 4         bread
+## 5           toy
+## 6        towels
+</code></pre>
+
+<p>Everything seems to be saved correctly and seems to be useable.</p>
+
+<h1 id="how-to-combine-both-data-sets">How to combine both data sets</h1>
+
+<pre><code class="language-r"># Collapsing acrossp participants as well as objects and splitting location and rating values into three separate values
+dataRatingTask_agg &lt;- ddply(dataRatingTask, c('subNo', 'objectName', 'objectNumber'), summarise, 
+                            location1 = location[1],  
+                            location2 = location[2],  
+                            location3 = location[3],
+                            rating1   = rating[1],
+                            rating2   = rating[2],
+                            rating3   = rating[3])
+
+# Basically I need the following bit to sort the data set
+dataRetrievalTask_agg &lt;- ddply(dataRetrievalTask, c('subNo', 'objectName', 'objectNumber'), summarise, 
+                               foil1Location  = foil1Location, 
+                               targetLocation = targetLocation, 
+                               foil2Location  = foil2Location)
+
+# Finding the respective ratings for targets and foils because this information is not saved for the ratingTask data set
+# Target
+postRatingTarget  &lt;- rep(NA, 20)
+postRatingTarget[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$targetLocation)]
+postRatingTarget[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$targetLocation)]
+postRatingTarget[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$targetLocation)]
+
+# Foil 1
+postRatingFoil1  &lt;- rep(NA, 20)
+postRatingFoil1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil1Location)]
+postRatingFoil1[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil1Location)]
+postRatingFoil1[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil1Location)]
+
+# Foil 2
+postRatingFoil2  &lt;- rep(NA, 20)
+postRatingFoil2[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil2Location)]
+postRatingFoil2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil2Location)]
+postRatingFoil2[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil2Location)]
+
+# Creating new combined data set
+combinedData                  &lt;- dataRetrievalTask
+combinedData$postRatingTarget &lt;- postRatingTarget
+combinedData$postRatingFoil1  &lt;- postRatingFoil1
+combinedData$postRatingFoil2  &lt;- postRatingFoil2
+head(combinedData)
+</code></pre>
+
+<pre><code>##   subNo     date   time trial objectNumber targetLocation targetRankPre
+## 1     0 20180201 101221     1           10             15      283.5000
+## 2     0 20180201 101221     2            2              8      328.8333
+## 3     0 20180201 101221     3           12              6       80.0000
+## 4     0 20180201 101221     4            6             18      347.2500
+## 5     0 20180201 101221     5            1             14      127.6667
+## 6     0 20180201 101221     6           13              7      208.2500
+##   foil1Location foil1RankPre foil2Location foil2RankPre AFCPreTime
+## 1            20    319.41667            14     255.1667 2084.13306
+## 2             7    335.25000            15     227.2500  113.74290
+## 3            16     50.83333             5     161.8333   29.83545
+## 4             8    322.41667            19     318.2500  110.68266
+## 5            11    129.58333             3     266.3333  332.81256
+## 6             3    200.08333             9     248.8333   59.36903
+##        rtAFC resAFC accAFC conPreTime      rtCon resCon   left middle
+## 1 2076.39100      2      1 2098.96090 2091.04221      1  foil2 target
+## 2  105.16199      2      0   50.05753   42.57150      1  foil1  foil2
+## 3   19.14892      2      1   50.03185   42.43834      1  foil1 target
+## 4  102.51031      2      0  718.35725  709.06036      1 target  foil2
+## 5  324.90612      3      0   45.22990   39.14024      1 target  foil1
+## 6   52.94352      1      0   82.24121   73.50738      1  foil2  foil1
+##    right   objectName postRatingTarget postRatingFoil1 postRatingFoil2
+## 1  foil2    glass jug          0.00000        2.280130       -24.26710
+## 2  foil1 kitchen roll        -12.05212        0.000000       -25.08143
+## 3  foil1       dishes          0.00000        0.000000         0.00000
+## 4 target      tea pot        -23.45277      -38.762215        18.56677
+## 5 target    microwave          0.00000        7.654723         0.00000
+## 6  foil2       towels          0.00000        0.000000       -36.31922
+</code></pre>
+
+<p>The combined data set seems to be useable as well. This format will be used to create a mock data set.</p>
+
+
+    
+
+    
+
+    <h4>See also</h4>
+    <ul>
+        
+            <li><a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a></li>
+        
+            <li><a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a></li>
+        
+            <li><a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a></li>
+        
+            <li><a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a></li>
+        
+            <li><a href="/2018/01/analysing-normative-data-set/">Analysing normative data set</a></li>
+        
+    </ul>
+
+
+</article>
+
+
+
+        </div>
+
+        <aside class="col-12 col-lg-3 ml-auto blog-sidebar">
+    
+        
+
+
+<section>
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+        
+        <li>
+            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
+        </li>
+        
+        <li>
+            <a href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
+        </li>
+        
+    </ol>
+</section>
+
+    
+    
+        <section>
+    
+        
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-primary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/tags/about">about</a>
+            
+            <a class="badge badge-primary" href="/tags/data-check">data-check</a>
+            
+            <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
+            
+            <a class="badge badge-primary" href="/tags/graphics">graphics</a>
+            
+            <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
+            
+            <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
+            
+            <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
+            
+            <a class="badge badge-primary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-primary" href="/tags/pilot-study">pilot-study</a>
+            
+            <a class="badge badge-primary" href="/tags/ratingstudy">ratingstudy</a>
+            
+            <a class="badge badge-primary" href="/tags/recognition-memory">recognition-memory</a>
+            
+            <a class="badge badge-primary" href="/tags/recollection">recollection</a>
+            
+            <a class="badge badge-primary" href="/tags/research-design">research-design</a>
+            
+            <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+            
+            <a class="badge badge-primary" href="/tags/schema">schema</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr1">schemavr1</a>
+            
+            <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-primary" href="/tags/word-properties">word-properties</a>
+            
+            <a class="badge badge-primary" href="/tags/words">words</a>
+            
+        </p>
+        
+    
+</section>
+    
+</aside>
+
+      </div>
+    </div>
+    
+
+    
+      
+
+
+
+
+
+
+<footer class="blog-footer w-100">
+    <nav class="navbar navbar-light bg-light">
+        <p class="w-100 text-center">Hugo template made with ❤ by <a href="https://github.com/Xzya">Xzya</a>, inspired by <a href="https://github.com/alanorth/hugo-theme-bootstrap4-blog">hugo-theme-bootstrap4-blog</a></p>
+        <p class="w-100 text-center"><a href="#">Back to top</a></p>
+    </nav>
+</footer>
+
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

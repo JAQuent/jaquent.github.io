@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Final analysis of pilot data" />
+<meta property="og:description" content="Introduction This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.
+Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.lm(x) x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2018/02/final-analysis-of-pilot-data/" /><meta property="article:published_time" content="2018-02-13T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-02-13T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Final analysis of pilot data"/>
+<meta name="twitter:description" content="Introduction This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.
+Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.lm(x) x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower."/>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2018/02/final-analysis-of-pilot-data/">
+
+    <title>
+      
+        Final analysis of pilot data | Jörn Alexander Quent&#39;s notebook
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      <header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            Jörn Alexander Quent&#39;s notebook
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/">Home</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/about/">About</a>
+                    
+                </li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-8 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+        <a class="text-dark" href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+    </h2>
+    
+
+
+<div class="blog-post-date text-secondary">
+    
+        Feb 13, 2018
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+    
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/pilot-study">pilot study</a>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+    
+</div>
+
+    
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+    
+</div>
+
+    <hr>
+</header>
+<article class="blog-post">
+    
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.</p>
+
+<h2 id="preliminary-stuff">Preliminary stuff</h2>
+
+<h3 id="libraries-functions">Libraries &amp; functions</h3>
+
+<pre><code class="language-r">library(data.table)
+library(plyr)
+library(ggplot2)
+library(lme4)
+library(ez)
+library(BayesFactor)
+library(grid)
+
+pValue &lt;-function(x, sign = '='){
+  if (inherits(x, &quot;lm&quot;)){
+    s &lt;- summary.lm(x)
+    x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.tail = FALSE)
+    if(x &gt; 1){
+      stop(&quot;There is no p-value greater than 1&quot;)
+    } else if(x &lt; 0.001){
+      x.converted &lt;- '&lt; .001'
+    } else{
+      x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
+    } 
+  } else {
+    if(x &gt; 1){
+      stop(&quot;There is no p-value greater than 1&quot;)
+    } else if(x &lt; 0.001){
+      x.converted &lt;- '&lt; .001'
+    } else{
+      x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
+    } 
+  }
+  return(x.converted)
+}
+
+rValue &lt;-function(x){
+  if (inherits(x, &quot;lm&quot;)){
+    r.squared &lt;- summary(x)$r.squared
+    x.converted &lt;- paste('=',substr(as.character(round(r.squared, 3)), 2,5)) 
+  } else {
+    if (x &lt; 0){
+      x.converted &lt;- paste('= -',substr(as.character(abs(round(x, 3))), 2,5), sep = '') 
+    } else {
+      x.converted &lt;- paste('=',substr(as.character(abs(round(x, 3))), 2,5)) 
+    }
+  }
+  return(x.converted) 
+}
+</code></pre>
+
+<h3 id="loading-data">Loading data</h3>
+
+<pre><code class="language-r"># Using fread instead of read.table because it is faster but rbindlist(lapply(fileNames, read.table)) would also work. This is my attempt to use more vectorisation in my code.
+population        &lt;- 2:6
+fileNames         &lt;- paste('C:/Users/aq01/Desktop/schemVR_pilot/pilotData/retrievalTask_', as.character(population),'.dat', sep = '')
+dataRetrievalTask &lt;- rbindlist(lapply(fileNames, fread))
+
+# Variable and objects names
+names(dataRetrievalTask) &lt;- c('subNo', 'date', 'time', 'trial','objNum', 'targetLocation', 'targetRankPre', 'foil1Location', 'foil1RankPre', 'foil2Location', 'foil2RankPre', 'AFCPreTime','rtAFC', 'resAFC', 'accAFC', 'conPreTime', 'rtCon', 'resCon', 'left', 'middle', 'right')
+objNames              &lt;- c('microwave','kitchen roll','saucepan', 'toaster','bowl of fruits','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
+
+# Assign factor labels
+dataRetrievalTask$objName &lt;- factor(dataRetrievalTask$objNum, labels = objNames)
+dataRetrievalTask$left       &lt;- factor(dataRetrievalTask$left, labels = c('target', 'foil1', 'foil2'))
+dataRetrievalTask$middle     &lt;- factor(dataRetrievalTask$middle, labels = c('target', 'foil1', 'foil2'))
+dataRetrievalTask$right      &lt;- factor(dataRetrievalTask$left, labels = c('target', 'foil1', 'foil2'))
+dataRetrievalTask$resCon     &lt;- as.factor(dataRetrievalTask$resCon)
+</code></pre>
+
+<h2 id="confidence-decision">Confidence decision</h2>
+
+<pre><code class="language-r"># Legend: 1 = Did not see object| 2 = Guess the object was there | 3 = Know the object was there
+table1 &lt;- table(dataRetrievalTask$resCon)
+</code></pre>
+
+<p>After indicating which location was correct, participants indicated their confidence. There were 11 &lsquo;Did not see object&rsquo;, 43 &lsquo;Guess the object was there&rsquo; and 43 &lsquo;Know the object was there&rsquo; responses in total.</p>
+
+<p>Another way to look at the data is to check the confidence responses aggregated for each participant and each object. The latter is especially important to see whether a object was repeatedly missed.</p>
+
+<pre><code class="language-r"># Looking at confidence response for each participant
+conSubNo &lt;- ddply(dataRetrievalTask, c('subNo'), summarise, notSeen = table(resCon)[1], guessed = table(resCon)[2], knew = table(resCon)[3])
+conSubNo
+</code></pre>
+
+<pre><code>##   subNo notSeen guessed knew
+## 1     2       2      10    8
+## 2     3       3       9    8
+## 3     4       2       6   12
+## 4     5       2      13    5
+## 5     6       2       5   13
+</code></pre>
+
+<pre><code class="language-r"># Looking at confidence responses for each object
+conobjName &lt;- ddply(dataRetrievalTask, c('objName'), summarise, notSeen = table(resCon)[1], guessed = table(resCon)[2], knew = table(resCon)[3])
+conobjName
+</code></pre>
+
+<pre><code>##           objName notSeen guessed knew
+## 1       microwave       2       1    2
+## 2    kitchen roll       1       2    2
+## 3        saucepan       0       4    1
+## 4         toaster       0       1    4
+## 5  bowl of fruits       0       1    4
+## 6         tea pot       0       1    4
+## 7           knife       4       1    0
+## 8           mixer       0       4    1
+## 9           bread       0       0    5
+## 10      glass jug       0       3    2
+## 11            mug       0       2    3
+## 12         dishes       2       0    3
+## 13         towels       0       2    3
+## 14            toy       0       3    2
+## 15  pile of books       0       3    2
+## 16       umbrella       1       2    2
+## 17            hat       1       3    1
+## 18         helmet       0       4    1
+## 19       calendar       0       2    3
+## 20            fan       0       4    1
+</code></pre>
+
+<p>As can be seen above, participants didn&rsquo;t see the knife in 4 out of 5 times. This is clearly problematic. Interestingly, 2 participants indicated that they did not see microwave even though it is the biggest movable object in the room. I should probably exclude the knife from the analysis as already noted <a href="https://jaquent.me/2018/01/25/196/">here</a> because both foils are to similar as they are all on the working surface. Additionally, it is possible that the knife is just not visible enough. The other object look fine.</p>
+
+<h2 id="accuracy-for-afc-decision-task-performance">Accuracy for AFC decision (task performance)</h2>
+
+<pre><code class="language-r"># For each participant
+dataRetrievalTaskSub1 &lt;- subset(dataRetrievalTask, dataRetrievalTask$resCon != 1 &amp; dataRetrievalTask$objNum != 7)
+agg2                  &lt;- ddply(dataRetrievalTaskSub1, c('subNo'), summarise, accAFC = mean(accAFC))
+agg2
+</code></pre>
+
+<pre><code>##   subNo    accAFC
+## 1     2 0.6111111
+## 2     3 0.7647059
+## 3     4 0.8888889
+## 4     5 0.5294118
+## 5     6 0.7777778
+</code></pre>
+
+<p>If one ignores the knife and all trials, on which participants indicated that they didn&rsquo;t see the object, the average accuracy is 0.72.</p>
+
+<pre><code class="language-r">ggplot(agg2, aes(x = 1 , y = accAFC)) + 
+  geom_jitter(width = 0.1, height = 0, alpha = 0.5) + 
+  geom_hline(yintercept = 1/3) + 
+  geom_segment(aes(x = 0.95, y = mean(agg2$accAFC), xend = 1.05, yend = mean(agg2$accAFC))) +
+  annotate('text', x = 0.95, y = (1/3) - 0.03, label = 'Chance (1/3)') + 
+  labs(y = 'Accuracy (3AFC)', x = '') + 
+  coord_cartesian(ylim = c(0, 1), xlim = c(0.9, 1.1)) + 
+  theme(plot.margin = margin(10, 10, 10, 10))
+</code></pre>
+
+<p><img src="/post/2018-02-13-final-analysis-of-pilot-data_files/figure-markdown_github/unnamed-chunk-6-1.png" alt="" /></p>
+
+<p>The average performance seems to be in good range. The highest performance is 0.89, which is likely to be a bit inflated because this participant had longer exposure time. The lowest value 0.53 is still considerably above chance. The general difficulty seems to be appropriate.</p>
+
+<h2 id="ratings">Ratings</h2>
+
+<pre><code class="language-r"># This chunk is about combining the data from the retrieval part with the data with the post-encoding ratings. 
+# Loading data and adding objects names
+fileNames         &lt;- paste('C:/Users/aq01/Desktop/schemVR_pilot/pilotData/ratingTask_', as.character(population),'.dat', sep = '')
+dataRatingTask    &lt;- rbindlist(lapply(fileNames, fread))
+
+names(dataRatingTask) &lt;- c('subNo', 'date', 'time', 'trial','objNum', 'location', 'rating', 'RT')
+
+objNames &lt;- c('microwave','kitchen roll','saucepan', 'toaster','bowl of fruits','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
+
+dataRatingTask$objName &lt;- factor(dataRatingTask$objNum, labels = objNames)
+
+
+# Collapsing acrossp participants as well as objects and splitting location and rating values into three separate values
+dataRatingTask_agg &lt;- ddply(dataRatingTask, c('subNo', 'objName', 'objNum'), summarise, 
+                            location1 = location[1],  
+                            location2 = location[2],  
+                            location3 = location[3],
+                            rating1   = rating[1],
+                            rating2   = rating[2],
+                            rating3   = rating[3])
+
+# Basically I need the following bit to sort the data set
+dataRetrievalTask_agg &lt;- ddply(dataRetrievalTask, c('subNo', 'objName', 'objNum'), summarise, 
+                               foil1Location  = foil1Location, 
+                               targetLocation = targetLocation, 
+                               foil2Location  = foil2Location)
+
+# Finding the respective ratings for targets and foils because this information is not saved for the ratingTask data set
+# Target
+postRatingTarget  &lt;- rep(NA, 20)
+postRatingTarget[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$targetLocation)]
+postRatingTarget[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$targetLocation)]
+postRatingTarget[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$targetLocation)]
+
+# Foil 1
+postRatingFoil1  &lt;- rep(NA, 20)
+postRatingFoil1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil1Location)]
+postRatingFoil1[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil1Location)]
+postRatingFoil1[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil1Location)]
+
+# Foil 2
+postRatingFoil2  &lt;- rep(NA, 20)
+postRatingFoil2[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil2Location)]
+postRatingFoil2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil2Location)]
+postRatingFoil2[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil2Location)]
+
+# Creating new combined data set and exclude guess responses
+combData                  &lt;- dataRetrievalTask
+combData$postRatingTarget &lt;- postRatingTarget
+combData$postRatingFoil1  &lt;- postRatingFoil1
+combData$postRatingFoil2  &lt;- postRatingFoil2
+combData[which(combData$objNum == 7),]
+</code></pre>
+
+<pre><code>##    subNo     date   time trial objNum targetLocation targetRankPre
+## 1:     2 20180202 123537     9      7             20        338.25
+## 2:     3 20180202 125243     3      7             20        338.25
+## 3:     4 20180207 133353    11      7             20        338.25
+## 4:     5 20180208 173324     4      7             20        338.25
+## 5:     6 20180209 163241    14      7             20        338.25
+##    foil1Location foil1RankPre foil2Location foil2RankPre AFCPreTime
+## 1:            19     324.5833             2     359.9167   7830.268
+## 2:            19     324.5833             2     359.9167   6324.611
+## 3:            19     324.5833             2     359.9167   6619.014
+## 4:            19     324.5833             2     359.9167   5089.594
+## 5:            19     324.5833             2     359.9167  13325.536
+##        rtAFC resAFC accAFC conPreTime     rtCon resCon  left middle right
+## 1:  7819.901      3      1  1403.0627 1393.7994      1 foil2  foil1 foil2
+## 2:  6314.136      1      0  2405.3414 2395.0598      1 foil1  foil2 foil1
+## 3:  6611.930      2      1   448.0851  440.7390      1 foil1 target foil1
+## 4:  5081.712      1      0  1798.6552 1791.0316      2 foil2 target foil2
+## 5: 13316.473      3      1   705.3646  697.7877      1 foil2  foil1 foil2
+##    objName postRatingTarget postRatingFoil1 postRatingFoil2
+## 1:   knife        -57.49186       -48.85994       22.149837
+## 2:   knife         42.01954        43.48534       -8.469055
+## 3:   knife        100.00000       100.00000      100.000000
+## 4:   knife        -79.64169       -32.57329      -59.446254
+## 5:   knife         73.12704        51.79153        6.677524
+</code></pre>
+
+<pre><code class="language-r"># Again exluding all didn't see repsonses and the knife. 
+combData                  &lt;- subset(combData, combData$resCon != 1 &amp; combData$objNum != 7)
+</code></pre>
+
+<h2 id="object-level">object level</h2>
+
+<h3 id="relationship-between-expectancy-and-3afc-performance">Relationship between expectancy and 3AFC performance</h3>
+
+<pre><code class="language-r">combDataAfcExp  &lt;- ddply(combData, c('objName', 'objNum'), summarise, afc = mean(accAFC), preRank = mean(targetRankPre), postRating = mean(postRatingTarget))
+
+# How well do the pre-ecnoding ranks correlate with the post-encoding ratings.
+corrPrePost &lt;- cor.test(combDataAfcExp$preRank, combDataAfcExp$postRating)
+</code></pre>
+
+<p>It might be interesting to note that the correlation between the pre-encoding ranks and post-encoding ratings is <em>r</em> = .01, <em>p</em> = .967. This clearly shows that ratings differ if you rated other combinations of objects and locations as well.</p>
+
+<pre><code class="language-r">plot1 &lt;- ggplot(combDataAfcExp, aes(x = postRating, y = afc)) + 
+  geom_point() +
+  geom_text(aes(label = objNum),hjust = 0, vjust = 0) + 
+  geom_smooth() +  
+  labs(y = 'Mean accuracy (3AFC)', x = &quot;Expectancy&quot;, title = 'Relationship with post-encoding ratings') + 
+  coord_cartesian(ylim = c(0, 1.5), xlim = c(-100, 100), expand = FALSE) + 
+  theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;))
+for (i in 1:dim(combDataAfcExp)[1])  {
+  height &lt;- seq(0.2, 1.3, length = dim(combDataAfcExp)[1])
+plot1 &lt;- plot1 + annotation_custom(
+      grob = textGrob(label = paste(as.character(combDataAfcExp$objNum[i]), &quot;=&quot;, combDataAfcExp$objName[i]), hjust = 0),
+      ymin = height[i],      # Vertical position of the textGrob
+      ymax = height[i],
+      xmin = 102,         # Note: The grobs are positioned outside the plot area
+      xmax = 102)
+ }   
+
+gt &lt;- ggplot_gtable(ggplot_build(plot1))
+gt$layout$clip[gt$layout$name == &quot;panel&quot;] &lt;- &quot;off&quot;
+grid.draw(gt)
+</code></pre>
+
+<p><img src="/post/2018-02-13-final-analysis-of-pilot-data_files/figure-markdown_github/unnamed-chunk-9-1.png" alt="" /></p>
+
+<pre><code class="language-r">plot2 &lt;- ggplot(combDataAfcExp, aes(x = preRank, y = afc)) + 
+  geom_point() +
+  geom_text(aes(label = objNum),hjust = 0, vjust = 0) + 
+  geom_smooth() +  
+  labs(y = 'Mean accuracy (3AFC)', x = &quot;Expectancy&quot;, title = 'Relationship with pre-encoding ranks') +  
+  coord_cartesian(ylim = c(0, 1.5), xlim = c(0, 400), expand = FALSE) + 
+  theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;))
+for(i in 1:dim(combDataAfcExp)[1]) {
+  height &lt;- seq(0.2, 1.3, length = dim(combDataAfcExp)[1])
+plot2 &lt;- plot2 + annotation_custom(
+      grob = textGrob(label = paste(as.character(combDataAfcExp$objNum[i]), &quot;=&quot;, combDataAfcExp$objName[i]), hjust = 0),
+      ymin = height[i],      # Vertical position of the textGrob
+      ymax = height[i],
+      xmin = 402,         # Note: The grobs are positioned outside the plot area
+      xmax = 402)
+ }   
+
+gt &lt;- ggplot_gtable(ggplot_build(plot2))
+gt$layout$clip[gt$layout$name == &quot;panel&quot;] &lt;- &quot;off&quot;
+grid.draw(gt)
+</code></pre>
+
+<p><img src="/post/2018-02-13-final-analysis-of-pilot-data_files/figure-markdown_github/unnamed-chunk-10-1.png" alt="" /></p>
+
+<p>If the knife were included in this analysis, it would be an outlier completely changing the smoothing curve. However both plots show that there might be no memory benefit for expected object when it comes to object/location memory, but there seems benefit for objects at unexpected locations. That is very interesting because there is basically no relationship between both ratings. However the number of participants is far to small too make any real claims about the relationship.</p>
+
+<p>I think there could be a power problem because no matter how many participants I collect the analysis will be still run with 19 data points (20 minus the knife).</p>
+
+<h2 id="participant-level">Participant level</h2>
+
+<h3 id="factorisation">Factorisation</h3>
+
+<p>Another way to look at the data is to split the data into three equally sized conditions based on the expectancy (i.e. unexpected, neutral, expected) for each participant. The problem however is that you cannot create equally sized conditions if the number of objects is twenty. The unexpected condition will hence comprise the lowest seven values, the neutral condition the next six values and the expected condition the next seven values.</p>
+
+<pre><code class="language-r"># Based on post-encoding ratings
+combData2 &lt;- combData
+combData2$postRatingTargetRank &lt;- ddply(combData2, c('subNo'), summarise, postRatingTarget = postRatingTarget, rank = rank(postRatingTarget))$rank
+
+combData2$expFact &lt;- 2
+combData2$expFact[which(combData2$postRatingTargetRank &lt;= 7)] &lt;- 1
+combData2$expFact[which(combData2$postRatingTargetRank &gt;= 14)] &lt;- 3
+combData2$expFact &lt;- factor(combData2$expFact, labels = c(&quot;unexpected&quot;, &quot;neutral&quot;, &quot;expected&quot;))
+
+combData2Exp &lt;- ddply(combData2, c('subNo', 'expFact'), summarise, 
+                     N = length(accAFC),  
+                     mean = mean(accAFC),
+                     ratingsMean = mean(postRatingTarget))
+
+# It is important to aggregate data, which was already aggregated.
+combData2ExpAgg &lt;- ddply(combData2Exp, c('expFact'), summarise, 
+                        N = length(mean),  
+                        accAfcMean = mean(mean), 
+                        accAfcSd = sd(mean), 
+                        accAfcSe = accAfcSd/sqrt(N))
+
+ggplot(combData2Exp, aes(x = expFact, y = mean)) +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.5) +
+  stat_summary(fun.y = mean, geom = &quot;line&quot;, aes(group=1))  +
+  labs(y = 'Mean accuracy (3AFC)', x = &quot;Expectancy&quot;, title = 'Relationship with post-encoding ratings') + 
+  theme(plot.margin = margin(10, 10, 10, 10))
+</code></pre>
+
+<p><img src="/post/2018-02-13-final-analysis-of-pilot-data_files/figure-markdown_github/unnamed-chunk-11-1.png" alt="" /></p>
+
+<pre><code class="language-r"># Based on post-encoding ratings
+combData3               &lt;- combData
+combData3$targetRankPre &lt;- ddply(combData3, c('subNo'), summarise, targetRankPre = targetRankPre, rank = rank(targetRankPre))$rank
+
+combData3$expFact &lt;- 2
+combData3$expFact[which(combData3$targetRankPre &lt;= 7)] &lt;- 1
+combData3$expFact[which(combData3$targetRankPre &gt;= 14)] &lt;- 3
+combData3$expFact &lt;- factor(combData3$expFact, labels = c(&quot;unexpected&quot;, &quot;neutral&quot;, &quot;expected&quot;))
+
+combData3Exp &lt;- ddply(combData3, c('subNo', 'expFact'), summarise, 
+                     N = length(accAFC),  
+                     mean = mean(accAFC),
+                     ratingsMean = mean(targetRankPre))
+
+# It is important to aggregate data, which was already aggregated.
+combData3ExpAgg &lt;- ddply(combData3Exp, c('expFact'), summarise, 
+                        N = length(mean),  
+                        accAfcMean = mean(mean), 
+                        accAfcSd = sd(mean), 
+                        accAfcSe = accAfcSd/sqrt(N))
+
+ggplot(combData3Exp, aes(x = expFact, y = mean)) +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.5) +
+  stat_summary(fun.y = mean, geom = &quot;line&quot;, aes(group=1))  +
+  labs(y = 'Mean accuracy (3AFC)', x = &quot;Expectancy&quot;, title = 'Relationship with pre-encoding ranks') + 
+  theme(plot.margin = margin(10, 10, 10, 10))
+</code></pre>
+
+<p><img src="/post/2018-02-13-final-analysis-of-pilot-data_files/figure-markdown_github/unnamed-chunk-12-1.png" alt="" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Overall, it looks like the paradigm could work to inform me about the relationship between schema-congruency and object/location memory. The performance is in a good range. Furthermore, it became apparent that I might need exclude the knife from the analysis after looking at the confidence responses this item received. Therefore I will exclude it if this pattern persist in data, which I will begin to collect. The next step will be to write the real analysis script with pre-processing and so on and formulated hypotheses. After that and fixing some issue in the protocol, I will start collecting data. Yay :)</p>
+
+
+    
+
+    
+
+    <h4>See also</h4>
+    <ul>
+        
+            <li><a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a></li>
+        
+            <li><a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a></li>
+        
+            <li><a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a></li>
+        
+            <li><a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a></li>
+        
+            <li><a href="/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/">Running RMarkdown on CBU computer and first pilot session</a></li>
+        
+    </ul>
+
+
+</article>
+
+
+
+        </div>
+
+        <aside class="col-12 col-lg-3 ml-auto blog-sidebar">
+    
+        
+
+
+<section>
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+        
+        <li>
+            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
+        </li>
+        
+        <li>
+            <a href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
+        </li>
+        
+    </ol>
+</section>
+
+    
+    
+        <section>
+    
+        
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-primary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/tags/about">about</a>
+            
+            <a class="badge badge-primary" href="/tags/data-check">data-check</a>
+            
+            <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
+            
+            <a class="badge badge-primary" href="/tags/graphics">graphics</a>
+            
+            <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
+            
+            <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
+            
+            <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
+            
+            <a class="badge badge-primary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-primary" href="/tags/pilot-study">pilot-study</a>
+            
+            <a class="badge badge-primary" href="/tags/ratingstudy">ratingstudy</a>
+            
+            <a class="badge badge-primary" href="/tags/recognition-memory">recognition-memory</a>
+            
+            <a class="badge badge-primary" href="/tags/recollection">recollection</a>
+            
+            <a class="badge badge-primary" href="/tags/research-design">research-design</a>
+            
+            <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+            
+            <a class="badge badge-primary" href="/tags/schema">schema</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr1">schemavr1</a>
+            
+            <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-primary" href="/tags/word-properties">word-properties</a>
+            
+            <a class="badge badge-primary" href="/tags/words">words</a>
+            
+        </p>
+        
+    
+</section>
+    
+</aside>
+
+      </div>
+    </div>
+    
+
+    
+      
+
+
+
+
+
+
+<footer class="blog-footer w-100">
+    <nav class="navbar navbar-light bg-light">
+        <p class="w-100 text-center">Hugo template made with ❤ by <a href="https://github.com/Xzya">Xzya</a>, inspired by <a href="https://github.com/alanorth/hugo-theme-bootstrap4-blog">hugo-theme-bootstrap4-blog</a></p>
+        <p class="w-100 text-center"><a href="#">Back to top</a></p>
+    </nav>
+</footer>
+
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
