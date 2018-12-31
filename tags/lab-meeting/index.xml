@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lab Meeting on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/lab-meeting/</link>
+    <link>/tags/lab-meeting/</link>
     <description>Recent content in Lab Meeting on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 17 Nov 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/tags/lab-meeting/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/lab-meeting/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lab meeting</title>
-      <link>https://jaquent.github.io/2017/11/lab-meeting/</link>
+      <link>/2017/11/lab-meeting/</link>
       <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2017/11/lab-meeting/</guid>
+      <guid>/2017/11/lab-meeting/</guid>
       <description>Today I met with my supervisor and we also had lab meeting.  We have discussed the difficulty to counter-balance the expectedness of the objects and their locations in a true factorial design. For instance, it is nearly impossible to pair objects so that the expected location of one object is the unexpected location of the other object. We are interested in how the expectedness of an object and its location is related to memory and whether it is possible to get a u-shaped function.</description>
     </item>
     
     <item>
       <title>Lab meeting</title>
-      <link>https://jaquent.github.io/2017/10/lab-meeting/</link>
+      <link>/2017/10/lab-meeting/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2017/10/lab-meeting/</guid>
+      <guid>/2017/10/lab-meeting/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
       <title>Lab meeting and feedback to first experiment</title>
-      <link>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
+      <link>/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
+      <guid>/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to schemaVR:
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>

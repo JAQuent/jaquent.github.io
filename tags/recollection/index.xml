@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Recollection on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/recollection/</link>
+    <link>/tags/recollection/</link>
     <description>Recent content in Recollection on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 19 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/tags/recollection/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/recollection/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Issue with stimulus selection and some thoughts</title>
-      <link>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</link>
+      <link>/2018/01/issue-with-stimulus-selection-and-some-thoughts/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</guid>
+      <guid>/2018/01/issue-with-stimulus-selection-and-some-thoughts/</guid>
       <description>This entry contains thoughts and observations for the last couple of days because I was stuck with a problem and didn’t have a lot say. The problem was that I hadn&amp;rsquo;t controlled the number of times a location can serve as a foil when I had picked the set of object/locations pairs. This is indeed problematic because some locations were used four times. If you know which object was at a specific location, it isn’t really a foil anymore influencing subsequent trials.</description>
     </item>
     
     <item>
       <title>Recognition instructions for recollection and familiarity</title>
-      <link>https://jaquent.github.io/2017/11/recognition-instructions-for-recollection-and-familiarity/</link>
+      <link>/2017/11/recognition-instructions-for-recollection-and-familiarity/</link>
       <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2017/11/recognition-instructions-for-recollection-and-familiarity/</guid>
+      <guid>/2017/11/recognition-instructions-for-recollection-and-familiarity/</guid>
       <description>Following feedback I changed the instruction for the recognition task so that they are in line with Bastin et al. (2014). The respective part of the instruction were changed to:
  If you pressed &amp;lt;&amp;lt;y&amp;gt;&amp;gt; for yes, you will need to indicate whether you recollected this by pressing &amp;lt;&amp;lt;r&amp;gt;&amp;gt; or whether this object was only familiar by pressing &amp;lt;&amp;lt;f&amp;gt;&amp;gt;. You recollected an object if you see it and recall specific details about it (e.</description>
     </item>

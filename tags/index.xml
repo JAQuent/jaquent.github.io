@@ -2,201 +2,201 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>https://jaquent.github.io/tags/about/</link>
+      <link>/tags/about/</link>
       <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/about/</guid>
+      <guid>/tags/about/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Check</title>
-      <link>https://jaquent.github.io/tags/data-check/</link>
+      <link>/tags/data-check/</link>
       <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/data-check/</guid>
+      <guid>/tags/data-check/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Familiarity</title>
-      <link>https://jaquent.github.io/tags/familiarity/</link>
+      <link>/tags/familiarity/</link>
       <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/familiarity/</guid>
+      <guid>/tags/familiarity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Graphics</title>
-      <link>https://jaquent.github.io/tags/graphics/</link>
+      <link>/tags/graphics/</link>
       <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/graphics/</guid>
+      <guid>/tags/graphics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hippocampus</title>
-      <link>https://jaquent.github.io/tags/hippocampus/</link>
+      <link>/tags/hippocampus/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/hippocampus/</guid>
+      <guid>/tags/hippocampus/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lab Meeting</title>
-      <link>https://jaquent.github.io/tags/lab-meeting/</link>
+      <link>/tags/lab-meeting/</link>
       <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/lab-meeting/</guid>
+      <guid>/tags/lab-meeting/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Memory</title>
-      <link>https://jaquent.github.io/tags/memory/</link>
+      <link>/tags/memory/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/memory/</guid>
+      <guid>/tags/memory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mpfc</title>
-      <link>https://jaquent.github.io/tags/mpfc/</link>
+      <link>/tags/mpfc/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/mpfc/</guid>
+      <guid>/tags/mpfc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Noveltyvr</title>
-      <link>https://jaquent.github.io/tags/noveltyvr/</link>
+      <link>/tags/noveltyvr/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/noveltyvr/</guid>
+      <guid>/tags/noveltyvr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Pilot Study</title>
-      <link>https://jaquent.github.io/tags/pilot-study/</link>
+      <link>/tags/pilot-study/</link>
       <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/pilot-study/</guid>
+      <guid>/tags/pilot-study/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ratingstudy</title>
-      <link>https://jaquent.github.io/tags/ratingstudy/</link>
+      <link>/tags/ratingstudy/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/ratingstudy/</guid>
+      <guid>/tags/ratingstudy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recognition Memory</title>
-      <link>https://jaquent.github.io/tags/recognition-memory/</link>
+      <link>/tags/recognition-memory/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/recognition-memory/</guid>
+      <guid>/tags/recognition-memory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recollection</title>
-      <link>https://jaquent.github.io/tags/recollection/</link>
+      <link>/tags/recollection/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/recollection/</guid>
+      <guid>/tags/recollection/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Research Design</title>
-      <link>https://jaquent.github.io/tags/research-design/</link>
+      <link>/tags/research-design/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/research-design/</guid>
+      <guid>/tags/research-design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rmarkdown</title>
-      <link>https://jaquent.github.io/tags/rmarkdown/</link>
+      <link>/tags/rmarkdown/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/rmarkdown/</guid>
+      <guid>/tags/rmarkdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Schema</title>
-      <link>https://jaquent.github.io/tags/schema/</link>
+      <link>/tags/schema/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/schema/</guid>
+      <guid>/tags/schema/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Schemavr</title>
-      <link>https://jaquent.github.io/tags/schemavr/</link>
+      <link>/tags/schemavr/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/schemavr/</guid>
+      <guid>/tags/schemavr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Schemavr1</title>
-      <link>https://jaquent.github.io/tags/schemavr1/</link>
+      <link>/tags/schemavr1/</link>
       <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/schemavr1/</guid>
+      <guid>/tags/schemavr1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Unity3d</title>
-      <link>https://jaquent.github.io/tags/unity3d/</link>
+      <link>/tags/unity3d/</link>
       <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/unity3d/</guid>
+      <guid>/tags/unity3d/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Word Properties</title>
-      <link>https://jaquent.github.io/tags/word-properties/</link>
+      <link>/tags/word-properties/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/word-properties/</guid>
+      <guid>/tags/word-properties/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Words</title>
-      <link>https://jaquent.github.io/tags/words/</link>
+      <link>/tags/words/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/words/</guid>
+      <guid>/tags/words/</guid>
       <description></description>
     </item>
     
