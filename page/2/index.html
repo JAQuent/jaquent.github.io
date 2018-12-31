@@ -9,8 +9,8 @@
 <meta property="og:title" content="Jörn Alexander Quent&#39;s notebook" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2018-01-25T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://jaquent.github.io/" />
+<meta property="og:updated_time" content="2018-03-14T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Jörn Alexander Quent&#39;s notebook"/>
@@ -18,7 +18,7 @@
 
 
 
-    <link rel="canonical" href="/">
+    <link rel="canonical" href="https://jaquent.github.io/">
 
     <title>
       
@@ -28,10 +28,10 @@
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
 
     
-    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Jörn Alexander Quent&#39;s notebook" />
+    <link href="https://jaquent.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Jörn Alexander Quent&#39;s notebook" />
     
 
     
@@ -88,14 +88,14 @@
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
+            <a class="text-dark" href="/2018/03/mixed-linear-models/">Mixed linear models</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Jan 25, 2018
+        Mar 14, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -105,84 +105,30 @@
         
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/schemavr">schemaVR</a>
+    
+        <a class="badge badge-primary" href="/tags/mixed-linear-models">mixed linear models</a>
+    
+        <a class="badge badge-primary" href="/tags/lme4/lmertest">lme4/lmerTest</a>
     
         <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
     
-        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
-    
 </div>
 
         
 <div class="blog-post-categories text-secondary">
     <strong>Categories:</strong>
-    
-        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
-    
-</div>
-
-    </header>
-    Introduction This is actually the second attempt to find a suitable set of object/location pairs (click here for the first attempt). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&rsquo;t work as a foil anymore.
-Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets.
-    
-    <p></p>
-    <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Read More →</a>
-    
-</article>
-
-
-    
-
-
-
-    
-        <article class="blog-post">
-    <header>
-        <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
-        </h2>
-        
-
-
-<div class="blog-post-date text-secondary">
-    
-        Jan 19, 2018
-    
-    
-        by <span rel="author">Alex Quent</span>
-    
-</div>
-
-        
-<div class="blog-post-tags text-secondary">
-    <strong>Tags:</strong>
-    
-        <a class="badge badge-primary" href="/tags/recollection">recollection</a>
-    
-        <a class="badge badge-primary" href="/tags/recognition-memory">recognition memory</a>
-    
-        <a class="badge badge-primary" href="/tags/memory">memory</a>
-    
-        <a class="badge badge-primary" href="/tags/research-design">research design</a>
-    
-        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
-    
-</div>
-
-        
-<div class="blog-post-categories text-secondary">
-    <strong>Categories:</strong>
-    
-        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
     
         <a class="badge badge-primary" href="/categories/general">general</a>
     
 </div>
 
     </header>
-    This entry contains thoughts and observations for the last couple of days because I was stuck with a problem and didn’t have a lot say. The problem was that I hadn&rsquo;t controlled the number of times a location can serve as a foil when I had picked the set of object/locations pairs. This is indeed problematic because some locations were used four times. If you know which object was at a specific location, it isn’t really a foil anymore influencing subsequent trials.
+    Preface This work documents my attempt to understand the model structure of mixed linear models or multilevel models. I adapted a formula that I found on Wikipedia and work myself through the different models and test whether I am able to retrieve the different parameters with lmerTest. Bodo Winter&rsquo;s tutorial on the lme was very useful for this. The main motivation for doing all this is to use basically model 5 in my analysis of my first experiment.
     
     <p></p>
-    <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Read More →</a>
+    <a href="/2018/03/mixed-linear-models/">Read More →</a>
     
 </article>
 
@@ -195,14 +141,14 @@ Just as a reminder, the aim is to select a combination of twenty objects at twen
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a>
+            <a class="text-dark" href="/2018/02/final-design-of-schemavr1/">Final design of schemaVR1</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Jan 15, 2018
+        Feb 14, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -212,6 +158,57 @@ Just as a reminder, the aim is to select a combination of twenty objects at twen
         
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+        <a class="badge badge-primary" href="/tags/research-design">research design</a>
+    
+</div>
+
+        
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+    
+</div>
+
+    </header>
+    My supervisor and I agreed on the final design while discussing the results of the pilot experiment. We both think that it is important to replicate Lew &amp; Howe (2016) results if their test is used, but not if one uses 3AFC test. They used a Y/N location recognition task (“Was this object in this place before?”) and location recall task (2D picture version). I will develop a spatial 3D location recall task for the VR system to replicate the results in the first experiment.
+    
+    <p></p>
+    <a href="/2018/02/final-design-of-schemavr1/">Read More →</a>
+    
+</article>
+
+
+    
+
+
+
+    
+        <article class="blog-post">
+    <header>
+        <h2 class="blog-post-title">
+            <a class="text-dark" href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+        </h2>
+        
+
+
+<div class="blog-post-date text-secondary">
+    
+        Feb 13, 2018
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+        
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/pilot-study">pilot study</a>
     
         <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
     
@@ -228,11 +225,11 @@ Just as a reminder, the aim is to select a combination of twenty objects at twen
 </div>
 
     </header>
-    Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
-Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &lt;-function(x, sign = '='){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.
+    Introduction This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.
+Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &lt;-function(x, sign = '='){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.lm(x) x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.
     
     <p></p>
-    <a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Read More →</a>
+    <a href="/2018/02/final-analysis-of-pilot-data/">Read More →</a>
     
 </article>
 
@@ -351,8 +348,17 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
                 
             
             
+        
+            
+            
+            
+            
+                
+                
+            
+            
                 <li class="page-item ">
-                    <a class="page-link" href="/page/9/">9</a>
+                    <a class="page-link" href="/page/10/">10</a>
                 </li>
             
         
@@ -361,7 +367,7 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
         </li>
         
             <li class="page-item">
-                <a class="page-link" href="/page/9/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+                <a class="page-link" href="/page/10/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
             </li>
         
     </ul>
@@ -386,19 +392,19 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
         </li>
         
         <li>
-            <a href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+            <a href="/2018/04/3d-location-recall-task-in-vr/">3D location recall task in VR</a>
         </li>
         
         <li>
-            <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+            <a href="/2018/03/general-update-and-plan-for-the-future/">General update and plan for the future</a>
         </li>
         
         <li>
-            <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
+            <a href="/2018/03/mixed-linear-models/">Mixed linear models</a>
         </li>
         
         <li>
-            <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
+            <a href="/2018/02/final-design-of-schemavr1/">Final design of schemaVR1</a>
         </li>
         
     </ol>
@@ -435,9 +441,17 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
             
             <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
             
+            <a class="badge badge-primary" href="/tags/ideas-and-plans">ideas-and-plans</a>
+            
             <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
             
+            <a class="badge badge-primary" href="/tags/lme4/lmertest">lme4/lmertest</a>
+            
             <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/meta">meta</a>
+            
+            <a class="badge badge-primary" href="/tags/mixed-linear-models">mixed-linear-models</a>
             
             <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
             

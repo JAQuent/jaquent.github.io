@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ideas and Plans on Jörn Alexander Quent&#39;s notebook</title>
+    <link>https://jaquent.github.io/tags/ideas-and-plans/</link>
+    <description>Recent content in Ideas and Plans on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jaquent.github.io/tags/ideas-and-plans/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>General update and plan for the future</title>
+      <link>https://jaquent.github.io/2018/03/general-update-and-plan-for-the-future/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/03/general-update-and-plan-for-the-future/</guid>
+      <description>Even though the last post is basically a month ago, I am still committed to this diary. Therefore I thought to provide an update. I spent the last month with finishing the experiment and preparing its pre-registration. In that progress, I have started working on the R script that analyses the data to include it in the pre-registration. I want to use mixed linear models to analyse the data so that I can model the performance on individual trials.</description>
+    </item>
+    
+  </channel>
+</rss>

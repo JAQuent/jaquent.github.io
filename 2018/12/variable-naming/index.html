@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Variable naming" />
+<meta property="og:description" content="Disclaimer: This document is out of date and will be replaced by a thourough convention of naming files and variables.
+I recently realised that I am sometimes quite inconsistent when it comes to naming variables. I decided to stipulate a variable naming convention that I can stick to. This convention should be useable in the three major languages I use (R, Matlab, C#). That means I can’t for instance use dots within a name because it would only work in R." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2018/12/variable-naming/" /><meta property="article:published_time" content="2018-12-31T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-12-31T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Variable naming"/>
+<meta name="twitter:description" content="Disclaimer: This document is out of date and will be replaced by a thourough convention of naming files and variables.
+I recently realised that I am sometimes quite inconsistent when it comes to naming variables. I decided to stipulate a variable naming convention that I can stick to. This convention should be useable in the three major languages I use (R, Matlab, C#). That means I can’t for instance use dots within a name because it would only work in R."/>
+
+
+
+    <link rel="canonical" href="/2018/12/variable-naming/">
+
+    <title>
+      
+        Variable naming | Jörn Alexander Quent&#39;s notebook
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      <header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            Jörn Alexander Quent&#39;s notebook
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/">Home</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/about/">About</a>
+                    
+                </li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-8 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+        <a class="text-dark" href="/2018/12/variable-naming/">Variable naming</a>
+    </h2>
+    
+
+
+<div class="blog-post-date text-secondary">
+    
+        Dec 31, 2018
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+    
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/meta">meta</a>
+    
+</div>
+
+    
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/general">general</a>
+    
+</div>
+
+    <hr>
+</header>
+<article class="blog-post">
+    <p>Disclaimer: This document is out of date and will be replaced by a thourough convention of naming files and variables.</p>
+
+<p>I recently realised that I am sometimes quite inconsistent when it comes to naming variables. I decided to stipulate a variable naming convention that I can stick to. This convention should be useable in the three major languages I use (R, Matlab, C#). That means I can’t for instance use dots within a name because it would only work in R.  I will keep an updated version <a href="https://jaquent.me/code/">here</a>.</p>
+<p>I hereby stipulate the following rules to name variables:</p>
+<ul>
+<li>Variable names should be informative. Example: <em>rt</em> for reaction time.</li>
+<li>They should be short. Therefore I will use capitalisation to separate the variable name instead of for instance an underscore. Example: <em>dataMean</em>.</li>
+<li>The variable should start with a lower case later.</li>
+<li>If the variable is in some way nested, the name should indicate that by a decreasing hierarchy. Example: <em>dataSub1Mean</em>.</li>
+<li>I will use the following abbreviations for singular and plural form:
+<ul>
+<li><em>acc</em> = accuracy</li>
+<li><em>err</em> = error</li>
+<li><em>rt</em> = reaction time</li>
+<li><em>con</em> = condition</li>
+<li><em>conf</em> = confidence</li>
+<li><em>comb</em> = combination/combined</li>
+<li><em>obj</em> = object</li>
+<li><em>num</em> = number</li>
+<li><em>iter</em> = iteration</li>
+<li><em>disp</em> = display</li>
+<li><em>subNo</em> = subject number</li>
+<li><em>sub</em> = subject</li>
+<li><em>pos</em> = position</li>
+<li><em>len</em> = length</li>
+<li><em>dim</em> = dimension</li>
+<li><em>rect</em> = rectangle</li>
+<li><em>resp</em> = response</li>
+<li><em>img</em> = image</li>
+<li><em>tex</em> = texture</li>
+<li><em>str</em> = string</li>
+<li><em>logi</em> = logistic</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<p>These are variables I used and then changed according to convention:<br /><em>numberObjects</em> -&gt; <em>numObj             </em><br /><em>sub_SS_foils</em>    -&gt; <em>foilSsSub</em></p>
+
+
+    
+
+    
+
+
+</article>
+
+
+
+        </div>
+
+        <aside class="col-12 col-lg-3 ml-auto blog-sidebar">
+    
+        
+
+
+<section>
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+        
+        <li>
+            <a href="/2018/12/variable-naming/">Variable naming</a>
+        </li>
+        
+        <li>
+            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
+        </li>
+        
+        <li>
+            <a href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+        </li>
+        
+        <li>
+            <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
+        </li>
+        
+    </ol>
+</section>
+
+    
+    
+        <section>
+    
+        
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-primary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/tags/about">about</a>
+            
+            <a class="badge badge-primary" href="/tags/data-check">data-check</a>
+            
+            <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
+            
+            <a class="badge badge-primary" href="/tags/graphics">graphics</a>
+            
+            <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
+            
+            <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
+            
+            <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/meta">meta</a>
+            
+            <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
+            
+            <a class="badge badge-primary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-primary" href="/tags/pilot-study">pilot-study</a>
+            
+            <a class="badge badge-primary" href="/tags/ratingstudy">ratingstudy</a>
+            
+            <a class="badge badge-primary" href="/tags/recognition-memory">recognition-memory</a>
+            
+            <a class="badge badge-primary" href="/tags/recollection">recollection</a>
+            
+            <a class="badge badge-primary" href="/tags/research-design">research-design</a>
+            
+            <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+            
+            <a class="badge badge-primary" href="/tags/schema">schema</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr1">schemavr1</a>
+            
+            <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-primary" href="/tags/word-properties">word-properties</a>
+            
+            <a class="badge badge-primary" href="/tags/words">words</a>
+            
+        </p>
+        
+    
+</section>
+    
+</aside>
+
+      </div>
+    </div>
+    
+
+    
+      
+
+
+
+
+
+
+<footer class="blog-footer w-100">
+    <nav class="navbar navbar-light bg-light">
+        <p class="w-100 text-center">Hugo template made with ❤ by <a href="https://github.com/Xzya">Xzya</a>, inspired by <a href="https://github.com/alanorth/hugo-theme-bootstrap4-blog">hugo-theme-bootstrap4-blog</a></p>
+        <p class="w-100 text-center"><a href="#">Back to top</a></p>
+    </nav>
+</footer>
+
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

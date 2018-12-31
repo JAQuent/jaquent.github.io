@@ -8,8 +8,8 @@
 <meta property="og:title" content="Posts" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/post/" />
-<meta property="og:updated_time" content="2018-01-08T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://jaquent.github.io/post/" />
+<meta property="og:updated_time" content="2018-01-19T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
@@ -17,7 +17,7 @@
 
 
 
-    <link rel="canonical" href="/post/">
+    <link rel="canonical" href="https://jaquent.github.io/post/">
 
     <title>
       
@@ -27,10 +27,10 @@
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
 
     
-    <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Jörn Alexander Quent&#39;s notebook" />
+    <link href="https://jaquent.github.io/post/index.xml" rel="alternate" type="application/rss+xml" title="Jörn Alexander Quent&#39;s notebook" />
     
 
     
@@ -87,14 +87,14 @@
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/about-my-open-notebook/">About my open notebook</a>
+            <a class="text-dark" href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Jan 8, 2018
+        Jan 19, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -105,24 +105,33 @@
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/about">about</a>
+        <a class="badge badge-primary" href="/tags/recollection">recollection</a>
+    
+        <a class="badge badge-primary" href="/tags/recognition-memory">recognition memory</a>
+    
+        <a class="badge badge-primary" href="/tags/memory">memory</a>
+    
+        <a class="badge badge-primary" href="/tags/research-design">research design</a>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
     
 </div>
 
         
 <div class="blog-post-categories text-secondary">
     <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
     
         <a class="badge badge-primary" href="/categories/general">general</a>
     
 </div>
 
     </header>
-    Note (10/12/2018): This is outdated. See here for current approach.
-I have just finished uploading old diary entries, which gives me the opportunity to reflect on what I have done so far and to get a bit more meta on the whole topic with this entry, which is the first one I am actually going to publish at the end of my (working) day. Some of the previous entries are quite short and initially weren’t written for the general public.
+    This entry contains thoughts and observations for the last couple of days because I was stuck with a problem and didn’t have a lot say. The problem was that I hadn&rsquo;t controlled the number of times a location can serve as a foil when I had picked the set of object/locations pairs. This is indeed problematic because some locations were used four times. If you know which object was at a specific location, it isn’t really a foil anymore influencing subsequent trials.
     
     <p></p>
-    <a href="/2018/01/about-my-open-notebook/">Read More →</a>
+    <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Read More →</a>
     
 </article>
 
@@ -135,14 +144,14 @@ I have just finished uploading old diary entries, which gives me the opportunity
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2017/12/designing-rating-study/">Designing rating study</a>
+            <a class="text-dark" href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Dec 17, 2017
+        Jan 15, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -153,7 +162,9 @@ I have just finished uploading old diary entries, which gives me the opportunity
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/ratingstudy">ratingStudy</a>
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
     
 </div>
 
@@ -166,10 +177,11 @@ I have just finished uploading old diary entries, which gives me the opportunity
 </div>
 
     </header>
-    11/12/2017: I finished the script, with which participants can rate a) the expectancy of an object in the room (kitchen) and b) the expectancy of a particular object at all possible twenty locations. To that regard, we decided to reverse the original order of ratings so that the overall expectancy of the objects for that room is rated at the very end. The reason for that is that otherwise one might be prone to rate schema irrelevant objects as highly unexpected (-100) in any location even though some are more expected than others.
+    Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
+Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &lt;-function(x, sign = '='){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.
     
     <p></p>
-    <a href="/2017/12/designing-rating-study/">Read More →</a>
+    <a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Read More →</a>
     
 </article>
 
@@ -182,14 +194,14 @@ I have just finished uploading old diary entries, which gives me the opportunity
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2017/11/summary-of-piloting/">Summary of piloting</a>
+            <a class="text-dark" href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Nov 21, 2017
+        Jan 12, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -200,7 +212,9 @@ I have just finished uploading old diary entries, which gives me the opportunity
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/pilot-study">pilot study</a>
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
     
 </div>
 
@@ -213,10 +227,11 @@ I have just finished uploading old diary entries, which gives me the opportunity
 </div>
 
     </header>
-    17/11/2017: Today, I run another pilot session and I realized that I should introduce practice trials of both the n-back distractor task and the recognition task to reduce the difference between the first and subsequent blocks. Before I can start with the normative study, I need to make sure how many objects I am going to need, how these objects are going to look like and whether these objects are appropriate because some had problems naming some objects.
+    Introduction The aim is to select a certain number (20) of combinations of objects and locations that cover the whole range of expectancy values. The previous analysis of this data set can be found here. The code for the task can be found here.
+Used libraries and functions library(ggplot2)  Loading the rating data I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants.
     
     <p></p>
-    <a href="/2017/11/summary-of-piloting/">Read More →</a>
+    <a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Read More →</a>
     
 </article>
 
@@ -343,8 +358,17 @@ I have just finished uploading old diary entries, which gives me the opportunity
                 
             
             
+        
+            
+            
+            
+            
+                
+                
+            
+            
                 <li class="page-item ">
-                    <a class="page-link" href="/post/page/9/">9</a>
+                    <a class="page-link" href="/post/page/10/">10</a>
                 </li>
             
         
@@ -353,7 +377,7 @@ I have just finished uploading old diary entries, which gives me the opportunity
         </li>
         
             <li class="page-item">
-                <a class="page-link" href="/post/page/9/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+                <a class="page-link" href="/post/page/10/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
             </li>
         
     </ul>
@@ -378,19 +402,19 @@ I have just finished uploading old diary entries, which gives me the opportunity
         </li>
         
         <li>
-            <a href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+            <a href="/2018/04/3d-location-recall-task-in-vr/">3D location recall task in VR</a>
         </li>
         
         <li>
-            <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+            <a href="/2018/03/general-update-and-plan-for-the-future/">General update and plan for the future</a>
         </li>
         
         <li>
-            <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
+            <a href="/2018/03/mixed-linear-models/">Mixed linear models</a>
         </li>
         
         <li>
-            <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
+            <a href="/2018/02/final-design-of-schemavr1/">Final design of schemaVR1</a>
         </li>
         
     </ol>
@@ -427,9 +451,17 @@ I have just finished uploading old diary entries, which gives me the opportunity
             
             <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
             
+            <a class="badge badge-primary" href="/tags/ideas-and-plans">ideas-and-plans</a>
+            
             <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
             
+            <a class="badge badge-primary" href="/tags/lme4/lmertest">lme4/lmertest</a>
+            
             <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/meta">meta</a>
+            
+            <a class="badge badge-primary" href="/tags/mixed-linear-models">mixed-linear-models</a>
             
             <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
             

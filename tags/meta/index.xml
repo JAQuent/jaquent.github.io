@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Meta on Jörn Alexander Quent&#39;s notebook</title>
+    <link>https://jaquent.github.io/tags/meta/</link>
+    <description>Recent content in Meta on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jaquent.github.io/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>General update and plan for the future</title>
+      <link>https://jaquent.github.io/2018/03/general-update-and-plan-for-the-future/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/03/general-update-and-plan-for-the-future/</guid>
+      <description>Even though the last post is basically a month ago, I am still committed to this diary. Therefore I thought to provide an update. I spent the last month with finishing the experiment and preparing its pre-registration. In that progress, I have started working on the R script that analyses the data to include it in the pre-registration. I want to use mixed linear models to analyse the data so that I can model the performance on individual trials.</description>
+    </item>
+    
+    <item>
+      <title>Variable naming</title>
+      <link>https://jaquent.github.io/2018/02/variable-naming/</link>
+      <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/02/variable-naming/</guid>
+      <description>Disclaimer: This document is out of date and will be replaced by a thourough convention of naming files and variables.
+I recently realised that I am sometimes quite inconsistent when it comes to naming variables. I decided to stipulate a variable naming convention that I can stick to. This convention should be useable in the three major languages I use (R, Matlab, C#). That means I can’t for instance use dots within a name because it would only work in R.</description>
+    </item>
+    
+  </channel>
+</rss>

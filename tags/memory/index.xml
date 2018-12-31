@@ -2,60 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Memory on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/memory/</link>
+    <link>https://jaquent.github.io/tags/memory/</link>
     <description>Recent content in Memory on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 19 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/memory/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/memory/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Issue with stimulus selection and some thoughts</title>
-      <link>/2018/01/issue-with-stimulus-selection-and-some-thoughts/</link>
+      <link>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/issue-with-stimulus-selection-and-some-thoughts/</guid>
+      <guid>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</guid>
       <description>This entry contains thoughts and observations for the last couple of days because I was stuck with a problem and didn’t have a lot say. The problem was that I hadn&amp;rsquo;t controlled the number of times a location can serve as a foil when I had picked the set of object/locations pairs. This is indeed problematic because some locations were used four times. If you know which object was at a specific location, it isn’t really a foil anymore influencing subsequent trials.</description>
     </item>
     
     <item>
       <title>Recognition instructions for recollection and familiarity</title>
-      <link>/2017/11/recognition-instructions-for-recollection-and-familiarity/</link>
+      <link>https://jaquent.github.io/2017/11/recognition-instructions-for-recollection-and-familiarity/</link>
       <pubDate>Wed, 15 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/11/recognition-instructions-for-recollection-and-familiarity/</guid>
+      <guid>https://jaquent.github.io/2017/11/recognition-instructions-for-recollection-and-familiarity/</guid>
       <description>Following feedback I changed the instruction for the recognition task so that they are in line with Bastin et al. (2014). The respective part of the instruction were changed to:
  If you pressed &amp;lt;&amp;lt;y&amp;gt;&amp;gt; for yes, you will need to indicate whether you recollected this by pressing &amp;lt;&amp;lt;r&amp;gt;&amp;gt; or whether this object was only familiar by pressing &amp;lt;&amp;lt;f&amp;gt;&amp;gt;. You recollected an object if you see it and recall specific details about it (e.</description>
     </item>
     
     <item>
       <title>Lab meeting</title>
-      <link>/2017/10/lab-meeting/</link>
+      <link>https://jaquent.github.io/2017/10/lab-meeting/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lab-meeting/</guid>
+      <guid>https://jaquent.github.io/2017/10/lab-meeting/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to project 1 (schema-memory-VR; see here):
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
       <title>Lab meeting and feedback to first experiment</title>
-      <link>/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
+      <link>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</link>
       <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
+      <guid>https://jaquent.github.io/2017/10/lab-meeting-and-feedback-to-first-experiment/</guid>
       <description>During our weekly lab meeting I got the following feedback pertaining to schemaVR:
  I should drop mixed condition and only use unexpected or expected locations to reduce the number of conditions. Another idea was to present objects in a sequence in order to create a temporal episode. It could be interesting in this context to look at the fragmentation hypothesis (Horner &amp;amp; Burgess, 2013, 2014) and see how my VR approach can be use to examine predictions of it.</description>
     </item>
     
     <item>
       <title>HPC activity and graphics in Unity</title>
-      <link>/2017/10/hpc-activity-and-graphics-in-unity/</link>
+      <link>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/hpc-activity-and-graphics-in-unity/</guid>
+      <guid>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</guid>
       <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
     </item>
     

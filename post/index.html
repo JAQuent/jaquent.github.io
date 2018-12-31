@@ -8,7 +8,7 @@
 <meta property="og:title" content="Posts" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/post/" />
+<meta property="og:url" content="https://jaquent.github.io/post/" />
 <meta property="og:updated_time" content="2018-11-21T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
@@ -17,7 +17,7 @@
 
 
 
-    <link rel="canonical" href="/post/">
+    <link rel="canonical" href="https://jaquent.github.io/post/">
 
     <title>
       
@@ -27,10 +27,10 @@
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
 
     
-    <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Jörn Alexander Quent&#39;s notebook" />
+    <link href="https://jaquent.github.io/post/index.xml" rel="alternate" type="application/rss+xml" title="Jörn Alexander Quent&#39;s notebook" />
     
 
     
@@ -140,14 +140,14 @@
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+            <a class="text-dark" href="/2018/04/3d-location-recall-task-in-vr/">3D location recall task in VR</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Feb 13, 2018
+        Apr 19, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -158,11 +158,11 @@
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/pilot-study">pilot study</a>
+        <a class="badge badge-primary" href="/tags/schemavr">schemaVR</a>
     
-        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+        <a class="badge badge-primary" href="/tags/research-design">research design</a>
     
-        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+        <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
     
 </div>
 
@@ -175,11 +175,11 @@
 </div>
 
     </header>
-    Introduction This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.
-Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &lt;-function(x, sign = '='){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.lm(x) x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.
+    As noted in the previous post, I want to create a 3D location recall task. I want that people are able to pick up objects from the floor and place them at the locations at which they think the objects were during encoding.
+I found a good YouTube tutorial (see here) and adapted the respective script (see here), which needs to be added to the wand controllers to work. My version of the script will be uploaded later when it finished.
     
     <p></p>
-    <a href="/2018/02/final-analysis-of-pilot-data/">Read More →</a>
+    <a href="/2018/04/3d-location-recall-task-in-vr/">Read More →</a>
     
 </article>
 
@@ -192,14 +192,14 @@ Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) li
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+            <a class="text-dark" href="/2018/03/general-update-and-plan-for-the-future/">General update and plan for the future</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Jan 30, 2018
+        Mar 22, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -210,11 +210,9 @@ Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) li
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+        <a class="badge badge-primary" href="/tags/ideas-and-plans">ideas and plans</a>
     
-        <a class="badge badge-primary" href="/tags/data-check">data check</a>
-    
-        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+        <a class="badge badge-primary" href="/tags/meta">meta</a>
     
 </div>
 
@@ -222,16 +220,15 @@ Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) li
 <div class="blog-post-categories text-secondary">
     <strong>Categories:</strong>
     
-        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+        <a class="badge badge-primary" href="/categories/general">general</a>
     
 </div>
 
     </header>
-    Comment For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found here). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.
-Introduction I am about to start collecting pilot data to see whether the number of objects etc.
+    Even though the last post is basically a month ago, I am still committed to this diary. Therefore I thought to provide an update. I spent the last month with finishing the experiment and preparing its pre-registration. In that progress, I have started working on the R script that analyses the data to include it in the pre-registration. I want to use mixed linear models to analyse the data so that I can model the performance on individual trials.
     
     <p></p>
-    <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Read More →</a>
+    <a href="/2018/03/general-update-and-plan-for-the-future/">Read More →</a>
     
 </article>
 
@@ -350,8 +347,17 @@ Introduction I am about to start collecting pilot data to see whether the number
                 
             
             
+        
+            
+            
+            
+            
+                
+                
+            
+            
                 <li class="page-item ">
-                    <a class="page-link" href="/post/page/9/">9</a>
+                    <a class="page-link" href="/post/page/10/">10</a>
                 </li>
             
         
@@ -360,7 +366,7 @@ Introduction I am about to start collecting pilot data to see whether the number
         </li>
         
             <li class="page-item">
-                <a class="page-link" href="/post/page/9/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+                <a class="page-link" href="/post/page/10/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
             </li>
         
     </ul>
@@ -385,19 +391,19 @@ Introduction I am about to start collecting pilot data to see whether the number
         </li>
         
         <li>
-            <a href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+            <a href="/2018/04/3d-location-recall-task-in-vr/">3D location recall task in VR</a>
         </li>
         
         <li>
-            <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
+            <a href="/2018/03/general-update-and-plan-for-the-future/">General update and plan for the future</a>
         </li>
         
         <li>
-            <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
+            <a href="/2018/03/mixed-linear-models/">Mixed linear models</a>
         </li>
         
         <li>
-            <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
+            <a href="/2018/02/final-design-of-schemavr1/">Final design of schemaVR1</a>
         </li>
         
     </ol>
@@ -434,9 +440,17 @@ Introduction I am about to start collecting pilot data to see whether the number
             
             <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
             
+            <a class="badge badge-primary" href="/tags/ideas-and-plans">ideas-and-plans</a>
+            
             <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
             
+            <a class="badge badge-primary" href="/tags/lme4/lmertest">lme4/lmertest</a>
+            
             <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/meta">meta</a>
+            
+            <a class="badge badge-primary" href="/tags/mixed-linear-models">mixed-linear-models</a>
             
             <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
             
