@@ -6,20 +6,10 @@
     <description>Recent content in Schemavr on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jaquent.github.io/tags/schemavr/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>3D location recall task in VR</title>
-      <link>https://jaquent.github.io/2018/04/3d-location-recall-task-in-vr/</link>
-      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/2018/04/3d-location-recall-task-in-vr/</guid>
-      <description>As noted in the previous post, I want to create a 3D location recall task. I want that people are able to pick up objects from the floor and place them at the locations at which they think the objects were during encoding.
-I found a good YouTube tutorial (see here) and adapted the respective script (see here), which needs to be added to the wand controllers to work. My version of the script will be uploaded later when it finished.</description>
-    </item>
     
     <item>
       <title>Mixed linear models</title>
@@ -28,6 +18,16 @@ I found a good YouTube tutorial (see here) and adapted the respective script (se
       
       <guid>https://jaquent.github.io/2018/03/mixed-linear-models/</guid>
       <description>Preface This work documents my attempt to understand the model structure of mixed linear models or multilevel models. I adapted a formula that I found on Wikipedia and work myself through the different models and test whether I am able to retrieve the different parameters with lmerTest. Bodo Winter&amp;rsquo;s tutorial on the lme was very useful for this. The main motivation for doing all this is to use basically model 5 in my analysis of my first experiment.</description>
+    </item>
+    
+    <item>
+      <title>3D location recall task in VR</title>
+      <link>https://jaquent.github.io/2018/02/3d-location-recall-task-in-vr/</link>
+      <pubDate>Mon, 19 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/02/3d-location-recall-task-in-vr/</guid>
+      <description>As noted in the previous post, I want to create a 3D location recall task. I want that people are able to pick up objects from the floor and place them at the locations at which they think the objects were during encoding.
+I found a good YouTube tutorial (see here) and adapted the respective script (see here), which needs to be added to the wand controllers to work. My version of the script will be uploaded later when it finished.</description>
     </item>
     
     <item>

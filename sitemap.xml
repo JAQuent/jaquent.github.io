@@ -8,11 +8,6 @@
   </url>
   
   <url>
-    <loc>https://jaquent.github.io/2018/04/3d-location-recall-task-in-vr/</loc>
-    <lastmod>2018-04-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jaquent.github.io/2018/03/general-update-and-plan-for-the-future/</loc>
     <lastmod>2018-03-22T00:00:00+00:00</lastmod>
   </url>
@@ -20,6 +15,11 @@
   <url>
     <loc>https://jaquent.github.io/2018/03/mixed-linear-models/</loc>
     <lastmod>2018-03-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/2018/02/3d-location-recall-task-in-vr/</loc>
+    <lastmod>2018-02-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -289,7 +289,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/research-design/</loc>
-    <lastmod>2018-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -307,7 +307,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/schemavr/</loc>
-    <lastmod>2018-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -330,7 +330,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/unity3d/</loc>
-    <lastmod>2018-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
