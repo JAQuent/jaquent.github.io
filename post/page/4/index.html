@@ -9,7 +9,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jaquent.github.io/post/" />
-<meta property="og:updated_time" content="2018-01-19T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2018-02-07T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
@@ -87,14 +87,14 @@
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a>
+            <a class="text-dark" href="/2018/02/variable-naming/">Variable naming</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Jan 19, 2018
+        Feb 7, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -105,33 +105,24 @@
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/recollection">recollection</a>
-    
-        <a class="badge badge-primary" href="/tags/recognition-memory">recognition memory</a>
-    
-        <a class="badge badge-primary" href="/tags/memory">memory</a>
-    
-        <a class="badge badge-primary" href="/tags/research-design">research design</a>
-    
-        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+        <a class="badge badge-primary" href="/tags/meta">meta</a>
     
 </div>
 
         
 <div class="blog-post-categories text-secondary">
     <strong>Categories:</strong>
-    
-        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
     
         <a class="badge badge-primary" href="/categories/general">general</a>
     
 </div>
 
     </header>
-    This entry contains thoughts and observations for the last couple of days because I was stuck with a problem and didn’t have a lot say. The problem was that I hadn&rsquo;t controlled the number of times a location can serve as a foil when I had picked the set of object/locations pairs. This is indeed problematic because some locations were used four times. If you know which object was at a specific location, it isn’t really a foil anymore influencing subsequent trials.
+    Disclaimer: This document is out of date and will be replaced by a thourough convention of naming files and variables.
+I recently realised that I am sometimes quite inconsistent when it comes to naming variables. I decided to stipulate a variable naming convention that I can stick to. This convention should be useable in the three major languages I use (R, Matlab, C#). That means I can’t for instance use dots within a name because it would only work in R.
     
     <p></p>
-    <a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Read More →</a>
+    <a href="/2018/02/variable-naming/">Read More →</a>
     
 </article>
 
@@ -144,14 +135,14 @@
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a>
+            <a class="text-dark" href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Jan 15, 2018
+        Jan 30, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -163,6 +154,8 @@
     <strong>Tags:</strong>
     
         <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+        <a class="badge badge-primary" href="/tags/data-check">data check</a>
     
         <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
     
@@ -177,11 +170,11 @@
 </div>
 
     </header>
-    Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
-Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &lt;-function(x, sign = '='){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.
+    Comment For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found here). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.
+Introduction I am about to start collecting pilot data to see whether the number of objects etc.
     
     <p></p>
-    <a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Read More →</a>
+    <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Read More →</a>
     
 </article>
 
@@ -194,14 +187,14 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
         <article class="blog-post">
     <header>
         <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a>
+            <a class="text-dark" href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
         </h2>
         
 
 
 <div class="blog-post-date text-secondary">
     
-        Jan 12, 2018
+        Jan 25, 2018
     
     
         by <span rel="author">Alex Quent</span>
@@ -212,9 +205,9 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
 <div class="blog-post-tags text-secondary">
     <strong>Tags:</strong>
     
-        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
-    
         <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
     
 </div>
 
@@ -227,11 +220,11 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
 </div>
 
     </header>
-    Introduction The aim is to select a certain number (20) of combinations of objects and locations that cover the whole range of expectancy values. The previous analysis of this data set can be found here. The code for the task can be found here.
-Used libraries and functions library(ggplot2)  Loading the rating data I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants.
+    Introduction This is actually the second attempt to find a suitable set of object/location pairs (click here for the first attempt). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&rsquo;t work as a foil anymore.
+Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets.
     
     <p></p>
-    <a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Read More →</a>
+    <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Read More →</a>
     
 </article>
 
@@ -367,8 +360,17 @@ Used libraries and functions library(ggplot2)  Loading the rating data I start w
                 
             
             
+        
+            
+            
+            
+            
+                
+                
+            
+            
                 <li class="page-item ">
-                    <a class="page-link" href="/post/page/10/">10</a>
+                    <a class="page-link" href="/post/page/11/">11</a>
                 </li>
             
         
@@ -377,7 +379,7 @@ Used libraries and functions library(ggplot2)  Loading the rating data I start w
         </li>
         
             <li class="page-item">
-                <a class="page-link" href="/post/page/10/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+                <a class="page-link" href="/post/page/11/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
             </li>
         
     </ul>
@@ -402,19 +404,19 @@ Used libraries and functions library(ggplot2)  Loading the rating data I start w
         </li>
         
         <li>
+            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
+        </li>
+        
+        <li>
+            <a href="/2018/04/interim-results-of-schemvr1/">Interim results of schemVR1</a>
+        </li>
+        
+        <li>
+            <a href="/2018/04/interim-results-and-future-plans/">Interim results and future plans</a>
+        </li>
+        
+        <li>
             <a href="/2018/03/general-update-and-plan-for-the-future/">General update and plan for the future</a>
-        </li>
-        
-        <li>
-            <a href="/2018/03/mixed-linear-models/">Mixed linear models</a>
-        </li>
-        
-        <li>
-            <a href="/2018/02/3d-location-recall-task-in-vr/">3D location recall task in VR</a>
-        </li>
-        
-        <li>
-            <a href="/2018/02/final-design-of-schemavr1/">Final design of schemaVR1</a>
         </li>
         
     </ol>
@@ -484,6 +486,8 @@ Used libraries and functions library(ggplot2)  Loading the rating data I start w
             <a class="badge badge-primary" href="/tags/schemavr">schemavr</a>
             
             <a class="badge badge-primary" href="/tags/schemavr1">schemavr1</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr2">schemavr2</a>
             
             <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
             

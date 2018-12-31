@@ -8,6 +8,21 @@
   </url>
   
   <url>
+    <loc>https://jaquent.github.io/2018/05/end-of-schemavr1-and-start-of-schemavr2/</loc>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/2018/04/interim-results-of-schemvr1/</loc>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/2018/04/interim-results-and-future-plans/</loc>
+    <lastmod>2018-04-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jaquent.github.io/2018/03/general-update-and-plan-for-the-future/</loc>
     <lastmod>2018-03-22T00:00:00+00:00</lastmod>
   </url>
@@ -181,7 +196,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/familiarity/</loc>
-    <lastmod>2017-11-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -199,13 +214,13 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/hippocampus/</loc>
-    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://jaquent.github.io/tags/ideas-and-plans/</loc>
-    <lastmod>2018-03-22T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -229,7 +244,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/memory/</loc>
-    <lastmod>2018-01-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -247,7 +262,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/mpfc/</loc>
-    <lastmod>2017-10-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -277,19 +292,19 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/recognition-memory/</loc>
-    <lastmod>2018-01-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://jaquent.github.io/tags/recollection/</loc>
-    <lastmod>2018-01-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://jaquent.github.io/tags/research-design/</loc>
-    <lastmod>2018-02-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -301,7 +316,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/schema/</loc>
-    <lastmod>2017-10-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -313,7 +328,13 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/schemavr1/</loc>
-    <lastmod>2018-02-14T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/tags/schemavr2/</loc>
+    <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

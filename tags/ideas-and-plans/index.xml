@@ -6,10 +6,19 @@
     <description>Recent content in Ideas and Plans on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jaquent.github.io/tags/ideas-and-plans/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Interim results and future plans</title>
+      <link>https://jaquent.github.io/2018/04/interim-results-and-future-plans/</link>
+      <pubDate>Thu, 12 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/04/interim-results-and-future-plans/</guid>
+      <description>I am currently caught up with collecting data for my first experiment, which I will henceforth call schemaVR1, working on my first year report and analysing the interim results. I have collected data from eight participant so far and already got number of significant results. This is quite impressive considering that I also have only twenty stimuli/trials. I will upload the pre-processing script alongside a script analysing the interim results in the next days in a separate GitHub repository, where I will provide more details, but a very robust, and already significant, finding is that the locations of unexpected objects are recalled more often than that of expected objects.</description>
+    </item>
     
     <item>
       <title>General update and plan for the future</title>

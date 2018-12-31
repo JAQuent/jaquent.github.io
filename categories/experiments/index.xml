@@ -21,6 +21,35 @@
     </item>
     
     <item>
+      <title> End of schemaVR1 and start of schemaVR2</title>
+      <link>https://jaquent.github.io/2018/05/end-of-schemavr1-and-start-of-schemavr2/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/05/end-of-schemavr1-and-start-of-schemavr2/</guid>
+      <description>Today, I finished the data collection for schemaVR1. I collected 17 instead of 16 participants because I wanted to show the experiment to someone who then agreed to formally take part in this experiment.
+The two major the results of this experiment are that the locations of objects that are generally unexpected in a kitchen are remembered better (measured by 3D location recall and 3AFC location recognition) than the locations of objects that are expected in a kitchen.</description>
+    </item>
+    
+    <item>
+      <title>Interim results of schemVR1</title>
+      <link>https://jaquent.github.io/2018/04/interim-results-of-schemvr1/</link>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/04/interim-results-of-schemvr1/</guid>
+      <description>Introduction The current data collection is part of a broader attempt to pilot the design and to refine my hypotheses. The experiment itself is referred to as schemaVR1. The analyses that are pre-planned and post-hoc are clearly labelled.
+This script was created to show the interim results. In order to be transparent to which extent I analysed the data before the conclusion of the data collection, I uploaded this version.</description>
+    </item>
+    
+    <item>
+      <title>Interim results and future plans</title>
+      <link>https://jaquent.github.io/2018/04/interim-results-and-future-plans/</link>
+      <pubDate>Thu, 12 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/04/interim-results-and-future-plans/</guid>
+      <description>I am currently caught up with collecting data for my first experiment, which I will henceforth call schemaVR1, working on my first year report and analysing the interim results. I have collected data from eight participant so far and already got number of significant results. This is quite impressive considering that I also have only twenty stimuli/trials. I will upload the pre-processing script alongside a script analysing the interim results in the next days in a separate GitHub repository, where I will provide more details, but a very robust, and already significant, finding is that the locations of unexpected objects are recalled more often than that of expected objects.</description>
+    </item>
+    
+    <item>
       <title>3D location recall task in VR</title>
       <link>https://jaquent.github.io/2018/02/3d-location-recall-task-in-vr/</link>
       <pubDate>Mon, 19 Feb 2018 00:00:00 +0000</pubDate>

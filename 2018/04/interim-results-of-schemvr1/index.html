@@ -1,0 +1,2850 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Interim results of schemVR1" />
+<meta property="og:description" content="Introduction The current data collection is part of a broader attempt to pilot the design and to refine my hypotheses. The experiment itself is referred to as schemaVR1. The analyses that are pre-planned and post-hoc are clearly labelled.
+This script was created to show the interim results. In order to be transparent to which extent I analysed the data before the conclusion of the data collection, I uploaded this version." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2018/04/interim-results-of-schemvr1/" /><meta property="article:published_time" content="2018-04-24T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-04-24T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Interim results of schemVR1"/>
+<meta name="twitter:description" content="Introduction The current data collection is part of a broader attempt to pilot the design and to refine my hypotheses. The experiment itself is referred to as schemaVR1. The analyses that are pre-planned and post-hoc are clearly labelled.
+This script was created to show the interim results. In order to be transparent to which extent I analysed the data before the conclusion of the data collection, I uploaded this version."/>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2018/04/interim-results-of-schemvr1/">
+
+    <title>
+      
+        Interim results of schemVR1 | Jörn Alexander Quent&#39;s notebook
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      <header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            Jörn Alexander Quent&#39;s notebook
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/">Home</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/about/">About</a>
+                    
+                </li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-8 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+        <a class="text-dark" href="/2018/04/interim-results-of-schemvr1/">Interim results of schemVR1</a>
+    </h2>
+    
+
+
+<div class="blog-post-date text-secondary">
+    
+        Apr 24, 2018
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+    
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+</div>
+
+    
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+    
+</div>
+
+    <hr>
+</header>
+<article class="blog-post">
+    
+
+<h2 id="introduction">Introduction</h2>
+
+<p>The current data collection is part of a broader attempt to pilot the design and to refine my hypotheses. The experiment itself is referred to as schemaVR1. The analyses that are pre-planned and post-hoc are clearly labelled.</p>
+
+<p>This script was created to show the interim results. In order to be transparent to which extent I analysed the data before the conclusion of the data collection, I uploaded this version. This especially important because I did not pre-register the study. The aim of this pilot study is to collect sixteen participants in total, which will hopefully be done by the end of the week.</p>
+
+<p>Personally, I will use this script to look at and check the results as soon as new data from participants is added to the dataset. This script covers only the presentation of results and the analyses. All pre-processing, concatenation and the actual updating of the dataset is done with this <a href="https://github.com/JAQuent/schemaVR1/blob/master/analysis/updateDataset.R">script</a>, which also contains a detailed legend explaining all variable names. All relevant files will be uploaded in due course to my GitHub repository <a href="https://github.com/JAQuent/schemaVR1">schemaVR1</a>. Currently, I am not testing any of the various statistical assumptions, which will be part of the thorough data analysis as soon as I have finished data collection.</p>
+
+<p>This version is commented and already tries to the discuss the findings because there already a lot of significant effects. However this by no means anyhting like a registered report or pre-print.</p>
+
+<h3 id="procedure">Procedure</h3>
+
+<p>If any one is actually interested, I copied the procedure section from my the draft of my first year report/proposal:</p>
+
+<blockquote>
+<p>After testing a couple of participants, it became apparent that I need to add a familiarisation phase because the experience of immersive VR was as a new experience overwhelming. Therefore the participants had two minutes to get used to the feeling of being in a virtual world by being in the same environment that was used to leanr how to pick up objects (see below).</p>
+
+<p>The encoding phase of the experiment will start with 45 sec in long exposure to a virtual room of 5.15 virtual meter (vm) by 4.4 vm (height 2.58 vm, which was designed to be a kitchen . A vm corresponds to one meter in the real word. Twenty objects are scattered around at twenty discrete locations so called spawn points. The same object will appear at the same location for all participants, but we collected expectancy values for all 400 combinations. Participants will freely walk around in the virtual room. They will be told that to memorise all moveable objects and their locations. To ensure that, participants will be instructed to count the objects. Furthermore, they are told that they need to make sure to look at the floor and in the corners of the room or otherwise they will miss objects. After the time elapsed, the screen turns black.</p>
+
+<p>The next task serves to eliminate active rehearsal serving the same purpose than the reaction time task in @Lew2016, but also as a practice to pick up object in virtual reality. For that, the participants will stand on a virtual square plane surrounded by an infinite horizon. There are four big cubes (edge length 1 vm) in red, blue, green and yellow standing on the floor and four small cubes (edge length 0.5 vm) in the same colours. The experimenter will give the HTC Vive wand controller to the participants. These will be instructed to pick up the floating small cubes by inserting the controller into the object and continously pressing the trigger button, which attaches the object to the controller. The task is to place the small cubes on the big cubes of the same colour. To do this, the participants need to hold the object above big cube and release the trigger button so that the cube can fall down in the right position.</p>
+
+<p>When this is finished, the kitchen will be loaded again and the 3D location recall task will begin. A trial (total number twenty) begins by the instantiation of an object at fixed location in the room, which is the same for all twenty objects. Like the small cubes, the objects are floating above the floor. This was done so that the participants do not have to bend to pick up an object. The participants will be instructed to pick the object up and place it at the location where the object was initially during encoding. The participant will be instructed to tell the experimenter when the final placement was made so that this person can log the response. Only the participant cannot remember the object itself, they are to indicated that they are guessing and the trial is marked as a no memory trial. The participant will be aware that a trial can be restarted with the object is retrievably lost for instance because it is stuck in another object in the VE, which is possible. The order of objects is pseudo-random. The following measures will be saved: placement coordinates (x, y, z), time from start of trial to the time the object is picked up, the time to place the object once it is picked up, the number of attempts to place the object and whether the response was guess (no memory trial) or a true answer. Once each of the twenty objects have been placed, the participants will be instructed to take off the VR goggles and sit on the chair in front of the computer in the same room to start the 3AFC location task.</p>
+
+<p>On each trial in this task, the participant will be presented with three pictures showing the same object in three different locations of which the participant has to choose the correct one by pressing respective number on the keyboard, which will be displayed under each picture. After this, the participant will be asked to indicate their confidence for this decision on a 3-point scale (1 = Did not see object, 2 = Guess the object was there, 3 = Know the object was there) by pressing the corresponding key. The first option should only be used when the participant does not remember seeing this object.</p>
+
+<p>As soon as this task has been completed, participants&rsquo; task will be asked to rate how likely it is that they would see the specific objects at specific locations in the kitchen they saw earlier. A generally unexpected object may be more or less expected depending on the location. After rating the twenty objects at the three locations, the partiicpant will be asked to rate the general expectancy of those objects anywhere in a kitchen. The object/location ratings by loading screen. The scale ranges from unexpected (-100) to expected (100). Move the mouse to move the slider across the scale and press the left mouse button to make your response. Press the spacebar to start.</p>
+</blockquote>
+
+<h2 id="preliminary-stuff">Preliminary stuff</h2>
+
+<h3 id="libraries">Libraries</h3>
+
+<pre><code class="language-r">library(plyr)
+library(ggplot2)
+library(lmerTest)
+library(gridExtra)
+library(grid)
+library(knitr)
+</code></pre>
+
+<h3 id="data">Data</h3>
+
+<pre><code class="language-r"># Loading data
+load(&quot;U:/Projects/schemaVR/schemaVR1/data/mergedData/exp1Data.RData&quot;)
+
+# Adding the normative object/location rating for each target and foil 1 &amp; 2
+combData$objLocTargetNorm &lt;- 99
+combData$objLocFoil1Norm  &lt;- 99
+combData$objLocFoil2Norm  &lt;- 99
+for(i in 1:dim(combData)[1]){
+  combData$objLocTargetNorm[i] &lt;- combData[i, paste(&quot;loc&quot;, combData$targetLocation[i], sep = &quot;&quot;)]
+  combData$objLocFoil1Norm[i]  &lt;- combData[i, paste(&quot;loc&quot;, combData$foil1Location[i], sep = &quot;&quot;)]
+  combData$objLocFoil2Norm[i]  &lt;- combData[i, paste(&quot;loc&quot;, combData$foil2Location[i], sep = &quot;&quot;)]
+}
+</code></pre>
+
+<h3 id="functions">Functions</h3>
+
+<pre><code class="language-r">pValue &lt;-function(x, sign = '='){
+  # To report a p-value in text.
+  if (inherits(x, &quot;lm&quot;)){
+    s &lt;- summary.lm(x)
+    x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.tail = FALSE)
+    if(x &gt; 1){
+      stop(&quot;There is no p-value greater than 1&quot;)
+    } else if(x &lt; 0.001){
+      x.converted &lt;- '&lt; .001'
+    } else{
+      x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
+    } 
+  } else {
+    if(x &gt; 1){
+      stop(&quot;There is no p-value greater than 1&quot;)
+    } else if(x &lt; 0.001){
+      x.converted &lt;- '&lt; .001'
+    } else{
+      x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
+    } 
+  }
+  return(x.converted)
+}
+
+rValue &lt;-function(x){
+  # To report a correlation coeffiecient in text
+  if (inherits(x, &quot;lm&quot;)){
+    r.squared &lt;- summary(x)$r.squared
+    x.converted &lt;- paste('=',substr(as.character(round(r.squared, 3)), 2,5)) 
+  } else {
+    if (x &lt; 0){
+      x.converted &lt;- paste('= -',substr(as.character(abs(round(x, 3))), 2,5), sep = '') 
+    } else {
+      x.converted &lt;- paste('=',substr(as.character(abs(round(x, 3))), 2,5)) 
+    }
+  }
+  return(x.converted) 
+}
+
+sigStars &lt;- function(x){
+  # Adding stars to indicate significance
+  stars &lt;- rep(&quot;&quot;, length(x))
+  stars[x &lt; 0.1   &amp; x &gt; 0.05]   &lt;- '.' # trend
+  stars[x &lt; 0.05  &amp; x &gt; 0.01]   &lt;- '*'
+  stars[x &lt; 0.01  &amp; x &gt; 0.001]  &lt;- '**'
+  stars[x &lt; 0.001 &amp; x &gt; 0.0001] &lt;- '***'
+  return(stars)
+}
+
+createResultTable &lt;- function(x){
+  # Creating a nice looking table
+  if(inherits(x, &quot;glmerMod&quot;)){
+    # For glmer table
+    xTable        &lt;- summary(x)$coefficients
+    xTable        &lt;- data.frame(xTable)
+    xTable[, 1]   &lt;- round(xTable[, 1], 2)
+    xTable[, 2]   &lt;- round(xTable[, 2], 2)
+    xTable[, 3]   &lt;- round(xTable[, 3], 2)
+    xTable[, 4]   &lt;- round(xTable[, 4], 4)
+    xTable        &lt;- cbind(xTable, sigStars(xTable[, 4]))
+    names(xTable) &lt;- c('Estimate', 'SE', 'Z', 'P', 'Sig')
+  } else if(inherits(x, 'merModLmerTest')){
+    xTable        &lt;- summary(x)$coefficients
+    xTable        &lt;- data.frame(xTable)
+    xTable[, 1]   &lt;- round(xTable[, 1], 2)
+    xTable[, 2]   &lt;- round(xTable[, 2], 2)
+    xTable[, 3]   &lt;- round(xTable[, 3], 2)
+    xTable[, 4]   &lt;- round(xTable[, 4], 2)
+    xTable[, 5]   &lt;- round(xTable[, 5], 4)
+    xTable        &lt;- cbind(xTable, sigStars(xTable[, 5]))
+    names(xTable) &lt;- c('Estimate', 'SE', 'DF', 'T', 'P', 'Sig')
+  } else if(inherits(x, 'anova')){
+    if(attributes(x)$heading == &quot;Analysis of Variance Table of type III  with  Satterthwaite \napproximation for degrees of freedom&quot;){
+      # Only ANOVA on lmerTest models with Satterthwaite approximation
+      xTable        &lt;- data.frame(x)
+      xTable[, 1]   &lt;- round(xTable[, 1], 2)
+      xTable[, 2]   &lt;- round(xTable[, 2], 2)
+      xTable[, 3]   &lt;- round(xTable[, 3], 2)
+      xTable[, 4]   &lt;- round(xTable[, 4], 2)
+      xTable[, 5]   &lt;- round(xTable[, 5], 2)
+      xTable[, 6]   &lt;- round(xTable[, 6], 4)
+      xTable        &lt;- cbind(xTable, sigStars(xTable[, 6]))
+      names(xTable) &lt;- c('SS', 'MSS', 'nDF', 'dDF', 'F', 'P', 'Sig') 
+    } else {
+      xTable &lt;- data.frame('######', 'No known model', '######')
+      names(xTable) &lt;- c('%%%', '***', '&amp;&amp;&amp;')
+    }
+  } else {
+    xTable &lt;- data.frame('######', 'No known model', '######')
+    names(xTable) &lt;- c('%%%', '***', '&amp;&amp;&amp;')
+  }
+  return(xTable)
+}
+</code></pre>
+
+<h2 id="population-demographics">Population &amp; demographics</h2>
+
+<pre><code class="language-r"># Aggregating to get summary of demographics
+aggDemo   &lt;- ddply(combData, c('subNum', 'gender'), summarise, age = mean(age))
+aggGender &lt;- table(aggDemo$gender)
+</code></pre>
+
+<p>Currently, there are 17 participants in this dataset, of which 9 are female and 8 are male. The mean age of the participants is 26.59 (SD = 3.52) years. Due a handling error, one recall trial was not recorded for one participant. For the same participant, there is also no information available whether the participant actually saw the object (i.e. no memory trial). Nevertheless, I included this person in this analysis.</p>
+
+<h2 id="overall-performance">Overall performance</h2>
+
+<h3 id="analysis-of-no-memory-trials-and-confidence-decisions">Analysis of no memory trials and confidence decisions</h3>
+
+<pre><code class="language-r"># Legend: 1 = Did not see object| 2 = Guess the object was there | 3 = Know the object was there
+table1 &lt;- table(combData$resCon)
+
+# Looking at confidence response for each participant
+#table2 &lt;- ddply(combData, c('subNum'), summarise, noMemory = sum(recallNoMemory, na.rm = TRUE), notSeen = table(resCon)[1], guessed = table(resCon)[2], knew = table(resCon)[3])
+#kable(table2)
+# This information is not available online protect to protect anonymity.
+
+# Looking at no memory trials and confidence responses for each object
+table3 &lt;- ddply(combData, c('objName', 'objNum'), summarise, 
+                noMemory = sum(recallNoMemory, na.rm = TRUE), 
+                notSeen  = table(resCon)[1], 
+                guessed  = table(resCon)[2], 
+                knew     = table(resCon)[3])
+
+result0 &lt;- cor.test(table3$noMemory, table3$notSeen, method = 'pearson')
+kable(table3)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">objName</th>
+<th align="right">objNum</th>
+<th align="right">noMemory</th>
+<th align="right">notSeen</th>
+<th align="right">guessed</th>
+<th align="right">knew</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">bowl of fruits</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">6</td>
+</tr>
+
+<tr>
+<td align="left">bread</td>
+<td align="right">9</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">6</td>
+<td align="right">9</td>
+</tr>
+
+<tr>
+<td align="left">calendar</td>
+<td align="right">19</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">12</td>
+</tr>
+
+<tr>
+<td align="left">dishes</td>
+<td align="right">12</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">8</td>
+</tr>
+
+<tr>
+<td align="left">fan</td>
+<td align="right">20</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">7</td>
+</tr>
+
+<tr>
+<td align="left">glass jug</td>
+<td align="right">10</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">9</td>
+</tr>
+
+<tr>
+<td align="left">hat</td>
+<td align="right">17</td>
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">9</td>
+</tr>
+
+<tr>
+<td align="left">helmet</td>
+<td align="right">18</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">7</td>
+</tr>
+
+<tr>
+<td align="left">kitchen roll</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">10</td>
+<td align="right">5</td>
+</tr>
+
+<tr>
+<td align="left">knife</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">0</td>
+</tr>
+
+<tr>
+<td align="left">microwave</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">6</td>
+</tr>
+
+<tr>
+<td align="left">mixer</td>
+<td align="right">8</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">7</td>
+<td align="right">8</td>
+</tr>
+
+<tr>
+<td align="left">mug</td>
+<td align="right">11</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+
+<tr>
+<td align="left">pile of books</td>
+<td align="right">15</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">9</td>
+</tr>
+
+<tr>
+<td align="left">saucepan</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">11</td>
+<td align="right">4</td>
+</tr>
+
+<tr>
+<td align="left">tea pot</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">6</td>
+</tr>
+
+<tr>
+<td align="left">toaster</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">8</td>
+<td align="right">6</td>
+</tr>
+
+<tr>
+<td align="left">towels</td>
+<td align="right">13</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">8</td>
+<td align="right">6</td>
+</tr>
+
+<tr>
+<td align="left">toy</td>
+<td align="right">14</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">10</td>
+</tr>
+
+<tr>
+<td align="left">umbrella</td>
+<td align="right">16</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">8</td>
+</tr>
+</tbody>
+</table>
+
+<p>The number of trials during recall on which participants indicated that they did not see the object was 49 (15 %). Note that the instructions for one participant were different and therefore the number is not completely accurate. Furthermore, there were 53 &lsquo;Did not see object&rsquo;, 148 &lsquo;Guess the object was there&rsquo; and 148 &lsquo;Know the object was there&rsquo; responses in total. Note that one participant was instructed to report a no memory trial if this person did not see the object or absolutely did not know where to place it. All other participants were instructed to report a no memory trial only if there is no memory of the object itself. Additionally, two participants did not receive the general instruction to begin the encoding phase by broadly looking around in the room to make sure they do not run out of time because they focussed on individual objects. This could explain why their number of no memory trials was quite high. Other than that there seem to be no irregularities except that no memory trials do not occur as often as 3AFC trials, on which the participant indicated that they &lsquo;Did not see the object&rsquo;. The corresponding pearson correlation coefficients is <em>r</em> = .599, <em>p</em> = .005. The reason for discordance is not immediately apparent.</p>
+
+<h3 id="memory-performance">Memory performance</h3>
+
+<pre><code class="language-r"># Creating subsets for analysing recall and 3AFC, for which participants have item memory and then
+# aggregating across participants to analyse overall memory performance
+recallCombDataSub &lt;- subset(combData, combData$recallNoMemory == 0 | is.na(combData$recallNoMemory))
+agg1              &lt;- ddply(recallCombDataSub, 
+                           c('subNum'), 
+                           summarise, 
+                           accRecall = mean(accRecall, na.rm = TRUE))
+
+afcCombDataSub    &lt;- subset(combData, combData$resCon != 1)
+agg2              &lt;- ddply(afcCombDataSub, 
+                           c('subNum'), 
+                           summarise, 
+                           accAFC = mean(accAFC))
+
+
+plot1 &lt;- ggplot(agg1, aes(x = &quot;accRecall&quot; , y = accRecall)) + 
+                geom_boxplot(alpha = 0.5, width = 0.5) +
+                geom_dotplot(binaxis='y', stackdir='center') +
+                labs(y = 'Recall rate', 
+                     x = ' ', 
+                     title = 'A) Recall performance') + 
+                coord_cartesian(ylim = c(0, 1), xlim = c(0.9, 1.1)) + 
+                theme(plot.margin = margin(10, 10, 10, 10), 
+                      axis.title.x=element_blank(),
+                      axis.text.x=element_blank(),
+                      axis.ticks.x=element_blank())
+
+plot2 &lt;- ggplot(agg2, aes(x = &quot;accAFC&quot; , y = accAFC)) + 
+                geom_boxplot(alpha = 0.5, width = 0.5) +
+                geom_dotplot(binaxis='y', stackdir='center') + 
+                geom_hline(yintercept = 1/3) + 
+                annotate('text', x = 0.95, y = (1/3) - 0.03, label = 'Chance (1/3)') + 
+                labs(y = 'Accuracy (3AFC)', 
+                     x = ' ', 
+                     title = 'B) 3AFC performance') + 
+                coord_cartesian(ylim = c(0, 1), xlim = c(0.9, 1.1)) + 
+                theme(plot.margin = margin(10, 10, 10, 10), 
+                      axis.title.x=element_blank(),
+                      axis.text.x=element_blank(),
+                      axis.ticks.x=element_blank())
+
+# Arrange in grid and plot
+grid.arrange(plot1, plot2, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-6-1.png" alt="" /></p>
+
+<h4 id="recall-accuracy">Recall accuracy</h4>
+
+<pre><code class="language-r">result1 &lt;- t.test(agg1$accRecall)
+</code></pre>
+
+<p>Accuracy of recall was calculated by finding the shortest Euclidean distance and checking whether the location that has the shortest distance is the target location. The mean recall rate was 0.44 (SD = 0.2), which is significantly above zero, <em>t</em>(16) = 9.2, <em>p</em> &lt; .001. In contrast to the 3AFC task, it is not straightforward to calculate a chance niveau for the recall task. Therefore I used zero.</p>
+
+<h4 id="recall-bias">Recall bias</h4>
+
+<pre><code class="language-r"># Finding the expectancy of the closest location for an object
+combData$closestObjLocNorm &lt;- NA
+# Add normative location rating
+for(i in 1:dim(combData)[1]){
+  try(combData$closestObjLocNorm[i] &lt;- combData[i, paste(&quot;loc&quot;, combData$closestLoc[i], sep = &quot;&quot;)])
+  # It was necessary to use try() because there are NA values, which cannot be used to index. 
+}
+
+recallBiasData &lt;- ddply(subset(combData, recallNoMemory == 0), 
+                        c('subNum', 'accRecall'), 
+                        summarise, 
+                        closestObjLocNorm = mean(closestObjLocNorm, na.rm = TRUE))
+
+recallBias     &lt;- ddply(recallBiasData, 
+                        c('accRecall'), 
+                        summarise, 
+                        mean = mean(closestObjLocNorm, na.rm = TRUE), 
+                        sd = sd(closestObjLocNorm, na.rm = TRUE))
+</code></pre>
+
+<p>One idea was that if participants did not remember the location for particular object, they would place it at an expected location because they are biased to these location during retrieval. However the current the mean normative object/location expectancy is lower for incorrectly placed objects, 41.36 (SD = 14.42), than for correctly placed objects, 2.83 (SD = 10.13). Therefore there is no evidence for a recall bias to more expected location.</p>
+
+<h4 id="3afc-accuracy">3AFC accuracy</h4>
+
+<pre><code class="language-r">result2 &lt;- t.test(agg2$accAFC - 1/3)
+</code></pre>
+
+<p>The mean 3AFC accuracy rate was 0.71 (SD = 0.15), which is significantly higher than 0.33, <em>t</em>(16) = 10.41, <em>p</em> &lt; .001.</p>
+
+<h3 id="relationship-between-recall-and-3afc-performance">Relationship between recall and 3AFC performance</h3>
+
+<pre><code class="language-r">plot3 &lt;- ggplot(data.frame(accRecall = agg1$accRecall, accAFC = agg2$accAFC), aes(x  = accRecall, y = accAFC)) +
+  geom_smooth(method = 'lm') + 
+  geom_point() + 
+  labs(y = '3AFC accuracy', 
+       x = 'Recall rate', 
+       title = 'Relationship between memory measures')
+
+result3 &lt;- cor.test(agg1$accRecall, agg2$accAFC)
+plot3
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-10-1.png" alt="" /> Performance in the recall task is significantly correlated with performance in the 3AFC task, <em>r</em> = .648, <em>p</em> = .005. This important because I was not completely sure whether the way I calculated recall accuracy is correct and sensitive enough to measure what I want to measure because the possible locationsare not, for instance, equidistant and moreover there are a some locations closely cluster in areas of the virtual kitchen.</p>
+
+<h2 id="analysing-expectancy">Analysing expectancy</h2>
+
+<pre><code class="language-r"># Aggregating over all objects without bothering whether the participants actually saw the objects. This however is done for the statistical analysis (see below). 
+objectAgg &lt;- ddply(combData, 
+                   c('objNum', 'objName'), 
+                   summarise, 
+                   generalRatingNorm  = mean(generalRatingNorm),
+                   generalRatingPost  = mean(generalRatingPost),
+                   afc                = mean(accAFC),
+                   targetRankPre      = mean(targetRankPre),
+                   objLocTargetRating = mean(objLocTargetRating),
+                   recall             = mean(accRecall, na.rm = TRUE), 
+                   objLocTargetNorm   = mean(objLocTargetNorm),
+                   euclideanDist      = mean(accRecall, na.rm = TRUE),
+                   answerTime         = mean(answerTime, na.rm = TRUE))
+
+# Displaying relationship between average object/location expectancy values from nomative and participant data.
+plot4 &lt;- ggplot(objectAgg, aes(x  = objLocTargetNorm, y = objLocTargetRating)) +
+                geom_smooth(method = 'lm') + 
+                geom_point() + 
+                labs(y = 'Participant data', 
+                     x = 'Normative data', 
+                     title = 'A) Object/location expectancy')
+
+# Displaying relationship between average general expectancy values from nomative and participant data.
+plot5 &lt;- ggplot(objectAgg, aes(x  = generalRatingNorm, y = generalRatingPost)) +
+                geom_smooth(method = 'lm') + 
+                geom_point() + 
+                labs(y = 'Participant data', 
+                     x = 'Normative data', 
+                     title = 'B) General expectancy')
+
+# Calculating the correlations  
+result4 &lt;- cor.test(objectAgg$objLocTargetNorm, objectAgg$objLocTargetRating)
+result5 &lt;- cor.test(objectAgg$generalRatingNorm, objectAgg$generalRatingPost)
+
+# Plot
+grid.arrange(plot4, plot5, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-11-1.png" alt="" /></p>
+
+<p>For object/location expectancy, the correlation between normative data and average participants ratings for objects at their encoding locations is not significant, <em>r</em> = .964, <em>p</em> &lt; .001, which is not completely surprising because the participants in the normative study rated a much higher number of stimuli and did not complete a memory test. On the other, the correlation for the general expectancy values for objects at their encoding locations is significant and very high, <em>r</em> = .97, <em>p</em> &lt; .001, which might be explained due to the fact that both groups of participants rated same number of objects in terms of their general expectancy.</p>
+
+<h2 id="analysing-effect-of-expectancy-on-memory">Analysing effect of expectancy on memory</h2>
+
+<p>Note that the subsequent plots are only illustrations of the models because they averaged data across objects, while all the statistical models are trial based and only trials go into the analyses, on which the participant did not indicated that they did not see the object in other words have item memory.</p>
+
+<p>As for my specific predictions, this is a quote from a draft of my first year report, where I specify my hypotheses:</p>
+
+<blockquote>
+<p>My main hypothesis is that there is an U-shape relationship between schema-expectancy and memory. However when recall is used as an assay to test memory, there is always the confound that participants might be biased to the more expected locations. In that respect, I predict to see that memory precision is enhanced for highly expected object/locations. However if the participants does not remember the location the participant is more likely to place the object close to an expected location (i.e. a spawn point) than to an unexpected location. In contrast, I predict a U-shaped relationship for performance in the 3AFC task (unexpected &gt; neutral &lt; expected) because the retrieval effects are reduced as all three options are chosen to have similar expectancy values.</p>
+</blockquote>
+
+<p>Concerning the models used in the experiments: my plan/idea was originally to include random intercepts and slopes for the objects and for the participants, but in simulations I had problems to actually retrieve the true parameters (<a href="https://jaquent.github.io/2018/03/mixed-linear-models/">see here</a>). Furthermore, my supervisor pointed out that adding random effects for the objects might take away the effect of their expectancy. Therefore, I, for now, decided to only include a random intercept for each participant. The quadratic term is included to look for the predicted U-shaped relationship. However of course, a significant quadratic term amount to a U-shaped relationship.</p>
+
+<p>As you will see, sometimes I get the exact opposite result of what I have expected (see e.g. model 10). One of the confound for these models is that all the objects which are expected in a kitchen are at the end of the scale in terms of their object/location expectancy, but all, by definition, highly expected in a kitchen in general, which seems to be associated with lower memory performance. Therefore, I <em>post-hoc</em> decided to add the corresponding other forms of expectancy to the model as a covariate. There will also be a second experiment, where objects that are highly expected in kitchen over the whole range of object/location expectancy. All the other models expect the ones predicting the time to place the objects were pre-planned. I looked at this variable because in a recent study using immersive VR from @Draschkow2017 an interesting relationship between &lsquo;scene grammar&rsquo; and object handling time was found.</p>
+
+<pre><code class="language-r"># Preparation
+# scaling for analysis
+combDataScaled                    &lt;- combData
+combDataScaled$objLocTargetRating &lt;- scale(combData$objLocTargetRating)
+combDataScaled$targetRankPre      &lt;- scale(combData$targetRankPre)
+combDataScaled$generalRatingNorm  &lt;- scale(combData$generalRatingNorm)
+combDataScaled$generalRatingPost  &lt;- scale(combData$generalRatingPost)
+combDataScaled$objLocTargetNorm   &lt;- scale(combDataScaled$objLocTargetNorm)
+
+# Adding kitchen relevance. Note that 12 objects were choosen because they are expected in a kitchen, while the other 8 object were not expected in a kitchen.
+objectAgg$expectedInKitchen                                  &lt;- 'low'
+objectAgg[which(objectAgg$objNum &lt; 13), 'expectedInKitchen'] &lt;- 'highly'
+</code></pre>
+
+<h3 id="3afc-models">3AFC models</h3>
+
+<pre><code class="language-r"># Plots
+# Participant object/location expectancy versus 3AFC
+plot6 &lt;- ggplot(objectAgg, aes(x = objLocTargetRating, y = afc)) + 
+                geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                geom_smooth() +  
+                labs(y = 'Mean accuracy (3AFC)', 
+                     x = &quot;Post-ratings expectancy&quot;, 
+                     title = 'Model 1: Object/location expectancy') +
+                coord_cartesian(ylim = c(0, 1.25), xlim = c(-100, 100), expand = TRUE) + 
+                theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = c(1.25, 0.8))
+
+plot7 &lt;- ggplot(objectAgg, aes(x = targetRankPre, y = afc)) + 
+                geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                geom_smooth() +  
+                labs(y = 'Mean accuracy (3AFC)', 
+                     x = &quot;Normative expectancy (ranked)&quot;, 
+                     title = 'Model 2: Object/location expectancy') + 
+                coord_cartesian(ylim = c(0, 1.25), xlim = c(0, 400), expand = TRUE) + 
+                theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot8 &lt;- ggplot(objectAgg, aes(x = objLocTargetNorm, y = afc)) + 
+                geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                geom_smooth() +  
+                labs(y = 'Mean accuracy (3AFC)', 
+                     x = &quot;Normative expectancy &quot;, 
+                     title = 'Model 3: Object/location expectancy') + 
+                coord_cartesian(ylim = c(0, 1.25), xlim = c(-100, 100), expand = TRUE) + 
+                theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot9 &lt;- ggplot(objectAgg, aes(x = generalRatingNorm, y = afc)) + 
+                geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                geom_smooth() +  
+                labs(y = 'Mean accuracy (3AFC)', 
+                     x = &quot;Normative expectancy&quot;, 
+                     title = 'Model 4: General expectancy') + 
+                coord_cartesian(ylim = c(0, 1.25), xlim = c(-100, 100), expand = TRUE) + 
+                theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+
+grid.arrange(plot6, plot7, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-13-1.png" alt="" /></p>
+
+<pre><code class="language-r">grid.arrange(plot8, plot9, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-13-2.png" alt="" /></p>
+
+<pre><code class="language-r"># Legend
+paste(as.character(objectAgg$objNum), &quot;=&quot;, objectAgg$objName)
+</code></pre>
+
+<pre><code>##  [1] &quot;1 = microwave&quot;      &quot;2 = kitchen roll&quot;   &quot;3 = saucepan&quot;      
+##  [4] &quot;4 = toaster&quot;        &quot;5 = bowl of fruits&quot; &quot;6 = tea pot&quot;       
+##  [7] &quot;7 = knife&quot;          &quot;8 = mixer&quot;          &quot;9 = bread&quot;         
+## [10] &quot;10 = glass jug&quot;     &quot;11 = mug&quot;           &quot;12 = dishes&quot;       
+## [13] &quot;13 = towels&quot;        &quot;14 = toy&quot;           &quot;15 = pile of books&quot;
+## [16] &quot;16 = umbrella&quot;      &quot;17 = hat&quot;           &quot;18 = helmet&quot;       
+## [19] &quot;19 = calendar&quot;      &quot;20 = fan&quot;
+</code></pre>
+
+<pre><code class="language-r"># Data
+subAFC    &lt;- subset(combDataScaled, combDataScaled$resCon != 1)
+
+# Models 
+# Participant object/location expectancy versus 3AFC
+model1 &lt;- glmer(accAFC ~  objLocTargetRating + I(objLocTargetRating*objLocTargetRating) + (1 | subNum), 
+                    data = subAFC, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+kable(createResultTable(model1))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">0.81</td>
+<td align="right">0.26</td>
+<td align="right">3.10</td>
+<td align="right">0.0019</td>
+<td align="left">**</td>
+</tr>
+
+<tr>
+<td>objLocTargetRating</td>
+<td align="right">-0.07</td>
+<td align="right">0.14</td>
+<td align="right">-0.48</td>
+<td align="right">0.6342</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>I(objLocTargetRating * objLocTargetRating)</td>
+<td align="right">0.14</td>
+<td align="right">0.18</td>
+<td align="right">0.78</td>
+<td align="right">0.4331</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative (ranked) object/location expectancy versus 3AFC
+model2 &lt;- glmer(accAFC ~  targetRankPre + I(targetRankPre*targetRankPre) + (1 | subNum), 
+                    data = subAFC, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model2))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">1.18</td>
+<td align="right">0.27</td>
+<td align="right">4.43</td>
+<td align="right">0.0000</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>targetRankPre</td>
+<td align="right">-0.32</td>
+<td align="right">0.14</td>
+<td align="right">-2.32</td>
+<td align="right">0.0202</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>I(targetRankPre * targetRankPre)</td>
+<td align="right">-0.21</td>
+<td align="right">0.18</td>
+<td align="right">-1.12</td>
+<td align="right">0.2630</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative object/location expectancy versus 3AFC
+model3 &lt;- glmer(accAFC ~  objLocTargetNorm + I(objLocTargetNorm*objLocTargetNorm) + (1 | subNum), 
+                    data = subAFC, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model3))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">1.08</td>
+<td align="right">0.26</td>
+<td align="right">4.10</td>
+<td align="right">0.0000</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>objLocTargetNorm</td>
+<td align="right">-0.35</td>
+<td align="right">0.15</td>
+<td align="right">-2.39</td>
+<td align="right">0.0168</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>I(objLocTargetNorm * objLocTargetNorm)</td>
+<td align="right">-0.10</td>
+<td align="right">0.18</td>
+<td align="right">-0.57</td>
+<td align="right">0.5714</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative general expectancy versus 3AFC
+model4 &lt;- glmer(accAFC ~  generalRatingNorm + I(generalRatingNorm*generalRatingNorm)  + (1 | subNum), 
+                    data = subAFC, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model4))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">1.21</td>
+<td align="right">0.29</td>
+<td align="right">4.24</td>
+<td align="right">0.0000</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingNorm</td>
+<td align="right">-0.58</td>
+<td align="right">0.22</td>
+<td align="right">-2.65</td>
+<td align="right">0.0080</td>
+<td align="left">**</td>
+</tr>
+
+<tr>
+<td>I(generalRatingNorm * generalRatingNorm)</td>
+<td align="right">-0.23</td>
+<td align="right">0.20</td>
+<td align="right">-1.12</td>
+<td align="right">0.2614</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="3afc-models-with-covariates">3AFC models with covariates</h4>
+
+<p>This is was decided post-hoc. They idea here was to adjust for the respective general or object/location expectancy. Another idea would be to control for answer time.</p>
+
+<pre><code class="language-r">model5 &lt;- glmer(accAFC ~  objLocTargetRating + 
+                     I(objLocTargetRating*objLocTargetRating) + 
+                     generalRatingPost +
+                     (1 | subNum), data = combDataScaled, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model5))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">0.53</td>
+<td align="right">0.23</td>
+<td align="right">2.29</td>
+<td align="right">0.0220</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>objLocTargetRating</td>
+<td align="right">0.08</td>
+<td align="right">0.13</td>
+<td align="right">0.60</td>
+<td align="right">0.5472</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>I(objLocTargetRating * objLocTargetRating)</td>
+<td align="right">0.26</td>
+<td align="right">0.17</td>
+<td align="right">1.51</td>
+<td align="right">0.1314</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingPost</td>
+<td align="right">-0.35</td>
+<td align="right">0.14</td>
+<td align="right">-2.56</td>
+<td align="right">0.0105</td>
+<td align="left">*</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">model6 &lt;- glmer(accAFC ~  targetRankPre + 
+                     I(targetRankPre*targetRankPre) + 
+                     generalRatingNorm +
+                     (1 | subNum), data = combDataScaled, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model6))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">0.49</td>
+<td align="right">0.26</td>
+<td align="right">1.88</td>
+<td align="right">0.0598</td>
+<td align="left">.</td>
+</tr>
+
+<tr>
+<td>targetRankPre</td>
+<td align="right">-0.09</td>
+<td align="right">0.12</td>
+<td align="right">-0.72</td>
+<td align="right">0.4729</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>I(targetRankPre * targetRankPre)</td>
+<td align="right">0.31</td>
+<td align="right">0.21</td>
+<td align="right">1.47</td>
+<td align="right">0.1424</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingNorm</td>
+<td align="right">-0.51</td>
+<td align="right">0.17</td>
+<td align="right">-3.00</td>
+<td align="right">0.0027</td>
+<td align="left">**</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">model7 &lt;- glmer(accAFC ~  objLocTargetNorm + 
+                     I(objLocTargetNorm*objLocTargetNorm) + 
+                     generalRatingNorm +
+                     (1 | subNum), data = combDataScaled, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model7))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">0.31</td>
+<td align="right">0.26</td>
+<td align="right">1.16</td>
+<td align="right">0.2444</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>objLocTargetNorm</td>
+<td align="right">-0.01</td>
+<td align="right">0.14</td>
+<td align="right">-0.05</td>
+<td align="right">0.9618</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>I(objLocTargetNorm * objLocTargetNorm)</td>
+<td align="right">0.51</td>
+<td align="right">0.22</td>
+<td align="right">2.34</td>
+<td align="right">0.0190</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>generalRatingNorm</td>
+<td align="right">-0.61</td>
+<td align="right">0.17</td>
+<td align="right">-3.55</td>
+<td align="right">0.0004</td>
+<td align="left">***</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">model8 &lt;- glmer(accAFC ~  generalRatingNorm + 
+                     I(generalRatingNorm*generalRatingNorm) + 
+                     objLocTargetNorm +
+                     (1 | subNum), data = combDataScaled, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model8))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">0.98</td>
+<td align="right">0.25</td>
+<td align="right">4.00</td>
+<td align="right">0.0001</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingNorm</td>
+<td align="right">-0.49</td>
+<td align="right">0.19</td>
+<td align="right">-2.57</td>
+<td align="right">0.0101</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>I(generalRatingNorm * generalRatingNorm)</td>
+<td align="right">-0.18</td>
+<td align="right">0.18</td>
+<td align="right">-1.02</td>
+<td align="right">0.3073</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>objLocTargetNorm</td>
+<td align="right">-0.16</td>
+<td align="right">0.12</td>
+<td align="right">-1.37</td>
+<td align="right">0.1697</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="3afc-interpretation">3AFC interpretation</h4>
+
+<p>The most robust result is that 3AFC performance is much higher for objects that are generally unexpected in a kitchen. All forms of general expectancy are negatively associated with 3AFC perfomance. Notably though in model 3, there is a trend for a U-shaped relationship.</p>
+
+<h3 id="recall-models">Recall models</h3>
+
+<p>The actual statistics are calculated only on trials, which were no no memory trials.</p>
+
+<pre><code class="language-r">plot10 &lt;- ggplot(objectAgg, aes(x = objLocTargetRating, y = recall)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) +  
+                 geom_smooth() +  
+                 labs(y = 'Mean accuracy (Recall)', 
+                      x = &quot;Post-ratings expectancy&quot;, 
+                      title = ' Model 9: Object/location expectancy')  + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = c(1.25, 0.8))
+
+plot11 &lt;- ggplot(objectAgg, aes(x = targetRankPre, y = recall)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Mean accuracy (Recall)', 
+                      x = &quot;Normative expectancy (ranked)&quot;, 
+                      title = 'Model 10: Object/location expectancy') + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(0, 400), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot12 &lt;- ggplot(objectAgg, aes(x = objLocTargetNorm, y = recall)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Mean accuracy (Recall)', 
+                      x = &quot;Normative expectancy&quot;, 
+                      title = 'Model 11: Object/location expectancy') + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot13 &lt;- ggplot(objectAgg, aes(x = generalRatingNorm, y = recall)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Mean accuracy (Recall)', 
+                      x = &quot;Normative expectancy&quot;, 
+                      title = 'Model 12: General expectancy') + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+
+plot14 &lt;- ggplot(objectAgg, aes(x = generalRatingPost, y = recall)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Mean accuracy (Recall)', 
+                      x = &quot;Post-ratings expectancy&quot;, 
+                      title = 'Model 13: General expectancy') + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+grid.arrange(plot10, plot11, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-16-1.png" alt="" /></p>
+
+<pre><code class="language-r">grid.arrange(plot12, plot13, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-16-2.png" alt="" /></p>
+
+<pre><code class="language-r">grid.arrange(plot14, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-16-3.png" alt="" /></p>
+
+<pre><code class="language-r"># Legend
+paste(as.character(objectAgg$objNum), &quot;=&quot;, objectAgg$objName)
+</code></pre>
+
+<pre><code>##  [1] &quot;1 = microwave&quot;      &quot;2 = kitchen roll&quot;   &quot;3 = saucepan&quot;      
+##  [4] &quot;4 = toaster&quot;        &quot;5 = bowl of fruits&quot; &quot;6 = tea pot&quot;       
+##  [7] &quot;7 = knife&quot;          &quot;8 = mixer&quot;          &quot;9 = bread&quot;         
+## [10] &quot;10 = glass jug&quot;     &quot;11 = mug&quot;           &quot;12 = dishes&quot;       
+## [13] &quot;13 = towels&quot;        &quot;14 = toy&quot;           &quot;15 = pile of books&quot;
+## [16] &quot;16 = umbrella&quot;      &quot;17 = hat&quot;           &quot;18 = helmet&quot;       
+## [19] &quot;19 = calendar&quot;      &quot;20 = fan&quot;
+</code></pre>
+
+<pre><code class="language-r"># Data
+subRecall &lt;- subset(combDataScaled, combDataScaled$recallNoMemory == 0)
+
+# Participant object/location expectancy versus recall
+model9 &lt;- glmer(accRecall ~ objLocTargetRating + 
+                      I(objLocTargetRating*objLocTargetRating) + 
+                      (1 | subNum), 
+                    data = subRecall, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model9))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-0.75</td>
+<td align="right">0.27</td>
+<td align="right">-2.79</td>
+<td align="right">0.0052</td>
+<td align="left">**</td>
+</tr>
+
+<tr>
+<td>objLocTargetRating</td>
+<td align="right">-0.02</td>
+<td align="right">0.13</td>
+<td align="right">-0.13</td>
+<td align="right">0.8935</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>I(objLocTargetRating * objLocTargetRating)</td>
+<td align="right">0.43</td>
+<td align="right">0.18</td>
+<td align="right">2.31</td>
+<td align="right">0.0206</td>
+<td align="left">*</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative (ranked) object/location expectancy versus recall
+model10 &lt;- glmer(accRecall ~  targetRankPre + 
+                       I(targetRankPre*targetRankPre) + 
+                       (1 | subNum), 
+                     data = subRecall, 
+                     family = binomial, 
+                     control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                     nAGQ = 1)
+
+kable(createResultTable(model10))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">0.04</td>
+<td align="right">0.27</td>
+<td align="right">0.15</td>
+<td align="right">0.8847</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>targetRankPre</td>
+<td align="right">-0.27</td>
+<td align="right">0.14</td>
+<td align="right">-2.01</td>
+<td align="right">0.0444</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>I(targetRankPre * targetRankPre)</td>
+<td align="right">-0.37</td>
+<td align="right">0.18</td>
+<td align="right">-2.02</td>
+<td align="right">0.0433</td>
+<td align="left">*</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative object/location expectancy versus recall
+model11 &lt;- glmer(accRecall ~  objLocTargetNorm + 
+                       I(objLocTargetNorm*objLocTargetNorm) + 
+                       (1 | subNum), 
+                     data = subRecall, 
+                     family = binomial, 
+                     control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                     nAGQ = 1)
+
+kable(createResultTable(model11))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-0.07</td>
+<td align="right">0.27</td>
+<td align="right">-0.26</td>
+<td align="right">0.7925</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>objLocTargetNorm</td>
+<td align="right">-0.30</td>
+<td align="right">0.14</td>
+<td align="right">-2.07</td>
+<td align="right">0.0387</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>I(objLocTargetNorm * objLocTargetNorm)</td>
+<td align="right">-0.26</td>
+<td align="right">0.18</td>
+<td align="right">-1.43</td>
+<td align="right">0.1539</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative general expectancy versus recall
+model12 &lt;- glmer(accRecall ~  generalRatingNorm + 
+                       I(generalRatingNorm*generalRatingNorm)  + 
+                       (1 | subNum), data = subRecall, 
+                     family = binomial, 
+                     control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                     nAGQ = 1)
+
+kable(createResultTable(model12))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-0.29</td>
+<td align="right">0.28</td>
+<td align="right">-1.01</td>
+<td align="right">0.3148</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingNorm</td>
+<td align="right">-0.64</td>
+<td align="right">0.20</td>
+<td align="right">-3.16</td>
+<td align="right">0.0016</td>
+<td align="left">**</td>
+</tr>
+
+<tr>
+<td>I(generalRatingNorm * generalRatingNorm)</td>
+<td align="right">-0.02</td>
+<td align="right">0.19</td>
+<td align="right">-0.12</td>
+<td align="right">0.9073</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Participant general expectancy versus recall
+model13 &lt;- glmer(accRecall ~  generalRatingPost + 
+                       I(generalRatingPost*generalRatingPost)  + 
+                       (1 | subNum), 
+                     data = subRecall, 
+                     family = binomial, 
+                     control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                   nAGQ = 1)
+
+kable(createResultTable(model13))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-0.27</td>
+<td align="right">0.29</td>
+<td align="right">-0.93</td>
+<td align="right">0.3539</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingPost</td>
+<td align="right">-0.58</td>
+<td align="right">0.24</td>
+<td align="right">-2.40</td>
+<td align="right">0.0163</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>I(generalRatingPost * generalRatingPost)</td>
+<td align="right">-0.04</td>
+<td align="right">0.17</td>
+<td align="right">-0.23</td>
+<td align="right">0.8180</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="recall-models-with-covariates">Recall models with covariates</h4>
+
+<pre><code class="language-r"># Participant object/location expectancy versus recall
+model14 &lt;- glmer(accRecall ~  
+                      objLocTargetRating + 
+                      I(objLocTargetRating*objLocTargetRating) + 
+                      generalRatingPost +
+                      (1 | subNum), 
+                    data = subRecall, 
+                    family = binomial, 
+                    control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                    nAGQ = 1)
+
+kable(createResultTable(model14))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-1.07</td>
+<td align="right">0.30</td>
+<td align="right">-3.57</td>
+<td align="right">0.0004</td>
+<td align="left">***</td>
+</tr>
+
+<tr>
+<td>objLocTargetRating</td>
+<td align="right">0.10</td>
+<td align="right">0.14</td>
+<td align="right">0.68</td>
+<td align="right">0.4979</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>I(objLocTargetRating * objLocTargetRating)</td>
+<td align="right">0.75</td>
+<td align="right">0.21</td>
+<td align="right">3.58</td>
+<td align="right">0.0003</td>
+<td align="left">***</td>
+</tr>
+
+<tr>
+<td>generalRatingPost</td>
+<td align="right">-0.70</td>
+<td align="right">0.16</td>
+<td align="right">-4.40</td>
+<td align="right">0.0000</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative (ranked) object/location expectancy versus recall
+model15 &lt;- glmer(accRecall ~  targetRankPre + 
+                       I(targetRankPre*targetRankPre) + 
+                       generalRatingNorm +
+                       (1 | subNum), 
+                     data = subRecall, 
+                     family = binomial, 
+                     control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                     nAGQ = 1)
+
+kable(createResultTable(model15))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-0.60</td>
+<td align="right">0.33</td>
+<td align="right">-1.80</td>
+<td align="right">0.0716</td>
+<td align="left">.</td>
+</tr>
+
+<tr>
+<td>targetRankPre</td>
+<td align="right">-0.14</td>
+<td align="right">0.14</td>
+<td align="right">-1.00</td>
+<td align="right">0.3193</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>I(targetRankPre * targetRankPre)</td>
+<td align="right">0.29</td>
+<td align="right">0.25</td>
+<td align="right">1.18</td>
+<td align="right">0.2395</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingNorm</td>
+<td align="right">-0.76</td>
+<td align="right">0.19</td>
+<td align="right">-3.91</td>
+<td align="right">0.0001</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative object/location expectancy versus recall
+model16 &lt;- glmer(accRecall ~  objLocTargetNorm + 
+                       I(objLocTargetNorm*objLocTargetNorm) + 
+                       generalRatingNorm +
+                       (1 | subNum), 
+                     data = subRecall, 
+                     family = binomial, 
+                     control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                     nAGQ = 1)
+
+kable(createResultTable(model16))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-0.84</td>
+<td align="right">0.35</td>
+<td align="right">-2.43</td>
+<td align="right">0.0151</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>objLocTargetNorm</td>
+<td align="right">-0.01</td>
+<td align="right">0.16</td>
+<td align="right">-0.07</td>
+<td align="right">0.9482</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>I(objLocTargetNorm * objLocTargetNorm)</td>
+<td align="right">0.54</td>
+<td align="right">0.26</td>
+<td align="right">2.07</td>
+<td align="right">0.0389</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>generalRatingNorm</td>
+<td align="right">-0.90</td>
+<td align="right">0.20</td>
+<td align="right">-4.41</td>
+<td align="right">0.0000</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Normative general expectancy versus recall
+model17 &lt;- glmer(accRecall ~  generalRatingNorm + 
+                       I(generalRatingNorm*generalRatingNorm)  + 
+                       objLocTargetNorm +
+                       (1 | subNum), 
+                     data = subRecall, 
+                     family = binomial, 
+                     control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                     nAGQ = 1)
+
+kable(createResultTable(model17))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-0.30</td>
+<td align="right">0.28</td>
+<td align="right">-1.06</td>
+<td align="right">0.2887</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingNorm</td>
+<td align="right">-0.63</td>
+<td align="right">0.20</td>
+<td align="right">-3.09</td>
+<td align="right">0.0020</td>
+<td align="left">**</td>
+</tr>
+
+<tr>
+<td>I(generalRatingNorm * generalRatingNorm)</td>
+<td align="right">-0.01</td>
+<td align="right">0.19</td>
+<td align="right">-0.08</td>
+<td align="right">0.9379</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>objLocTargetNorm</td>
+<td align="right">-0.20</td>
+<td align="right">0.14</td>
+<td align="right">-1.47</td>
+<td align="right">0.1413</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Participant general expectancy versus recall
+model18 &lt;- glmer(accRecall ~  generalRatingPost + 
+                       I(generalRatingPost*generalRatingPost)  + 
+                       objLocTargetRating +
+                       (1 | subNum), 
+                     data = subRecall, 
+                     family = binomial, 
+                     control = glmerControl(optimizer = &quot;bobyqa&quot;),
+                     nAGQ = 1)
+
+kable(createResultTable(model18))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">SE</th>
+<th align="right">Z</th>
+<th align="right">P</th>
+<th align="left">Sig</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(Intercept)</td>
+<td align="right">-0.27</td>
+<td align="right">0.29</td>
+<td align="right">-0.93</td>
+<td align="right">0.3511</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>generalRatingPost</td>
+<td align="right">-0.57</td>
+<td align="right">0.24</td>
+<td align="right">-2.36</td>
+<td align="right">0.0181</td>
+<td align="left">*</td>
+</tr>
+
+<tr>
+<td>I(generalRatingPost * generalRatingPost)</td>
+<td align="right">-0.04</td>
+<td align="right">0.17</td>
+<td align="right">-0.21</td>
+<td align="right">0.8312</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>objLocTargetRating</td>
+<td align="right">-0.05</td>
+<td align="right">0.14</td>
+<td align="right">-0.37</td>
+<td align="right">0.7105</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="recall-interpretation">Recall interpretation</h4>
+
+<p>Model 9 and 10 show a very unexpected inverted U-shaped relationship. However this might be due to the fact that again objects that are generally unexpected in kitchen are associated with better memory because these are the ones which are in the middle of the object/location expectancy scale. Model 11 looks very similar to model 3. When controlled for general expectancy a lot of models do show an trend for significant quadratic term (model 14 and 15).</p>
+
+<h3 id="euclidean-distance-models">Euclidean distance models</h3>
+
+<pre><code class="language-r">plot15 &lt;- ggplot(objectAgg, aes(x = objLocTargetRating, y = euclideanDist)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) +  
+                 geom_smooth() +  
+                 labs(y = 'Euclidean distance in vm', 
+                      x = &quot;Post-ratings expectancy&quot;, 
+                      title = ' Model 19: Object/location expectancy')  + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = c(1.25, 0.8))
+
+plot16 &lt;- ggplot(objectAgg, aes(x = targetRankPre, y = euclideanDist)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Euclidean distance in vm', 
+                      x = &quot;Normative expectancy (ranked)&quot;, 
+                      title = 'Model 20: Object/location expectancy') + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(0, 400), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot17 &lt;- ggplot(objectAgg, aes(x = objLocTargetNorm, y = euclideanDist)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Euclidean distance in vm', 
+                      x = &quot;Normative expectancy&quot;, 
+                      title = 'Model 21: Object/location expectancy') + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot18 &lt;- ggplot(objectAgg, aes(x = generalRatingNorm, y = euclideanDist)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Euclidean distance in vm', 
+                      x = &quot;Normative expectancy&quot;, 
+                      title = 'Model 22: General expectancy') + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot19 &lt;- ggplot(objectAgg, aes(x = generalRatingPost, y = euclideanDist)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Euclidean distance in vm', 
+                      x = &quot;Post-ratings expectancy&quot;, 
+                      title = 'Model 23: General expectancy') + 
+                 coord_cartesian(ylim = c(0, 1), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+grid.arrange(plot15, plot16, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-19-1.png" alt="" /></p>
+
+<pre><code class="language-r">grid.arrange(plot17, plot18, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-19-2.png" alt="" /></p>
+
+<pre><code class="language-r">grid.arrange(plot19, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-19-3.png" alt="" /></p>
+
+<pre><code class="language-r"># Legend
+paste(as.character(objectAgg$objNum), &quot;=&quot;, objectAgg$objName)
+</code></pre>
+
+<pre><code>##  [1] &quot;1 = microwave&quot;      &quot;2 = kitchen roll&quot;   &quot;3 = saucepan&quot;      
+##  [4] &quot;4 = toaster&quot;        &quot;5 = bowl of fruits&quot; &quot;6 = tea pot&quot;       
+##  [7] &quot;7 = knife&quot;          &quot;8 = mixer&quot;          &quot;9 = bread&quot;         
+## [10] &quot;10 = glass jug&quot;     &quot;11 = mug&quot;           &quot;12 = dishes&quot;       
+## [13] &quot;13 = towels&quot;        &quot;14 = toy&quot;           &quot;15 = pile of books&quot;
+## [16] &quot;16 = umbrella&quot;      &quot;17 = hat&quot;           &quot;18 = helmet&quot;       
+## [19] &quot;19 = calendar&quot;      &quot;20 = fan&quot;
+</code></pre>
+
+<pre><code class="language-r"># Model 19: 
+model19 &lt;- lmer(euclideanDist ~  objLocTargetRating + 
+                  I(objLocTargetRating*objLocTargetRating) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model19))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 20: 
+model20 &lt;- lmer(euclideanDist ~  targetRankPre + 
+                  I(targetRankPre*targetRankPre) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model20))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 21: 
+model21 &lt;- lmer(euclideanDist ~  objLocTargetNorm + 
+                  I(objLocTargetNorm*objLocTargetNorm) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model21))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 22: 
+model22 &lt;- lmer(euclideanDist ~  generalRatingNorm + 
+                  I(generalRatingNorm*generalRatingNorm) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model22))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 23: 
+model23 &lt;- lmer(euclideanDist ~  generalRatingPost + 
+                  I(generalRatingPost*generalRatingPost) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model23))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="euclidean-distance-models-with-covariates">Euclidean distance models with covariates</h4>
+
+<pre><code class="language-r"># Model 24: 
+model24&lt;- lmer(euclideanDist ~  objLocTargetRating + 
+                  I(objLocTargetRating*objLocTargetRating) + 
+                  generalRatingPost +
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model24))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 25: 
+model25 &lt;- lmer(euclideanDist ~  targetRankPre + 
+                  I(targetRankPre*targetRankPre) + 
+                  generalRatingNorm + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model25))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 26: 
+model26 &lt;- lmer(euclideanDist ~  objLocTargetNorm + 
+                  I(objLocTargetNorm*objLocTargetNorm) + 
+                  generalRatingNorm + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model26))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 27: 
+model27 &lt;- lmer(euclideanDist ~  generalRatingNorm + 
+                  I(generalRatingNorm*generalRatingNorm) + 
+                  objLocTargetNorm +
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model27))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 28: 
+model28 &lt;- lmer(euclideanDist ~  generalRatingPost + 
+                  I(generalRatingPost*generalRatingPost) + 
+                  objLocTargetRating +
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model28))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="euclidean-distance-interpretation">Euclidean distance interpretation</h4>
+
+<p>The same is true if the Euclidean distance is the dependent variable. Model 24 is interesting as it continues to show the signifcant quadratic effect even though the general expectancy is controlled for.</p>
+
+<h3 id="answer-time-models">Answer time models</h3>
+
+<pre><code class="language-r">plot15 &lt;- ggplot(objectAgg, aes(x = objLocTargetRating, y = answerTime)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) +  
+                 geom_smooth() +  
+                 labs(y = 'Time to place object in sec', 
+                      x = &quot;Post-ratings expectancy&quot;, 
+                      title = ' Model 19: Object/location expectancy')  + 
+                 coord_cartesian(ylim = c(0, 20), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = c(1.25, 0.8))
+
+plot16 &lt;- ggplot(objectAgg, aes(x = targetRankPre, y = answerTime)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Time to place object in sec', 
+                      x = &quot;Normative expectancy (ranked)&quot;, 
+                      title = 'Model 20: Object/location expectancy') + 
+                 coord_cartesian(ylim = c(0, 20), xlim = c(0, 400), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot17 &lt;- ggplot(objectAgg, aes(x = objLocTargetNorm, y = answerTime)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Time to place object in sec', 
+                      x = &quot;Normative expectancy&quot;, 
+                      title = 'Model 21: Object/location expectancy') + 
+                 coord_cartesian(ylim = c(0, 20), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot18 &lt;- ggplot(objectAgg, aes(x = generalRatingNorm, y = answerTime)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Time to place object in sec', 
+                      x = &quot;Normative expectancy&quot;, 
+                      title = 'Model 22: General expectancy') + 
+                 coord_cartesian(ylim = c(0, 20), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+plot19 &lt;- ggplot(objectAgg, aes(x = generalRatingPost, y = answerTime)) + 
+                 geom_text(aes(label = objNum, colour = expectedInKitchen), hjust = 0, vjust = 0) + 
+                 geom_smooth() +  
+                 labs(y = 'Time to place object in sec', 
+                      x = &quot;Post-ratings expectancy&quot;, 
+                      title = 'Model 23: General expectancy') + 
+                 coord_cartesian(ylim = c(0, 20), xlim = c(-100, 100), expand = TRUE) + 
+                 theme(plot.margin = unit(c(1,7,1,1), &quot;lines&quot;), legend.position = &quot;none&quot;)
+
+grid.arrange(plot15, plot16, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-22-1.png" alt="" /></p>
+
+<pre><code class="language-r">grid.arrange(plot17, plot18, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-22-2.png" alt="" /></p>
+
+<pre><code class="language-r">grid.arrange(plot19, ncol = 2)
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-22-3.png" alt="" /></p>
+
+<pre><code class="language-r"># Legend
+paste(as.character(objectAgg$objNum), &quot;=&quot;, objectAgg$objName)
+</code></pre>
+
+<pre><code>##  [1] &quot;1 = microwave&quot;      &quot;2 = kitchen roll&quot;   &quot;3 = saucepan&quot;      
+##  [4] &quot;4 = toaster&quot;        &quot;5 = bowl of fruits&quot; &quot;6 = tea pot&quot;       
+##  [7] &quot;7 = knife&quot;          &quot;8 = mixer&quot;          &quot;9 = bread&quot;         
+## [10] &quot;10 = glass jug&quot;     &quot;11 = mug&quot;           &quot;12 = dishes&quot;       
+## [13] &quot;13 = towels&quot;        &quot;14 = toy&quot;           &quot;15 = pile of books&quot;
+## [16] &quot;16 = umbrella&quot;      &quot;17 = hat&quot;           &quot;18 = helmet&quot;       
+## [19] &quot;19 = calendar&quot;      &quot;20 = fan&quot;
+</code></pre>
+
+<pre><code class="language-r"># Model 19: 
+model19 &lt;- lmer(answerTime ~  objLocTargetRating + 
+                  I(objLocTargetRating*objLocTargetRating) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model19))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 20: 
+model20 &lt;- lmer(answerTime ~  targetRankPre + 
+                  I(targetRankPre*targetRankPre) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model20))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 21: 
+model21 &lt;- lmer(answerTime ~  objLocTargetNorm + 
+                  I(objLocTargetNorm*objLocTargetNorm) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model21))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 22: 
+model22 &lt;- lmer(answerTime ~  generalRatingNorm + 
+                  I(generalRatingNorm*generalRatingNorm) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model22))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">#kable(createResultTable(anova(model22)))
+
+# Model 23: 
+model23 &lt;- lmer(answerTime ~  generalRatingPost + 
+                  I(generalRatingPost*generalRatingPost) + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model23))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="answer-time-models-with-covariates">Answer time models with covariates</h4>
+
+<pre><code class="language-r"># Model 24: 
+model24&lt;- lmer(answerTime ~  objLocTargetRating + 
+                  I(objLocTargetRating*objLocTargetRating) + 
+                  generalRatingPost +
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model24))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 25: 
+model25 &lt;- lmer(answerTime ~  targetRankPre + 
+                  I(targetRankPre*targetRankPre) + 
+                  generalRatingNorm + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model25))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 26: 
+model26 &lt;- lmer(answerTime ~  objLocTargetNorm + 
+                  I(objLocTargetNorm*objLocTargetNorm) + 
+                  generalRatingNorm + 
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model26))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 27: 
+model27 &lt;- lmer(answerTime ~  generalRatingNorm + 
+                  I(generalRatingNorm*generalRatingNorm) + 
+                  objLocTargetNorm +
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model27))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># Model 28: 
+model28 &lt;- lmer(answerTime ~  generalRatingPost + 
+                  I(generalRatingPost*generalRatingPost) + 
+                  objLocTargetRating +
+                  (1 | subNum), 
+                data = subRecall)
+
+kable(createResultTable(model28))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">%%%</th>
+<th align="left">***</th>
+<th align="left">&amp;&amp;&amp;</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">######</td>
+<td align="left">No known model</td>
+<td align="left">######</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="answer-time-interpretation">Answer time interpretation</h4>
+
+<p>Here only models that include the respetive covariate are significant but with interesting resuls. For instance model 25 show that when controlled for general expectancy there is an inverted U-shaped relationship, which needs to be inverted if one assummes that shorter answer time are indicative of better memory.</p>
+
+<h2 id="further-analysis">Further analysis</h2>
+
+<h3 id="factorisation">Factorisation</h3>
+
+<p>Here I tried the classical way of analysing creating factor (unexpected, neutral and expected) and then aggregating across participants and that factor.</p>
+
+<pre><code class="language-r"># Based on post-encoding ratings
+combData2                      &lt;- combData
+combData2$postRatingTargetRank &lt;- ddply(combData2, 
+                                        c('subNum'), 
+                                        summarise, 
+                                        objLocTargetRating = objLocTargetRating, 
+                                        rank = rank(objLocTargetRating))$rank
+
+combData2$expFact &lt;- 2
+combData2$expFact[which(combData2$postRatingTargetRank &lt;= 7)]  &lt;- 1
+combData2$expFact[which(combData2$postRatingTargetRank &gt;= 14)] &lt;- 3
+combData2$expFact &lt;- factor(combData2$expFact, labels = c(&quot;unexpected&quot;, &quot;neutral&quot;, &quot;expected&quot;))
+
+combData2Exp &lt;- ddply(combData2, 
+                      c('subNum', 'expFact'), 
+                      summarise,
+                      N = length(accAFC),
+                      mean = mean(accAFC),
+                      ratingsMean = mean(objLocTargetRating))
+
+# It is important to aggregate data, which was already aggregated.
+combData2ExpAgg &lt;- ddply(combData2Exp, 
+                         c('expFact'), 
+                         summarise,
+                         N = length(mean),
+                         accAfcMean = mean(mean),
+                         accAfcSd = sd(mean),
+                         accAfcSe = accAfcSd/sqrt(N))
+
+ggplot(combData2Exp, aes(x = expFact, y = mean)) +
+  geom_dotplot(binaxis='y', stackdir='center') +
+  stat_summary(fun.y = mean, geom = &quot;line&quot;, aes(group=1))  +
+  labs(y = 'Mean accuracy (3AFC)', 
+       x = &quot;Expectancy&quot;, 
+       title = 'Relationship with post-encoding ratings') + 
+  theme(plot.margin = margin(10, 10, 10, 10))
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-25-1.png" alt="" /></p>
+
+<pre><code class="language-r"># Based on post-encoding ratings
+combData3               &lt;- combData
+combData3$targetRankPre &lt;- ddply(combData3, 
+                                 c('subNum'), 
+                                 summarise, 
+                                 targetRankPre = targetRankPre, 
+                                 rank = rank(targetRankPre))$rank
+
+combData3$expFact &lt;- 2
+combData3$expFact[which(combData3$targetRankPre &lt;= 7)] &lt;- 1
+combData3$expFact[which(combData3$targetRankPre &gt;= 14)] &lt;- 3
+combData3$expFact &lt;- factor(combData3$expFact, labels = c(&quot;unexpected&quot;, &quot;neutral&quot;, &quot;expected&quot;))
+
+combData3Exp &lt;- ddply(combData3, 
+                      c('subNum', 'expFact'), 
+                      summarise,
+                      N = length(accAFC),
+                      mean = mean(accAFC),
+                      ratingsMean = mean(targetRankPre))
+
+# It is important to aggregate data, which was already aggregated.
+combData3ExpAgg &lt;- ddply(combData3Exp, 
+                         c('expFact'), 
+                         summarise,
+                         N = length(mean),
+                         accAfcMean = mean(mean),
+                         accAfcSd = sd(mean),
+                         accAfcSe = accAfcSd/sqrt(N))
+
+ggplot(combData3Exp, aes(x = expFact, y = mean)) +
+   geom_dotplot(binaxis='y', stackdir='center') +
+  stat_summary(fun.y = mean, geom = &quot;line&quot;, aes(group=1))  +
+  labs(y = 'Mean accuracy (3AFC)', 
+       x = &quot;Expectancy&quot;, 
+       title = 'Relationship with pre-encoding ranks') + 
+  theme(plot.margin = margin(10, 10, 10, 10))
+</code></pre>
+
+<p><img src="/post/2018-04-24-interim-results-of-schemvr1_files/figure-markdown_github/unnamed-chunk-26-1.png" alt="" /></p>
+
+
+    
+
+    
+
+    <h4>See also</h4>
+    <ul>
+        
+            <li><a href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a></li>
+        
+            <li><a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a></li>
+        
+            <li><a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a></li>
+        
+            <li><a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a></li>
+        
+            <li><a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a></li>
+        
+    </ul>
+
+
+</article>
+
+
+
+        </div>
+
+        <aside class="col-12 col-lg-3 ml-auto blog-sidebar">
+    
+        
+
+
+<section>
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+        
+        <li>
+            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
+        </li>
+        
+        <li>
+            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
+        </li>
+        
+        <li>
+            <a href="/2018/04/interim-results-of-schemvr1/">Interim results of schemVR1</a>
+        </li>
+        
+        <li>
+            <a href="/2018/04/interim-results-and-future-plans/">Interim results and future plans</a>
+        </li>
+        
+        <li>
+            <a href="/2018/03/general-update-and-plan-for-the-future/">General update and plan for the future</a>
+        </li>
+        
+    </ol>
+</section>
+
+    
+    
+        <section>
+    
+        
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-primary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/tags/about">about</a>
+            
+            <a class="badge badge-primary" href="/tags/data-check">data-check</a>
+            
+            <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
+            
+            <a class="badge badge-primary" href="/tags/graphics">graphics</a>
+            
+            <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
+            
+            <a class="badge badge-primary" href="/tags/ideas-and-plans">ideas-and-plans</a>
+            
+            <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
+            
+            <a class="badge badge-primary" href="/tags/lme4/lmertest">lme4/lmertest</a>
+            
+            <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/meta">meta</a>
+            
+            <a class="badge badge-primary" href="/tags/mixed-linear-models">mixed-linear-models</a>
+            
+            <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
+            
+            <a class="badge badge-primary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-primary" href="/tags/pilot-study">pilot-study</a>
+            
+            <a class="badge badge-primary" href="/tags/ratingstudy">ratingstudy</a>
+            
+            <a class="badge badge-primary" href="/tags/recognition-memory">recognition-memory</a>
+            
+            <a class="badge badge-primary" href="/tags/recollection">recollection</a>
+            
+            <a class="badge badge-primary" href="/tags/research-design">research-design</a>
+            
+            <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+            
+            <a class="badge badge-primary" href="/tags/schema">schema</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr1">schemavr1</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr2">schemavr2</a>
+            
+            <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-primary" href="/tags/word-properties">word-properties</a>
+            
+            <a class="badge badge-primary" href="/tags/words">words</a>
+            
+        </p>
+        
+    
+</section>
+    
+</aside>
+
+      </div>
+    </div>
+    
+
+    
+      
+
+
+
+
+
+
+<footer class="blog-footer w-100">
+    <nav class="navbar navbar-light bg-light">
+        <p class="w-100 text-center">Hugo template made with ❤ by <a href="https://github.com/Xzya">Xzya</a>, inspired by <a href="https://github.com/alanorth/hugo-theme-bootstrap4-blog">hugo-theme-bootstrap4-blog</a></p>
+        <p class="w-100 text-center"><a href="#">Back to top</a></p>
+    </nav>
+</footer>
+
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
