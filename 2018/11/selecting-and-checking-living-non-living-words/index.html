@@ -200,82 +200,106 @@ for(i in 1:dim(wordsSubset)[1]){
 wordsSubset[wordsSubset == 0] &lt;- NA_real_
 </code></pre>
 
-<p>Note that all lot of values of the database are 0, which are here counted as NA. This explains the huge variability of the number of data points below.</p>
+<p>Note that all lot of values of the database are 0, which are here counted as NA. This explains the huge variability of the number of data points below. $BF_{01}$</p>
 
 <h1 id="inspecting-word-properties-of-living-vs-non-living-words">Inspecting word properties of Living vs. non-living words</h1>
 
-<pre><code class="language-r">pTemp &lt;- paste('p', pValue(t.test(K.F.FREQ ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
-plot1 &lt;- ggplot(wordsSubset, aes(x = living, y = K.F.FREQ)) +
+<pre><code class="language-r">bfTemp &lt;- ttestBF(na.omit(wordsSubset$K.F.FREQ[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$K.F.FREQ[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
+plot1&lt;- ggplot(wordsSubset, aes(x = living, y = K.F.FREQ)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$K.F.FREQ, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$K.F.FREQ, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(K.F.NCATS ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$K.F.NCATS[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$K.F.NCATS[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot2 &lt;- ggplot(wordsSubset, aes(x = living, y = K.F.NCATS)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$K.F.NCATS, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$K.F.NCATS, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(wordLength ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$wordLength[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$wordLength[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot3 &lt;- ggplot(wordsSubset, aes(x = living, y = wordLength)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$wordLength, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$wordLength, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(K.F.NSAMP ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$K.F.NSAMP[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$K.F.NSAMP[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot4 &lt;- ggplot(wordsSubset, aes(x = living, y = K.F.NSAMP)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$K.F.NSAMP, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$K.F.NSAMP, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(T.L.FREQ ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$T.L.FREQ[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$T.L.FREQ[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot5 &lt;- ggplot(wordsSubset, aes(x = living, y = T.L.FREQ)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$T.L.FREQ, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$T.L.FREQ, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(BROWN.FREQ ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$BROWN.FREQ[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$BROWN.FREQ[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot6 &lt;- ggplot(wordsSubset, aes(x = living, y = BROWN.FREQ)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$BROWN.FREQ, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$BROWN.FREQ, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(MEANP ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$MEANP[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$MEANP[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot7 &lt;- ggplot(wordsSubset, aes(x = living, y = MEANP)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$MEANP, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$MEANP, na.rm = TRUE)*0.9, label = bfTemp)
 
 
-pTemp &lt;- paste('p', pValue(t.test(AOA ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$AOA[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$AOA[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot8 &lt;- ggplot(wordsSubset, aes(x = living, y = AOA)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$AOA, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$AOA, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(FAM ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$FAM[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$FAM[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot9 &lt;- ggplot(wordsSubset, aes(x = living, y = FAM)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$FAM, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$FAM, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(CONC ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$CONC[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$CONC[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot10 &lt;- ggplot(wordsSubset, aes(x = living, y = CONC)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$CONC, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$CONC, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(MEANC ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$MEANC[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$MEANC[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot11 &lt;- ggplot(wordsSubset, aes(x = living, y = MEANC)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$MEANC, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$MEANC, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(IMAG ~ living, data = wordsSubset, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(wordsSubset$IMAG[wordsSubset$living == 'living']),
+                  na.omit(wordsSubset$IMAG[wordsSubset$living == 'non-living']))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot12 &lt;- ggplot(wordsSubset, aes(x = living, y = IMAG)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(wordsSubset$IMAG, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(wordsSubset$IMAG, na.rm = TRUE)*0.9, label = bfTemp)
 
 gridPlot &lt;- grid.arrange(plot1,
                          plot2,
@@ -287,7 +311,7 @@ gridPlot &lt;- grid.arrange(plot1,
                          nrow = 3)
 </code></pre>
 
-<p><img src="/post/2018-11-21-selecting-and-checking-living-non-living-words_files/figure-html/inspection-1.png" width="1200px" height="1200px" /></p>
+<p><img src="/post/2018-11-21-selecting-and-checking-living-non-living-words_files/figure-markdown_github/inspection-1.png" alt="" /></p>
 
 <pre><code class="language-r">gridPlot &lt;- grid.arrange(plot7,
                          plot8,
@@ -299,9 +323,9 @@ gridPlot &lt;- grid.arrange(plot1,
                          nrow = 3)
 </code></pre>
 
-<p><img src="/post/2018-11-21-selecting-and-checking-living-non-living-words_files/figure-html/inspection-2.png" width="1200px" height="1200px" /></p>
+<p><img src="/post/2018-11-21-selecting-and-checking-living-non-living-words_files/figure-markdown_github/inspection-2.png" alt="" /></p>
 
-<p>As can be seen above, living and non-living words only differed in terms of their   Kucera-Francis number of categories (<a href="http://websites.psychology.uwa.edu.au/school/MRCDatabase/mrc2.html#K-F">K-F-NCATS</a>), age of acquisition (<a href="http://websites.psychology.uwa.edu.au/school/MRCDatabase/mrc2.html#AOA">AOA</a>), concreteness (<a href="http://websites.psychology.uwa.edu.au/school/MRCDatabase/mrc2.html#CONC">CONC</a>), and imagability (<a href="http://websites.psychology.uwa.edu.au/school/MRCDatabase/mrc2.html#IMAG">IMAG</a>). As the same number of living and non-living words will be randomly assigned to the word lists used in the experiment, those difference are not an important issue.</p>
+<p>As can be seen above by the Bayes factors, living and non-living words only differed in terms of age of acquisition (<a href="http://websites.psychology.uwa.edu.au/school/MRCDatabase/mrc2.html#AOA">AOA</a>), concreteness (<a href="http://websites.psychology.uwa.edu.au/school/MRCDatabase/mrc2.html#CONC">CONC</a>). All other Bayes factos are below 1. In any case as the same number of living and non-living words will be randomly assigned to the word lists used in the experiment, those difference are not an important issue.</p>
 
 <h1 id="splitting-into-two-word-lists">Splitting into two word lists</h1>
 
@@ -329,78 +353,102 @@ combinedLists$list &lt;- as.factor(rep(c(1, 2), each = 100))
 
 <h2 id="inspecting-word-list-properties">Inspecting word list properties</h2>
 
-<pre><code class="language-r">pTemp &lt;- paste('p', pValue(t.test(K.F.FREQ ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+<pre><code class="language-r">bfTemp &lt;- ttestBF(na.omit(combinedLists$K.F.FREQ[combinedLists$list == 1]),
+                  na.omit(combinedLists$K.F.FREQ[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot1 &lt;- ggplot(combinedLists, aes(x = list, y = K.F.FREQ)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$K.F.FREQ, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$K.F.FREQ, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(K.F.NCATS ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$K.F.NCATS[combinedLists$list == 1]),
+                  na.omit(combinedLists$K.F.NCATS[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot2 &lt;- ggplot(combinedLists, aes(x = list, y = K.F.NCATS)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$K.F.NCATS, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$K.F.NCATS, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(wordLength ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$K.F.NCATS[combinedLists$list == 1]),
+                  na.omit(combinedLists$K.F.NCATS[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot3 &lt;- ggplot(combinedLists, aes(x = list, y = wordLength)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$wordLength, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$wordLength, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(K.F.NSAMP ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$K.F.NSAMP[combinedLists$list == 1]),
+                  na.omit(combinedLists$K.F.NSAMP[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot4 &lt;- ggplot(combinedLists, aes(x = list, y = K.F.NSAMP)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$K.F.NSAMP, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$K.F.NSAMP, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(T.L.FREQ ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$T.L.FREQ[combinedLists$list == 1]),
+                  na.omit(combinedLists$T.L.FREQ[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot5 &lt;- ggplot(combinedLists, aes(x = list, y = T.L.FREQ)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$T.L.FREQ, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$T.L.FREQ, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(BROWN.FREQ ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$BROWN.FREQ[combinedLists$list == 1]),
+                  na.omit(combinedLists$BROWN.FREQ[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot6 &lt;- ggplot(combinedLists, aes(x = list, y = BROWN.FREQ)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$BROWN.FREQ, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$BROWN.FREQ, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(MEANP ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$MEANP[combinedLists$list == 1]),
+                  na.omit(combinedLists$MEANP[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot7 &lt;- ggplot(combinedLists, aes(x = list, y = MEANP)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$MEANP, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$MEANP, na.rm = TRUE)*0.9, label = bfTemp)
 
 
-pTemp &lt;- paste('p', pValue(t.test(AOA ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$AOA[combinedLists$list == 1]),
+                  na.omit(combinedLists$AOA[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot8 &lt;- ggplot(combinedLists, aes(x = list, y = AOA)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$AOA, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$AOA, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(FAM ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$FAM[combinedLists$list == 1]),
+                  na.omit(combinedLists$FAM[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot9 &lt;- ggplot(combinedLists, aes(x = list, y = FAM)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$FAM, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$FAM, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(CONC ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$CONC[combinedLists$list == 1]),
+                  na.omit(combinedLists$CONC[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot10 &lt;- ggplot(combinedLists, aes(x = list, y = CONC)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$CONC, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$CONC, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(MEANC ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$MEANC[combinedLists$list == 1]),
+                  na.omit(combinedLists$MEANC[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot11 &lt;- ggplot(combinedLists, aes(x = list, y = MEANC)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$MEANC, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$MEANC, na.rm = TRUE)*0.9, label = bfTemp)
 
-pTemp &lt;- paste('p', pValue(t.test(IMAG ~ list, data = combinedLists, var.equal = TRUE)$p.value))
+bfTemp &lt;- ttestBF(na.omit(combinedLists$IMAG[combinedLists$list == 1]),
+                  na.omit(combinedLists$IMAG[combinedLists$list == 2]))
+bfTemp &lt;- TeX(paste('$BF_{10} = ', as.character(round(as.numeric(as.vector(bfTemp)), 3)), '$', sep = ''))
 plot12 &lt;- ggplot(combinedLists, aes(x = list, y = IMAG)) +
   geom_boxplot(alpha = 0.5, width = 0.4) +
   geom_jitter(width = 0.2, height = 0) +
-  annotate('text', x = 1.5, y = max(combinedLists$IMAG, na.rm = TRUE)*0.9, label = pTemp)
+  annotate('text', x = 1.5, y = max(combinedLists$IMAG, na.rm = TRUE)*0.9, label = bfTemp)
 
 gridPlot &lt;- grid.arrange(plot1,
                          plot2,
@@ -412,7 +460,7 @@ gridPlot &lt;- grid.arrange(plot1,
                          nrow = 3)
 </code></pre>
 
-<p><img src="/post/2018-11-21-selecting-and-checking-living-non-living-words_files/figure-html/inspectingWordlists-1.png" width="1200px" height="1200px" /></p>
+<p><img src="/post/2018-11-21-selecting-and-checking-living-non-living-words_files/figure-markdown_github/inspectingWordlists-1.png" alt="" /></p>
 
 <pre><code class="language-r">gridPlot &lt;- grid.arrange(plot7,
                          plot8,
@@ -424,7 +472,7 @@ gridPlot &lt;- grid.arrange(plot1,
                          nrow = 3)
 </code></pre>
 
-<p><img src="/post/2018-11-21-selecting-and-checking-living-non-living-words_files/figure-html/inspectingWordlists-2.png" width="1200px" height="1200px" /></p>
+<p><img src="/post/2018-11-21-selecting-and-checking-living-non-living-words_files/figure-markdown_github/inspectingWordlists-2.png" alt="" /></p>
 
 <p>There are no systematic/significant differences between the word lists. Therefore I will use them for my study as foil and study lists.</p>
 
@@ -688,6 +736,10 @@ write.table(subset(combinedLists, combinedLists$list == 2, select = c('word', 'l
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2019/01/design-analysis-for-noveltyvr/">Design analysis for noveltyVR</a>
+        </li>
+        
+        <li>
             <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
         </li>
         
@@ -701,10 +753,6 @@ write.table(subset(combinedLists, combinedLists$list == 2, select = c('word', 'l
         
         <li>
             <a href="/2018/04/interim-results-and-future-plans/">Interim results and future plans</a>
-        </li>
-        
-        <li>
-            <a href="/2018/03/general-update-and-plan-for-the-future/">General update and plan for the future</a>
         </li>
         
     </ol>
@@ -733,7 +781,11 @@ write.table(subset(combinedLists, combinedLists$list == 2, select = c('word', 'l
             
             <a class="badge badge-primary" href="/tags/about">about</a>
             
+            <a class="badge badge-primary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
             <a class="badge badge-primary" href="/tags/data-check">data-check</a>
+            
+            <a class="badge badge-primary" href="/tags/design-analysis">design-analysis</a>
             
             <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
             

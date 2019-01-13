@@ -6,10 +6,20 @@
     <description>Recent content in Experiments on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jaquent.github.io/categories/experiments/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Design analysis for noveltyVR</title>
+      <link>https://jaquent.github.io/2019/01/design-analysis-for-noveltyvr/</link>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2019/01/design-analysis-for-noveltyvr/</guid>
+      <description>Aim of this document Instead of frequentist statistics as planned previously, we decided to use a Bayesian framework more specifically a Sequential Bayesian Factor (SBF) analysis to examine whether the experience of novelty can enhance memory for unrelated information.
+Nevertheless, I also report the power analysis that I ran, in which I am determining the necessary sample size to find an effect with a power of 95 % based on the results of Fenker et al.</description>
+    </item>
     
     <item>
       <title>Selecting and checking living/non-living words</title>
@@ -243,11 +253,11 @@ Originally posted on the 08/11/2018: I decided to drop the guess response option
     </item>
     
     <item>
-      <title>Use empty game objects as spawn points</title>
-      <link>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</link>
+      <title>Use empty game opjects as spawn points</title>
+      <link>https://jaquent.github.io/2017/10/use-empty-game-opjects-as-spawn-points/</link>
       <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</guid>
+      <guid>https://jaquent.github.io/2017/10/use-empty-game-opjects-as-spawn-points/</guid>
       <description>Use empty game objects as spawn points to spawn objects in your environment. These can be dragged to certain position in the scene without specifying points in a Cartesian coordinate system.</description>
     </item>
     

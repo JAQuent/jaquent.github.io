@@ -46,15 +46,15 @@ I found a good YouTube tutorial (see here) and adapted the respective script (se
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</guid>
-      <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
+      <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema. Unity tutorial on graphics:  If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting. Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
     </item>
     
     <item>
-      <title>Use empty game objects as spawn points</title>
-      <link>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</link>
+      <title>Use empty game opjects as spawn points</title>
+      <link>https://jaquent.github.io/2017/10/use-empty-game-opjects-as-spawn-points/</link>
       <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2017/10/use-empty-game-objects-as-spawn-points/</guid>
+      <guid>https://jaquent.github.io/2017/10/use-empty-game-opjects-as-spawn-points/</guid>
       <description>Use empty game objects as spawn points to spawn objects in your environment. These can be dragged to certain position in the scene without specifying points in a Cartesian coordinate system.</description>
     </item>
     

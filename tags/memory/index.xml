@@ -75,7 +75,7 @@ The two major the results of this experiment are that the locations of objects t
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/</guid>
-      <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.Unity tutorial on graphics:If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
+      <description>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema. Unity tutorial on graphics:  If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting. Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</description>
     </item>
     
   </channel>

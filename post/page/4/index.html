@@ -9,7 +9,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jaquent.github.io/post/" />
-<meta property="og:updated_time" content="2018-02-07T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2018-02-13T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
@@ -80,6 +80,58 @@
 
 
 
+
+
+
+    
+        <article class="blog-post">
+    <header>
+        <h2 class="blog-post-title">
+            <a class="text-dark" href="/2018/02/final-analysis-of-pilot-data/">Final analysis of pilot data</a>
+        </h2>
+        
+
+
+<div class="blog-post-date text-secondary">
+    
+        Feb 13, 2018
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+        
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/pilot-study">pilot study</a>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+    
+</div>
+
+        
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+    
+</div>
+
+    </header>
+    Introduction This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.
+Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &lt;-function(x, sign = '='){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.lm(x) x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.
+    
+    <p></p>
+    <a href="/2018/02/final-analysis-of-pilot-data/">Read More →</a>
+    
+</article>
+
+
+    
 
 
 
@@ -175,56 +227,6 @@ Introduction I am about to start collecting pilot data to see whether the number
     
     <p></p>
     <a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Read More →</a>
-    
-</article>
-
-
-    
-
-
-
-    
-        <article class="blog-post">
-    <header>
-        <h2 class="blog-post-title">
-            <a class="text-dark" href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a>
-        </h2>
-        
-
-
-<div class="blog-post-date text-secondary">
-    
-        Jan 25, 2018
-    
-    
-        by <span rel="author">Alex Quent</span>
-    
-</div>
-
-        
-<div class="blog-post-tags text-secondary">
-    <strong>Tags:</strong>
-    
-        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
-    
-        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
-    
-</div>
-
-        
-<div class="blog-post-categories text-secondary">
-    <strong>Categories:</strong>
-    
-        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
-    
-</div>
-
-    </header>
-    Introduction This is actually the second attempt to find a suitable set of object/location pairs (click here for the first attempt). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&rsquo;t work as a foil anymore.
-Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets.
-    
-    <p></p>
-    <a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Read More →</a>
     
 </article>
 
@@ -369,8 +371,17 @@ Just as a reminder, the aim is to select a combination of twenty objects at twen
                 
             
             
+        
+            
+            
+            
+            
+                
+                
+            
+            
                 <li class="page-item ">
-                    <a class="page-link" href="/post/page/11/">11</a>
+                    <a class="page-link" href="/post/page/12/">12</a>
                 </li>
             
         
@@ -379,7 +390,7 @@ Just as a reminder, the aim is to select a combination of twenty objects at twen
         </li>
         
             <li class="page-item">
-                <a class="page-link" href="/post/page/11/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+                <a class="page-link" href="/post/page/12/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
             </li>
         
     </ul>
@@ -400,6 +411,10 @@ Just as a reminder, the aim is to select a combination of twenty objects at twen
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2019/01/design-analysis-for-noveltyvr/">Design analysis for noveltyVR</a>
+        </li>
+        
+        <li>
             <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
         </li>
         
@@ -413,10 +428,6 @@ Just as a reminder, the aim is to select a combination of twenty objects at twen
         
         <li>
             <a href="/2018/04/interim-results-and-future-plans/">Interim results and future plans</a>
-        </li>
-        
-        <li>
-            <a href="/2018/03/general-update-and-plan-for-the-future/">General update and plan for the future</a>
         </li>
         
     </ol>
@@ -445,7 +456,11 @@ Just as a reminder, the aim is to select a combination of twenty objects at twen
             
             <a class="badge badge-primary" href="/tags/about">about</a>
             
+            <a class="badge badge-primary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
             <a class="badge badge-primary" href="/tags/data-check">data-check</a>
+            
+            <a class="badge badge-primary" href="/tags/design-analysis">design-analysis</a>
             
             <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
             
