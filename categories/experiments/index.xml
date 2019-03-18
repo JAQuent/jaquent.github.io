@@ -6,19 +6,28 @@
     <description>Recent content in Experiments on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jaquent.github.io/categories/experiments/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Design analysis for noveltyVR</title>
-      <link>https://jaquent.github.io/2019/01/design-analysis-for-noveltyvr/</link>
-      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
+      <link>https://jaquent.github.io/2019/03/design-analysis-for-noveltyvr/</link>
+      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2019/01/design-analysis-for-noveltyvr/</guid>
-      <description>Aim of this document Instead of frequentist statistics as planned previously, we decided to use a Bayesian framework more specifically a Sequential Bayesian Factor (SBF) analysis to examine whether the experience of novelty can enhance memory for unrelated information.
-Nevertheless, I also report the power analysis that I ran, in which I am determining the necessary sample size to find an effect with a power of 95 % based on the results of Fenker et al.</description>
+      <guid>https://jaquent.github.io/2019/03/design-analysis-for-noveltyvr/</guid>
+      <description>Aim of this document The aim of this document is to conduct a design analysis for a fixed N design using one-sided Bayesian t-test. This analysis will inform our choice of N for a registered report. The planned experiment is a 2 x 2 x 2 design with one between- and two within-subject factors. Without going into too much detail, there will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E).</description>
+    </item>
+    
+    <item>
+      <title>Prior deliberation on analysis</title>
+      <link>https://jaquent.github.io/2019/03/prior-deliberation-on-analysis/</link>
+      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2019/03/prior-deliberation-on-analysis/</guid>
+      <description>Aim of this document The aim of this document is to accompany the design analysis for noveltyVR (see here) and to shed light on the deliberations concerning the planned analysis.
+The planned design is a 2 x 2 x 2 design with one between and two within subject factors. There will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E).</description>
     </item>
     
     <item>

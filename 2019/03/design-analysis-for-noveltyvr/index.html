@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Design analysis for noveltyVR" />
+<meta property="og:description" content="Aim of this document The aim of this document is to conduct a design analysis for a fixed N design using one-sided Bayesian t-test. This analysis will inform our choice of N for a registered report. The planned experiment is a 2 x 2 x 2 design with one between- and two within-subject factors. Without going into too much detail, there will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2019/03/design-analysis-for-noveltyvr/" /><meta property="article:published_time" content="2019-03-18T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-03-18T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Design analysis for noveltyVR"/>
+<meta name="twitter:description" content="Aim of this document The aim of this document is to conduct a design analysis for a fixed N design using one-sided Bayesian t-test. This analysis will inform our choice of N for a registered report. The planned experiment is a 2 x 2 x 2 design with one between- and two within-subject factors. Without going into too much detail, there will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E)."/>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2019/03/design-analysis-for-noveltyvr/">
+
+    <title>
+      
+        Design analysis for noveltyVR | Jörn Alexander Quent&#39;s notebook
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      <header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            Jörn Alexander Quent&#39;s notebook
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/">Home</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/about/">About</a>
+                    
+                </li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-8 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+        <a class="text-dark" href="/2019/03/design-analysis-for-noveltyvr/">Design analysis for noveltyVR</a>
+    </h2>
+    
+
+
+<div class="blog-post-date text-secondary">
+    
+        Mar 18, 2019
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+    
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/noveltyvr">noveltyVR</a>
+    
+        <a class="badge badge-primary" href="/tags/bayesian-stats">Bayesian Stats</a>
+    
+        <a class="badge badge-primary" href="/tags/research-design">research design</a>
+    
+        <a class="badge badge-primary" href="/tags/design-analysis">design analysis</a>
+    
+</div>
+
+    
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+    
+</div>
+
+    <hr>
+</header>
+<article class="blog-post">
+    
+
+<h1 id="aim-of-this-document">Aim of this document</h1>
+
+<p>The aim of this document is to conduct a design analysis for a fixed N design using one-sided Bayesian t-test. This analysis will inform our choice of N for a registered report. The planned experiment is a 2 x 2 x 2 design with one between- and two within-subject factors. Without going into too much detail, there will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E).</p>
+
+<h1 id="libraries">Libraries</h1>
+
+<pre><code class="language-r">library(ggplot2)
+library(reshape2)
+library(plyr)
+library(knitr)
+library(cowplot)
+library(BayesFactor)
+theme_set(theme_grey()) # Important to retain the ggplot theme
+</code></pre>
+
+<h1 id="simulation">Simulation</h1>
+
+<h2 id="short-description-of-the-simulation">Short description of the simulation</h2>
+
+<p>I simulated a fixed N design with 36 participants per group (see Schönbrodt &amp; Wagenmakers, 2018).</p>
+
+<p>For us, four effects are of interest: main effect of novelty (N) with better memory for the novelty group, interaction of novelty with encoding strength (N x E) where novelty benefits weakly encoded words more, interaction of novelty with memory quality (N x M) where novelty increases recollection and lastly the interaction of novelty with encoding strength and memory quality (N x E x M) where novelty increases recollection for weakly encoded words. Theoretically, the most important effect is the interaction between novelty and and encoding strength (weakly/strongly). We choose directional t-tests over an ANOVA-based approach because our hypotheses are directional (for more on the deliberations see <a href="https://github.com/JAQuent/noveltyVR/blob/master/preparation/designDeliberations.md">here</a>).</p>
+
+<p>Data under five different hypotheses is simulated:</p>
+
+<p><em>H</em><sub>0</sub> : <em>β</em><sub>1</sub> = 0.0 ∨ <em>β</em><sub>4</sub> = 0.0 ∨ <em>β</em><sub>5</sub> = 0.0 ∨ <em>β</em><sub>7</sub> = 0.0
+<em>H</em><sub>1</sub> : <em>β</em><sub>1</sub> = 0.2 ∨ <em>β</em><sub>4</sub> = 0.0 ∨ <em>β</em><sub>5</sub> = 0.0 ∨ <em>β</em><sub>7</sub> = 0.0
+<em>H</em><sub>2</sub> : <em>β</em><sub>1</sub> = 0.2 ∨ <em>β</em><sub>4</sub> = 0.2 ∨ <em>β</em><sub>5</sub> = 0.0 ∨ <em>β</em><sub>7</sub> = 0.0
+<em>H</em><sub>3</sub> : <em>β</em><sub>1</sub> = 0.2 ∨ <em>β</em><sub>4</sub> = 0.2 ∨ <em>β</em><sub>5</sub> = 0.2 ∨ <em>β</em><sub>7</sub> = 0.0
+<em>H</em><sub>4</sub> : <em>β</em><sub>1</sub> = 0.2 ∨ <em>β</em><sub>4</sub> = 0.2 ∨ <em>β</em><sub>5</sub> = 0.2 ∨ <em>β</em><sub>7</sub> = 0.2</p>
+
+<p>All other <em>β</em>-values are set to 0 because they are not of particular interest for this study. This however does not mean that we - for instance - do not expect that weakly encoded words are associated with weaker memory. Since the effects are orthogonal, it does not matter for the simulation. The simulation was based on small effects sizes with <em>β</em> = .2 to be more conservative. The actual effect sizes even tough difficult to calculate are expected to be higher (up to d = 0.9 based on the literature see for instance Fenker et al., 2008).</p>
+
+<h1 id="the-simulation">The simulation</h1>
+
+<p>The script with which the simulation was run can be found <a href="https://github.com/JAQuent/noveltyVR/blob/master/preparation/bayesianDesignAnalysis_tTest_fixedN_script.R">here</a>.</p>
+
+<h2 id="results">Results</h2>
+
+<h3 id="preparing-the-data-for-analysis">Preparing the data for analysis</h3>
+
+<pre><code class="language-r"># Loading data
+load('noveltyVR_fixed_DesignAnalysis_tTest_20190311_103709.RData')
+
+# Preparing data
+underH0 &lt;- data.frame(beta1 = bfH0[seq(1, length(bfH0), 4)],
+                      beta4 = bfH0[seq(2, length(bfH0), 4)],
+                      beta5 = bfH0[seq(3, length(bfH0), 4)],
+                      beta7 = bfH0[seq(4, length(bfH0), 4)],
+                      run   = 1:nIterations)
+
+underH1 &lt;- data.frame(beta1 = bfH1[seq(1, length(bfH1), 4)],
+                      beta4 = bfH1[seq(2, length(bfH1), 4)],
+                      beta5 = bfH1[seq(3, length(bfH1), 4)],
+                      beta7 = bfH1[seq(4, length(bfH1), 4)],
+                      run   = 1:nIterations)
+
+underH2 &lt;- data.frame(beta1 = bfH2[seq(1, length(bfH2), 4)],
+                      beta4 = bfH2[seq(2, length(bfH2), 4)],
+                      beta5 = bfH2[seq(3, length(bfH2), 4)],
+                      beta7 = bfH2[seq(4, length(bfH2), 4)],
+                      run   = 1:nIterations)
+
+underH3 &lt;- data.frame(beta1 = bfH3[seq(1, length(bfH3), 4)],
+                      beta4 = bfH3[seq(2, length(bfH3), 4)],
+                      beta5 = bfH3[seq(3, length(bfH3), 4)],
+                      beta7 = bfH3[seq(4, length(bfH3), 4)],
+                      run   = 1:nIterations)
+
+underH4 &lt;- data.frame(beta1 = bfH4[seq(1, length(bfH4), 4)],
+                      beta4 = bfH4[seq(2, length(bfH4), 4)],
+                      beta5 = bfH4[seq(3, length(bfH4), 4)],
+                      beta7 = bfH4[seq(4, length(bfH4), 4)],
+                      run   = 1:nIterations)
+</code></pre>
+
+<p>The simulation was repeated 10000 times for each hypothesis.</p>
+
+<p>For thus who are interested, the simulation took 4.68 mins and 23 CPU cores to complete.</p>
+
+<h3 id="analysis">Analysis</h3>
+
+<p>Following Schönbrodt &amp; Wagenmakers (2018), we want to answer the following questions with that design analysis:</p>
+
+<h4 id="1-what-are-the-expected-distributions-of-obtained-evidence">1. What are the expected distributions of obtained evidence?</h4>
+
+<pre><code class="language-r"># Reshapre for plotting
+underH0_long &lt;- melt(underH0, id.vars=c(&quot;run&quot;))
+underH1_long &lt;- melt(underH1, id.vars=c(&quot;run&quot;))
+underH2_long &lt;- melt(underH2, id.vars=c(&quot;run&quot;))
+underH3_long &lt;- melt(underH3, id.vars=c(&quot;run&quot;))
+underH4_long &lt;- melt(underH4, id.vars=c(&quot;run&quot;))
+
+# In order to make the areas of Bayes factor &gt; 1 and &lt; 1 equal I transform the values
+# and relabel the y-axis and substract and add 1 so that BF = 1 are become 0
+underH0_long_trans &lt;- underH0_long
+underH1_long_trans &lt;- underH1_long
+underH2_long_trans &lt;- underH2_long
+underH3_long_trans &lt;- underH3_long
+underH4_long_trans &lt;- underH4_long
+
+underH0_long_trans$value[underH0_long_trans$value &lt; 1] &lt;- -1/underH0_long_trans$value[underH0_long_trans$value &lt; 1] + 1
+underH1_long_trans$value[underH1_long_trans$value &lt; 1] &lt;- -1/underH1_long_trans$value[underH1_long_trans$value &lt; 1] + 1
+underH2_long_trans$value[underH2_long_trans$value &lt; 1] &lt;- -1/underH2_long_trans$value[underH2_long_trans$value &lt; 1] + 1
+underH3_long_trans$value[underH3_long_trans$value &lt; 1] &lt;- -1/underH3_long_trans$value[underH3_long_trans$value &lt; 1] + 1
+underH4_long_trans$value[underH4_long_trans$value &lt; 1] &lt;- -1/underH4_long_trans$value[underH4_long_trans$value &lt; 1] + 1
+
+underH0_long_trans$value[underH0_long_trans$value &gt; 1] &lt;-  underH0_long_trans$value[underH0_long_trans$value &gt; 1] - 1
+underH1_long_trans$value[underH1_long_trans$value &gt; 1] &lt;-  underH1_long_trans$value[underH1_long_trans$value &gt; 1] - 1
+underH2_long_trans$value[underH2_long_trans$value &gt; 1] &lt;-  underH2_long_trans$value[underH2_long_trans$value &gt; 1] - 1
+underH3_long_trans$value[underH3_long_trans$value &gt; 1] &lt;-  underH3_long_trans$value[underH3_long_trans$value &gt; 1] - 1
+underH4_long_trans$value[underH4_long_trans$value &gt; 1] &lt;-  underH4_long_trans$value[underH4_long_trans$value &gt; 1] - 1
+
+# Under H0
+ggplot(underH0_long_trans, aes(x = value)) + 
+  facet_grid(variable~.) + 
+  geom_histogram() +
+  geom_vline(xintercept = c(10, targetBF, 0, -targetBF, -10) + c(-1, -1, 0, 1, 1)) +
+  annotate('text', 
+           x = 11, 
+           y = 900, 
+           label = c(paste('BF &gt; 14:\n', sum(underH0$beta1 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH0$beta4 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH0$beta5 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH0$beta7 &gt; 14)))) +
+  annotate('text', 
+           x = -11, 
+           y = 900, 
+           label = c(paste('BF &lt; 1/14:\n', sum(underH0$beta1 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH0$beta4 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH0$beta5 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH0$beta7 &lt; 1/14)))) +
+  scale_x_continuous(breaks = c(-13, -9, -5, -2, 0, 2, 5, 9, 13), 
+                     labels = c('1/14','1/10', '1/6', '1/3', '1', '3','6' ,'10', 14),
+                     limits = c(-13, 13),
+                     expand = c(0, 0)) +
+  labs(x = 'Bayes factor', 
+       y = 'Count',
+       title = bquote('Distribution of Bayes factors by sample size under '*H[0]))
+</code></pre>
+
+<p><img src="/post/2019-03-18-design-analysis-for-noveltyvr_files/figure-markdown_github/unnamed-chunk-3-1.png" alt="" /></p>
+
+<pre><code class="language-r"># Under H1
+ggplot(underH1_long_trans, aes(x = value)) + 
+  facet_grid(variable~.) + 
+  geom_histogram() +
+  geom_vline(xintercept = c(10, targetBF, 0, -targetBF, -10) + c(-1, -1, 0, 1, 1)) +
+  annotate('text', 
+           x = 11, 
+           y = 750, 
+           label = c(paste('BF &gt; 14:\n', sum(underH1$beta1 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH1$beta4 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH1$beta5 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH1$beta7 &gt; 14)))) +
+  annotate('text', 
+           x = -11, 
+           y = 750, 
+           label = c(paste('BF &lt; 1/14:\n', sum(underH1$beta1 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH1$beta4 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH1$beta5 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH1$beta7 &lt; 1/14)))) +
+    scale_x_continuous(breaks = c(-13, -9, -5, -2, 0, 2, 5, 9, 13), 
+                     labels = c('1/14','1/10', '1/6', '1/3', '1', '3','6' ,'10', 14),
+                     limits = c(-13, 13),
+                     expand = c(0, 0)) +
+  labs(x = 'Bayes factor', 
+       y = 'Count',
+       title = bquote('Distribution of Bayes factors by sample size under '*H[1]))
+</code></pre>
+
+<p><img src="/post/2019-03-18-design-analysis-for-noveltyvr_files/figure-markdown_github/unnamed-chunk-3-2.png" alt="" /></p>
+
+<pre><code class="language-r"># Under H2
+ggplot(underH2_long_trans, aes(x = value)) + 
+  facet_grid(variable~.) + 
+  geom_histogram() +
+  geom_vline(xintercept = c(10, targetBF, 0, -targetBF, -10) + c(-1, -1, 0, 1, 1)) +
+  annotate('text', 
+           x = 11, 
+           y = 700, 
+           label = c(paste('BF &gt; 14:\n', sum(underH2$beta1 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH2$beta4 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH2$beta5 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH2$beta7 &gt; 14)))) +
+  annotate('text', 
+           x = -11, 
+           y = 700, 
+           label = c(paste('BF &lt; 1/14:\n', sum(underH2$beta1 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH2$beta4 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH2$beta5 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH2$beta7 &lt; 1/14)))) +
+  scale_x_continuous(breaks = c(-13, -9, -5, -2, 0, 2, 5, 9, 13), 
+                     labels = c('1/14','1/10', '1/6', '1/3', '1', '3','6' ,'10', 14),
+                     limits = c(-13, 13),
+                     expand = c(0, 0)) +
+  labs(x = 'Bayes factor', 
+       y = 'Count',
+       title = bquote('Distribution of Bayes factors by sample size under '*H[2]))
+</code></pre>
+
+<p><img src="/post/2019-03-18-design-analysis-for-noveltyvr_files/figure-markdown_github/unnamed-chunk-3-3.png" alt="" /></p>
+
+<pre><code class="language-r"># Under H3
+ggplot(underH3_long_trans, aes(x = value)) + 
+  facet_grid(variable~.) + 
+  geom_histogram() +
+  geom_vline(xintercept = c(10, targetBF, 0, -targetBF, -10) + c(-1, -1, 0, 1, 1)) +
+  annotate('text', 
+           x = 11, 
+           y = 700, 
+           label = c(paste('BF &gt; 14:\n', sum(underH3$beta1 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH3$beta4 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH3$beta5 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH3$beta7 &gt; 14)))) +
+  annotate('text', 
+           x = -11, 
+           y = 700, 
+           label = c(paste('BF &lt; 1/14:\n', sum(underH3$beta1 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH3$beta4 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH3$beta5 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH3$beta7 &lt; 1/14)))) +
+  scale_x_continuous(breaks = c(-13, -9, -5, -2, 0, 2, 5, 9, 13), 
+                     labels = c('1/14','1/10', '1/6', '1/3', '1', '3','6' ,'10', 14),
+                     limits = c(-13, 13),
+                     expand = c(0, 0)) +
+  labs(x = 'Bayes factor', 
+       y = 'Count',
+       title = bquote('Distribution of Bayes factors by sample size under '*H[3]))
+</code></pre>
+
+<p><img src="/post/2019-03-18-design-analysis-for-noveltyvr_files/figure-markdown_github/unnamed-chunk-3-4.png" alt="" /></p>
+
+<pre><code class="language-r"># Under H4
+ggplot(underH4_long_trans, aes(x = value)) + 
+  facet_grid(variable~.) + 
+  geom_histogram() +
+  geom_vline(xintercept = c(10, targetBF, 0, -targetBF, -10) + c(-1, -1, 0, 1, 1)) +
+  annotate('text', 
+           x = 11, 
+           y = 700, 
+           label = c(paste('BF &gt; 14:\n', sum(underH4$beta1 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH4$beta4 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH4$beta5 &gt; 14)),
+                     paste('BF &gt; 14:\n', sum(underH4$beta7 &gt; 14)))) +
+  annotate('text', 
+           x = -11, 
+           y = 700, 
+           label = c(paste('BF &lt; 1/14:\n', sum(underH4$beta1 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH4$beta4 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH4$beta5 &lt; 1/14)),
+                     paste('BF &lt; 1/14:\n', sum(underH4$beta7 &lt; 1/14)))) +
+  scale_x_continuous(breaks = c(-13, -9, -5, -2, 0, 2, 5, 9, 13), 
+                     labels = c('1/14','1/10', '1/6', '1/3', '1', '3','6' ,'10', 14),
+                     limits = c(-13, 13),
+                     expand = c(0, 0)) +
+  labs(x = 'Bayes factor', 
+       y = 'Count',
+       title = bquote('Distribution of Bayes factors by sample size under '*H[4]))
+</code></pre>
+
+<p><img src="/post/2019-03-18-design-analysis-for-noveltyvr_files/figure-markdown_github/unnamed-chunk-3-5.png" alt="" /></p>
+
+<p>The plots above show the distributions of BFs under different hypotheses. To display the BF values like above, I transformed them so that values between 0 and 1 are equally spaced as the BFs that are above 1. The shown distributions are only a small section because some BF values are extremely high. For instance, the maximum value for <em>β</em><sub>7</sub> under <em>H</em><sub>4</sub> is 3.237658810^{9}. Therefore, I plot the number of values that are outside the display for both directions. I have decided to do this instead of displaying the logarithm because it feels easier to interpret.</p>
+
+<p>As expected, the ability to detect an effect is not influenced by the presence of other effects. In the presence of a true effect, BF values are higher than our target BF of 6. The only exception is the main effect of N, which even though has the same <em>β</em>-value has a different effect size due to subject specific noise. Again note that the simulation was based on a very small <em>β</em>-value.</p>
+
+<h4 id="2-what-is-the-probability-of-obtaining-compelling-misleading-evidence">2. What is the probability of obtaining (compelling) misleading evidence?</h4>
+
+<pre><code class="language-r">underH0_misleading &lt;- c(sum(underH0$beta1 &gt;= 6),
+                        sum(underH0$beta4 &gt;= 6),
+                        sum(underH0$beta5 &gt;= 6),
+                        sum(underH0$beta7 &gt;= 6))/nIterations
+
+underH1_misleading &lt;- c(sum(underH1$beta1 &lt;= 1/6),
+                        sum(underH1$beta4 &gt;= 6),
+                        sum(underH1$beta5 &gt;= 6),
+                        sum(underH1$beta7 &gt;= 6))/nIterations
+
+underH2_misleading &lt;- c(sum(underH2$beta1 &lt;= 1/6),
+                        sum(underH2$beta4 &lt;= 1/6),
+                        sum(underH2$beta5 &gt;= 6),
+                        sum(underH2$beta7 &gt;= 6))/nIterations
+
+underH3_misleading &lt;- c(sum(underH3$beta1 &lt;= 1/6),
+                        sum(underH3$beta4 &lt;= 1/6),
+                        sum(underH3$beta5 &lt;= 1/6),
+                        sum(underH3$beta7 &gt;= 6))/nIterations
+
+underH4_misleading &lt;- c(sum(underH4$beta1 &lt;= 1/6),
+                        sum(underH4$beta4 &lt;= 1/6),
+                        sum(underH4$beta5 &lt;= 1/6),
+                        sum(underH4$beta7 &lt;= 1/6))/nIterations
+
+
+
+table1 &lt;- data.frame(Hypothesis = c('H0', 'H1', 'H2', 'H3', 'H4'),
+                     Beta1 = c(underH0_misleading[1], 
+                               underH1_misleading[1], 
+                               underH2_misleading[1], 
+                               underH3_misleading[1],
+                               underH4_misleading[1]),
+                     Beta4 = c(underH0_misleading[2], 
+                               underH1_misleading[3], 
+                               underH2_misleading[2], 
+                               underH3_misleading[2],
+                               underH4_misleading[2]),
+                     Beta5 = c(underH0_misleading[3], 
+                               underH1_misleading[3], 
+                               underH2_misleading[3], 
+                               underH3_misleading[3],
+                               underH4_misleading[3]),
+                     Beta7 = c(underH0_misleading[4], 
+                               underH1_misleading[4], 
+                               underH2_misleading[4], 
+                               underH3_misleading[4],
+                               underH4_misleading[4]))
+
+kable(table1)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Hypothesis</th>
+<th align="right">Beta1</th>
+<th align="right">Beta4</th>
+<th align="right">Beta5</th>
+<th align="right">Beta7</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">H0</td>
+<td align="right">0</td>
+<td align="right">0.0087</td>
+<td align="right">0.0079</td>
+<td align="right">0.0093</td>
+</tr>
+
+<tr>
+<td align="left">H1</td>
+<td align="right">0</td>
+<td align="right">0.0099</td>
+<td align="right">0.0099</td>
+<td align="right">0.0088</td>
+</tr>
+
+<tr>
+<td align="left">H2</td>
+<td align="right">0</td>
+<td align="right">0.0000</td>
+<td align="right">0.0080</td>
+<td align="right">0.0096</td>
+</tr>
+
+<tr>
+<td align="left">H3</td>
+<td align="right">0</td>
+<td align="right">0.0002</td>
+<td align="right">0.0000</td>
+<td align="right">0.0093</td>
+</tr>
+
+<tr>
+<td align="left">H4</td>
+<td align="right">0</td>
+<td align="right">0.0000</td>
+<td align="right">0.0001</td>
+<td align="right">0.0000</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">maxMisleading &lt;- round(max(underH0_misleading,
+                           underH1_misleading,
+                           underH2_misleading,
+                           underH3_misleading,
+                           underH4_misleading), 4)*100
+</code></pre>
+
+<p>The probability of obtaining misleading evidence is generally very low. The highest rate is 0.99 %.</p>
+
+<h4 id="3-is-the-sample-size-big-enough-to-provide-compelling-evidence-in-the-right-direction-with-sufficiently-high-probability">3. Is the sample size big enough to provide compelling evidence in the right direction with sufficiently high probability?</h4>
+
+<pre><code class="language-r">underH0_compelling &lt;- c(sum(underH0$beta1 &lt;= 1/6),
+                        sum(underH0$beta4 &lt;= 1/6),
+                        sum(underH0$beta5 &lt;= 1/6),
+                        sum(underH0$beta7 &lt;= 1/6))/nIterations
+
+underH1_compelling &lt;- c(sum(underH1$beta1 &gt;= 6),
+                        sum(underH1$beta4 &lt;= 1/6),
+                        sum(underH1$beta5 &lt;= 1/6),
+                        sum(underH1$beta7 &lt;= 1/6))/nIterations
+
+underH2_compelling &lt;- c(sum(underH2$beta1 &gt;= 6),
+                        sum(underH2$beta4 &gt;= 6),
+                        sum(underH2$beta5 &lt;= 1/6),
+                        sum(underH2$beta7 &lt;= 1/6))/nIterations
+
+underH3_compelling &lt;- c(sum(underH3$beta1 &gt;= 6),
+                        sum(underH3$beta4 &gt;= 6),
+                        sum(underH3$beta5 &gt;= 6),
+                        sum(underH3$beta7 &lt;= 1/6))/nIterations
+
+underH4_compelling &lt;- c(sum(underH4$beta1 &gt;= 6),
+                        sum(underH4$beta4 &gt;= 6),
+                        sum(underH4$beta5 &gt;= 6),
+                        sum(underH4$beta7 &gt;= 6))/nIterations
+
+table2 &lt;- data.frame(Hypothesis = c('H0', 'H1', 'H2', 'H3', 'H4'),
+                     Beta1 = c(underH0_compelling[1], 
+                               underH1_compelling[1], 
+                               underH2_compelling[1], 
+                               underH3_compelling[1],
+                               underH4_compelling[1]),
+                     Beta4 = c(underH0_compelling[2], 
+                               underH1_compelling[3], 
+                               underH2_compelling[2], 
+                               underH3_compelling[2],
+                               underH4_compelling[2]),
+                     Beta5 = c(underH0_compelling[3], 
+                               underH1_compelling[3], 
+                               underH2_compelling[3], 
+                               underH3_compelling[3],
+                               underH4_compelling[3]),
+                     Beta7 = c(underH0_compelling[4], 
+                               underH1_compelling[4], 
+                               underH2_compelling[4], 
+                               underH3_compelling[4],
+                               underH4_compelling[4]))
+
+kable(table2)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Hypothesis</th>
+<th align="right">Beta1</th>
+<th align="right">Beta4</th>
+<th align="right">Beta5</th>
+<th align="right">Beta7</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">H0</td>
+<td align="right">0.1011</td>
+<td align="right">0.2889</td>
+<td align="right">0.2846</td>
+<td align="right">0.2831</td>
+</tr>
+
+<tr>
+<td align="left">H1</td>
+<td align="right">0.0404</td>
+<td align="right">0.2767</td>
+<td align="right">0.2767</td>
+<td align="right">0.2839</td>
+</tr>
+
+<tr>
+<td align="left">H2</td>
+<td align="right">0.0394</td>
+<td align="right">0.8223</td>
+<td align="right">0.2852</td>
+<td align="right">0.2763</td>
+</tr>
+
+<tr>
+<td align="left">H3</td>
+<td align="right">0.0358</td>
+<td align="right">0.8150</td>
+<td align="right">0.8254</td>
+<td align="right">0.2798</td>
+</tr>
+
+<tr>
+<td align="left">H4</td>
+<td align="right">0.0368</td>
+<td align="right">0.8275</td>
+<td align="right">0.8200</td>
+<td align="right">0.8198</td>
+</tr>
+</tbody>
+</table>
+
+<p>The probability of finding evidence against and in favour of higher memory performance in the novelty group is low with a beta of 0.2. However, The probability to obtain compelling evidence in favour of any interactions high (around 82 %). In around 27 % of the case, there was also compelling event against those interactions.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In sum, a sample size of 36 per group is enough to provide compelling evidence in favour of an interaction even if they are small in size.</p>
+
+<h1 id="references">References</h1>
+
+<p>Fenker, D. E., Frey, J. U., Schuetze, H., Heipertz, D., Heinze, H.-J., &amp; Düzel, E. (2008). Novel scenes improve recollection and recall of words. Journal of Cognitive Neuroscience, 20(7), 1250–1265. <a href="https://doi.org/10.1162/jocn.2008.20086">https://doi.org/10.1162/jocn.2008.20086</a> Schönbrodt, F. D., &amp; Wagenmakers, E.-J. (2018). Bayes factor design analysis: Planning for compelling evidence. Psychonomic Bulletin &amp; Review, 25(1), 128–142. <a href="https://doi.org/10.3758/s13423-017-1230-y">https://doi.org/10.3758/s13423-017-1230-y</a></p>
+
+
+    
+
+    
+
+    <h4>See also</h4>
+    <ul>
+        
+            <li><a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a></li>
+        
+            <li><a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a></li>
+        
+            <li><a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/"> End of schemaVR1 and start of schemaVR2</a></li>
+        
+            <li><a href="/2018/04/interim-results-and-future-plans/">Interim results and future plans</a></li>
+        
+            <li><a href="/2018/02/3d-location-recall-task-in-vr/">3D location recall task in VR</a></li>
+        
+    </ul>
+
+
+</article>
+
+
+
+        </div>
+
+        <aside class="col-12 col-lg-3 ml-auto blog-sidebar">
+    
+        
+
+
+<section>
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+        
+        <li>
+            <a href="/2019/03/design-analysis-for-noveltyvr/">Design analysis for noveltyVR</a>
+        </li>
+        
+        <li>
+            <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
+        </li>
+        
+        <li>
+            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
+        </li>
+        
+        <li>
+            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
+        </li>
+        
+        <li>
+            <a href="/2018/04/interim-results-of-schemvr1/">Interim results of schemVR1</a>
+        </li>
+        
+    </ol>
+</section>
+
+    
+    
+        <section>
+    
+        
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-primary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/tags/about">about</a>
+            
+            <a class="badge badge-primary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-primary" href="/tags/data-check">data-check</a>
+            
+            <a class="badge badge-primary" href="/tags/design-analysis">design-analysis</a>
+            
+            <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
+            
+            <a class="badge badge-primary" href="/tags/glm">glm</a>
+            
+            <a class="badge badge-primary" href="/tags/graphics">graphics</a>
+            
+            <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
+            
+            <a class="badge badge-primary" href="/tags/ideas-and-plans">ideas-and-plans</a>
+            
+            <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
+            
+            <a class="badge badge-primary" href="/tags/lme4/lmertest">lme4/lmertest</a>
+            
+            <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/meta">meta</a>
+            
+            <a class="badge badge-primary" href="/tags/mixed-linear-models">mixed-linear-models</a>
+            
+            <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
+            
+            <a class="badge badge-primary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-primary" href="/tags/pilot-study">pilot-study</a>
+            
+            <a class="badge badge-primary" href="/tags/ratingstudy">ratingstudy</a>
+            
+            <a class="badge badge-primary" href="/tags/recognition-memory">recognition-memory</a>
+            
+            <a class="badge badge-primary" href="/tags/recollection">recollection</a>
+            
+            <a class="badge badge-primary" href="/tags/research-design">research-design</a>
+            
+            <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+            
+            <a class="badge badge-primary" href="/tags/schema">schema</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr1">schemavr1</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr2">schemavr2</a>
+            
+            <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-primary" href="/tags/word-properties">word-properties</a>
+            
+            <a class="badge badge-primary" href="/tags/words">words</a>
+            
+        </p>
+        
+    
+</section>
+    
+</aside>
+
+      </div>
+    </div>
+    
+
+    
+      
+
+
+
+
+
+
+<footer class="blog-footer w-100">
+    <nav class="navbar navbar-light bg-light">
+        <p class="w-100 text-center">Hugo template made with ❤ by <a href="https://github.com/Xzya">Xzya</a>, inspired by <a href="https://github.com/alanorth/hugo-theme-bootstrap4-blog">hugo-theme-bootstrap4-blog</a></p>
+        <p class="w-100 text-center"><a href="#">Back to top</a></p>
+    </nav>
+</footer>
+
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

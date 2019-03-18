@@ -3,8 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jaquent.github.io/2019/01/design-analysis-for-noveltyvr/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+    <loc>https://jaquent.github.io/2019/03/design-analysis-for-noveltyvr/</loc>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/2019/03/prior-deliberation-on-analysis/</loc>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -184,7 +189,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/bayesian-stats/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -201,13 +206,13 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/design-analysis/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://jaquent.github.io/categories/experiments/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -219,7 +224,13 @@
   
   <url>
     <loc>https://jaquent.github.io/categories/general/</loc>
-    <lastmod>2018-03-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/tags/glm/</loc>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -243,7 +254,7 @@
   
   <url>
     <loc>https://jaquent.github.io/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -285,7 +296,7 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/noveltyvr/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -297,7 +308,7 @@
   
   <url>
     <loc>https://jaquent.github.io/post/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -321,13 +332,13 @@
   
   <url>
     <loc>https://jaquent.github.io/tags/research-design/</loc>
-    <lastmod>2019-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://jaquent.github.io/tags/rmarkdown/</loc>
-    <lastmod>2018-11-21T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
