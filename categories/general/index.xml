@@ -6,10 +6,19 @@
     <description>Recent content in General on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jaquent.github.io/categories/general/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Effect of SD under the null hypothesis</title>
+      <link>https://jaquent.github.io/2019/04/effect-of-sd-under-the-null-hypothesis/</link>
+      <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2019/04/effect-of-sd-under-the-null-hypothesis/</guid>
+      <description>Outset of the problem I recently discussed generating data for a power/design analysis and the following problem came up. Does the standard deviation (SD) has an influence on the test statistics (t-value, p-value, BF) under the null hypothesis? The noise in the or the SD of the data should have no effect. To understand this can look at Cohen&amp;rsquo;s D, which is the mean divided by the SD. Under the null hypothesis will always be zero because the mean is zero regardless how big the SD is.</description>
+    </item>
     
     <item>
       <title>Prior deliberation on analysis</title>
