@@ -9,8 +9,9 @@
 <meta property="og:description" content="As noted in the previous post, I want to create a 3D location recall task. I want that people are able to pick up objects from the floor and place them at the locations at which they think the objects were during encoding.
 I found a good YouTube tutorial (see here) and adapted the respective script (see here), which needs to be added to the wand controllers to work. My version of the script will be uploaded later when it finished." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2018/02/3d-location-recall-task-in-vr/" /><meta property="article:published_time" content="2018-02-19T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-02-19T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2018/02/3d-location-recall-task-in-vr/" />
+<meta property="article:published_time" content="2018-02-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-02-19T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="3D location recall task in VR"/>
@@ -19,7 +20,7 @@ I found a good YouTube tutorial (see here) and adapted the respective script (se
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2018/02/3d-location-recall-task-in-vr/">
+    <link rel="canonical" href="/2018/02/3d-location-recall-task-in-vr/">
 
     <title>
       
@@ -29,7 +30,7 @@ I found a good YouTube tutorial (see here) and adapted the respective script (se
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -120,7 +121,6 @@ I found a good YouTube tutorial (see here) and adapted the respective script (se
     <p>As noted in the previous post, I want to create a 3D location recall task. I want that people are able to pick up objects from the floor and place them at the locations at which they think the objects were during encoding.</p>
 <p>I found a good YouTube tutorial (<a href="https://www.youtube.com/watch?v=h9IJHZgkcME">see here</a>) and adapted the respective script (<a href="https://github.com/b0ard/YoutubeVive/blob/36f26134dd9adb1a8513941db694a2524f055101/Assets/WandController.cs">see here</a>), which needs to be added to the wand controllers to work. My version of the script will be uploaded later when it finished. The basic approach is to make the target object a child of the wand controller and to make it kinematic. The object itself needs to have a collider and a rigidbody attached to it. To release the object, one just needs to reverse the steps.</p>
 
-
     
 
     
@@ -157,6 +157,14 @@ I found a good YouTube tutorial (see here) and adapted the respective script (se
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -166,14 +174,6 @@ I found a good YouTube tutorial (see here) and adapted the respective script (se
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -284,6 +284,29 @@ I found a good YouTube tutorial (see here) and adapted the respective script (se
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

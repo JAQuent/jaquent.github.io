@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>About on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/about/</link>
-    <description>Recent content in About on Jörn Alexander Quent&#39;s notebook</description>
+    <title>about on Jörn Alexander Quent&#39;s notebook</title>
+    <link>/tags/about/</link>
+    <description>Recent content in about on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/tags/about/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/about/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About my open notebook </title>
-      <link>https://jaquent.github.io/2018/01/about-my-open-notebook/</link>
+      <link>/2018/01/about-my-open-notebook/</link>
       <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/about-my-open-notebook/</guid>
+      <guid>/2018/01/about-my-open-notebook/</guid>
       <description>Note (10/12/2018): This is outdated. See here for current approach.
 I have just finished uploading old diary entries, which gives me the opportunity to reflect on what I have done so far and to get a bit more meta on the whole topic with this entry, which is the first one I am actually going to publish at the end of my (working) day. Some of the previous entries are quite short and initially weren’t written for the general public.</description>
     </item>

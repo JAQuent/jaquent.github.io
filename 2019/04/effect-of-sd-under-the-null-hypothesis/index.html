@@ -8,8 +8,9 @@
 <meta property="og:title" content="Effect of SD under the null hypothesis" />
 <meta property="og:description" content="Outset of the problem I recently discussed generating data for a power/design analysis and the following problem came up. Does the standard deviation (SD) has an influence on the test statistics (t-value, p-value, BF) under the null hypothesis? The noise in the or the SD of the data should have no effect. To understand this, look at Cohen&rsquo;s D, which is the mean divided by the SD. Under the null hypothesis will always be zero because the mean is zero regardless how big the SD is." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2019/04/effect-of-sd-under-the-null-hypothesis/" /><meta property="article:published_time" content="2019-04-22T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-04-22T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2019/04/effect-of-sd-under-the-null-hypothesis/" />
+<meta property="article:published_time" content="2019-04-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-04-22T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effect of SD under the null hypothesis"/>
@@ -17,7 +18,7 @@
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2019/04/effect-of-sd-under-the-null-hypothesis/">
+    <link rel="canonical" href="/2019/04/effect-of-sd-under-the-null-hypothesis/">
 
     <title>
       
@@ -27,7 +28,7 @@
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -115,204 +116,185 @@
     <hr>
 </header>
 <article class="blog-post">
-    
-
-<h1 id="outset-of-the-problem">Outset of the problem</h1>
-
+    <h1 id="outset-of-the-problem">Outset of the problem</h1>
 <p>I recently discussed generating data for a power/design analysis and the following problem came up. Does the standard deviation (SD) has an influence on the test statistics (t-value, p-value, BF) under the null hypothesis? The noise in the or the SD of the data should have no effect. To understand this, look at Cohen&rsquo;s D, which is the mean divided by the SD. Under the null hypothesis will always be zero because the mean is zero regardless how big the SD is.</p>
-
 <p>To illustrate this, I ran a short simulation where I generated 100000 data sets each with 100 data points from two zero mean normal distributios: one with SD = 1 and a second with SD = 100. Then, I calculate standard t-tests to get the respective t-values and p-values. Since the original discussion was about a Bayesian design analysis, I also ran the Bayesian version of the t-test.</p>
-
 <h1 id="simulation-code">Simulation code</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># This script simulates null data with two different SDs</span>
+<span style="color:#75715e"># Libraries</span>
+<span style="color:#a6e22e">library</span>(BayesFactor)
+<span style="color:#a6e22e">library</span>(parallel)
+<span style="color:#a6e22e">library</span>(assortedRFunctions)
 
-<pre><code class="language-r"># This script simulates null data with two different SDs
-# Libraries
-library(BayesFactor)
-library(parallel)
-library(assortedRFunctions)
-
-# Functions
-fun1 &lt;- function(x){
-  return(t.test(x)$statistic)
+<span style="color:#75715e"># Functions</span>
+fun1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(x){
+  <span style="color:#a6e22e">return</span>(<span style="color:#a6e22e">t.test</span>(x)<span style="color:#f92672">$</span>statistic)
 }
 
-fun2 &lt;- function(x){
-  return(t.test(x)$p.value)
+fun2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(x){
+  <span style="color:#a6e22e">return</span>(<span style="color:#a6e22e">t.test</span>(x)<span style="color:#f92672">$</span>p.value)
 }
 
-fun3 &lt;- function(x){
-  return(as.numeric(as.vector(ttestBF(x))))
+fun3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(x){
+  <span style="color:#a6e22e">return</span>(<span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">as.vector</span>(<span style="color:#a6e22e">ttestBF</span>(x))))
 }
 
-# Creating cluster
-numCores &lt;- detectCores() - 1
-print(paste('Cores used:', numCores))
-cluster  &lt;- makeCluster(numCores)
-clusterExport(cluster, c('ttestBF',
-                         't.test'))
+<span style="color:#75715e"># Creating cluster</span>
+numCores <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">detectCores</span>() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+<span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;Cores used:&#39;</span>, numCores))
+cluster  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">makeCluster</span>(numCores)
+<span style="color:#a6e22e">clusterExport</span>(cluster, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;ttestBF&#39;</span>,
+                         <span style="color:#e6db74">&#39;t.test&#39;</span>))
 
-# Parameters
-n  &lt;- 10000000
-s1 &lt;- 1
-s2 &lt;- 100
+<span style="color:#75715e"># Parameters</span>
+n  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10000000</span>
+s1 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+s2 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
 
-# Generating the data sets
-data1 &lt;- matrix(rnorm(n, 0, s1), ncol = 100)
-data2 &lt;- matrix(rnorm(n, 0, s2), ncol = 100)
-print('Data created')
+<span style="color:#75715e"># Generating the data sets</span>
+data1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0</span>, s1), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)
+data2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0</span>, s2), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)
+<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#39;Data created&#39;</span>)
 
-# Run simulation
-# t-values
-print('Start simulation')
-startTime &lt;- Sys.time()
-t1  &lt;- parApply(cluster, data1, 1, fun1)
-t2  &lt;- parApply(cluster, data2, 1, fun1)
-time1     &lt;- Sys.time()
-print(paste('Finished calculating t-values:', time1))
+<span style="color:#75715e"># Run simulation</span>
+<span style="color:#75715e"># t-values</span>
+<span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#39;Start simulation&#39;</span>)
+startTime <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.time</span>()
+t1  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">parApply</span>(cluster, data1, <span style="color:#ae81ff">1</span>, fun1)
+t2  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">parApply</span>(cluster, data2, <span style="color:#ae81ff">1</span>, fun1)
+time1     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.time</span>()
+<span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;Finished calculating t-values:&#39;</span>, time1))
 
-# p-values
-p1  &lt;- parApply(cluster, data1, 1, fun2)
-p2  &lt;- parApply(cluster, data2, 1, fun2)
-time2     &lt;- Sys.time()
-print(paste('Finished calculating p-values:', time2))
+<span style="color:#75715e"># p-values</span>
+p1  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">parApply</span>(cluster, data1, <span style="color:#ae81ff">1</span>, fun2)
+p2  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">parApply</span>(cluster, data2, <span style="color:#ae81ff">1</span>, fun2)
+time2     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.time</span>()
+<span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;Finished calculating p-values:&#39;</span>, time2))
 
-# BF
-bf1 &lt;- parApply(cluster, data1, 1, fun3)
-bf2 &lt;- parApply(cluster, data2, 1, fun3)
-time3     &lt;- Sys.time()
-print(paste('Finished calculating BFs:', time3))
+<span style="color:#75715e"># BF</span>
+bf1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">parApply</span>(cluster, data1, <span style="color:#ae81ff">1</span>, fun3)
+bf2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">parApply</span>(cluster, data2, <span style="color:#ae81ff">1</span>, fun3)
+time3     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.time</span>()
+<span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;Finished calculating BFs:&#39;</span>, time3))
 
-# Concatenating to data frame
-df1  &lt;- data.frame(`p-value` = p1,
-                   `t-value` = t1,
-                   BF = bf1)
+<span style="color:#75715e"># Concatenating to data frame</span>
+df1  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(`p-value` <span style="color:#f92672">=</span> p1,
+                   `t-value` <span style="color:#f92672">=</span> t1,
+                   BF <span style="color:#f92672">=</span> bf1)
 
-df2  &lt;- data.frame(`p-value` = p2,
-                   `t-value` = t2,
-                   BF = bf2)
+df2  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(`p-value` <span style="color:#f92672">=</span> p2,
+                   `t-value` <span style="color:#f92672">=</span> t2,
+                   BF <span style="color:#f92672">=</span> bf2)
 
-# Stopping analysis
-stopCluster(cluster)
+<span style="color:#75715e"># Stopping analysis</span>
+<span style="color:#a6e22e">stopCluster</span>(cluster)
 
-# Saving results
-save.image(file = datedFileNam('nullDataNoise', '.RData'))
+<span style="color:#75715e"># Saving results</span>
+<span style="color:#a6e22e">save.image</span>(file <span style="color:#f92672">=</span> <span style="color:#a6e22e">datedFileNam</span>(<span style="color:#e6db74">&#39;nullDataNoise&#39;</span>, <span style="color:#e6db74">&#39;.RData&#39;</span>))
 
-print(time3 - startTime)
-</code></pre>
+<span style="color:#a6e22e">print</span>(time3 <span style="color:#f92672">-</span> startTime)
+</code></pre></div><h1 id="displaying-results">Displaying results</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Libraries</span>
+<span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">library</span>(cowplot)
 
-<h1 id="displaying-results">Displaying results</h1>
+<span style="color:#75715e"># Loading data</span>
+<span style="color:#a6e22e">load</span>(<span style="color:#e6db74">&#34;U:/Projects/variousFiles/rStuff/nullDataNoise_20190409_160133.RData&#34;</span>)
 
-<pre><code class="language-r"># Libraries
-library(ggplot2)
-library(cowplot)
+<span style="color:#75715e"># Specify quantile range for qq plot</span>
+probs <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.01</span>)
 
-# Loading data
-load(&quot;U:/Projects/variousFiles/rStuff/nullDataNoise_20190409_160133.RData&quot;)
+<span style="color:#75715e"># T-value plots</span>
+t1_q <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">quantile</span>(t1, probs <span style="color:#f92672">=</span> probs))
+t2_q <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">quantile</span>(t2, probs <span style="color:#f92672">=</span> probs))
+t_qq <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_point</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> t1_q, y <span style="color:#f92672">=</span> t2_q)) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;T-values for Data 1&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;T-values for Data 2&#39;</span>) 
 
-# Specify quantile range for qq plot
-probs &lt;- seq(0, 1, 0.01)
+t1_hist <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_histogram</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> t1)) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Count&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-5</span>, <span style="color:#ae81ff">5</span>), expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
 
-# T-value plots
-t1_q &lt;- as.numeric(quantile(t1, probs = probs))
-t2_q &lt;- as.numeric(quantile(t2, probs = probs))
-t_qq &lt;- ggplot() + 
-  geom_point(aes(x = t1_q, y = t2_q)) + 
-  labs(y = 'T-values for Data 1', 
-       x = 'T-values for Data 2') 
+t2_hist <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_histogram</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> t2)) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Count&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_flip</span>() 
 
-t1_hist &lt;- ggplot() + 
-  geom_histogram(aes(x = t1)) + 
-  labs(y = 'Count', 
-       x = '') +
-  coord_cartesian(xlim = c(-5, 5), expand = FALSE)
-
-t2_hist &lt;- ggplot() + 
-  geom_histogram(aes(x = t2)) + 
-  labs(y = 'Count', 
-       x = '') +
-  coord_flip() 
-
-# Plot
-plot_grid(t1_hist,
-          NULL,
+<span style="color:#75715e"># Plot</span>
+<span style="color:#a6e22e">plot_grid</span>(t1_hist,
+          <span style="color:#66d9ef">NULL</span>,
           t_qq,
           t2_hist,
-          ncol = 2,
-          align = 'hv',
-          rel_widths = c(2, 1),
-          rel_heights = c(1, 2))
-</code></pre>
+          ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+          align <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hv&#39;</span>,
+          rel_widths <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>),
+          rel_heights <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+</code></pre></div><p><img src="/post/2019-04-22-effect-of-sd-under-the-null-hypothesis_files/figure-markdown_github/unnamed-chunk-2-1.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># p-value plots</span>
+p1_q <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">quantile</span>(p1, probs <span style="color:#f92672">=</span> probs))
+p2_q <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">quantile</span>(p1, probs <span style="color:#f92672">=</span> probs))
+p_qq <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_point</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> p1_q, y <span style="color:#f92672">=</span> p2_q)) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;p-values for Data 1&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;p-values for Data 2&#39;</span>) 
 
-<p><img src="/post/2019-04-22-effect-of-sd-under-the-null-hypothesis_files/figure-markdown_github/unnamed-chunk-2-1.png" alt="" /></p>
+p1_hist <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_histogram</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> p1)) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Count&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
 
-<pre><code class="language-r"># p-value plots
-p1_q &lt;- as.numeric(quantile(p1, probs = probs))
-p2_q &lt;- as.numeric(quantile(p1, probs = probs))
-p_qq &lt;- ggplot() + 
-  geom_point(aes(x = p1_q, y = p2_q)) + 
-  labs(y = 'p-values for Data 1', 
-       x = 'p-values for Data 2') 
+p2_hist <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_histogram</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> p2)) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Count&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_flip</span>() 
 
-p1_hist &lt;- ggplot() + 
-  geom_histogram(aes(x = p1)) + 
-  labs(y = 'Count', 
-       x = '') +
-  coord_cartesian(xlim = c(0, 1), expand = FALSE)
-
-p2_hist &lt;- ggplot() + 
-  geom_histogram(aes(x = p2)) + 
-  labs(y = 'Count', 
-       x = '') +
-  coord_flip() 
-
-# Plot
-plot_grid(p1_hist,
-          NULL,
+<span style="color:#75715e"># Plot</span>
+<span style="color:#a6e22e">plot_grid</span>(p1_hist,
+          <span style="color:#66d9ef">NULL</span>,
           p_qq,
           p2_hist,
-          ncol = 2,
-          align = 'hv',
-          rel_widths = c(2, 1),
-          rel_heights = c(1, 2))
-</code></pre>
+          ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+          align <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hv&#39;</span>,
+          rel_widths <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>),
+          rel_heights <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+</code></pre></div><p><img src="/post/2019-04-22-effect-of-sd-under-the-null-hypothesis_files/figure-markdown_github/unnamed-chunk-2-2.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># BF plots</span>
+bf1_q <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">quantile</span>(<span style="color:#a6e22e">log</span>(bf1), probs <span style="color:#f92672">=</span> probs))
+bf2_q <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">quantile</span>(<span style="color:#a6e22e">log</span>(bf2), probs <span style="color:#f92672">=</span> probs))
+bf_qq <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_point</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> bf1_q, y <span style="color:#f92672">=</span> bf2_q)) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;log(BF)-values for Data 1&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;log(BF)-values for Data 2&#39;</span>) 
 
-<p><img src="/post/2019-04-22-effect-of-sd-under-the-null-hypothesis_files/figure-markdown_github/unnamed-chunk-2-2.png" alt="" /></p>
+bf1_hist <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_histogram</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> <span style="color:#a6e22e">log</span>(bf1))) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Count&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-2.5</span>, <span style="color:#ae81ff">7.5</span>), expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
 
-<pre><code class="language-r"># BF plots
-bf1_q &lt;- as.numeric(quantile(log(bf1), probs = probs))
-bf2_q &lt;- as.numeric(quantile(log(bf2), probs = probs))
-bf_qq &lt;- ggplot() + 
-  geom_point(aes(x = bf1_q, y = bf2_q)) + 
-  labs(y = 'log(BF)-values for Data 1', 
-       x = 'log(BF)-values for Data 2') 
+bf2_hist <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_histogram</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> <span style="color:#a6e22e">log</span>(bf2))) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Count&#39;</span>, 
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_flip</span>() 
 
-bf1_hist &lt;- ggplot() + 
-  geom_histogram(aes(x = log(bf1))) + 
-  labs(y = 'Count', 
-       x = '') +
-  coord_cartesian(xlim = c(-2.5, 7.5), expand = FALSE)
-
-bf2_hist &lt;- ggplot() + 
-  geom_histogram(aes(x = log(bf2))) + 
-  labs(y = 'Count', 
-       x = '') +
-  coord_flip() 
-
-# Plot
-plot_grid(bf1_hist,
-          NULL,
+<span style="color:#75715e"># Plot</span>
+<span style="color:#a6e22e">plot_grid</span>(bf1_hist,
+          <span style="color:#66d9ef">NULL</span>,
           bf_qq,
           bf2_hist,
-          ncol = 2,
-          align = 'hv',
-          rel_widths = c(2, 1),
-          rel_heights = c(1, 2))
-</code></pre>
-
-<p><img src="/post/2019-04-22-effect-of-sd-under-the-null-hypothesis_files/figure-markdown_github/unnamed-chunk-2-3.png" alt="" /></p>
-
+          ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+          align <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hv&#39;</span>,
+          rel_widths <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>),
+          rel_heights <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+</code></pre></div><p><img src="/post/2019-04-22-effect-of-sd-under-the-null-hypothesis_files/figure-markdown_github/unnamed-chunk-2-3.png" alt=""></p>
 <h1 id="conclusion">Conclusion</h1>
-
 <p>As can bee seen above in the QQ-plots and the histrograms and as expected, there is basically no difference between the datasets drawn from the two distributions in any of the statistics.</p>
 
 
@@ -323,11 +305,11 @@ plot_grid(bf1_hist,
     <h4>See also</h4>
     <ul>
         
-            <li><a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a></li>
-        
             <li><a href="/2019/03/design-analysis-for-noveltyvr/">Design analysis for noveltyVR</a></li>
         
-            <li><a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a></li>
+            <li><a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a></li>
+        
+            <li><a href="/2018/11/selecting-and-checking-living/non-living-words/">Selecting and checking living/non-living words</a></li>
         
             <li><a href="/2018/04/interim-results-of-schemvr1/">Interim results of schemVR1</a></li>
         
@@ -352,6 +334,14 @@ plot_grid(bf1_hist,
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -361,14 +351,6 @@ plot_grid(bf1_hist,
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -479,6 +461,29 @@ plot_grid(bf1_hist,
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

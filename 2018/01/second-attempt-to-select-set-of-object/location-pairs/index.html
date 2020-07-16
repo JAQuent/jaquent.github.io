@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Second attempt to select set of object/location pairs" />
+<meta property="og:description" content="Introduction This is actually the second attempt to find a suitable set of object/location pairs (click here for the first attempt). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&rsquo;t work as a foil anymore.
+Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2018/01/second-attempt-to-select-set-of-object/location-pairs/" />
+<meta property="article:published_time" content="2018-01-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-01-25T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Second attempt to select set of object/location pairs"/>
+<meta name="twitter:description" content="Introduction This is actually the second attempt to find a suitable set of object/location pairs (click here for the first attempt). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&rsquo;t work as a foil anymore.
+Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets."/>
+
+
+
+    <link rel="canonical" href="/2018/01/second-attempt-to-select-set-of-object/location-pairs/">
+
+    <title>
+      
+        Second attempt to select set of object/location pairs | Jörn Alexander Quent&#39;s notebook
+      
+    </title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      <header class="blog-header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            Jörn Alexander Quent&#39;s notebook
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/">Home</a>
+                    
+                </li>
+                
+                <li class="nav-item ">
+                    
+                        <a class="nav-link" href="/about/">About</a>
+                    
+                </li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+</header>
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-8 blog-main">
+
+          
+
+<header>
+    <h2 class="blog-post-title">
+        <a class="text-dark" href="/2018/01/second-attempt-to-select-set-of-object/location-pairs/">Second attempt to select set of object/location pairs</a>
+    </h2>
+    
+
+
+<div class="blog-post-date text-secondary">
+    
+        Jan 25, 2018
+    
+    
+        by <span rel="author">Alex Quent</span>
+    
+</div>
+
+    
+<div class="blog-post-tags text-secondary">
+    <strong>Tags:</strong>
+    
+        <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+    
+        <a class="badge badge-primary" href="/tags/schemavr1">schemaVR1</a>
+    
+</div>
+
+    
+<div class="blog-post-categories text-secondary">
+    <strong>Categories:</strong>
+    
+        <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+    
+</div>
+
+    <hr>
+</header>
+<article class="blog-post">
+    <h1 id="introduction">Introduction</h1>
+<p>This is actually the second attempt to find a suitable set of object/location pairs (<a href="https://jaquent.github.io/2018/01/stimulus-selection-for-schemavr1-attempt-1/">click here for the first attempt</a>). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&rsquo;t work as a foil anymore.</p>
+<p>Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets. The previous analysis of this data set can be found <a href="https://jaquent.github.io/2018/01/analysing-normative-data-set/">here</a>. The code for the task can be found <a href="https://github.com/JAQuent/ratingStudy">here</a>.</p>
+<h2 id="used-libraries-and-functions">Used libraries and functions</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">library</span>(ez)
+<span style="color:#a6e22e">library</span>(tidyr)
+
+pValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x, sign <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;=&#39;</span>){
+  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
+    s <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary.lm</span>(x)
+    x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pf</span>(s<span style="color:#f92672">$</span>fstatistic[1L], s<span style="color:#f92672">$</span>fstatistic[2L], s<span style="color:#f92672">$</span>fstatistic[3L], lower.tail <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
+      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
+    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
+    } else{
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
+    } 
+  } else {
+    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
+      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
+    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
+    } else{
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
+    } 
+  }
+  <span style="color:#a6e22e">return</span>(x.converted)
+}
+
+rValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x){
+  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
+    r.squared <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(x)<span style="color:#f92672">$</span>r.squared
+    x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(r.squared, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
+  } else {
+    <span style="color:#a6e22e">if </span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;= -&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>), sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) 
+    } else {
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
+    }
+  }
+  <span style="color:#a6e22e">return</span>(x.converted) 
+}
+</code></pre></div><h2 id="calculating-the-number-of-possible-sets">Calculating the number of possible sets</h2>
+<p>First I want to get an idea how many combinations are possible. With a little help (<a href="https://stackoverflow.com/questions/48321546/choosing-all-possible-combinations-for-pairing-the-elements-of-two-vectors-in-r">click here</a>), I found out that there are 20*!* or 2432902008176640000 possible sets of combinations for placing twenty objects at twenty locations, which means I cannot generate all possible solutions. The number of combinations is way higher then the maximal length for a vector in R, which by the way is 2147483647.</p>
+<p>If I didn&rsquo;t care whether an object or location is drawn more than once, the number of possible combinations would be even higher (2788360983670898446406042662828820). because one would draw a set of k = 20 out of n = 400 possible pairs or ${n}\choose{k}$.</p>
+<p>To show that it is the case consider this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">k                    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">3</span>
+a                    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>
+b                    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>
+possibleCombinations <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">expand.grid</span>(a, b)
+n                    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">length</span>(a)^2
+numberCombinations   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">choose</span>(n, k)
+indexCombinations    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">combn</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>n, k)
+invalidIndex         <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">TRUE</span>, numberCombinations)
+allSets              <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">array</span>(data <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, dim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(k, <span style="color:#ae81ff">2</span>, numberCombinations))
+
+<span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numberCombinations){
+  allSets[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>, i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(possibleCombinations<span style="color:#f92672">$</span>Var1[indexCombinations[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, i]], possibleCombinations<span style="color:#f92672">$</span>Var2[indexCombinations[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, i]])
+  <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">table</span>(allSets[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, i])) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">table</span>(allSets[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, i])) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
+    invalidIndex[i] <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">FALSE</span>
+  }
+}
+<span style="color:#a6e22e">sum</span>(invalidIndex)
+</code></pre></div><pre><code>## [1] 6
+</code></pre>
+<p>If I reduce the number of objects and locations to three, it is a bit easier to calculate. Without bothering about whether an object or a location is drawn more than once, the number of possible combinations is 84 because one would draw a set of k = 3 out of n = 9 possible pairs or ${n}\choose{k}$. If calculate all possible combinations by using <em>combn()</em> and then check how often a number is repeating in columns (i.e. object and location column) of the array <em>allSets</em>, then I find that the result is 6 or in other word 3*!*.</p>
+<p>The example above doesn&rsquo;t consider the constraints I impose nor does it take the foils into account. The message is that there are a lot of combinations and therefore I need high number of iterations to actually find a good set.</p>
+<h2 id="two-foils-solution">Two foils solution</h2>
+<p>After a quick research I couldn&rsquo;t find any other solution that work because R seems to be more on continuous optimisation. For instance I tried to implement a grid search, but I was not successful.</p>
+<p>In my second attempt, I randomly select locations for the targets and for foil 1 as well as foil 2 with <em>sample()</em> without replacement. After that I make sure that same location is not used for foil 1, foil 2 and/or the target by repeating the step until it is not the case. I then calculate the sum of squared differences between the ranks of the targets and the intended spread (i.e. <em>targetSpread</em>; SS of targets) and the sum of squared differences between the ranks of the targets and both foils (SS of foils), which will be used later to select a sets in two-step process.</p>
+<p>Because the number of combination is so high, I decided to use the CBU&rsquo;s computer cluster. I used a machine with 2.67 GHz CPU with 16 cores and 128 RAM.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Functions</span>
+progressDisplay <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(i, iterations){
+  <span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#39;\rProgress: |&#39;</span>,<span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">floor</span>((i<span style="color:#f92672">/</span>iterations)<span style="color:#f92672">*</span><span style="color:#ae81ff">50</span>)),<span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#39; &#39;</span>,<span style="color:#ae81ff">50</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">floor</span>((i<span style="color:#f92672">/</span>iterations)<span style="color:#f92672">*</span><span style="color:#ae81ff">50</span>)),<span style="color:#e6db74">&#39;|&#39;</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>)
+}
+
+<span style="color:#75715e"># Preparing</span>
+subNo           <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>
+N               <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">length</span>(subNo)
+numberObjects   <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+locationRatings <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">array</span>(data <span style="color:#f92672">=</span> <span style="color:#66d9ef">NA</span>, dim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(numberObjects, numberObjects, N))
+
+<span style="color:#75715e"># Sequently loading data</span>
+<span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>N){
+  locationRatings[,,i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">scan</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;U:/Projects/schemaVR/normativeStudy/normativeData/locationRatings_&#39;</span>, <span style="color:#a6e22e">as.character</span>(subNo[i]) ,<span style="color:#e6db74">&#39;.dat&#39;</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>)), byrow <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>)
+}
+
+<span style="color:#75715e"># Calculating ranks</span>
+rankedRatings <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">array</span>(data <span style="color:#f92672">=</span> <span style="color:#66d9ef">NA</span>, dim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(numberObjects, numberObjects, N))
+
+<span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>N){
+  rankedRatings[,,i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rank</span>(locationRatings[,,i])
+}
+
+<span style="color:#75715e"># Calculating mean rank per object/ location and declaring that it is a gobal variable so that I can used it inside an optimising function</span>
+meanRankedRatings <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">apply</span>(rankedRatings, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>, mean)
+
+<span style="color:#75715e"># Declaring it to be a gobal variable so that I can used it inside an optimising function</span>
+targetSpread <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">400</span>,length <span style="color:#f92672">=</span> numberObjects)
+
+iterations <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">9999999</span>
+SS_target  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">NA</span>, iterations)
+SS_foils   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">NA</span>, iterations)
+targets    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#66d9ef">NA</span>, nrow <span style="color:#f92672">=</span> numberObjects, ncol <span style="color:#f92672">=</span> iterations)
+foils1     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#66d9ef">NA</span>, nrow <span style="color:#f92672">=</span> numberObjects, ncol <span style="color:#f92672">=</span> iterations)
+foils2     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#66d9ef">NA</span>, nrow <span style="color:#f92672">=</span> numberObjects, ncol <span style="color:#f92672">=</span> iterations)
+minima     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">NA</span>, iterations)
+<span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>iterations){
+  targets[, i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">20</span>)
+  foils1[, i]  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">20</span>)
+  foils2[, i]  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">20</span>)
+  <span style="color:#a6e22e">while</span>(<span style="color:#a6e22e">any</span>(foils1[, i] <span style="color:#f92672">==</span> foils2[, i]) <span style="color:#f92672">|</span> <span style="color:#a6e22e">any</span>(targets[, i] <span style="color:#f92672">==</span> foils2[, i]) <span style="color:#f92672">|</span> <span style="color:#a6e22e">any</span>(targets[, i] <span style="color:#f92672">==</span> foils1[, i])){
+    targets[, i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">20</span>)
+    foils1[, i]  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">20</span>)
+    foils2[, i]  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">20</span>)
+  }
+  <span style="color:#75715e"># Checking if same location is used more than once</span>
+  <span style="color:#a6e22e">progressDisplay</span>(i, iterations)
+  <span style="color:#75715e"># x contains the target and foil locations</span>
+  <span style="color:#75715e"># Calculating SS</span>
+  SS_target[i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>((<span style="color:#a6e22e">sort</span>(meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(targets[, i]),  targets[, i])]) <span style="color:#f92672">-</span> targetSpread)^2)
+  SS_foils[i]   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>((meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(targets[, i]),  targets[, i])] <span style="color:#f92672">-</span> meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(foils1[, i]),  foils1[, i])])^2, (meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(targets[, i]),  targets[, i])] <span style="color:#f92672">-</span> meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(foils2[, i]),  foils2[, i])])^2)
+  <span style="color:#75715e"># For retrieval it is more imporant that foils are more similar than the targets spread is good enough</span>
+}
+
+<span style="color:#a6e22e">save.image</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;data_twoFoils_&#39;</span>,<span style="color:#a6e22e">format</span>(<span style="color:#a6e22e">Sys.time</span>(), <span style="color:#e6db74">&#34;%Y%m%d_%H%M&#34;</span>), <span style="color:#e6db74">&#39;.RData&#39;</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>))
+</code></pre></div><p>After a couple of hours computing, I finally got the results. Below you see the distribution of the SS of foils. In previous attempts (not shown here), I didn&rsquo;t save the SS of foils and the SS of targets in separate vectors. This however is very useful for a two-step selection process.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Selecting lowest values for further selection</span>
+cutOffDecimal <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.0001</span>
+cutOffValue   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sort</span>(SS_foils)<span style="color:#a6e22e">[round</span>(iterations <span style="color:#f92672">*</span> cutOffDecimal)]
+sub_SS_foils  <span style="color:#f92672">&lt;-</span> SS_foils<span style="color:#a6e22e">[which</span>(SS_foils <span style="color:#f92672">&lt;=</span> cutOffValue)]
+sub_SS_target <span style="color:#f92672">&lt;-</span> SS_target<span style="color:#a6e22e">[which</span>(SS_foils <span style="color:#f92672">&lt;=</span> cutOffValue)]
+
+<span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">data.frame</span>(SS_foils), <span style="color:#a6e22e">aes</span>(SS_foils)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>(binwidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_vline</span>(xintercept <span style="color:#f92672">=</span> cutOffValue) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(panel.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;cm&#34;</span>), text <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>),  plot.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">margin</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">+</span> 
+        <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Number of occurences&#39;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Sum of squared differences&#39;</span>, title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Distribution of SS of foils&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">coord_cartesian</span>(expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</code></pre></div><p><img src="/post/2018-01-25-second-attempt-to-select-set-of-object-location-pairs_files/figure-markdown_github/unnamed-chunk-5-1.png" alt=""></p>
+<p>It is more important that SS of foils is low because high SS of foils could bias participants to choose foils if the expectancy values are higher or lower. This would be especially problematic for me because I want to use . To reduce this bias, I selected the 0.0001th percentile of the SS of foils. This cut off is shown in the histogram above. In the next step, I plot the distributions of the SS of targets for this subset.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">data.frame</span>(sub_SS_target), <span style="color:#a6e22e">aes</span>(sub_SS_target)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>(binwidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(panel.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;cm&#34;</span>), text <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>),  plot.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">margin</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">+</span> 
+        <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Number of occurences&#39;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Summed squared differences&#39;</span>, title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Distribution of SS of targets (subset)&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">coord_cartesian</span>(expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</code></pre></div><p><img src="/post/2018-01-25-second-attempt-to-select-set-of-object-location-pairs_files/figure-markdown_github/unnamed-chunk-6-1.png" alt=""></p>
+<p>Now, I sort the subset of 1000 values that all have low SS of of foils values to select the set that has very low value in this subset. Before that I will test whether the code did what is was supposed to do. By recalculating all values for one set.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Getting set with lowest SS of targets in that subset</span>
+indexValue     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sort</span>(sub_SS_target)[1]
+
+<span style="color:#75715e"># Checking whether extracted ranks are really the correct ones</span>
+<span style="color:#75715e"># Microwave is object 1 and should a values of 16.83333 if location is 13</span>
+meanRankedRatings[1, <span style="color:#ae81ff">13</span>]
+</code></pre></div><pre><code>## [1] 16.83333
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Next it is important to recalculate SS of targets</span>
+<span style="color:#a6e22e">sum</span>((<span style="color:#a6e22e">sort</span>(meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(targets[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)]),  targets[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)])]) <span style="color:#f92672">-</span> targetSpread)^2) <span style="color:#f92672">==</span> indexValue
+</code></pre></div><pre><code>## [1] TRUE
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># And of Foils</span>
+<span style="color:#a6e22e">sum</span>((meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(targets[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)]),  targets[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)])] <span style="color:#f92672">-</span> meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(foils1[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)]),  foils1[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)])])^2, (meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(targets[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)]),  targets[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)])] <span style="color:#f92672">-</span> meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(foils2[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)]),  foils2[, <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)])])^2) <span style="color:#f92672">==</span> SS_foils<span style="color:#a6e22e">[which</span>(SS_target <span style="color:#f92672">==</span> indexValue)]
+</code></pre></div><pre><code>## [1] TRUE
+</code></pre>
+<p>Doing this helped me to spot an error, which led to the wrong extraction of values for the sets.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">objectNames <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;microwave&#39;</span>,<span style="color:#e6db74">&#39;kitchen roll&#39;</span>,<span style="color:#e6db74">&#39;saucepan&#39;</span>, <span style="color:#e6db74">&#39;toaster&#39;</span>,<span style="color:#e6db74">&#39;fruit bowl&#39;</span>,<span style="color:#e6db74">&#39;tea pot&#39;</span>,<span style="color:#e6db74">&#39;knife&#39;</span>,<span style="color:#e6db74">&#39;mixer&#39;</span>,<span style="color:#e6db74">&#39;bread&#39;</span>,<span style="color:#e6db74">&#39;glass jug&#39;</span>,<span style="color:#e6db74">&#39;mug&#39;</span>,<span style="color:#e6db74">&#39;dishes&#39;</span>,<span style="color:#e6db74">&#39;towels&#39;</span>,<span style="color:#e6db74">&#39;toy&#39;</span>,<span style="color:#e6db74">&#39;pile of books&#39;</span>,<span style="color:#e6db74">&#39;umbrella&#39;</span>,<span style="color:#e6db74">&#39;hat&#39;</span>,<span style="color:#e6db74">&#39;helmet&#39;</span>,<span style="color:#e6db74">&#39;calendar&#39;</span>,<span style="color:#e6db74">&#39;fan&#39;</span>)
+
+indexValue     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sort</span>(sub_SS_target)[18]
+index          <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">which</span>(SS_target <span style="color:#f92672">==</span> indexValue)[1]
+finalSelection <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Object <span style="color:#f92672">=</span> objectNames, 
+                             f1Rank <span style="color:#f92672">=</span> meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(foils1[, index]), foils1[, index])],
+                             tRank  <span style="color:#f92672">=</span> meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(targets[, index]), targets[, index])],
+                             f2Rank <span style="color:#f92672">=</span> meanRankedRatings<span style="color:#a6e22e">[cbind</span>(<span style="color:#a6e22e">seq_along</span>(foils2[, index]), foils2[, index])],
+                             f1Loc  <span style="color:#f92672">=</span> foils1[, index],
+                             tLoc   <span style="color:#f92672">=</span> targets[, index],
+                             f2Loc  <span style="color:#f92672">=</span> foils2[, index])
+
+finalSelection<span style="color:#f92672">$</span>diff1 <span style="color:#f92672">&lt;-</span> finalSelection<span style="color:#f92672">$</span>tRank <span style="color:#f92672">-</span> finalSelection<span style="color:#f92672">$</span>f1Rank
+finalSelection<span style="color:#f92672">$</span>diff2 <span style="color:#f92672">&lt;-</span> finalSelection<span style="color:#f92672">$</span>tRank <span style="color:#f92672">-</span> finalSelection<span style="color:#f92672">$</span>f2Rank
+finalSelection<span style="color:#a6e22e">[order</span>(finalSelection<span style="color:#f92672">$</span>tRank),]
+</code></pre></div><pre><code>##           Object    f1Rank     tRank    f2Rank f1Loc tLoc f2Loc
+## 9          bread  85.83333  33.08333  71.00000    12    4    13
+## 5     fruit bowl  95.25000  60.58333  41.16667     6   13    16
+## 4        toaster  52.00000  66.75000  46.83333     5   12    10
+## 12        dishes  50.83333  80.00000 161.83333    16    6     5
+## 19      calendar  89.66667  95.00000 158.83333    13   10     7
+## 17           hat  77.50000 106.58333  84.83333    10   16     4
+## 1      microwave 129.58333 127.66667 266.33333    11   14     3
+## 16      umbrella 217.33333 152.75000 189.50000    18    1    12
+## 15 pile of books 341.75000 161.16667 298.00000    15    2    11
+## 13        towels 200.08333 208.25000 248.83333     3    7     9
+## 14           toy 281.91667 253.83333 156.33333     4   11     1
+## 18        helmet 141.25000 257.00000 139.66667     9    5     8
+## 8          mixer 210.66667 261.91667 295.83333    17    9    20
+## 10     glass jug 319.41667 283.50000 255.16667    20   15    14
+## 20           fan 217.00000 284.83333 138.75000     2   19     6
+## 3       saucepan 258.41667 317.58333 297.50000     1    3    17
+## 2   kitchen roll 335.25000 328.83333 227.25000     7    8    15
+## 7          knife 324.58333 338.25000 359.91667    19   20     2
+## 6        tea pot 322.41667 347.25000 318.25000     8   18    19
+## 11           mug 348.83333 365.58333 378.66667    14   17    18
+##          diff1      diff2
+## 9   -52.750000  -37.91667
+## 5   -34.666667   19.41667
+## 4    14.750000   19.91667
+## 12   29.166667  -81.83333
+## 19    5.333333  -63.83333
+## 17   29.083333   21.75000
+## 1    -1.916667 -138.66667
+## 16  -64.583333  -36.75000
+## 15 -180.583333 -136.83333
+## 13    8.166667  -40.58333
+## 14  -28.083333   97.50000
+## 18  115.750000  117.33333
+## 8    51.250000  -33.91667
+## 10  -35.916667   28.33333
+## 20   67.833333  146.08333
+## 3    59.166667   20.08333
+## 2    -6.416667  101.58333
+## 7    13.666667  -21.66667
+## 6    24.833333   29.00000
+## 11   16.750000  -13.08333
+</code></pre>
+<h2 id="checking-the-set">Checking the set</h2>
+<p>In a last step, I check that foils don&rsquo;t differ from targets in terms of expectancy.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Converting data to long format</span>
+finalSelectionLong <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">gather</span>(finalSelection, Type, Rank, tRank, f1Rank, f2Rank)
+
+resultANOVA <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ezANOVA</span>(data <span style="color:#f92672">=</span> finalSelectionLong, dv <span style="color:#f92672">=</span> .(Rank), wid <span style="color:#f92672">=</span> .(Object), within <span style="color:#f92672">=</span> .(Type), detailed <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+resultANOVA
+</code></pre></div><pre><code>## $ANOVA
+##        Effect DFn DFd           SSn       SSd            F
+## 1 (Intercept)   1  19 2548014.33750 558193.41 86.730283321
+## 2        Type   2  38      36.44236  91965.97  0.007528925
+##                  p p&lt;.05           ges
+## 1 0.00000001635693     * 0.79670917474
+## 2 0.99250082640132       0.00005604829
+## 
+## $`Mauchly's Test for Sphericity`
+##   Effect        W        p p&lt;.05
+## 2   Type 0.926685 0.503952      
+## 
+## $`Sphericity Corrections`
+##   Effect       GGe     p[GG] p[GG]&lt;.05      HFe     p[HF] p[HF]&lt;.05
+## 2   Type 0.9316929 0.9899377           1.029016 0.9925008
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">ggplot</span>(data <span style="color:#f92672">=</span> finalSelectionLong, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Type, y <span style="color:#f92672">=</span> Rank)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_jitter</span>(width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>)
+</code></pre></div><p><img src="/post/2018-01-25-second-attempt-to-select-set-of-object-location-pairs_files/figure-markdown_github/unnamed-chunk-9-1.png" alt=""></p>
+<p>Type (target vs. foil 1 vs. foil 2) has no significant effect on the ranks, <em>F</em>(2, 38) = 0.01, <em>p</em> = .993. The next step now is to load all in the VE and check if this set would work.</p>
+
+
+    
+
+    
+
+    <h4>See also</h4>
+    <ul>
+        
+            <li><a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a></li>
+        
+            <li><a href="/2018/01/stimulus-selection-for-schemavr1-attempt-1/">Stimulus selection for schemaVR1 (Attempt 1)</a></li>
+        
+            <li><a href="/2018/01/issue-with-stimulus-selection-and-some-thoughts/">Issue with stimulus selection and some thoughts</a></li>
+        
+            <li><a href="/2018/01/analysing-normative-data-set/">Analysing normative data set</a></li>
+        
+            <li><a href="/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/">Running RMarkdown on CBU computer and first pilot session</a></li>
+        
+    </ul>
+
+
+</article>
+
+
+
+        </div>
+
+        <aside class="col-12 col-lg-3 ml-auto blog-sidebar">
+    
+        
+
+
+<section>
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+        
+        <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
+            <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
+        </li>
+        
+        <li>
+            <a href="/2019/03/design-analysis-for-noveltyvr/">Design analysis for noveltyVR</a>
+        </li>
+        
+        <li>
+            <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
+        </li>
+        
+    </ol>
+</section>
+
+    
+    
+        <section>
+    
+        
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-primary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-primary" href="/tags/about">about</a>
+            
+            <a class="badge badge-primary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-primary" href="/tags/data-check">data-check</a>
+            
+            <a class="badge badge-primary" href="/tags/design-analysis">design-analysis</a>
+            
+            <a class="badge badge-primary" href="/tags/familiarity">familiarity</a>
+            
+            <a class="badge badge-primary" href="/tags/glm">glm</a>
+            
+            <a class="badge badge-primary" href="/tags/graphics">graphics</a>
+            
+            <a class="badge badge-primary" href="/tags/hippocampus">hippocampus</a>
+            
+            <a class="badge badge-primary" href="/tags/ideas-and-plans">ideas-and-plans</a>
+            
+            <a class="badge badge-primary" href="/tags/lab-meeting">lab-meeting</a>
+            
+            <a class="badge badge-primary" href="/tags/lme4/lmertest">lme4/lmertest</a>
+            
+            <a class="badge badge-primary" href="/tags/memory">memory</a>
+            
+            <a class="badge badge-primary" href="/tags/meta">meta</a>
+            
+            <a class="badge badge-primary" href="/tags/mixed-linear-models">mixed-linear-models</a>
+            
+            <a class="badge badge-primary" href="/tags/mpfc">mpfc</a>
+            
+            <a class="badge badge-primary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-primary" href="/tags/pilot-study">pilot-study</a>
+            
+            <a class="badge badge-primary" href="/tags/ratingstudy">ratingstudy</a>
+            
+            <a class="badge badge-primary" href="/tags/recognition-memory">recognition-memory</a>
+            
+            <a class="badge badge-primary" href="/tags/recollection">recollection</a>
+            
+            <a class="badge badge-primary" href="/tags/research-design">research-design</a>
+            
+            <a class="badge badge-primary" href="/tags/rmarkdown">rmarkdown</a>
+            
+            <a class="badge badge-primary" href="/tags/schema">schema</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr1">schemavr1</a>
+            
+            <a class="badge badge-primary" href="/tags/schemavr2">schemavr2</a>
+            
+            <a class="badge badge-primary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-primary" href="/tags/word-properties">word-properties</a>
+            
+            <a class="badge badge-primary" href="/tags/words">words</a>
+            
+        </p>
+        
+    
+</section>
+    
+</aside>
+
+      </div>
+    </div>
+    
+
+    
+      
+
+
+
+
+
+
+<footer class="blog-footer w-100">
+    <nav class="navbar navbar-light bg-light">
+        <p class="w-100 text-center">Hugo template made with ❤ by <a href="https://github.com/Xzya">Xzya</a>, inspired by <a href="https://github.com/alanorth/hugo-theme-bootstrap4-blog">hugo-theme-bootstrap4-blog</a></p>
+        <p class="w-100 text-center"><a href="#">Back to top</a></p>
+    </nav>
+</footer>
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
+    
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -9,8 +9,9 @@
 <meta property="og:description" content="Disclaimer: This document is out of date and will be replaced by a thourough convention of naming files and variables.
 I recently realised that I am sometimes quite inconsistent when it comes to naming variables. I decided to stipulate a variable naming convention that I can stick to. This convention should be useable in the three major languages I use (R, Matlab, C#). That means I can’t for instance use dots within a name because it would only work in R." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2018/02/variable-naming/" /><meta property="article:published_time" content="2018-02-07T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-02-07T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2018/02/variable-naming/" />
+<meta property="article:published_time" content="2018-02-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-02-07T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Variable naming"/>
@@ -19,7 +20,7 @@ I recently realised that I am sometimes quite inconsistent when it comes to nami
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2018/02/variable-naming/">
+    <link rel="canonical" href="/2018/02/variable-naming/">
 
     <title>
       
@@ -29,7 +30,7 @@ I recently realised that I am sometimes quite inconsistent when it comes to nami
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -114,7 +115,6 @@ I recently realised that I am sometimes quite inconsistent when it comes to nami
 </header>
 <article class="blog-post">
     <p>Disclaimer: This document is out of date and will be replaced by a thourough convention of naming files and variables.</p>
-
 <p>I recently realised that I am sometimes quite inconsistent when it comes to naming variables. I decided to stipulate a variable naming convention that I can stick to. This convention should be useable in the three major languages I use (R, Matlab, C#). That means I can’t for instance use dots within a name because it would only work in R.  I will keep an updated version <a href="https://jaquent.me/code/">here</a>.</p>
 <p>I hereby stipulate the following rules to name variables:</p>
 <ul>
@@ -151,7 +151,6 @@ I recently realised that I am sometimes quite inconsistent when it comes to nami
 <p> </p>
 <p>These are variables I used and then changed according to convention:<br /><em>numberObjects</em> -&gt; <em>numObj             </em><br /><em>sub_SS_foils</em>    -&gt; <em>foilSsSub</em></p>
 
-
     
 
     
@@ -173,6 +172,14 @@ I recently realised that I am sometimes quite inconsistent when it comes to nami
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -182,14 +189,6 @@ I recently realised that I am sometimes quite inconsistent when it comes to nami
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -300,6 +299,29 @@ I recently realised that I am sometimes quite inconsistent when it comes to nami
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

@@ -8,8 +8,9 @@
 <meta property="og:title" content="Mixed linear models" />
 <meta property="og:description" content="Preface This work documents my attempt to understand the model structure of mixed linear models or multilevel models. I adapted a formula that I found on Wikipedia and work myself through the different models and test whether I am able to retrieve the different parameters with lmerTest. Bodo Winter&rsquo;s tutorial on the lme was very useful for this. The main motivation for doing all this is to use basically model 5 in my analysis of my first experiment." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2018/03/mixed-linear-models/" /><meta property="article:published_time" content="2018-03-14T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-03-14T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2018/03/mixed-linear-models/" />
+<meta property="article:published_time" content="2018-03-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-03-14T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Mixed linear models"/>
@@ -17,7 +18,7 @@
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2018/03/mixed-linear-models/">
+    <link rel="canonical" href="/2018/03/mixed-linear-models/">
 
     <title>
       
@@ -27,7 +28,7 @@
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -117,64 +118,53 @@
     <hr>
 </header>
 <article class="blog-post">
-    
-
-<h1 id="preface">Preface</h1>
-
+    <h1 id="preface">Preface</h1>
 <p>This work documents my attempt to understand the model structure of mixed linear models or multilevel models. I adapted a formula that I found on <a href="https://en.wikipedia.org/wiki/Multilevel_model">Wikipedia</a> and work myself through the different models and test whether I am able to retrieve the different parameters with <em>lmerTest</em>. Bodo Winter&rsquo;s <a href="http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf">tutorial</a> on the <em>lme</em> was very useful for this. The main motivation for doing all this is to use basically model 5 in my analysis of my first experiment. This work is also part of the process of pre-registering the study with a complete analysis script, which I will upload soon.</p>
-
 <p>The design of the fictive experiment that 100 subjects see 20 objects and provide a continuous measure of memory for each objects. The expectancy of the objects (<em>X</em>) servers as a predictor for the memory performance (<em>Y</em>).</p>
-
 <p>I start with very easy models and add more effects in order to finally arrive at my target model (model 5).</p>
+<h2 id="libraries--functions">Libraries &amp; functions</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(lmerTest)
+<span style="color:#a6e22e">library</span>(ggplot2)
 
-<h2 id="libraries-functions">Libraries &amp; functions</h2>
-
-<pre><code class="language-r">library(lmerTest)
-library(ggplot2)
-
-pValue &lt;-function(x, sign = '='){
-  if (inherits(x, &quot;lm&quot;)){
-    s &lt;- summary.lm(x)
-    x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.tail = FALSE)
-    if(x &gt; 1){
-      stop(&quot;There is no p-value greater than 1&quot;)
-    } else if(x &lt; 0.001){
-      x.converted &lt;- '&lt; .001'
+pValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x, sign <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;=&#39;</span>){
+  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
+    s <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary.lm</span>(x)
+    x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pf</span>(s<span style="color:#f92672">$</span>fstatistic[1L], s<span style="color:#f92672">$</span>fstatistic[2L], s<span style="color:#f92672">$</span>fstatistic[3L], lower.tail <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
+      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
+    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
     } else{
-      x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
     } 
   } else {
-    if(x &gt; 1){
-      stop(&quot;There is no p-value greater than 1&quot;)
-    } else if(x &lt; 0.001){
-      x.converted &lt;- '&lt; .001'
+    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
+      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
+    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
     } else{
-      x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
     } 
   }
-  return(x.converted)
+  <span style="color:#a6e22e">return</span>(x.converted)
 }
 
-rValue &lt;-function(x){
-  if (inherits(x, &quot;lm&quot;)){
-    r.squared &lt;- summary(x)$r.squared
-    x.converted &lt;- paste('=',substr(as.character(round(r.squared, 3)), 2,5)) 
+rValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x){
+  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
+    r.squared <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(x)<span style="color:#f92672">$</span>r.squared
+    x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(r.squared, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
   } else {
-    if (x &lt; 0){
-      x.converted &lt;- paste('= -',substr(as.character(abs(round(x, 3))), 2,5), sep = '') 
+    <span style="color:#a6e22e">if </span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;= -&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>), sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) 
     } else {
-      x.converted &lt;- paste('=',substr(as.character(abs(round(x, 3))), 2,5)) 
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
     }
   }
-  return(x.converted) 
+  <span style="color:#a6e22e">return</span>(x.converted) 
 }
-</code></pre>
-
-<h2 id="model-1-simple-regression-model-with-1-level">Model 1: Simple regression model with 1 level</h2>
-
+</code></pre></div><h2 id="model-1-simple-regression-model-with-1-level">Model 1: Simple regression model with 1 level</h2>
 <p>Assume that expectancy and memory performance was aggregated across subjects.In this model, objects&rsquo; memorability is predicted by their average expectancy values. The corresponding formula looks like this:
 <em>Y</em><sub><em>i</em></sub> = <em>β</em><sub>0</sub> + <em>β</em><sub>1</sub><em>X</em><sub><em>i</em></sub> + <em>e</em><sub><em>i</em></sub></p>
-
 <ul>
 <li><em>Y</em><sub><em>i</em></sub> refers to memorability of object i.</li>
 <li><em>X</em><sub><em>i</em></sub> refers to average expectancy of object i.</li>
@@ -182,29 +172,26 @@ rValue &lt;-function(x){
 <li><em>β</em><sub>1</sub> refers to the linear slope.</li>
 <li><em>e</em><sub><em>i</em></sub> refers to the random errors of prediction.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Generating data set</span>
+<span style="color:#75715e"># General values and variables</span>
+numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>))
+y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
 
-<pre><code class="language-r"># Generating data set
-# General values and variables
-numObj &lt;- 20
-e      &lt;- rnorm(numObj, mean = 0, sd = 0.1)
-x      &lt;- scale(runif(numObj, min = -100, max = 100))
-y      &lt;- c()
+<span style="color:#75715e"># Coefficients</span>
+beta0  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">8</span>
+beta1  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.3</span>
 
-# Coefficients
-beta0  &lt;- 8
-beta1  &lt;- 0.3
-
-for(i in 1:numObj){
-  y[i] &lt;- beta0 + beta1*x[i] + e[i]
+<span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
+  y[i] <span style="color:#f92672">&lt;-</span> beta0 <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x[i] <span style="color:#f92672">+</span> e[i]
 }
 
-dataFrame1 &lt;- data.frame(y = y, x = x, objNum = factor(1:20)) 
+dataFrame1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, x <span style="color:#f92672">=</span> x, objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>)) 
 
-model1 &lt;- lm(y ~  x, data = dataFrame1)
-summary(model1)
-</code></pre>
-
-<pre><code>## 
+model1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(y <span style="color:#f92672">~</span>  x, data <span style="color:#f92672">=</span> dataFrame1)
+<span style="color:#a6e22e">summary</span>(model1)
+</code></pre></div><pre><code>## 
 ## Call:
 ## lm(formula = y ~ x, data = dataFrame1)
 ## 
@@ -223,62 +210,54 @@ summary(model1)
 ## Multiple R-squared:  0.923,  Adjusted R-squared:  0.9187 
 ## F-statistic: 215.6 on 1 and 18 DF,  p-value: 1.84e-11
 </code></pre>
-
 <p>Unsurprisingly, <em>lm</em> returns estimates that are very close the the true values $\hat{\beta_{0}} =$ 7.9850955 (vs 8) and $\hat{\beta_{1}} =$ 0.297594 (vs 0.3).</p>
-
 <h2 id="model-2-a-random-intercept-for-each-subject">Model 2: A random intercept for each subject</h2>
-
 <p>Now, I don&rsquo;t aggregated anymore and there is one value for each subject and each object and I allow for different intercepts for each subject, which basically means that I assume that my subjects&rsquo; general memory performance varies.</p>
-
 <p>Level 1:
-<em>Y</em><sub>*i<strong>j*</sub> = <em>β</em><sub>0<em>j</em></sub> + <em>β</em><sub>1</sub><em>X</em><sub>*i</strong>j*</sub> + <em>e</em><sub>*i*<em>j</em></sub>
- Level 2:
+<em>Y</em><sub><em>i**j</em></sub> = <em>β</em><sub>0<em>j</em></sub> + <em>β</em><sub>1</sub><em>X</em><sub><em>i**j</em></sub> + <em>e</em><sub><em>i**j</em></sub>
+Level 2:
 <em>β</em><sub>0<em>j</em></sub> = <em>γ</em><sub>00</sub> + <em>γ</em><sub>01</sub><em>W</em><sub><em>j</em></sub> + <em>u</em><sub>0<em>j</em></sub></p>
-
 <ul>
-<li><em>Y</em><sub>*i*<em>j</em></sub> refers to memory score for object i and subject j.</li>
+<li><em>Y</em><sub><em>i**j</em></sub> refers to memory score for object i and subject j.</li>
 <li><em>β</em><sub>0<em>j</em></sub> refers to the intercept of the dependent variable in subject j (level 2) in other words the individual difference in general performance across subjects.</li>
 <li><em>β</em><sub>1</sub> refers to the linear slope.</li>
-<li><em>X</em><sub>*i*<em>j</em></sub> refers to the level 1 predictor.</li>
-<li><em>e</em><sub>*i*<em>j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
+<li><em>X</em><sub><em>i**j</em></sub> refers to the level 1 predictor.</li>
+<li><em>e</em><sub><em>i**j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
 <li><em>γ</em><sub>00</sub> refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.</li>
 <li><em>γ</em><sub>01</sub> refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.</li>
 <li><em>W</em><sub><em>j</em></sub> refers to the level 2 predictor.</li>
 <li><em>u</em><sub>0<em>j</em></sub> refers to the random error component for the deviation of the intercept of a subject from the overall intercept.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Generating data set</span>
+<span style="color:#75715e"># General values and variables</span>
+numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj <span style="color:#f92672">*</span> numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>))
+y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
 
-<pre><code class="language-r"># Generating data set
-# General values and variables
-numObj &lt;- 20
-numSub &lt;- 100
-e      &lt;- rnorm(numObj * numSub, mean = 0, sd = 0.1)
-x      &lt;- scale(runif(numObj * numSub, min = -100, max = 100))
-y      &lt;- c()
-index  &lt;- 1
+<span style="color:#75715e"># Coefficients</span>
+gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">18</span>
+gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
+beta1   <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-100</span>
+w       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-3</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+u0      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+meanBeta0 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w <span style="color:#f92672">+</span> u0) <span style="color:#75715e"># I should be able to retrieve that parameter. </span>
 
-# Coefficients
-gamma00 &lt;- 18
-gamma01 &lt;- 0.5
-beta1   &lt;- -100
-w       &lt;- runif(numSub, min = -3, max = 3)
-u0      &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-meanBeta0 &lt;- mean(gamma00 + gamma01*w + u0) # I should be able to retrieve that parameter. 
-
-for(j in 1:numSub){
-  for(i in 1:numObj){
-    y[index] &lt;- gamma00 + gamma01*w[j]+ u0[j] + beta1*x[index] + e[index]
-    index &lt;- index + 1
+<span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
+  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
+    y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w[j]<span style="color:#f92672">+</span> u0[j] <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x[index] <span style="color:#f92672">+</span> e[index]
+    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
   } 
 }
 
-dataFrame2 &lt;- data.frame(y = y, x = x, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub))) 
+dataFrame2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, x <span style="color:#f92672">=</span> x, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub))) 
 
-model2 &lt;- lmer(y ~  x + 
-                 (1 | subNo), data = dataFrame2)
-summary(model2)
-</code></pre>
-
-<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+model2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
+                 (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo), data <span style="color:#f92672">=</span> dataFrame2)
+<span style="color:#a6e22e">summary</span>(model2)
+</code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + (1 | subNo)
 ##    Data: dataFrame2
@@ -306,39 +285,28 @@ summary(model2)
 ##   (Intr)
 ## x 0.000
 </code></pre>
-
-<pre><code class="language-r">anova(model2)
-</code></pre>
-
-<pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">anova</span>(model2)
+</code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##     Sum Sq  Mean Sq NumDF  DenDF    F value    Pr(&gt;F)    
 ## x 19123395 19123395     1 1899.1 1970854622 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-
-<pre><code class="language-r"># Extract intercept for each subject by coef(model2). 
-</code></pre>
-
-<p>As you can see above (fixed effects), $\hat{\beta_{0.}} =$ 18.0612368 is approximating the true (18.0601846). The same is true for $\hat{\beta_{1}} =$ -100.0019619 (vs -100). The estimated level 1 intercept for subject 1 was also close to the true value (18.8278538 vs 18.8320122).</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Extract intercept for each subject by coef(model2). </span>
+</code></pre></div><p>As you can see above (fixed effects), $\hat{\beta_{0.}} =$ 18.0612368 is approximating the true (18.0601846). The same is true for $\hat{\beta_{1}} =$ -100.0019619 (vs -100). The estimated level 1 intercept for subject 1 was also close to the true value (18.8278538 vs 18.8320122).</p>
 <h2 id="model-3-random-intercept-and-slope-for-each-subject">Model 3: Random intercept and slope for each subject</h2>
-
 <p>In the next model, I am additionally allowing the slope randomly different for each subject. This means that the strength of the relationship between the level 1 predictor <em>X</em> and the memory scores <em>Y</em> varies across subjects.</p>
-
 <p>Level 1:
-<em>Y</em><sub>*i<strong>j*</sub> = <em>β</em><sub>0<em>j</em></sub> + <em>β</em><sub>1<em>j</em></sub><em>X</em><sub>*i</strong>j*</sub> + <em>e</em><sub>*i*<em>j</em></sub></p>
-
+<em>Y</em><sub><em>i**j</em></sub> = <em>β</em><sub>0<em>j</em></sub> + <em>β</em><sub>1<em>j</em></sub><em>X</em><sub><em>i**j</em></sub> + <em>e</em><sub><em>i**j</em></sub></p>
 <p>Level 2:
 <em>β</em><sub>0<em>j</em></sub> = <em>γ</em><sub>00</sub> + <em>γ</em><sub>01</sub><em>W</em><sub><em>j</em></sub> + <em>u</em><sub>0<em>j</em></sub>
 <em>β</em><sub>1<em>j</em></sub> = <em>γ</em><sub>10</sub> + <em>u</em><sub>1<em>j</em></sub></p>
-
 <ul>
-<li><em>Y</em><sub>*i*<em>j</em></sub> refers to memory score for object i and subject j.</li>
+<li><em>Y</em><sub><em>i**j</em></sub> refers to memory score for object i and subject j.</li>
 <li><em>β</em><sub>0<em>j</em></sub> refers to the intercept of the dependent variable in subject j (level 2) in other words the individual difference in general performance across subjects.</li>
 <li><em>β</em><sub>1<em>j</em></sub> refers to the linear slope that varies across subjects in other words the relationship <em>X</em> and <em>Y</em> is different across subjects.</li>
-<li><em>X</em><sub>*i*<em>j</em></sub> refers to the level 1 predictor.</li>
-<li><em>e</em><sub>*i*<em>j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
+<li><em>X</em><sub><em>i**j</em></sub> refers to the level 1 predictor.</li>
+<li><em>e</em><sub><em>i**j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
 <li><em>γ</em><sub>00</sub> refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.</li>
 <li><em>γ</em><sub>01</sub> refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.</li>
 <li><em>W</em><sub><em>j</em></sub> refers to the level 2 predictor.</li>
@@ -346,40 +314,37 @@ summary(model2)
 <li><em>γ</em><sub>10</sub> overall slope of the level 2.</li>
 <li><em>u</em><sub>1<em>j</em></sub> refers to the random error component for the deviation of the slope of a subject from the overall intercept.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Generating data set</span>
+<span style="color:#75715e"># General values and variables</span>
+numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj <span style="color:#f92672">*</span> numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>))
+y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
 
-<pre><code class="language-r"># Generating data set
-# General values and variables
-numObj &lt;- 20
-numSub &lt;- 100
-e      &lt;- rnorm(numObj * numSub, mean = 0, sd = 0.1)
-x      &lt;- scale(runif(numObj * numSub, min = -100, max = 100))
-y      &lt;- c()
-index  &lt;- 1
+<span style="color:#75715e"># Coefficients</span>
+gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">18</span>
+gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
+gamma10 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-100</span>
+w       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-3</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+u0      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+u1      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+meanBeta0 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w <span style="color:#f92672">+</span> u0) <span style="color:#75715e"># I should be able to retrieve that parameter. </span>
 
-# Coefficients
-gamma00 &lt;- 18
-gamma01 &lt;- 0.5
-gamma10 &lt;- -100
-w       &lt;- runif(numSub, min = -3, max = 3)
-u0      &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-u1      &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-meanBeta0 &lt;- mean(gamma00 + gamma01*w + u0) # I should be able to retrieve that parameter. 
-
-for(j in 1:numSub){
-  for(i in 1:numObj){
-    y[index] &lt;- gamma00 + gamma01*w[j]+ u0[j] + (gamma10 + u1[j])*x[index] + e[index]
-    index &lt;- index + 1
+<span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
+  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
+    y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w[j]<span style="color:#f92672">+</span> u0[j] <span style="color:#f92672">+</span> (gamma10 <span style="color:#f92672">+</span> u1[j])<span style="color:#f92672">*</span>x[index] <span style="color:#f92672">+</span> e[index]
+    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
   } 
 }
 
-dataFrame3 &lt;- data.frame(y = y, x = x, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub))) 
+dataFrame3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, x <span style="color:#f92672">=</span> x, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub))) 
 
-model3 &lt;- lmer(y ~  x + 
-                 (1 + x | subNo), data = dataFrame3)
-summary(model3)
-</code></pre>
-
-<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+model3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
+                 (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> x <span style="color:#f92672">|</span> subNo), data <span style="color:#f92672">=</span> dataFrame3)
+<span style="color:#a6e22e">summary</span>(model3)
+</code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + (1 + x | subNo)
 ##    Data: dataFrame3
@@ -408,35 +373,26 @@ summary(model3)
 ##   (Intr)
 ## x 0.106
 </code></pre>
-
-<pre><code class="language-r">anova(model3)
-</code></pre>
-
-<pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">anova</span>(model3)
+</code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##    Sum Sq Mean Sq NumDF  DenDF   F value    Pr(&gt;F)    
 ## x 1114376 1114376     1 99.528 114532908 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-
 <p>Again, $\hat{\beta_{0.}} =$ 18.0612368 and $\hat{\beta_{1.}} =$ -100.0019619 were correctly estimated (i.e. 18 vs -100) for level 1. Level 2 estimates for subject 1 were also correctly estimated: $\hat{\beta_{01}}$ = 18.3278073 vs <em>β</em><sub>11</sub> = 18.3177611 and $\hat{\beta_{11}}$ = -99.9649699 vs <em>β</em><sub>11</sub> = -99.9383084.</p>
-
 <h2 id="model-4-random-intercepts-for-each-object-and-each-subject">Model 4: Random intercepts for each object and each subject</h2>
-
 <p>As explained, above each subject rates each of twenty objects. In addition to the varying performance among the participants, one can assume that there are objects, which can be remembered more easily than others. Therefore, I add a random intercept for each object representing at varying baseline memorability.</p>
-
 <p>Level 1:
-<em>Y</em><sub>*i<strong>j*</sub> = <em>β</em><sub>0*i</strong>j*</sub> + <em>β</em><sub>1</sub><em>X</em><sub>*i<strong>j*</sub> + <em>e</em><sub>*i</strong>j*</sub></p>
-
+<em>Y</em><sub><em>i**j</em></sub> = <em>β</em><sub>0<em>i**j</em></sub> + <em>β</em><sub>1</sub><em>X</em><sub><em>i**j</em></sub> + <em>e</em><sub><em>i**j</em></sub></p>
 <p>Level 2:
-<em>β</em><sub>0*i*<em>j</em></sub> = <em>γ</em><sub>00</sub> + <em>γ</em><sub>01</sub><em>W</em><sub>1<em>i</em></sub> + <em>u</em><sub>01<em>i</em></sub> + <em>γ</em><sub>02</sub><em>W</em><sub>2<em>j</em></sub> + <em>u</em><sub>02<em>j</em></sub></p>
-
+<em>β</em><sub>0<em>i**j</em></sub> = <em>γ</em><sub>00</sub> + <em>γ</em><sub>01</sub><em>W</em><sub>1<em>i</em></sub> + <em>u</em><sub>01<em>i</em></sub> + <em>γ</em><sub>02</sub><em>W</em><sub>2<em>j</em></sub> + <em>u</em><sub>02<em>j</em></sub></p>
 <ul>
-<li><em>Y</em><sub>*i*<em>j</em></sub> refers to memory score for object i and subject j.</li>
-<li><em>β</em><sub>0*i*<em>j</em></sub> refers to the intercept of the dependent variable that is different for each subject and object.</li>
+<li><em>Y</em><sub><em>i**j</em></sub> refers to memory score for object i and subject j.</li>
+<li><em>β</em><sub>0<em>i**j</em></sub> refers to the intercept of the dependent variable that is different for each subject and object.</li>
 <li><em>β</em><sub>1</sub> refers to the linear slope.</li>
-<li><em>X</em><sub>*i*<em>j</em></sub> refers to the level 1 predictor.</li>
-<li><em>e</em><sub>*i*<em>j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
+<li><em>X</em><sub><em>i**j</em></sub> refers to the level 1 predictor.</li>
+<li><em>e</em><sub><em>i**j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
 <li><em>γ</em><sub>00</sub> refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.</li>
 <li><em>γ</em><sub>01</sub> refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.</li>
 <li><em>W</em><sub>1<em>i</em></sub> refers to the level 2 predictor for objects.</li>
@@ -445,42 +401,39 @@ summary(model3)
 <li><em>W</em><sub>2<em>j</em></sub> refers to the level 2 predictor for subjects.</li>
 <li><em>u</em><sub>02<em>j</em></sub> refers to the random error component for the deviation of the intercept of a subject from the overall intercept.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Generating data set</span>
+<span style="color:#75715e"># General values and variables</span>
+numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj <span style="color:#f92672">*</span> numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>))
+y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
 
-<pre><code class="language-r"># Generating data set
-# General values and variables
-numObj &lt;- 20
-numSub &lt;- 100
-e      &lt;- rnorm(numObj * numSub, mean = 0, sd = 0.1)
-x      &lt;- scale(runif(numObj * numSub, min = -100, max = 100))
-y      &lt;- c()
-index  &lt;- 1
+<span style="color:#75715e"># Coefficients</span>
+gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">18</span>
+gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
+gamma02 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-10</span>
+beta1    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-100</span>
+w1       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+w2       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-3</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+u01       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+u02       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
 
-# Coefficients
-gamma00 &lt;- 18
-gamma01 &lt;- 0.5
-gamma02 &lt;- -10
-beta1    &lt;- -100
-w1       &lt;- runif(numObj, min = 0, max = 3)
-w2       &lt;- runif(numSub, min = -3, max = 3)
-u01       &lt;- rnorm(numObj, mean = 0, sd = 0.1)
-u02       &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-
-for(j in 1:numSub){
-  for(i in 1:numObj){
-    y[index] &lt;-gamma00 + gamma01*w1[i] + u01[i] + gamma02*w2[j] + u02[j] + beta1*x[index] + e[index]
-    index &lt;- index + 1
+<span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
+  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
+    y[index] <span style="color:#f92672">&lt;-</span>gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w1[i] <span style="color:#f92672">+</span> u01[i] <span style="color:#f92672">+</span> gamma02<span style="color:#f92672">*</span>w2[j] <span style="color:#f92672">+</span> u02[j] <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x[index] <span style="color:#f92672">+</span> e[index]
+    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
   } 
 }
 
-dataFrame4 &lt;- data.frame(y = y, x = x, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub))) 
+dataFrame4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, x <span style="color:#f92672">=</span> x, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub))) 
 
-model4 &lt;- lmer(y ~  x + 
-                 (1 | subNo) + 
-                 (1 | objNum), data = dataFrame4)
-summary(model4)
-</code></pre>
-
-<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+model4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
+                 (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo) <span style="color:#f92672">+</span> 
+                 (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> objNum), data <span style="color:#f92672">=</span> dataFrame4)
+<span style="color:#a6e22e">summary</span>(model4)
+</code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + (1 | subNo) + (1 | objNum)
 ##    Data: dataFrame4
@@ -509,40 +462,31 @@ summary(model4)
 ##   (Intr)
 ## x 0.000
 </code></pre>
-
-<pre><code class="language-r">anova(model4)
-</code></pre>
-
-<pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">anova</span>(model4)
+</code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##     Sum Sq  Mean Sq NumDF DenDF    F value    Pr(&gt;F)    
 ## x 18621423 18621423     1  1880 1939423508 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-
 <p>Firstly, on level 1 estimates were close to the true values: $\hat{\beta_{0..}} =$ 19.450424 (vs 19.4497162) as well as $\hat{\beta_{1}} =$ -100.0054394 (vs -100). Now looking at the level 2 estimates: the intercept for the object 1 across all subjects is $\hat{\beta_{01.}}$ = 19.0068543 (vs 18.9956614), while the intercept for subject 1 across all objects is $\hat{\beta_{0.1}}$ = 41.9438705 (vs 41.9422321).</p>
-
 <h2 id="model-5-random-intercepts-for-each-object-each-subject-quadratic-term-and-random-slopes-for-subjects">Model 5: Random intercepts for each object, each subject, quadratic term and random slopes for subjects</h2>
-
-<h3 id="model-5-1">Model 5.1</h3>
-
+<h3 id="model-51">Model 5.1</h3>
 <p>I am finally arriving at the model, which I want to use to model my data in the upcoming analysis. This models contains random intercepts for each object and each subject. A second quadratic term is added to test for non-linearities. Both the slope of the linear term and the slope of the quadratic term are random for each subject. At this point it is crucial to note that the predictor <em>X</em> is random for each subject and object just as if the subjects had to rate the expectancy of each object after their memory was tested. This will be the case of my experiment, but I also collected normative data, where <em>X</em> varies only across objects representing aggregate values (see model 5.2).</p>
-
 <p>Level 1:
-<em>Y</em><sub>*i<strong>j*</sub> = <em>β</em><sub>0*i</strong>j*</sub> + <em>β</em><sub>1<em>j</em></sub><em>X</em><sub>*i<strong>j*</sub> + <em>β</em><sub>2<em>j</em></sub><em>X</em><sub>*i</strong>j*</sub><sup>2</sup> + <em>e</em><sub>*i<strong>j*</sub>
- Level 2:
-<em>β</em><sub>0*i</strong>j*</sub> = <em>γ</em><sub>00</sub> + <em>γ</em><sub>01</sub><em>W</em><sub>1<em>i</em></sub> + <em>u</em><sub>01<em>i</em></sub> + <em>γ</em><sub>02</sub><em>W</em><sub>2<em>j</em></sub> + <em>u</em><sub>02<em>j</em></sub>
+<em>Y</em><sub><em>i**j</em></sub> = <em>β</em><sub>0<em>i**j</em></sub> + <em>β</em><sub>1<em>j</em></sub><em>X</em><sub><em>i**j</em></sub> + <em>β</em><sub>2<em>j</em></sub><em>X</em><sub><em>i**j</em></sub><sup>2</sup> + <em>e</em><sub><em>i**j</em></sub>
+Level 2:
+<em>β</em><sub>0<em>i**j</em></sub> = <em>γ</em><sub>00</sub> + <em>γ</em><sub>01</sub><em>W</em><sub>1<em>i</em></sub> + <em>u</em><sub>01<em>i</em></sub> + <em>γ</em><sub>02</sub><em>W</em><sub>2<em>j</em></sub> + <em>u</em><sub>02<em>j</em></sub>
 <em>β</em><sub>1<em>j</em></sub> = <em>γ</em><sub>10</sub> + <em>u</em><sub>1<em>j</em></sub>
 <em>β</em><sub>2<em>j</em></sub> = <em>γ</em><sub>20</sub> + <em>u</em><sub>2<em>j</em></sub></p>
-
 <ul>
-<li><em>Y</em><sub>*i*<em>j</em></sub> refers to memory score for object i and subject j.</li>
-<li><em>β</em><sub>0*i*<em>j</em></sub> refers to the intercept of the dependent variable that is different for each subject and object.</li>
+<li><em>Y</em><sub><em>i**j</em></sub> refers to memory score for object i and subject j.</li>
+<li><em>β</em><sub>0<em>i**j</em></sub> refers to the intercept of the dependent variable that is different for each subject and object.</li>
 <li><em>β</em><sub>1<em>j</em></sub> refers to the linear slope for the relationship in subject j (level 2) between the level 1 predictor and the dependent variable.</li>
-<li><em>X</em><sub>*i*<em>j</em></sub> refers to the linear level 1 predictor that varies for across objects and subjects.</li>
+<li><em>X</em><sub><em>i**j</em></sub> refers to the linear level 1 predictor that varies for across objects and subjects.</li>
 <li><em>β</em><sub>2<em>j</em></sub> refers to the quadratic slope for the relationship in subject j (level 2) between the level 1 predictor and the dependent variable.</li>
-<li><em>X</em><sub>*i*<em>j</em></sub><sup>2</sup> refers to the quadratic level 1 predictor that varies for across objects and subjects.</li>
-<li><em>e</em><sub>*i*<em>j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
+<li><em>X</em><sub><em>i**j</em></sub><sup>2</sup> refers to the quadratic level 1 predictor that varies for across objects and subjects.</li>
+<li><em>e</em><sub><em>i**j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
 <li><em>γ</em><sub>00</sub> refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.</li>
 <li><em>γ</em><sub>01</sub> refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.</li>
 <li><em>W</em><sub>1<em>i</em></sub> refers to the level 2 predictor for objects.</li>
@@ -555,53 +499,50 @@ summary(model4)
 <li><em>γ</em><sub>20</sub> overall quadratic slope of the level 2.</li>
 <li><em>u</em><sub>2<em>j</em></sub> refers to the random error component for the deviation from the quadratic slope of a subject from the overall intercept.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Generating data set</span>
+<span style="color:#75715e"># General values</span>
+numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj <span style="color:#f92672">*</span> numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)) <span style="color:#75715e"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
+x2     <span style="color:#f92672">&lt;-</span> x<span style="color:#f92672">*</span>x
+e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>) 
 
-<pre><code class="language-r"># Generating data set
-# General values
-numObj &lt;- 20
-numSub &lt;- 100
-index  &lt;- 1
-y      &lt;- c()
-x      &lt;- scale(runif(numObj * numSub, min = -100, max = 100)) # randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated
-x2     &lt;- x*x
-e      &lt;- rnorm(numObj * numSub, mean = 0, sd = 0.1) 
+<span style="color:#75715e"># Coefficients</span>
+gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
+gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+gamma02 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">8</span>
+gamma10 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
+gamma20 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
 
-# Coefficients
-gamma00 &lt;- 0.5
-gamma01 &lt;- 2
-gamma02 &lt;- 8
-gamma10 &lt;- 0
-gamma20 &lt;- 10
+<span style="color:#75715e"># Varying stuff</span>
+w1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-4</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+w2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span>  <span style="color:#ae81ff">0</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+u01 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+u02 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+u1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+u2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
 
-# Varying stuff
-w1 &lt;- runif(numObj, min = -4, max = 4)
-w2 &lt;- runif(numSub, min =  0, max = 4)
-u01 &lt;- rnorm(numObj, mean = 0, sd = 0.1)
-u02 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-u1 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-u2 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-
-for(j in 1:numSub){
-  for(i in 1:numObj){
-    # Long format
-    y[index] &lt;- gamma00 + gamma01 * w1[i]  + u01[i] + gamma02 * w2[j] + u02[j] + (gamma10 + u1[j]) * x[index] + (gamma20 + u2[j]) * x2[index] + e[index]
-    index &lt;- index + 1
+<span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
+  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
+    <span style="color:#75715e"># Long format</span>
+    y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01 <span style="color:#f92672">*</span> w1[i]  <span style="color:#f92672">+</span> u01[i] <span style="color:#f92672">+</span> gamma02 <span style="color:#f92672">*</span> w2[j] <span style="color:#f92672">+</span> u02[j] <span style="color:#f92672">+</span> (gamma10 <span style="color:#f92672">+</span> u1[j]) <span style="color:#f92672">*</span> x[index] <span style="color:#f92672">+</span> (gamma20 <span style="color:#f92672">+</span> u2[j]) <span style="color:#f92672">*</span> x2[index] <span style="color:#f92672">+</span> e[index]
+    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
   }
 }
 
-dataFrame5 &lt;- data.frame(y = y, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub)), x = x, x2 = x2)
+dataFrame5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub)), x <span style="color:#f92672">=</span> x, x2 <span style="color:#f92672">=</span> x2)
 
-model5 &lt;- lmer(y ~  x + 
-                    x2 + 
-                    (1 | subNo) + 
-                    (1 | objNum) + 
-                    (x2|subNo) +
-                    (x|subNo), data = dataFrame5)
+model5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
+                    x2 <span style="color:#f92672">+</span> 
+                    (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo) <span style="color:#f92672">+</span> 
+                    (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> objNum) <span style="color:#f92672">+</span> 
+                    (x2<span style="color:#f92672">|</span>subNo) <span style="color:#f92672">+</span>
+                    (x<span style="color:#f92672">|</span>subNo), data <span style="color:#f92672">=</span> dataFrame5)
 
-summary(model5)
-</code></pre>
-
-<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+<span style="color:#a6e22e">summary</span>(model5)
+</code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + x2 + (1 | subNo) + (1 | objNum) + (x2 | subNo) + (x |  
 ##     subNo)
@@ -640,42 +581,32 @@ summary(model5)
 ## unable to evaluate scaled gradient
 ## Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
 </code></pre>
-
-<pre><code class="language-r">anova(model5)
-</code></pre>
-
-<pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">anova</span>(model5)
+</code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##    Sum Sq Mean Sq NumDF  DenDF    F value Pr(&gt;F)    
 ## x       0       0     1 98.790 4.5100e-02 0.8322    
 ## x2  10492   10492     1 98.504 1.0593e+06 &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-
-<pre><code class="language-r">corrResult &lt;- cor.test(coef(model5)$subNo$`(Intercept)`, gamma00 + mean(gamma01*w1 + u01) + gamma02*w2 + u02)
-</code></pre>
-
-<p>The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ 16.4906087 (vs 16.4837433), while subject&rsquo;s 1 performance across all objects was $\hat{\beta_{0.1}} =$ 17.3720882 (vs 15.6800431). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .185, <em>p</em> = .065. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ -0.0244874 (vs -0.0174013), while the quadratic slope was $\hat{\beta_{21}} =$ 9.9571944 (vs 9.970709).</p>
-
-<h3 id="model-5-2">Model 5.2</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">corrResult <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(<span style="color:#a6e22e">coef</span>(model5)<span style="color:#f92672">$</span>subNo<span style="color:#f92672">$</span><span style="color:#a6e22e">`</span>(Intercept)`, gamma00 <span style="color:#f92672">+</span> <span style="color:#a6e22e">mean</span>(gamma01<span style="color:#f92672">*</span>w1 <span style="color:#f92672">+</span> u01) <span style="color:#f92672">+</span> gamma02<span style="color:#f92672">*</span>w2 <span style="color:#f92672">+</span> u02)
+</code></pre></div><p>The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ 16.4906087 (vs 16.4837433), while subject&rsquo;s 1 performance across all objects was $\hat{\beta_{0.1}} =$ 17.3720882 (vs 15.6800431). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .185, <em>p</em> = .065. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ -0.0244874 (vs -0.0174013), while the quadratic slope was $\hat{\beta_{21}} =$ 9.9571944 (vs 9.970709).</p>
+<h3 id="model-52">Model 5.2</h3>
 <p>This model is basically the same than the previous except one different. <em>X</em> varies only across objects like as if it was aggregated values from a different population. This is case in the experiment, in which one could use the normative data instead of participants&rsquo; ratings to predict the memory score.</p>
-
 <p>Level 1:
-<em>Y</em><sub>*i<strong>j*</sub> = <em>β</em><sub>0*i</strong>j*</sub> + <em>β</em><sub>1<em>j</em></sub><em>X</em><sub><em>i</em></sub> + <em>β</em><sub>2<em>j</em></sub><em>X</em><sub><em>i</em></sub><sup>2</sup> + <em>e</em><sub>*i<strong>j*</sub>
- Level 2:
-<em>β</em><sub>0*i</strong>j*</sub> = <em>γ</em><sub>00</sub> + <em>γ</em><sub>01</sub><em>W</em><sub>1<em>i</em></sub> + <em>u</em><sub>01<em>i</em></sub> + <em>γ</em><sub>02</sub><em>W</em><sub>2<em>j</em></sub> + <em>u</em><sub>02<em>j</em></sub>
+<em>Y</em><sub><em>i**j</em></sub> = <em>β</em><sub>0<em>i**j</em></sub> + <em>β</em><sub>1<em>j</em></sub><em>X</em><sub><em>i</em></sub> + <em>β</em><sub>2<em>j</em></sub><em>X</em><sub><em>i</em></sub><sup>2</sup> + <em>e</em><sub><em>i**j</em></sub>
+Level 2:
+<em>β</em><sub>0<em>i**j</em></sub> = <em>γ</em><sub>00</sub> + <em>γ</em><sub>01</sub><em>W</em><sub>1<em>i</em></sub> + <em>u</em><sub>01<em>i</em></sub> + <em>γ</em><sub>02</sub><em>W</em><sub>2<em>j</em></sub> + <em>u</em><sub>02<em>j</em></sub>
 <em>β</em><sub>1<em>j</em></sub> = <em>γ</em><sub>10</sub> + <em>u</em><sub>1<em>j</em></sub>
 <em>β</em><sub>2<em>j</em></sub> = <em>γ</em><sub>20</sub> + <em>u</em><sub>2<em>j</em></sub></p>
-
 <ul>
-<li><em>Y</em><sub>*i*<em>j</em></sub> refers to memory score for object i and subject j.</li>
-<li><em>β</em><sub>0*i*<em>j</em></sub> refers to the intercept of the dependent variable that is different for each subject and object.</li>
+<li><em>Y</em><sub><em>i**j</em></sub> refers to memory score for object i and subject j.</li>
+<li><em>β</em><sub>0<em>i**j</em></sub> refers to the intercept of the dependent variable that is different for each subject and object.</li>
 <li><em>β</em><sub>1<em>j</em></sub> refers to the linear slope for the relationship in subject j (level 2) between the level 1 predictor and the dependent variable.</li>
 <li><em>X</em><sub><em>i</em></sub> refers to the linear level 1 predictor that varies for across objects but not across subjects.</li>
 <li><em>β</em><sub>2<em>j</em></sub> refers to the quadratic slope for the relationship in subject j (level 2) between the level 1 predictor and the dependent variable.</li>
 <li><em>X</em><sub><em>i</em></sub><sup>2</sup> refers to the quadratic level 1 predictor that varies for across objects but not across subjects.</li>
-<li><em>e</em><sub>*i*<em>j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
+<li><em>e</em><sub><em>i**j</em></sub> refers to the random errors of prediction for the level 1 equation.</li>
 <li><em>γ</em><sub>00</sub> refers to the overall intercept. This is the grand mean of the scores on the dependent variable across all the subjects when all the predictors are equal to 0.</li>
 <li><em>γ</em><sub>01</sub> refers to the overall regression coefficient, or the slope, between the dependent variable and the level 2 predictor.</li>
 <li><em>W</em><sub>1<em>i</em></sub> refers to the level 2 predictor for objects.</li>
@@ -688,53 +619,50 @@ summary(model5)
 <li><em>γ</em><sub>20</sub> overall quadratic slope of the level 2.</li>
 <li><em>u</em><sub>2<em>j</em></sub> refers to the random error component for the deviation from the quadratic slope of a subject from the overall intercept.</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Generating data set</span>
+<span style="color:#75715e"># General values</span>
+numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)) <span style="color:#75715e"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
+x2     <span style="color:#f92672">&lt;-</span> x<span style="color:#f92672">*</span>x
+e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>) 
 
-<pre><code class="language-r"># Generating data set
-# General values
-numObj &lt;- 20
-numSub &lt;- 100
-index  &lt;- 1
-y      &lt;- c()
-x      &lt;- scale(runif(numObj, min = -100, max = 100)) # randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated
-x2     &lt;- x*x
-e      &lt;- rnorm(numObj * numSub, mean = 0, sd = 0.1) 
+<span style="color:#75715e"># Coefficients</span>
+gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
+gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+gamma02 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">8</span>
+gamma10 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
+gamma20 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
 
-# Coefficients
-gamma00 &lt;- 0.5
-gamma01 &lt;- 2
-gamma02 &lt;- 8
-gamma10 &lt;- 0
-gamma20 &lt;- 10
+<span style="color:#75715e"># Varying stuff</span>
+w1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-4</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+w2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span>  <span style="color:#ae81ff">0</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+u01 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+u02 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+u1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+u2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
 
-# Varying stuff
-w1 &lt;- runif(numObj, min = -4, max = 4)
-w2 &lt;- runif(numSub, min =  0, max = 4)
-u01 &lt;- rnorm(numObj, mean = 0, sd = 0.1)
-u02 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-u1 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-u2 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-
-for(j in 1:numSub){
-  for(i in 1:numObj){
-    # Long format
-    y[index] &lt;- gamma00 + gamma01 * w1[i]  + u01[i] + gamma02 * w2[j] + u02[j] + (gamma10 + u1[j]) * x[i] + (gamma20 + u2[j]) * x2[i] + e[index]
-    index &lt;- index + 1
+<span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
+  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
+    <span style="color:#75715e"># Long format</span>
+    y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01 <span style="color:#f92672">*</span> w1[i]  <span style="color:#f92672">+</span> u01[i] <span style="color:#f92672">+</span> gamma02 <span style="color:#f92672">*</span> w2[j] <span style="color:#f92672">+</span> u02[j] <span style="color:#f92672">+</span> (gamma10 <span style="color:#f92672">+</span> u1[j]) <span style="color:#f92672">*</span> x[i] <span style="color:#f92672">+</span> (gamma20 <span style="color:#f92672">+</span> u2[j]) <span style="color:#f92672">*</span> x2[i] <span style="color:#f92672">+</span> e[index]
+    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
   }
 }
 
-dataFrame5 &lt;- data.frame(y = y, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub)), x = x, x2 = x2)
+dataFrame5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub)), x <span style="color:#f92672">=</span> x, x2 <span style="color:#f92672">=</span> x2)
 
-model5 &lt;- lmer(y ~  x + 
-                    x2 + 
-                    (1 | subNo) + 
-                    (1 | objNum) + 
-                    (x2|subNo) +
-                    (x|subNo), data = dataFrame5)
+model5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
+                    x2 <span style="color:#f92672">+</span> 
+                    (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo) <span style="color:#f92672">+</span> 
+                    (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> objNum) <span style="color:#f92672">+</span> 
+                    (x2<span style="color:#f92672">|</span>subNo) <span style="color:#f92672">+</span>
+                    (x<span style="color:#f92672">|</span>subNo), data <span style="color:#f92672">=</span> dataFrame5)
 
-summary(model5)
-</code></pre>
-
-<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+<span style="color:#a6e22e">summary</span>(model5)
+</code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + x2 + (1 | subNo) + (1 | objNum) + (x2 | subNo) + (x |  
 ##     subNo)
@@ -770,87 +698,71 @@ summary(model5)
 ## x  -0.272       
 ## x2 -0.709  0.383
 </code></pre>
-
-<pre><code class="language-r">anova(model5)
-</code></pre>
-
-<pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">anova</span>(model5)
+</code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##     Sum Sq Mean Sq NumDF  DenDF F value   Pr(&gt;F)    
 ## x  0.00023 0.00023     1 17.006  0.0217   0.8845    
 ## x2 0.49531 0.49531     1 16.980 47.6909 2.56e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-
-<pre><code class="language-r">corrResult &lt;- cor.test(coef(model5)$subNo$`(Intercept)`, gamma00 + mean(gamma01*w1 + u01) + gamma02*w2 + u02)
-</code></pre>
-
-<p>The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ 16.6529841 (vs 16.6423956), while subject&rsquo;s 1 performance across all objects was $\hat{\beta_{0.1}} =$ 17.139073 (vs 20.5890653). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .094, <em>p</em> = .352. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ 0.0037117 (vs -0.1519748), while the quadratic slope was $\hat{\beta_{21}} =$ 9.9792044 (vs 10.2879503).</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">corrResult <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(<span style="color:#a6e22e">coef</span>(model5)<span style="color:#f92672">$</span>subNo<span style="color:#f92672">$</span><span style="color:#a6e22e">`</span>(Intercept)`, gamma00 <span style="color:#f92672">+</span> <span style="color:#a6e22e">mean</span>(gamma01<span style="color:#f92672">*</span>w1 <span style="color:#f92672">+</span> u01) <span style="color:#f92672">+</span> gamma02<span style="color:#f92672">*</span>w2 <span style="color:#f92672">+</span> u02)
+</code></pre></div><p>The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ 16.6529841 (vs 16.6423956), while subject&rsquo;s 1 performance across all objects was $\hat{\beta_{0.1}} =$ 17.139073 (vs 20.5890653). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .094, <em>p</em> = .352. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ 0.0037117 (vs -0.1519748), while the quadratic slope was $\hat{\beta_{21}} =$ 9.9792044 (vs 10.2879503).</p>
 <h3 id="inaccurate-estimations-of-the-random-intercepts-for-each-subject">Inaccurate estimations of the random intercepts for each subject</h3>
-
 <p>There seems to be a problem in both simulation above that the estimate of $\hat{\beta_{0.j}}$ was quite inaccurate sometimes, but this could be due the fact that I used 16 subjects in previous analyses. To test this, I run number of simulation with the same parameters.</p>
-
-<pre><code class="language-r">n &lt;- 100
-# Fixed values:
-  numObj &lt;- 20
-  numSub &lt;- 100
-  gamma00 &lt;- 0.5
-  gamma01 &lt;- 2
-  gamma02 &lt;- 8
-  gamma10 &lt;- 0
-  gamma20 &lt;- 10
-  corrResults &lt;- c()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">n <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+<span style="color:#75715e"># Fixed values:</span>
+  numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+  numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+  gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
+  gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+  gamma02 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">8</span>
+  gamma10 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
+  gamma20 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
+  corrResults <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
   
-# Loop for n simulations
-for(run in 1:n){
-  # Generating data set
-  # General values
-  index  &lt;- 1
-  y      &lt;- c()
-  x      &lt;- scale(runif(numObj, min = -100, max = 100)) # randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated
-  x2     &lt;- x*x
-  e      &lt;- rnorm(numObj * numSub, mean = 0, sd = 0.1) 
-  # Varying stuff
-  w1 &lt;- runif(numObj, min = -4, max = 4)
-  w2 &lt;- runif(numSub, min =  0, max = 4)
-  u01 &lt;- rnorm(numObj, mean = 0, sd = 0.1)
-  u02 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-  u1 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
-  u2 &lt;- rnorm(numSub, mean = 0, sd = 0.1)
+<span style="color:#75715e"># Loop for n simulations</span>
+<span style="color:#a6e22e">for</span>(run in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>n){
+  <span style="color:#75715e"># Generating data set</span>
+  <span style="color:#75715e"># General values</span>
+  index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+  y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+  x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)) <span style="color:#75715e"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
+  x2     <span style="color:#f92672">&lt;-</span> x<span style="color:#f92672">*</span>x
+  e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>) 
+  <span style="color:#75715e"># Varying stuff</span>
+  w1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-4</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+  w2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span>  <span style="color:#ae81ff">0</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+  u01 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+  u02 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+  u1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+  u2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
   
-  for(j in 1:numSub){
-    for(i in 1:numObj){
-      # Long format
-      y[index] &lt;- gamma00 + gamma01 * w1[i]  + u01[i] + gamma02 * w2[j] + u02[j] + (gamma10 + u1[j]) * x[i] + (gamma20 + u2[j]) * x2[i] + e[index]
-      index &lt;- index + 1
+  <span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
+    <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
+      <span style="color:#75715e"># Long format</span>
+      y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01 <span style="color:#f92672">*</span> w1[i]  <span style="color:#f92672">+</span> u01[i] <span style="color:#f92672">+</span> gamma02 <span style="color:#f92672">*</span> w2[j] <span style="color:#f92672">+</span> u02[j] <span style="color:#f92672">+</span> (gamma10 <span style="color:#f92672">+</span> u1[j]) <span style="color:#f92672">*</span> x[i] <span style="color:#f92672">+</span> (gamma20 <span style="color:#f92672">+</span> u2[j]) <span style="color:#f92672">*</span> x2[i] <span style="color:#f92672">+</span> e[index]
+      index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
     }
   }
   
-  dataFrame5 &lt;- data.frame(y = y, subNo = factor(rep(1:numSub, each = numObj)), objNum = factor(rep(1:numObj, numSub)), x = x, x2 = x2)
+  dataFrame5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub)), x <span style="color:#f92672">=</span> x, x2 <span style="color:#f92672">=</span> x2)
   
-  try(model5 &lt;- lmer(y ~  x + 
-                      x2 + 
-                      (1 | subNo) + 
-                      (1 | objNum) + 
-                      (x2|subNo) +
-                      (x|subNo), data = dataFrame5))
+  <span style="color:#a6e22e">try</span>(model5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
+                      x2 <span style="color:#f92672">+</span> 
+                      (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo) <span style="color:#f92672">+</span> 
+                      (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> objNum) <span style="color:#f92672">+</span> 
+                      (x2<span style="color:#f92672">|</span>subNo) <span style="color:#f92672">+</span>
+                      (x<span style="color:#f92672">|</span>subNo), data <span style="color:#f92672">=</span> dataFrame5))
   
-  corrResults[run] &lt;- cor.test(coef(model5)$subNo$`(Intercept)`, gamma00 + mean(gamma01*w1 + u01) + gamma02*w2 + u02)$estimate
+  corrResults[run] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(<span style="color:#a6e22e">coef</span>(model5)<span style="color:#f92672">$</span>subNo<span style="color:#f92672">$</span><span style="color:#a6e22e">`</span>(Intercept)`, gamma00 <span style="color:#f92672">+</span> <span style="color:#a6e22e">mean</span>(gamma01<span style="color:#f92672">*</span>w1 <span style="color:#f92672">+</span> u01) <span style="color:#f92672">+</span> gamma02<span style="color:#f92672">*</span>w2 <span style="color:#f92672">+</span> u02)<span style="color:#f92672">$</span>estimate
 }
-</code></pre>
-
-<p>Even when increasing the number of subjects to 100, there were models that couldn&rsquo;t be estimated or had every low correlations coefficients. See the histogram below for the distribution.</p>
-
-<pre><code class="language-r">ggplot(data.frame(corrResults), aes(corrResults)) + geom_histogram() + theme(panel.margin = unit(1, &quot;cm&quot;), text = element_text(size = 12), plot.margin = margin(10, 10, 10, 10)) + 
-        labs(y = 'Frequency', x = 'Correlation coefficients') + 
-        coord_cartesian(xlim = c(0, 1), expand = FALSE)
-</code></pre>
-
-<p><img src="2018-03-14-mixed-linear-models_files/figure-markdown_github/unnamed-chunk-10-1.png" alt="" /></p>
-
+</code></pre></div><p>Even when increasing the number of subjects to 100, there were models that couldn&rsquo;t be estimated or had every low correlations coefficients. See the histogram below for the distribution.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">data.frame</span>(corrResults), <span style="color:#a6e22e">aes</span>(corrResults)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(panel.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;cm&#34;</span>), text <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>), plot.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">margin</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">+</span> 
+        <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Frequency&#39;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Correlation coefficients&#39;</span>) <span style="color:#f92672">+</span> 
+        <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</code></pre></div><p><img src="2018-03-14-mixed-linear-models_files/figure-markdown_github/unnamed-chunk-10-1.png" alt=""></p>
 <h1 id="conclusion">Conclusion</h1>
-
 <p>All models except the last two can be estimated with a decent accuracy. The problem for the last two models is that on rare occasions the model fails to converge or the correlation coefficients for $\hat{\beta_{0.j}}$ and their true value is very low. At the moment, I don&rsquo;t really know what to do about it.</p>
 
 
@@ -869,7 +781,7 @@ for(run in 1:n){
         
             <li><a href="/2018/01/checking-whether-my-data-is-saved-correctly/">Checking whether my data is saved correctly</a></li>
         
-            <li><a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a></li>
+            <li><a href="/2018/01/second-attempt-to-select-set-of-object/location-pairs/">Second attempt to select set of object/location pairs</a></li>
         
     </ul>
 
@@ -890,6 +802,14 @@ for(run in 1:n){
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -899,14 +819,6 @@ for(run in 1:n){
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -1017,6 +929,29 @@ for(run in 1:n){
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

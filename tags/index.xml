@@ -1,274 +1,274 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>About</title>
-      <link>https://jaquent.github.io/tags/about/</link>
-      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/about/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Bayesian Stats</title>
-      <link>https://jaquent.github.io/tags/bayesian-stats/</link>
+      <link>/tags/bayesian-stats/</link>
+      <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/bayesian-stats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>design analysis</title>
+      <link>/tags/design-analysis/</link>
       <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/bayesian-stats/</guid>
+      <guid>/tags/design-analysis/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Data Check</title>
-      <link>https://jaquent.github.io/tags/data-check/</link>
-      <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/data-check/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Design Analysis</title>
-      <link>https://jaquent.github.io/tags/design-analysis/</link>
+      <title>rmarkdown</title>
+      <link>/tags/rmarkdown/</link>
       <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/design-analysis/</guid>
+      <guid>/tags/rmarkdown/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Familiarity</title>
-      <link>https://jaquent.github.io/tags/familiarity/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/familiarity/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Glm</title>
-      <link>https://jaquent.github.io/tags/glm/</link>
+      <title>glm</title>
+      <link>/tags/glm/</link>
       <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/glm/</guid>
+      <guid>/tags/glm/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Graphics</title>
-      <link>https://jaquent.github.io/tags/graphics/</link>
-      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      <title>noveltyVR</title>
+      <link>/tags/noveltyvr/</link>
+      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/graphics/</guid>
+      <guid>/tags/noveltyvr/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Hippocampus</title>
-      <link>https://jaquent.github.io/tags/hippocampus/</link>
+      <title>research design</title>
+      <link>/tags/research-design/</link>
+      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/research-design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>word properties</title>
+      <link>/tags/word-properties/</link>
+      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/word-properties/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>words</title>
+      <link>/tags/words/</link>
+      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/words/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>familiarity</title>
+      <link>/tags/familiarity/</link>
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/hippocampus/</guid>
+      <guid>/tags/familiarity/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Ideas and Plans</title>
-      <link>https://jaquent.github.io/tags/ideas-and-plans/</link>
+      <title>hippocampus</title>
+      <link>/tags/hippocampus/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hippocampus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>memory</title>
+      <link>/tags/memory/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mPFC</title>
+      <link>/tags/mpfc/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/mpfc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>recognition memory</title>
+      <link>/tags/recognition-memory/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/recognition-memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>recollection</title>
+      <link>/tags/recollection/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/recollection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>schema</title>
+      <link>/tags/schema/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/schema/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>schemaVR</title>
+      <link>/tags/schemavr/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/schemavr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>schemaVR1</title>
+      <link>/tags/schemavr1/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/schemavr1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>schemaVR2</title>
+      <link>/tags/schemavr2/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/schemavr2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ideas and plans</title>
+      <link>/tags/ideas-and-plans/</link>
       <pubDate>Thu, 12 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/ideas-and-plans/</guid>
+      <guid>/tags/ideas-and-plans/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Lab Meeting</title>
-      <link>https://jaquent.github.io/tags/lab-meeting/</link>
-      <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/lab-meeting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Lme4/Lmertest</title>
-      <link>https://jaquent.github.io/tags/lme4-lmertest/</link>
-      <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/lme4-lmertest/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Memory</title>
-      <link>https://jaquent.github.io/tags/memory/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/memory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Meta</title>
-      <link>https://jaquent.github.io/tags/meta/</link>
+      <title>meta</title>
+      <link>/tags/meta/</link>
       <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/meta/</guid>
+      <guid>/tags/meta/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Mixed Linear Models</title>
-      <link>https://jaquent.github.io/tags/mixed-linear-models/</link>
+      <title>mixed linear models</title>
+      <link>/tags/mixed-linear-models/</link>
       <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/mixed-linear-models/</guid>
+      <guid>/tags/mixed-linear-models/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Mpfc</title>
-      <link>https://jaquent.github.io/tags/mpfc/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/mpfc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Noveltyvr</title>
-      <link>https://jaquent.github.io/tags/noveltyvr/</link>
-      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/noveltyvr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pilot Study</title>
-      <link>https://jaquent.github.io/tags/pilot-study/</link>
-      <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/pilot-study/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ratingstudy</title>
-      <link>https://jaquent.github.io/tags/ratingstudy/</link>
-      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/ratingstudy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Recognition Memory</title>
-      <link>https://jaquent.github.io/tags/recognition-memory/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/recognition-memory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Recollection</title>
-      <link>https://jaquent.github.io/tags/recollection/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/recollection/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Research Design</title>
-      <link>https://jaquent.github.io/tags/research-design/</link>
-      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/research-design/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rmarkdown</title>
-      <link>https://jaquent.github.io/tags/rmarkdown/</link>
-      <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/rmarkdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Schema</title>
-      <link>https://jaquent.github.io/tags/schema/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/schema/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Schemavr</title>
-      <link>https://jaquent.github.io/tags/schemavr/</link>
-      <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/schemavr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Schemavr1</title>
-      <link>https://jaquent.github.io/tags/schemavr1/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/schemavr1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Schemavr2</title>
-      <link>https://jaquent.github.io/tags/schemavr2/</link>
-      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/schemavr2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Unity3d</title>
-      <link>https://jaquent.github.io/tags/unity3d/</link>
+      <title>unity3d</title>
+      <link>/tags/unity3d/</link>
       <pubDate>Mon, 19 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/unity3d/</guid>
+      <guid>/tags/unity3d/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Word Properties</title>
-      <link>https://jaquent.github.io/tags/word-properties/</link>
-      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+      <title>pilot study</title>
+      <link>/tags/pilot-study/</link>
+      <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/word-properties/</guid>
+      <guid>/tags/pilot-study/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Words</title>
-      <link>https://jaquent.github.io/tags/words/</link>
-      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+      <title>data check</title>
+      <link>/tags/data-check/</link>
+      <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/words/</guid>
+      <guid>/tags/data-check/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ratingStudy</title>
+      <link>/tags/ratingstudy/</link>
+      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ratingstudy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>/tags/about/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lab meeting</title>
+      <link>/tags/lab-meeting/</link>
+      <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lab-meeting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>graphics</title>
+      <link>/tags/graphics/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/graphics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lme4/lmerTest</title>
+      <link>/tags/lme4/lmertest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lme4/lmertest/</guid>
       <description></description>
     </item>
     

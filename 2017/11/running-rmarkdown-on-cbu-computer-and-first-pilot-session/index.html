@@ -10,8 +10,9 @@
 These the things that I tried and eventually worked:
  I installed the package as a source package, because there is no binary version of it." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/" /><meta property="article:published_time" content="2017-11-13T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2017-11-13T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/" />
+<meta property="article:published_time" content="2017-11-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-11-13T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Running RMarkdown on CBU computer and first pilot session"/>
@@ -21,7 +22,7 @@ These the things that I tried and eventually worked:
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/">
+    <link rel="canonical" href="/2017/11/running-rmarkdown-on-cbu-computer-and-first-pilot-session/">
 
     <title>
       
@@ -31,7 +32,7 @@ These the things that I tried and eventually worked:
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -120,17 +121,13 @@ These the things that I tried and eventually worked:
 </header>
 <article class="blog-post">
     <p>The issues I am describing here are probably most interesting for people also working on a MRC-CBU computer because MRC-CBU’s specific cyber-security regulations. When I tried to create a new RMarkdown file, I got an error message that the package ‘rprojroot’ could not be found.</p>
-
 <p>These the things that I tried and eventually worked:</p>
-
 <ul>
 <li>I installed the package as a source package, because there is no binary version of it. However, I couldn’t because I did not have writing privileges in C:\Program Files\R\R-3.1.3\library. This can be fixed for instance by running RStudio as an administrator or by choosing a different folder.</li>
 <li>I then installed devtools (install.packages(“devtools”) and the other package (devtools::install_github(“krlmlr/rprojroot”)). After that RMarkdown worked for generating .html files, but not for .pdf.</li>
 <li>Therefore I downloaded MikTex via a proxy (important for CBU’s firewall) and installed it and everything worked.</li>
 </ul>
-
 <p>Today I also had the first pilot session. Here a my various notes and comments:</p>
-
 <ul>
 <li>The number of objects is not too high and the time spend in the environment seems to be sufficient (currently between 30 and 45 seconds).</li>
 <li>In the final experiment, I should have a mark in the middle of the actual room to ensure that all participants start at the same location in the virtual room. In order to maximise experimental control, I should add the possibility to load the scene (i.e. room) by pressing a key. In future version, the instructions in MATLAB should only be seen at the first time.</li>
@@ -174,6 +171,14 @@ These the things that I tried and eventually worked:
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -183,14 +188,6 @@ These the things that I tried and eventually worked:
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -301,6 +298,29 @@ These the things that I tried and eventually worked:
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

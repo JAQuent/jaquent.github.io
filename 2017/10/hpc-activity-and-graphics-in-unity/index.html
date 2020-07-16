@@ -8,8 +8,9 @@
 <meta property="og:title" content="HPC activity and graphics in Unity" />
 <meta property="og:description" content="Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema. Unity tutorial on graphics:  If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting. Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/" /><meta property="article:published_time" content="2017-10-12T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2017-10-12T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2017/10/hpc-activity-and-graphics-in-unity/" />
+<meta property="article:published_time" content="2017-10-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-10-12T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="HPC activity and graphics in Unity"/>
@@ -17,7 +18,7 @@
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2017/10/hpc-activity-and-graphics-in-unity/">
+    <link rel="canonical" href="/2017/10/hpc-activity-and-graphics-in-unity/">
 
     <title>
       
@@ -27,7 +28,7 @@
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -119,21 +120,17 @@
     <hr>
 </header>
 <article class="blog-post">
-    
-
-<ul>
+    <ul>
 <li>Frankland et al. (2005) reviews that HPC ripple activity is temporally correlated with cortical slow-wave spindles in the MPFC. This could be related to the integration of memories into existing schema.</li>
 <li>Unity tutorial on graphics:
-
 <ul>
 <li>If I want to spawn objects at random locations, it would be problematic to pre-compute the lighting.</li>
 <li>Would it be a solution to be used mixed baking and have all the items, which do not change their location, as static because they have light maps?</li>
 <li>Use linear colour space because it is more realistic. This goes well with using HDR. When using HDR cameras, the Tonemapping Image Effect from Standard Assets (Assets&gt;Import Package&gt;Effects) must be added to the camera.</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h1 id="references">References</h1>
-
 <p>Frankland, P. W., &amp; Bontempi, B. (2005). The organization of recent and remote memories. Nat Rev Neurosci, 6(2), 119–130. Retrieved from <a href="http://dx.doi.org/10.1038/nrn1607">http://dx.doi.org/10.1038/nrn1607</a></p>
 
 
@@ -165,6 +162,14 @@
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -174,14 +179,6 @@
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -292,6 +289,29 @@
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

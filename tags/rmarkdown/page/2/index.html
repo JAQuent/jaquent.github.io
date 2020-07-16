@@ -5,32 +5,32 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Rmarkdown" />
+<meta property="og:title" content="rmarkdown" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://jaquent.github.io/tags/rmarkdown/" />
-<meta property="og:updated_time" content="2018-04-24T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/tags/rmarkdown/" />
+<meta property="og:updated_time" content="2019-04-22T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Rmarkdown"/>
+<meta name="twitter:title" content="rmarkdown"/>
 <meta name="twitter:description" content=""/>
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/tags/rmarkdown/">
+    <link rel="canonical" href="/tags/rmarkdown/">
 
     <title>
       
-        Rmarkdown | Jörn Alexander Quent&#39;s notebook
+        rmarkdown | Jörn Alexander Quent&#39;s notebook
       
     </title>
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
-    <link href="https://jaquent.github.io/tags/rmarkdown/index.xml" rel="alternate" type="application/rss+xml" title="Jörn Alexander Quent&#39;s notebook" />
+    <link href="/tags/rmarkdown/index.xml" rel="alternate" type="application/rss+xml" title="Jörn Alexander Quent&#39;s notebook" />
     
 
     
@@ -121,7 +121,7 @@
 
     </header>
     Introduction The current data collection is part of a broader attempt to pilot the design and to refine my hypotheses. The experiment itself is referred to as schemaVR1. The analyses that are pre-planned and post-hoc are clearly labelled.
-This script was created to show the interim results. In order to be transparent to which extent I analysed the data before the conclusion of the data collection, I uploaded this version.
+This script was created to show the interim results. In order to be transparent to which extent I analysed the data before the conclusion of the data collection, I uploaded this version. This especially important because I did not pre-register the study.
     
     <p></p>
     <a href="/2018/04/interim-results-of-schemvr1/">Read More →</a>
@@ -226,7 +226,7 @@ This script was created to show the interim results. In order to be transparent 
 
     </header>
     Introduction This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.
-Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &lt;-function(x, sign = '='){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary.lm(x) x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.
+Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &#34;lm&#34;)){ s &lt;- summary.lm(x) x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.
     
     <p></p>
     <a href="/2018/02/final-analysis-of-pilot-data/">Read More →</a>
@@ -330,6 +330,14 @@ Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) li
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -339,14 +347,6 @@ Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) li
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -457,6 +457,29 @@ Preliminary stuff Libraries &amp; functions library(data.table) library(plyr) li
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

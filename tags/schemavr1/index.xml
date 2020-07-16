@@ -1,111 +1,111 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Schemavr1 on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/schemavr1/</link>
-    <description>Recent content in Schemavr1 on Jörn Alexander Quent&#39;s notebook</description>
+    <title>schemaVR1 on Jörn Alexander Quent&#39;s notebook</title>
+    <link>/tags/schemavr1/</link>
+    <description>Recent content in schemaVR1 on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jaquent.github.io/tags/schemavr1/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/schemavr1/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title> End of schemaVR1 and start of schemaVR2</title>
-      <link>https://jaquent.github.io/2018/05/end-of-schemavr1-and-start-of-schemavr2/</link>
+      <link>/2018/05/end-of-schemavr1-and-start-of-schemavr2/</link>
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/05/end-of-schemavr1-and-start-of-schemavr2/</guid>
+      <guid>/2018/05/end-of-schemavr1-and-start-of-schemavr2/</guid>
       <description>Today, I finished the data collection for schemaVR1. I collected 17 instead of 16 participants because I wanted to show the experiment to someone who then agreed to formally take part in this experiment.
 The two major the results of this experiment are that the locations of objects that are generally unexpected in a kitchen are remembered better (measured by 3D location recall and 3AFC location recognition) than the locations of objects that are expected in a kitchen.</description>
     </item>
     
     <item>
       <title>Interim results of schemVR1</title>
-      <link>https://jaquent.github.io/2018/04/interim-results-of-schemvr1/</link>
+      <link>/2018/04/interim-results-of-schemvr1/</link>
       <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/04/interim-results-of-schemvr1/</guid>
+      <guid>/2018/04/interim-results-of-schemvr1/</guid>
       <description>Introduction The current data collection is part of a broader attempt to pilot the design and to refine my hypotheses. The experiment itself is referred to as schemaVR1. The analyses that are pre-planned and post-hoc are clearly labelled.
-This script was created to show the interim results. In order to be transparent to which extent I analysed the data before the conclusion of the data collection, I uploaded this version.</description>
+This script was created to show the interim results. In order to be transparent to which extent I analysed the data before the conclusion of the data collection, I uploaded this version. This especially important because I did not pre-register the study.</description>
     </item>
     
     <item>
       <title>Interim results and future plans</title>
-      <link>https://jaquent.github.io/2018/04/interim-results-and-future-plans/</link>
+      <link>/2018/04/interim-results-and-future-plans/</link>
       <pubDate>Thu, 12 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/04/interim-results-and-future-plans/</guid>
+      <guid>/2018/04/interim-results-and-future-plans/</guid>
       <description>I am currently caught up with collecting data for my first experiment, which I will henceforth call schemaVR1, working on my first year report and analysing the interim results. I have collected data from eight participant so far and already got number of significant results. This is quite impressive considering that I also have only twenty stimuli/trials. I will upload the pre-processing script alongside a script analysing the interim results in the next days in a separate GitHub repository, where I will provide more details, but a very robust, and already significant, finding is that the locations of unexpected objects are recalled more often than that of expected objects.</description>
     </item>
     
     <item>
       <title>Final design of schemaVR1</title>
-      <link>https://jaquent.github.io/2018/02/final-design-of-schemavr1/</link>
+      <link>/2018/02/final-design-of-schemavr1/</link>
       <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/02/final-design-of-schemavr1/</guid>
+      <guid>/2018/02/final-design-of-schemavr1/</guid>
       <description>My supervisor and I agreed on the final design while discussing the results of the pilot experiment. We both think that it is important to replicate Lew &amp;amp; Howe (2016) results if their test is used, but not if one uses 3AFC test. They used a Y/N location recognition task (“Was this object in this place before?”) and location recall task (2D picture version). I will develop a spatial 3D location recall task for the VR system to replicate the results in the first experiment.</description>
     </item>
     
     <item>
       <title>Final analysis of pilot data</title>
-      <link>https://jaquent.github.io/2018/02/final-analysis-of-pilot-data/</link>
+      <link>/2018/02/final-analysis-of-pilot-data/</link>
       <pubDate>Tue, 13 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/02/final-analysis-of-pilot-data/</guid>
+      <guid>/2018/02/final-analysis-of-pilot-data/</guid>
       <description>Introduction This script is about to check whether the parameters of the experiment (such as time in the VE, number of targets objects etc.) work to avoid either floor or ceiling effects. Note that the pre-encoding ratings (see below) were from different individuals.
-Preliminary stuff Libraries &amp;amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &amp;lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &amp;quot;lm&amp;quot;)){ s &amp;lt;- summary.lm(x) x &amp;lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.</description>
+Preliminary stuff Libraries &amp;amp; functions library(data.table) library(plyr) library(ggplot2) library(lme4) library(ez) library(BayesFactor) library(grid) pValue &amp;lt;-function(x, sign = &amp;#39;=&amp;#39;){ if (inherits(x, &amp;#34;lm&amp;#34;)){ s &amp;lt;- summary.lm(x) x &amp;lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.</description>
     </item>
     
     <item>
       <title>Checking whether my data is saved correctly</title>
-      <link>https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/</link>
+      <link>/2018/01/checking-whether-my-data-is-saved-correctly/</link>
       <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/</guid>
+      <guid>/2018/01/checking-whether-my-data-is-saved-correctly/</guid>
       <description>Comment For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found here). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.
 Introduction I am about to start collecting pilot data to see whether the number of objects etc.</description>
     </item>
     
     <item>
       <title>Second attempt to select set of object/location pairs</title>
-      <link>https://jaquent.github.io/2018/01/second-attempt-to-select-set-of-object-location-pairs/</link>
+      <link>/2018/01/second-attempt-to-select-set-of-object/location-pairs/</link>
       <pubDate>Thu, 25 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/second-attempt-to-select-set-of-object-location-pairs/</guid>
+      <guid>/2018/01/second-attempt-to-select-set-of-object/location-pairs/</guid>
       <description>Introduction This is actually the second attempt to find a suitable set of object/location pairs (click here for the first attempt). The problem with the set I choose the first time is that some locations are used more than twice as foils during retrieval. This is an issue because once you know which object was at a specific location, it won&amp;rsquo;t work as a foil anymore.
 Just as a reminder, the aim is to select a combination of twenty objects at twenty locations that cover the whole range of expectancy values together with two foil locations that match the expectancy of the targets.</description>
     </item>
     
     <item>
       <title>Issue with stimulus selection and some thoughts</title>
-      <link>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</link>
+      <link>/2018/01/issue-with-stimulus-selection-and-some-thoughts/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/issue-with-stimulus-selection-and-some-thoughts/</guid>
+      <guid>/2018/01/issue-with-stimulus-selection-and-some-thoughts/</guid>
       <description>This entry contains thoughts and observations for the last couple of days because I was stuck with a problem and didn’t have a lot say. The problem was that I hadn&amp;rsquo;t controlled the number of times a location can serve as a foil when I had picked the set of object/locations pairs. This is indeed problematic because some locations were used four times. If you know which object was at a specific location, it isn’t really a foil anymore influencing subsequent trials.</description>
     </item>
     
     <item>
       <title>Testing whether targets differ in rank from foils</title>
-      <link>https://jaquent.github.io/2018/01/testing-whether-targets-differ-in-rank-from-foils/</link>
+      <link>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</link>
       <pubDate>Mon, 15 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/testing-whether-targets-differ-in-rank-from-foils/</guid>
+      <guid>/2018/01/testing-whether-targets-differ-in-rank-from-foils/</guid>
       <description>Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
-Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &amp;lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &amp;quot;lm&amp;quot;)){ s &amp;lt;- summary.</description>
+Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &amp;lt;-function(x, sign = &amp;#39;=&amp;#39;){ if (inherits(x, &amp;#34;lm&amp;#34;)){ s &amp;lt;- summary.</description>
     </item>
     
     <item>
       <title>Stimulus selection for schemaVR1 (Attempt 1)</title>
-      <link>https://jaquent.github.io/2018/01/stimulus-selection-for-schemavr1-attempt-1/</link>
+      <link>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</link>
       <pubDate>Fri, 12 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/stimulus-selection-for-schemavr1-attempt-1/</guid>
+      <guid>/2018/01/stimulus-selection-for-schemavr1-attempt-1/</guid>
       <description>Introduction The aim is to select a certain number (20) of combinations of objects and locations that cover the whole range of expectancy values. The previous analysis of this data set can be found here. The code for the task can be found here.
-Used libraries and functions library(ggplot2)  Loading the rating data I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants.</description>
+Used libraries and functions library(ggplot2) Loading the rating data I start with loading the raw data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants.</description>
     </item>
     
   </channel>

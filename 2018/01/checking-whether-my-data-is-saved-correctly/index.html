@@ -9,8 +9,9 @@
 <meta property="og:description" content="Comment For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found here). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.
 Introduction I am about to start collecting pilot data to see whether the number of objects etc." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/" /><meta property="article:published_time" content="2018-01-30T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-01-30T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2018/01/checking-whether-my-data-is-saved-correctly/" />
+<meta property="article:published_time" content="2018-01-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-01-30T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Checking whether my data is saved correctly"/>
@@ -19,7 +20,7 @@ Introduction I am about to start collecting pilot data to see whether the number
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2018/01/checking-whether-my-data-is-saved-correctly/">
+    <link rel="canonical" href="/2018/01/checking-whether-my-data-is-saved-correctly/">
 
     <title>
       
@@ -29,7 +30,7 @@ Introduction I am about to start collecting pilot data to see whether the number
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -117,101 +118,66 @@ Introduction I am about to start collecting pilot data to see whether the number
     <hr>
 </header>
 <article class="blog-post">
-    
-
-<h1 id="comment">Comment</h1>
-
+    <h1 id="comment">Comment</h1>
 <p>For the last days, I worked on the scripts of the retrieval task and the rating task (code can be found <a href="https://github.com/JAQuent/ratingStudy/tree/postEncodingRatings">here</a>). I successfully checked whether the data is saved correctly and can be used for analysis (see below). The next step now is to run a few pilot participants to see whether the task difficulty is appropriate.</p>
-
 <h1 id="introduction">Introduction</h1>
-
 <p>I am about to start collecting pilot data to see whether the number of objects etc. works and isn&rsquo;t to easy for instance. It is crucial to throroughly check whether my scripts save the data correctly and it can be used for data analysis before starting piloting.</p>
-
 <h1 id="libaries">Libaries</h1>
-
-<pre><code class="language-r">library(plyr)
-</code></pre>
-
-<h1 id="retrieval-task">Retrieval task</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(plyr)
+</code></pre></div><h1 id="retrieval-task">Retrieval task</h1>
 <h2 id="is-everything-saved-appropriately">Is everything saved appropriately?</h2>
-
 <p>I realised that I forgot to save which location (target, foil 1 or 2) in earlier check. This is the second attempt after adapting the script accordingly.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Loading data and adding objects names and specify factors</span>
+dataRetrievalTask <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#e6db74">&#39;C:/Users/aq01/Desktop/schemVR_pilot/pilotData/retrievalTask_0.dat&#39;</span>, header <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
 
-<pre><code class="language-r"># Loading data and adding objects names and specify factors
-dataRetrievalTask &lt;- read.table('C:/Users/aq01/Desktop/schemVR_pilot/pilotData/retrievalTask_0.dat', header = FALSE)
+<span style="color:#a6e22e">names</span>(dataRetrievalTask) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;subNo&#39;</span>, <span style="color:#e6db74">&#39;date&#39;</span>, <span style="color:#e6db74">&#39;time&#39;</span>, <span style="color:#e6db74">&#39;trial&#39;</span>,<span style="color:#e6db74">&#39;objectNumber&#39;</span>, <span style="color:#e6db74">&#39;targetLocation&#39;</span>, <span style="color:#e6db74">&#39;targetRankPre&#39;</span>, <span style="color:#e6db74">&#39;foil1Location&#39;</span>, <span style="color:#e6db74">&#39;foil1RankPre&#39;</span>, <span style="color:#e6db74">&#39;foil2Location&#39;</span>, <span style="color:#e6db74">&#39;foil2RankPre&#39;</span>, <span style="color:#e6db74">&#39;AFCPreTime&#39;</span>,<span style="color:#e6db74">&#39;rtAFC&#39;</span>, <span style="color:#e6db74">&#39;resAFC&#39;</span>, <span style="color:#e6db74">&#39;accAFC&#39;</span>, <span style="color:#e6db74">&#39;conPreTime&#39;</span>, <span style="color:#e6db74">&#39;rtCon&#39;</span>, <span style="color:#e6db74">&#39;resCon&#39;</span>, <span style="color:#e6db74">&#39;left&#39;</span>, <span style="color:#e6db74">&#39;middle&#39;</span>, <span style="color:#e6db74">&#39;right&#39;</span>)
 
-names(dataRetrievalTask) &lt;- c('subNo', 'date', 'time', 'trial','objectNumber', 'targetLocation', 'targetRankPre', 'foil1Location', 'foil1RankPre', 'foil2Location', 'foil2RankPre', 'AFCPreTime','rtAFC', 'resAFC', 'accAFC', 'conPreTime', 'rtCon', 'resCon', 'left', 'middle', 'right')
+objectNames <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;microwave&#39;</span>,<span style="color:#e6db74">&#39;kitchen roll&#39;</span>,<span style="color:#e6db74">&#39;saucepan&#39;</span>, <span style="color:#e6db74">&#39;toaster&#39;</span>,<span style="color:#e6db74">&#39;bowl of fruits&#39;</span>,<span style="color:#e6db74">&#39;tea pot&#39;</span>,<span style="color:#e6db74">&#39;knife&#39;</span>,<span style="color:#e6db74">&#39;mixer&#39;</span>,<span style="color:#e6db74">&#39;bread&#39;</span>,<span style="color:#e6db74">&#39;glass jug&#39;</span>,<span style="color:#e6db74">&#39;mug&#39;</span>,<span style="color:#e6db74">&#39;dishes&#39;</span>,<span style="color:#e6db74">&#39;towels&#39;</span>,<span style="color:#e6db74">&#39;toy&#39;</span>,<span style="color:#e6db74">&#39;pile of books&#39;</span>,<span style="color:#e6db74">&#39;umbrella&#39;</span>,<span style="color:#e6db74">&#39;hat&#39;</span>,<span style="color:#e6db74">&#39;helmet&#39;</span>,<span style="color:#e6db74">&#39;calendar&#39;</span>,<span style="color:#e6db74">&#39;fan&#39;</span>)
 
-objectNames &lt;- c('microwave','kitchen roll','saucepan', 'toaster','bowl of fruits','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
+dataRetrievalTask<span style="color:#f92672">$</span>objectName <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">factor</span>(dataRetrievalTask<span style="color:#f92672">$</span>objectNumber, labels <span style="color:#f92672">=</span> objectNames)
+dataRetrievalTask<span style="color:#f92672">$</span>left       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">factor</span>(dataRetrievalTask<span style="color:#f92672">$</span>left, labels <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;target&#39;</span>, <span style="color:#e6db74">&#39;foil1&#39;</span>, <span style="color:#e6db74">&#39;foil2&#39;</span>))
+dataRetrievalTask<span style="color:#f92672">$</span>middle     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">factor</span>(dataRetrievalTask<span style="color:#f92672">$</span>middle, labels <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;target&#39;</span>, <span style="color:#e6db74">&#39;foil1&#39;</span>, <span style="color:#e6db74">&#39;foil2&#39;</span>))
+dataRetrievalTask<span style="color:#f92672">$</span>right      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">factor</span>(dataRetrievalTask<span style="color:#f92672">$</span>left, labels <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;target&#39;</span>, <span style="color:#e6db74">&#39;foil1&#39;</span>, <span style="color:#e6db74">&#39;foil2&#39;</span>))
 
-dataRetrievalTask$objectName &lt;- factor(dataRetrievalTask$objectNumber, labels = objectNames)
-dataRetrievalTask$left       &lt;- factor(dataRetrievalTask$left, labels = c('target', 'foil1', 'foil2'))
-dataRetrievalTask$middle     &lt;- factor(dataRetrievalTask$middle, labels = c('target', 'foil1', 'foil2'))
-dataRetrievalTask$right      &lt;- factor(dataRetrievalTask$left, labels = c('target', 'foil1', 'foil2'))
-
-# First AFC response was 1
-dataRetrievalTask$resAFC[1]
+<span style="color:#75715e"># First AFC response was 1</span>
+dataRetrievalTask<span style="color:#f92672">$</span>resAFC[1]
+</code></pre></div><pre><code>## [1] 2
 </code></pre>
-
-<pre><code>## [1] 2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># First confidence response was 2</span>
+dataRetrievalTask<span style="color:#f92672">$</span>resCon[1]
+</code></pre></div><pre><code>## [1] 1
 </code></pre>
-
-<pre><code class="language-r"># First confidence response was 2
-dataRetrievalTask$resCon[1]
-</code></pre>
-
-<pre><code>## [1] 1
-</code></pre>
-
-<pre><code class="language-r"># Tagert was on the left
-dataRetrievalTask$left[1]
-</code></pre>
-
-<pre><code>## [1] foil2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Tagert was on the left</span>
+dataRetrievalTask<span style="color:#f92672">$</span>left[1]
+</code></pre></div><pre><code>## [1] foil2
 ## Levels: target foil1 foil2
 </code></pre>
-
-<pre><code class="language-r"># Foil 2 was in middle
-dataRetrievalTask$middle[1]
-</code></pre>
-
-<pre><code>## [1] target
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Foil 2 was in middle</span>
+dataRetrievalTask<span style="color:#f92672">$</span>middle[1]
+</code></pre></div><pre><code>## [1] target
 ## Levels: target foil1 foil2
 </code></pre>
-
-<pre><code class="language-r"># Foil 1 was on the right
-dataRetrievalTask$right[1]
-</code></pre>
-
-<pre><code>## [1] foil2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Foil 1 was on the right</span>
+dataRetrievalTask<span style="color:#f92672">$</span>right[1]
+</code></pre></div><pre><code>## [1] foil2
 ## Levels: target foil1 foil2
 </code></pre>
-
-<pre><code class="language-r"># The AFC response was therefore correct
-dataRetrievalTask$accAFC[1]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># The AFC response was therefore correct</span>
+dataRetrievalTask<span style="color:#f92672">$</span>accAFC[1]
+</code></pre></div><pre><code>## [1] 1
 </code></pre>
-
-<pre><code>## [1] 1
-</code></pre>
-
 <p>Everything seems to be saved correctly and seems to be useable.</p>
-
 <h1 id="rating-task">Rating task</h1>
-
 <h2 id="is-everything-saved-appropriately-1">Is everything saved appropriately?</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Loading data and adding objects names</span>
+dataRatingTask        <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#e6db74">&#39;C:/Users/aq01/Desktop/schemVR_pilot/pilotData/ratingTask_0.dat&#39;</span>, header <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+<span style="color:#a6e22e">names</span>(dataRatingTask) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;subNo&#39;</span>, <span style="color:#e6db74">&#39;date&#39;</span>, <span style="color:#e6db74">&#39;time&#39;</span>, <span style="color:#e6db74">&#39;trial&#39;</span>,<span style="color:#e6db74">&#39;objectNumber&#39;</span>, <span style="color:#e6db74">&#39;location&#39;</span>, <span style="color:#e6db74">&#39;rating&#39;</span>, <span style="color:#e6db74">&#39;RT&#39;</span>)
 
-<pre><code class="language-r"># Loading data and adding objects names
-dataRatingTask        &lt;- read.table('C:/Users/aq01/Desktop/schemVR_pilot/pilotData/ratingTask_0.dat', header = FALSE)
-names(dataRatingTask) &lt;- c('subNo', 'date', 'time', 'trial','objectNumber', 'location', 'rating', 'RT')
+objectNames <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;microwave&#39;</span>,<span style="color:#e6db74">&#39;kitchen roll&#39;</span>,<span style="color:#e6db74">&#39;saucepan&#39;</span>, <span style="color:#e6db74">&#39;toaster&#39;</span>,<span style="color:#e6db74">&#39;bowl of fruits&#39;</span>,<span style="color:#e6db74">&#39;tea pot&#39;</span>,<span style="color:#e6db74">&#39;knife&#39;</span>,<span style="color:#e6db74">&#39;mixer&#39;</span>,<span style="color:#e6db74">&#39;bread&#39;</span>,<span style="color:#e6db74">&#39;glass jug&#39;</span>,<span style="color:#e6db74">&#39;mug&#39;</span>,<span style="color:#e6db74">&#39;dishes&#39;</span>,<span style="color:#e6db74">&#39;towels&#39;</span>,<span style="color:#e6db74">&#39;toy&#39;</span>,<span style="color:#e6db74">&#39;pile of books&#39;</span>,<span style="color:#e6db74">&#39;umbrella&#39;</span>,<span style="color:#e6db74">&#39;hat&#39;</span>,<span style="color:#e6db74">&#39;helmet&#39;</span>,<span style="color:#e6db74">&#39;calendar&#39;</span>,<span style="color:#e6db74">&#39;fan&#39;</span>)
 
-objectNames &lt;- c('microwave','kitchen roll','saucepan', 'toaster','bowl of fruits','tea pot','knife','mixer','bread','glass jug','mug','dishes','towels','toy','pile of books','umbrella','hat','helmet','calendar','fan')
-
-dataRatingTask$objectName &lt;- factor(dataRatingTask$objectNumber, labels = objectNames)
-head(dataRatingTask)
-</code></pre>
-
-<pre><code>##   subNo     date   time trial objectNumber location   rating        RT
+dataRatingTask<span style="color:#f92672">$</span>objectName <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">factor</span>(dataRatingTask<span style="color:#f92672">$</span>objectNumber, labels <span style="color:#f92672">=</span> objectNames)
+<span style="color:#a6e22e">head</span>(dataRatingTask)
+</code></pre></div><pre><code>##   subNo     date   time trial objectNumber location   rating        RT
 ## 1     0 20180201 101346     1           15        2 9.446254 2622.9422
 ## 2     0 20180201 101346     2            3        3 0.000000  287.1267
 ## 3     0 20180201 101346     3           18        5 0.000000  292.5857
@@ -226,54 +192,49 @@ head(dataRatingTask)
 ## 5           toy
 ## 6        towels
 </code></pre>
-
 <p>Everything seems to be saved correctly and seems to be useable.</p>
-
 <h1 id="how-to-combine-both-data-sets">How to combine both data sets</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Collapsing acrossp participants as well as objects and splitting location and rating values into three separate values</span>
+dataRatingTask_agg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ddply</span>(dataRatingTask, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;subNo&#39;</span>, <span style="color:#e6db74">&#39;objectName&#39;</span>, <span style="color:#e6db74">&#39;objectNumber&#39;</span>), summarise, 
+                            location1 <span style="color:#f92672">=</span> location[1],  
+                            location2 <span style="color:#f92672">=</span> location[2],  
+                            location3 <span style="color:#f92672">=</span> location[3],
+                            rating1   <span style="color:#f92672">=</span> rating[1],
+                            rating2   <span style="color:#f92672">=</span> rating[2],
+                            rating3   <span style="color:#f92672">=</span> rating[3])
 
-<pre><code class="language-r"># Collapsing acrossp participants as well as objects and splitting location and rating values into three separate values
-dataRatingTask_agg &lt;- ddply(dataRatingTask, c('subNo', 'objectName', 'objectNumber'), summarise, 
-                            location1 = location[1],  
-                            location2 = location[2],  
-                            location3 = location[3],
-                            rating1   = rating[1],
-                            rating2   = rating[2],
-                            rating3   = rating[3])
+<span style="color:#75715e"># Basically I need the following bit to sort the data set</span>
+dataRetrievalTask_agg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ddply</span>(dataRetrievalTask, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;subNo&#39;</span>, <span style="color:#e6db74">&#39;objectName&#39;</span>, <span style="color:#e6db74">&#39;objectNumber&#39;</span>), summarise, 
+                               foil1Location  <span style="color:#f92672">=</span> foil1Location, 
+                               targetLocation <span style="color:#f92672">=</span> targetLocation, 
+                               foil2Location  <span style="color:#f92672">=</span> foil2Location)
 
-# Basically I need the following bit to sort the data set
-dataRetrievalTask_agg &lt;- ddply(dataRetrievalTask, c('subNo', 'objectName', 'objectNumber'), summarise, 
-                               foil1Location  = foil1Location, 
-                               targetLocation = targetLocation, 
-                               foil2Location  = foil2Location)
+<span style="color:#75715e"># Finding the respective ratings for targets and foils because this information is not saved for the ratingTask data set</span>
+<span style="color:#75715e"># Target</span>
+postRatingTarget  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">NA</span>, <span style="color:#ae81ff">20</span>)
+postRatingTarget<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location1 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>targetLocation)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating1<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location1 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>targetLocation)]
+postRatingTarget<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location2 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>targetLocation)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating2<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location2 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>targetLocation)]
+postRatingTarget<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location3 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>targetLocation)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating3<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location3 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>targetLocation)]
 
-# Finding the respective ratings for targets and foils because this information is not saved for the ratingTask data set
-# Target
-postRatingTarget  &lt;- rep(NA, 20)
-postRatingTarget[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$targetLocation)]
-postRatingTarget[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$targetLocation)]
-postRatingTarget[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$targetLocation)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$targetLocation)]
+<span style="color:#75715e"># Foil 1</span>
+postRatingFoil1  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">NA</span>, <span style="color:#ae81ff">20</span>)
+postRatingFoil1<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location1 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil1Location)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating1<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location1 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil1Location)]
+postRatingFoil1<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location2 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil1Location)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating2<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location2 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil1Location)]
+postRatingFoil1<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location3 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil1Location)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating3<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location3 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil1Location)]
 
-# Foil 1
-postRatingFoil1  &lt;- rep(NA, 20)
-postRatingFoil1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil1Location)]
-postRatingFoil1[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil1Location)]
-postRatingFoil1[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil1Location)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil1Location)]
+<span style="color:#75715e"># Foil 2</span>
+postRatingFoil2  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">NA</span>, <span style="color:#ae81ff">20</span>)
+postRatingFoil2<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location1 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil2Location)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating1<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location1 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil2Location)]
+postRatingFoil2<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location2 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil2Location)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating2<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location2 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil2Location)]
+postRatingFoil2<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location3 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil2Location)] <span style="color:#f92672">&lt;-</span> dataRatingTask_agg<span style="color:#f92672">$</span>rating3<span style="color:#a6e22e">[which</span>(dataRatingTask_agg<span style="color:#f92672">$</span>location3 <span style="color:#f92672">==</span> dataRetrievalTask_agg<span style="color:#f92672">$</span>foil2Location)]
 
-# Foil 2
-postRatingFoil2  &lt;- rep(NA, 20)
-postRatingFoil2[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating1[which(dataRatingTask_agg$location1 == dataRetrievalTask_agg$foil2Location)]
-postRatingFoil2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating2[which(dataRatingTask_agg$location2 == dataRetrievalTask_agg$foil2Location)]
-postRatingFoil2[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil2Location)] &lt;- dataRatingTask_agg$rating3[which(dataRatingTask_agg$location3 == dataRetrievalTask_agg$foil2Location)]
-
-# Creating new combined data set
-combinedData                  &lt;- dataRetrievalTask
-combinedData$postRatingTarget &lt;- postRatingTarget
-combinedData$postRatingFoil1  &lt;- postRatingFoil1
-combinedData$postRatingFoil2  &lt;- postRatingFoil2
-head(combinedData)
-</code></pre>
-
-<pre><code>##   subNo     date   time trial objectNumber targetLocation targetRankPre
+<span style="color:#75715e"># Creating new combined data set</span>
+combinedData                  <span style="color:#f92672">&lt;-</span> dataRetrievalTask
+combinedData<span style="color:#f92672">$</span>postRatingTarget <span style="color:#f92672">&lt;-</span> postRatingTarget
+combinedData<span style="color:#f92672">$</span>postRatingFoil1  <span style="color:#f92672">&lt;-</span> postRatingFoil1
+combinedData<span style="color:#f92672">$</span>postRatingFoil2  <span style="color:#f92672">&lt;-</span> postRatingFoil2
+<span style="color:#a6e22e">head</span>(combinedData)
+</code></pre></div><pre><code>##   subNo     date   time trial objectNumber targetLocation targetRankPre
 ## 1     0 20180201 101221     1           10             15      283.5000
 ## 2     0 20180201 101221     2            2              8      328.8333
 ## 3     0 20180201 101221     3           12              6       80.0000
@@ -302,7 +263,6 @@ head(combinedData)
 ## 5 target    microwave          0.00000        7.654723         0.00000
 ## 6  foil2       towels          0.00000        0.000000       -36.31922
 </code></pre>
-
 <p>The combined data set seems to be useable as well. This format will be used to create a mock data set.</p>
 
 
@@ -313,7 +273,7 @@ head(combinedData)
     <h4>See also</h4>
     <ul>
         
-            <li><a href="/2018/01/second-attempt-to-select-set-of-object-location-pairs/">Second attempt to select set of object/location pairs</a></li>
+            <li><a href="/2018/01/second-attempt-to-select-set-of-object/location-pairs/">Second attempt to select set of object/location pairs</a></li>
         
             <li><a href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">Testing whether targets differ in rank from foils</a></li>
         
@@ -342,6 +302,14 @@ head(combinedData)
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -351,14 +319,6 @@ head(combinedData)
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -469,6 +429,29 @@ head(combinedData)
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

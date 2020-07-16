@@ -7,19 +7,20 @@
 
 <meta property="og:title" content="Testing whether targets differ in rank from foils" />
 <meta property="og:description" content="Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
-Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary." />
+Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &#34;lm&#34;)){ s &lt;- summary." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2018/01/testing-whether-targets-differ-in-rank-from-foils/" /><meta property="article:published_time" content="2018-01-15T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-01-15T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2018/01/testing-whether-targets-differ-in-rank-from-foils/" />
+<meta property="article:published_time" content="2018-01-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-01-15T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Testing whether targets differ in rank from foils"/>
 <meta name="twitter:description" content="Introduction On Friday I found a good combination of objects and locations (see here). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.
-Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &quot;lm&quot;)){ s &lt;- summary."/>
+Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue &lt;-function(x, sign = &#39;=&#39;){ if (inherits(x, &#34;lm&#34;)){ s &lt;- summary."/>
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2018/01/testing-whether-targets-differ-in-rank-from-foils/">
+    <link rel="canonical" href="/2018/01/testing-whether-targets-differ-in-rank-from-foils/">
 
     <title>
       
@@ -29,7 +30,7 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -115,64 +116,54 @@ Used libraries and functions library(ggplot2) library(ez) library(tidyr) pValue 
     <hr>
 </header>
 <article class="blog-post">
-    
-
-<h1 id="introduction">Introduction</h1>
-
+    <h1 id="introduction">Introduction</h1>
 <p>On Friday I found a good combination of objects and locations (see <a href="https://jaquent.github.io/2018/0112_stimulusSelection.html">here</a>). Before I try this set in VR, it is important to make sure that the foils are not different from the targets in terms of the expectancy. To compare those, I calculate a repeated measure ANOVA and visualise it.</p>
-
 <h2 id="used-libraries-and-functions">Used libraries and functions</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">library</span>(ez)
+<span style="color:#a6e22e">library</span>(tidyr)
 
-<pre><code class="language-r">library(ggplot2)
-library(ez)
-library(tidyr)
-
-pValue &lt;-function(x, sign = '='){
-  if (inherits(x, &quot;lm&quot;)){
-    s &lt;- summary.lm(x)
-    x &lt;- pf(s$fstatistic[1L], s$fstatistic[2L], s$fstatistic[3L], lower.tail = FALSE)
-    if(x &gt; 1){
-      stop(&quot;There is no p-value greater than 1&quot;)
-    } else if(x &lt; 0.001){
-      x.converted &lt;- '&lt; .001'
+pValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x, sign <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;=&#39;</span>){
+  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
+    s <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary.lm</span>(x)
+    x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pf</span>(s<span style="color:#f92672">$</span>fstatistic[1L], s<span style="color:#f92672">$</span>fstatistic[2L], s<span style="color:#f92672">$</span>fstatistic[3L], lower.tail <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
+      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
+    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
     } else{
-      x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
     } 
   } else {
-    if(x &gt; 1){
-      stop(&quot;There is no p-value greater than 1&quot;)
-    } else if(x &lt; 0.001){
-      x.converted &lt;- '&lt; .001'
+    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
+      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
+    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
     } else{
-      x.converted &lt;- paste(sign,substr(as.character(round(x, 3)), 2,5))
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
     } 
   }
-  return(x.converted)
+  <span style="color:#a6e22e">return</span>(x.converted)
 }
 
-rValue &lt;-function(x){
-  if (inherits(x, &quot;lm&quot;)){
-    r.squared &lt;- summary(x)$r.squared
-    x.converted &lt;- paste('=',substr(as.character(round(r.squared, 3)), 2,5)) 
+rValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x){
+  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
+    r.squared <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(x)<span style="color:#f92672">$</span>r.squared
+    x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(r.squared, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
   } else {
-    if (x &lt; 0){
-      x.converted &lt;- paste('= -',substr(as.character(abs(round(x, 3))), 2,5), sep = '') 
+    <span style="color:#a6e22e">if </span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>){
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;= -&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>), sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) 
     } else {
-      x.converted &lt;- paste('=',substr(as.character(abs(round(x, 3))), 2,5)) 
+      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
     }
   }
-  return(x.converted) 
+  <span style="color:#a6e22e">return</span>(x.converted) 
 }
-</code></pre>
-
-<h2 id="formating-data">Formating data</h2>
-
-<pre><code class="language-r"># Loading data
-data &lt;- read.table('finalSelection.txt', header = TRUE, sep = '\t')
-head(data)
-</code></pre>
-
-<pre><code>##          Object Location   olRank foil1 foil1Rank foil2 foil2Rank
+</code></pre></div><h2 id="formating-data">Formating data</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Loading data</span>
+data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#e6db74">&#39;finalSelection.txt&#39;</span>, header <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\t&#39;</span>)
+<span style="color:#a6e22e">head</span>(data)
+</code></pre></div><pre><code>##          Object Location   olRank foil1 foil1Rank foil2 foil2Rank
 ## 1     microwave       13 16.83333    12  52.75000    10  54.33333
 ## 2       toaster        4 39.75000     6  43.08333    10  46.83333
 ## 3         knife        5 55.00000    10  45.58333     6  64.66667
@@ -180,13 +171,10 @@ head(data)
 ## 5 pile of books       10 78.25000     4 104.00000    14 108.08333
 ## 6           fan       12 97.50000    10  98.25000    16 106.83333
 </code></pre>
-
-<pre><code class="language-r"># Converting data to long format
-dataLong &lt;- gather(data, Type, Rank, olRank, foil1Rank, foil2Rank)
-head(dataLong)
-</code></pre>
-
-<pre><code>##          Object Location foil1 foil2   Type     Rank
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Converting data to long format</span>
+dataLong <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">gather</span>(data, Type, Rank, olRank, foil1Rank, foil2Rank)
+<span style="color:#a6e22e">head</span>(dataLong)
+</code></pre></div><pre><code>##          Object Location foil1 foil2   Type     Rank
 ## 1     microwave       13    12    10 olRank 16.83333
 ## 2       toaster        4     6    10 olRank 39.75000
 ## 3         knife        5    10     6 olRank 55.00000
@@ -194,14 +182,10 @@ head(dataLong)
 ## 5 pile of books       10     4    14 olRank 78.25000
 ## 6           fan       12    10    16 olRank 97.50000
 </code></pre>
-
 <h2 id="anova">ANOVA</h2>
-
-<pre><code class="language-r">resultANOVA &lt;- ezANOVA(data = dataLong, dv = .(Rank), wid = .(Object), within = .(Type), detailed = TRUE)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">resultANOVA <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ezANOVA</span>(data <span style="color:#f92672">=</span> dataLong, dv <span style="color:#f92672">=</span> .(Rank), wid <span style="color:#f92672">=</span> .(Object), within <span style="color:#f92672">=</span> .(Type), detailed <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
 resultANOVA
-</code></pre>
-
-<pre><code>## $ANOVA
+</code></pre></div><pre><code>## $ANOVA
 ##        Effect DFn DFd         SSn        SSd         F            p p&lt;.05
 ## 1 (Intercept)   1  19 2488127.819 765424.114 61.762398 2.180725e-07     *
 ## 2        Type   2  38    1076.961   3116.261  6.566288 3.553307e-03     *
@@ -217,18 +201,11 @@ resultANOVA
 ##   Effect       GGe       p[GG] p[GG]&lt;.05      HFe       p[HF] p[HF]&lt;.05
 ## 2   Type 0.9594436 0.004066417         * 1.064853 0.003553307         *
 </code></pre>
-
 <p>Type (target vs. foil 1 vs. foil 2) has no significant effect on the ranks, <em>F</em>(2, 38) = 6.57, <em>p</em> = .004.</p>
-
 <h2 id="visualisation">Visualisation</h2>
-
-<pre><code class="language-r">ggplot(data = dataLong, aes(x = Type, y = Rank)) + geom_jitter(width = 0.2)
-</code></pre>
-
-<p><img src="/post/2018-01-15-testing-whether-targets-differ-in-rank-from-foils_files/figure-markdown_github/unnamed-chunk-4-1.png" alt="" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">ggplot</span>(data <span style="color:#f92672">=</span> dataLong, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Type, y <span style="color:#f92672">=</span> Rank)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_jitter</span>(width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>)
+</code></pre></div><p><img src="/post/2018-01-15-testing-whether-targets-differ-in-rank-from-foils_files/figure-markdown_github/unnamed-chunk-4-1.png" alt=""></p>
 <h2 id="conclusion">Conclusion</h2>
-
 <p>Both the ANOVA and the visualization shows that the ranks of targets and foils do not differ from each other. Therefore the next step is to try the set in VR.</p>
 
 
@@ -264,6 +241,14 @@ resultANOVA
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -273,14 +258,6 @@ resultANOVA
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -391,6 +368,29 @@ resultANOVA
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

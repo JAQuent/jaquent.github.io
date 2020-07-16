@@ -9,8 +9,9 @@
 <meta property="og:description" content="I had the vague idea to do multivariate pattern analysis on the mPFC to decode specific schemas and to see how new objects/information is integrated in to those, but the problem might be that there are far too few trials to do that with the current design. It might also be interesting to look at memory reinstatement and how it is influence by schemas.
 Today, I met with my supervisor and talked about the current design, about the ratings and general plan for this year." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2018/01/change-of-design-based-on-pilot-study/" /><meta property="article:published_time" content="2018-01-10T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-01-10T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2018/01/change-of-design-based-on-pilot-study/" />
+<meta property="article:published_time" content="2018-01-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-01-10T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Change of design based on pilot study"/>
@@ -19,7 +20,7 @@ Today, I met with my supervisor and talked about the current design, about the r
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2018/01/change-of-design-based-on-pilot-study/">
+    <link rel="canonical" href="/2018/01/change-of-design-based-on-pilot-study/">
 
     <title>
       
@@ -29,7 +30,7 @@ Today, I met with my supervisor and talked about the current design, about the r
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -118,15 +119,10 @@ Today, I met with my supervisor and talked about the current design, about the r
 </header>
 <article class="blog-post">
     <p>I had the vague idea to do multivariate pattern analysis on the mPFC to decode specific schemas and to see how new objects/information is integrated in to those, but the problem might be that there are far too few trials to do that with the current design. It might also be interesting to look at memory reinstatement and how it is influence by schemas.</p>
-
 <p>Today, I met with my supervisor and talked about the current design, about the ratings and general plan for this year.  I started a script today, with which I analyse the ratings I got so far, which I will continue and probably upload tomorrow, which will be updated but can be found <a href="https://jaquent.github.io/2018/01/analysing-normative-data-set/">here</a>.</p>
-
 <p>One question raised during the meeting with my supervisor was how to compare the ratings across the different raters. I started with using the SD, but he suggested to also use spearman correlation because it uses ranked data, which I will hopefully try tomorrow. Nevertheless the SD will be important to remove objects, which get ratings that are too mixed.</p>
-
 <p>We changed the design of the first experiment quite a bit. We decided to drop the object/item recognition because a) it makes the design and everything much simpler and b) the effect of schemas on object/item memory is not the contentious part.</p>
-
 <p>Now, in the memory test, the participants will only have to do a 3AFC decision for the location. The participants therefore know that the item has been presented earlier and they have to choose the correct locations out three alternatives, both of which have similar expectancy values. In general, we want there to be a good range of expectancy values (i.e. from very unexpected to very expected values). To achieve that I will calculate the ranks of the 400 ratings per participants and then calculate the mean rank for each object at each location. There will be a binary elimination process based on the SD and factors such as that a knife should not be located at the top of a shelf because it can only be seen if it is artificially rotated so it basically stands in the air. This combined with a sequential percentile-approach across the objects assuring getting an evenly spaced distribution of values will be the basis of a brute force selection process finding one configuration of objects and locations that will be used for all participants. I will try explain what is meant by when I programmed it. The prior ratings will not be used to draw plot expectancy against memory performance. Instead participants will be debriefed and asked to rate expectancy of the objects and locations used during the experiment.</p>
-
 <p>Concerning the year and the next step after finishing this, we talked about that it would be useful to be able to measure the processing time for instance by the time a specific objects was visible on the displays. However, before I tried to do that I will first finish the location task, and the look at object/item memory again. For the future, I will think about ways how this paradigm can be usefully brought into a scanner and also think about the reason why immersive VR is so useful for that. A short idea I had was to create a temporal sequence by only showing one objects at a time.</p>
 
 
@@ -166,6 +162,14 @@ Today, I met with my supervisor and talked about the current design, about the r
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -175,14 +179,6 @@ Today, I met with my supervisor and talked about the current design, about the r
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -293,6 +289,29 @@ Today, I met with my supervisor and talked about the current design, about the r
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     

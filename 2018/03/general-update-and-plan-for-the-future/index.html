@@ -8,8 +8,9 @@
 <meta property="og:title" content="General update and plan for the future" />
 <meta property="og:description" content="Even though the last post is basically a month ago, I am still committed to this diary. Therefore I thought to provide an update. I spent the last month with finishing the experiment and preparing its pre-registration. In that progress, I have started working on the R script that analyses the data to include it in the pre-registration. I want to use mixed linear models to analyse the data so that I can model the performance on individual trials." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2018/03/general-update-and-plan-for-the-future/" /><meta property="article:published_time" content="2018-03-22T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-03-22T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/2018/03/general-update-and-plan-for-the-future/" />
+<meta property="article:published_time" content="2018-03-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-03-22T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="General update and plan for the future"/>
@@ -17,7 +18,7 @@
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2018/03/general-update-and-plan-for-the-future/">
+    <link rel="canonical" href="/2018/03/general-update-and-plan-for-the-future/">
 
     <title>
       
@@ -27,7 +28,7 @@
 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://jaquent.github.iocss/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     
 
@@ -116,7 +117,6 @@
     <p>Even though the last post is basically a month ago, I am still committed to this diary. Therefore I thought to provide an update. I spent the last month with finishing the experiment and preparing its pre-registration. In that progress, I have started working on the R script that analyses the data to include it in the pre-registration. I want to use mixed linear models to analyse the data so that I can model the performance on individual trials. To really understand these models, I simulated data, which can be found <a href="https://jaquent.github.io/2018/0314_mixedModels.html">here</a>. This worked quite well though I still need to understand why the models sometimes do not converge.</p>
 <p>In addition, I want provide an expected effect size and determine the sample size, but unfortunately there are no studies, on which I can confidently base my calculations on. Hence we decided to collect around 16 participants completing the full new design of the experiment. This will enable me to provide an effect size and find the best combination of fixed and random factors for the mixed linear models. As soon as the prober study launches, I will upload all the scripts etc.</p>
 
-
     
 
     
@@ -145,6 +145,14 @@
     <ol class="list-unstyled">
         
         <li>
+            <a href="/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-mode/">Comparing different methods to calculate Bayes factors for a simple mode</a>
+        </li>
+        
+        <li>
+            <a href="/post/">Posts</a>
+        </li>
+        
+        <li>
             <a href="/2019/04/effect-of-sd-under-the-null-hypothesis/">Effect of SD under the null hypothesis</a>
         </li>
         
@@ -154,14 +162,6 @@
         
         <li>
             <a href="/2019/03/prior-deliberation-on-analysis/">Prior deliberation on analysis</a>
-        </li>
-        
-        <li>
-            <a href="/2018/11/selecting-and-checking-living-non-living-words/">Selecting and checking living/non-living words</a>
-        </li>
-        
-        <li>
-            <a href="/2018/05/end-of-schemavr1-and-start-of-schemavr2/">End of schemaVR1 and start of schemaVR2</a>
         </li>
         
     </ol>
@@ -272,6 +272,29 @@
     </nav>
 </footer>
 
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
     
 
     
