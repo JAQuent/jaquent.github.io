@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jörn Alexander Quent&#39;s notebook</title>
+    <link>/</link>
+    <description>Recent content on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 16 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Comparing different methods to calculate Bayes factors for a simple model</title>
+      <link>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</link>
+      <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</guid>
+      <description>Introduction Comparing the four BF methods Evidence for null hypothesis: brms vs. ttestBF() How much more conservative is the bmrs approach? Directed vs. non-directed hypothesis Conclusion  Introduction In this post, I’d like to examine how different ways to calcualte Bayes factors (BF) compare with each other for a simple model.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>This is my open notebook. My main homepage can be found here. This should be regarded as an attempt though to live up to the ideals that I have. It will take some time to develop good routines and incorporate those into my typical working day. This notebook will also witness my development as a researcher.</description>
+    </item>
+    
+  </channel>
+</rss>
