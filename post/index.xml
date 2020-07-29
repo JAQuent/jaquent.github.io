@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>test</title>
-      <link>/post/test/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/test/</guid>
-      <description>   Header 1 Header 2 Header 3     Item 1 Item 2 Item 3   Item 1a Item 2a Item 3a      Header 1 Header 2 Header 3     Item 1 Item 2 Item 3   Item 1a Item 2a Item 3a    </description>
-    </item>
-    
-    <item>
       <title>Comparing different methods to calculate Bayes factors for a simple model</title>
       <link>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</link>
       <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
