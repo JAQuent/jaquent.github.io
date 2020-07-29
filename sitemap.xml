@@ -3,37 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/bayesian-sequential-designs-are-superior/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/bayesian-stats/</loc>
-    <lastmod>2020-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-07-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</loc>
-    <lastmod>2020-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/general/</loc>
-    <lastmod>2020-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sequential-design/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</loc>
     <lastmod>2020-07-16T00:00:00+00:00</lastmod>
   </url>
   

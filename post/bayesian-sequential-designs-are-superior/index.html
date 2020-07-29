@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Bayesian sequential designs are superior" />
+<meta property="og:description" content="This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power, which can be found here. This repository also includes all the data and script that were used to run the simulations and to create the figures." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/bayesian-sequential-designs-are-superior/" />
+<meta property="article:published_time" content="2020-07-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-29T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Bayesian sequential designs are superior"/>
+<meta name="twitter:description" content="This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power, which can be found here. This repository also includes all the data and script that were used to run the simulations and to create the figures."/>
+<meta name="generator" content="Hugo 0.70.0" />
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Bayesian sequential designs are superior",
+  "url": "/post/bayesian-sequential-designs-are-superior/",
+  "wordCount": "1795",
+  "datePublished": "2020-07-29T00:00:00+00:00",
+  "dateModified": "2020-07-29T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Alex Quent"
+  },
+  "keywords": "general, Bayesian Stats, Sequential design"
+}
+</script>
+
+
+
+    <link rel="canonical" href="/post/bayesian-sequential-designs-are-superior/">
+
+    <title>Bayesian sequential designs are superior | Jörn Alexander Quent&#39;s notebook</title>
+
+    
+    <!-- combined, minified CSS -->
+    
+    <link href="/css/style.e408605af1290e616960aef7be39db8d54400ce717e8e4f12f733d8fb56d62ee.css" rel="stylesheet" integrity="sha256-5AhgWvEpDmFpYK73vjnbjVRADOcX6OTxL3M9j7VtYu4=" crossorigin="anonymous">
+    
+
+    <!-- minified Font Awesome for SVG icons -->
+    
+    <script defer src="/js/fontawesome.min.16a86fa8fbdecc0f27392feecb61ee0803a507820bded359407103a49126b52c.js" integrity="sha256-FqhvqPvezA8nOS/uy2HuCAOlB4IL3tNZQHEDpJEmtSw=" crossorigin="anonymous"></script>
+
+    <!-- RSS 2.0 feed -->
+    
+
+    
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
+  </head>
+
+  <body>
+
+    
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="/">Home</a>
+          
+          <a class="nav-link" href="/about/" title="">About</a>
+          
+          
+          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
+          
+        </nav>
+      </div>
+    </div>
+    
+
+    
+    
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title" dir="auto"><a href="/" rel="home">Jörn Alexander Quent's notebook</a></h1>
+        <p class="lead blog-description" dir="auto">Posts on my work</p>
+      </div>
+    </header>
+    
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="/post/bayesian-sequential-designs-are-superior/">Bayesian sequential designs are superior</a></h2>
+    <p class="blog-post-meta"><time datetime="2020-07-29T00:00:00Z">Wed Jul 29, 2020</time> by Alex Quent in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/sequential-design/" rel="tag">Sequential design</a>
+
+</p>
+  </header>
+  <p>This post is based on a short talk that I gave at the MRC CBU on the 29
+July 2020 for a session on statistical power, which can be found
+<a href="https://github.com/JAQuent/bayesianSequentialDesign">here</a>. This
+repository also includes all the data and script that were used to run
+the simulations and to create the figures. Most of this talk as well as
+of this post is based on Schoenbrodt &amp; Wagenmakers (2018) fantastic
+paper that I encourage you to read as well as the other good articles in
+that special on Bayesian statistics.</p>
+<p>Like a traditional power analysis using frequentist statistics, we can
+calculate for which fixed sample size we get a Bayes factor (BF)
+surpassing a certain criterion in let’s say 80 % of the cases if
+repeated the data collection multiple times assuming a specific fixed
+effect size.</p>
+<p>This is illustrated in the Figure below:</p>
+<p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/traditional.png" alt="Figure 1"></p>
+<p>This figure shows the results of a traditoinal fixed sample size design
+analysis. It is based on a Bayesian one-sample <em>t</em>-test and shows the
+percentage of surpassing the criteria as a function of the sample size.
+The blue line shows the percentage for $BF_{10}$ over 10 for a true
+medium effect size of 0.5, while the red line shows a $BF_{10}$ below
+1/6 for a true null effect size of 0.0. I choose this assymmetric
+cut-off because it is much more difficult to get strong evidence for the
+point $H_0$ than it is for the $H_1$. Similarly, to each high
+percentage values like 95 %, we would need a sample size that is much
+larger than this in fact over 1000. Sidenote, this simulation like on
+the one in this post is based on 10,000 iterations. If we plan for true
+effect size of 0.5, the necessary sample size is 72, while it is 232 if
+the true effect size is 0.0. Collecting a sample size that is that large
+for one experiment is quite impossible for a basic science experiment in
+my field (cognitive neuroscience).</p>
+<p>Likely, there is a way to reliably produce strong evidence with sample
+that are much smaller. For that we need <em>Sequential Bayesian Designs</em>.
+The properties of the BF allows us to peak at the data multiple times to
+see what the current evidence from our data is. In a sequential design
+we essentially keep on collecting data until reached the pre-specified
+evidence criteria for instance a $BF_{10} &gt; 10$ or $BF_{10} &lt; 1/6$.
+Below you see an example piece of code that can run this kind of
+simulation in simple for loop.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Setting seed</span>
+<span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">2</span>)
+
+<span style="color:#75715e"># Parameters</span>
+minN      <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
+batchSize <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">5</span>
+crit1     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
+crit2     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">6</span>
+maxN      <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">300</span>
+nIter     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+d         <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>nIter){
+  <span style="color:#75715e"># First iteration</span>
+  data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(minN, d, <span style="color:#ae81ff">1</span>)
+  n    <span style="color:#f92672">&lt;-</span> minN
+  bf   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">reportBF</span>(<span style="color:#a6e22e">ttestBF</span>(data))
+  
+  <span style="color:#75715e"># Loop</span>
+  <span style="color:#a6e22e">while</span>(bf<span style="color:#a6e22e">[length</span>(bf)] <span style="color:#f92672">&lt;</span> crit1 <span style="color:#f92672">&amp;</span> bf<span style="color:#a6e22e">[length</span>(bf)] <span style="color:#f92672">&gt;</span> crit2){
+    data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(data, <span style="color:#a6e22e">rnorm</span>(minN, d, <span style="color:#ae81ff">1</span>))
+    bf<span style="color:#a6e22e">[length</span>(bf) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">reportBF</span>(<span style="color:#a6e22e">ttestBF</span>(data))
+    n<span style="color:#a6e22e">[length</span>(n) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]   <span style="color:#f92672">&lt;-</span> n<span style="color:#a6e22e">[length</span>(n)] <span style="color:#f92672">+</span> batchSize
+  }
+  
+  <span style="color:#a6e22e">if</span>(i <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>){
+    df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(id <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(i, <span style="color:#a6e22e">length</span>(bf)), n <span style="color:#f92672">=</span> n, bf <span style="color:#f92672">=</span> bf)
+  } else {
+    df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbind</span>(df, <span style="color:#a6e22e">data.frame</span>(id <span style="color:#f92672">=</span>  <span style="color:#a6e22e">rep</span>(i, <span style="color:#a6e22e">length</span>(bf)), n <span style="color:#f92672">=</span> n, bf <span style="color:#f92672">=</span> bf))
+  }
+}
+</code></pre></div><p>In this example we start with a sample size of 10 and then keep adding 5
+more data points until we either reach <code>crit1</code> or <code>crit2</code>. The true
+effect size here is 0.0. This simulation of 100 iterations is
+illustrated in this animation highlighting the sequential nature of the
+data collection. Note that the x-axis is the sample size. Each
+individual line represents one run in this simulation.</p>
+<p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/anim.gif" alt=""></p>
+<p>A full simulation of 10,000 iteration is shown in the figure below. The
+true effect size here is 0.0.</p>
+<p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/pure1.png" alt=""></p>
+<p>Here is a quick explanation of that this figure shows. For the code to
+generated this figure see
+<a href="https://github.com/JAQuent/bayesianSequentialDesign">here</a>. Like in the
+animation, each individual line in the middle part of the figure
+represents one iteration of this simulation. The lines are colour coded
+based on the final BF (red = $BF_{10} &gt; 10$, purple =
+$BF_{10} &lt; 1/6$). At the top and the bottom, you see histograms
+showing how many BF were above and below the criteria for each sample
+size. Two things are apparent at the first glance. First, there is very
+little misleading evidence. Misleading evidence for this simulation mean
+$BF_{10} &gt; 10$ as the true effect is 0.0. The red lines in the middle
+and the barely percetpible red bars in the top histogram show this.
+Second, most simulations end well before the 232 that are need to get a
+$BF_{10} &lt; 1/6$ 80 % of the times in the traditional design but we
+also see that in some case data collection goes well beyond 500 data
+points and in fact this figure is capped at 1000 for illustration in
+fact the highest sample size was 2765 and 10 were above 1000. On
+average, however we can stop data collection with sample size of only
+83, which is much lower than the traditional design.</p>
+<p>For further illustration, I also present a simulation were we have true
+medium effect size of 0.5.</p>
+<p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/pure2.png" alt=""></p>
+<p>This figure also clearly shows that most runs end much earier than the
+72 from the fixed sample size design. The highest sample size for this
+effect size is 170.</p>
+<p>Now, to the most interesting part that is comparing the traditional
+fixed sample size design and the sequential design. In the table below,
+you see the costs for an 1-hour long online experiment on prolific (£
+8.4) and an 1-hour long fMRI experiment (full economic costs £ 550).</p>
+<table>
+<thead>
+<tr>
+<th align="right">Effect size</th>
+<th align="right">Necessary sample size</th>
+<th align="right">Misleading evidence in %</th>
+<th align="right">£ for online experiment</th>
+<th align="right">£ for fMRI experiment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0.5</td>
+<td align="right">72</td>
+<td align="right">0.0003</td>
+<td align="right">605</td>
+<td align="right">39600</td>
+</tr>
+<tr>
+<td align="right">0.0</td>
+<td align="right">232</td>
+<td align="right">0.0011</td>
+<td align="right">1949</td>
+<td align="right">127600</td>
+</tr>
+</tbody>
+</table>
+<p>Based on the results, we would need to spend a lot of money for each
+experiments. In the worst case scenario, where you plan for showing a
+null effect in fMRI experiment, you need to spend £ 127600 it’s less if
+you plan for a medium effect size but the problem is often we don’t
+really have good estimate of the effect size. If we did, we might not
+even run the experiment. Johan Carlin recently gave talk where he among
+other things talked about the problem of bias effect size estimates and
+low power. This tlaks can be found
+<a href="https://twitter.com/johancarlin/status/1273186119564144641">here</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="right">Effect size</th>
+<th align="right">Average sample size</th>
+<th align="right">Maximal sample size</th>
+<th align="right">Misleading evidence in %</th>
+<th align="right">£ for online experiment</th>
+<th align="right">£ for fMRI experiment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0.5</td>
+<td align="right">41</td>
+<td align="right">170</td>
+<td align="right">0.13</td>
+<td align="right">344</td>
+<td align="right">22550</td>
+</tr>
+<tr>
+<td align="right">0.0</td>
+<td align="right">83</td>
+<td align="right">2765</td>
+<td align="right">2.95</td>
+<td align="right">697</td>
+<td align="right">45650</td>
+</tr>
+</tbody>
+</table>
+<p>In true sequential design we don’t have this problem at all. Regardless
+of the true effect size we produce strong evidence and this on average
+much cheaper than with a fixed sample design. The average cost for an
+fMRI experiment for instance is only £ 45650. This is only 6549 % of the
+cost that’d have to play for a traditional design. At the same times, it
+needs to be knowledge that the misleading evidence rate in much higher
+in sequential designs is much higher but still very low. For instance,
+for null effect in this simulation it is NA %. If misleading evidence
+rates are of concerns than one thing that can be done is to increase the
+minimal sample size and the number of data points added in each batch.
+The effect of doing this is illustrated further below.</p>
+<p>A much bigger problem is that while the average sample size is much
+lower, sometimes we’re unluckily and we haven’t reached a stopping
+criteria even after 1000 data points. For a PhD running an fMRI
+experiment, this is just not feasible. Despite what <a href="https://www.youtube.com/watch?v=awEnGXcmUXc">2
+Unlimited</a> wants us to
+believe, partically there is often a limit that can be based on money,
+available participants or time constraints. One way to protect oneself
+against collecting extremely large samples is to set an upper limit and
+to accept that in rare and extreme cases we might stop despite note
+having reached a criterion and ending with inconclusive evidence.</p>
+<p>In the following, I will present a simulation where data collection is
+stopped after collecting 100 data points regardless of whether an
+evidence criterion is reached.</p>
+<p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/limit1.png" alt=""></p>
+<p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/limit2.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th align="right">Effect size</th>
+<th align="right">Average sample size</th>
+<th align="right">Strong evidence in %</th>
+<th align="right">Misleading evidence in %</th>
+<th align="right">Insufficient evidence in %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0.5</td>
+<td align="right">39</td>
+<td align="right">98.05</td>
+<td align="right">0.12</td>
+<td align="right">1.83</td>
+</tr>
+<tr>
+<td align="right">0.0</td>
+<td align="right">58</td>
+<td align="right">80.25</td>
+<td align="right">2.31</td>
+<td align="right">17.44</td>
+</tr>
+</tbody>
+</table>
+<p>Stopping data at 100 data points protects against having to collect
+extreme sample size but still produces solid evidence in most cases even
+is the true effect is zero as in the first example above.</p>
+<h1 id="take-home-message">Take home message</h1>
+<p>It is important to find the right parameters for the specific situation
+that will lead to the most efficient data collection. Several factors
+influnece the performance of Bayesian Sequential Designs that are</p>
+<ul>
+<li>minimum sample size influences the rate of misleading evidence,</li>
+<li>batch size (i.e. after how many new data points we check evidence),</li>
+<li>choice priors and likelihood functions (If you want evidence for
+$H_0$, there are better choices for this type of data. See my
+<strong><a href="https://jaquent.github.io/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/">post</a></strong>)
+and</li>
+<li>directed vs. undirected hypothesis.</li>
+</ul>
+<p>To get some idea how the parameters affect the performance of the
+sequential designs I’ve compiled a summary table of a couple of
+simulation that I ran for this talk. All simulations have the same
+effect sizes and the same number of iterations (10,000).</p>
+<table>
+<thead>
+<tr>
+<th align="left">Design</th>
+<th align="left">Direction</th>
+<th align="right">Minimal N</th>
+<th align="right">Batch size</th>
+<th align="right">Maximal N</th>
+<th align="right">Effect size</th>
+<th align="right">BF &gt; crit %</th>
+<th align="right">Sample size</th>
+<th align="right">Misleading evidence %</th>
+<th align="right">£ online epxeriment</th>
+<th align="right">£ fMRI experiment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Fixed n</td>
+<td align="left">2-sided</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.5</td>
+<td align="right">80.00</td>
+<td align="right">72</td>
+<td align="right">0.0003</td>
+<td align="right">605</td>
+<td align="right">39600</td>
+</tr>
+<tr>
+<td align="left">Fixed n</td>
+<td align="left">2-sided</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.0</td>
+<td align="right">80.00</td>
+<td align="right">232</td>
+<td align="right">0.0011</td>
+<td align="right">1949</td>
+<td align="right">127600</td>
+</tr>
+<tr>
+<td align="left">Fixed n</td>
+<td align="left">1-sided</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.5</td>
+<td align="right">80.00</td>
+<td align="right">62</td>
+<td align="right">0.0000</td>
+<td align="right">521</td>
+<td align="right">34100</td>
+</tr>
+<tr>
+<td align="left">Fixed n</td>
+<td align="left">1-sided</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.0</td>
+<td align="right">80.00</td>
+<td align="right">232</td>
+<td align="right">0.0026</td>
+<td align="right">1949</td>
+<td align="right">127600</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">2-sided</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">NA</td>
+<td align="right">0.5</td>
+<td align="right">100.00</td>
+<td align="right">41</td>
+<td align="right">0.1300</td>
+<td align="right">344</td>
+<td align="right">22550</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">2-sided</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">NA</td>
+<td align="right">0.0</td>
+<td align="right">100.00</td>
+<td align="right">83</td>
+<td align="right">2.9500</td>
+<td align="right">697</td>
+<td align="right">45650</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">1-sided</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">NA</td>
+<td align="right">0.5</td>
+<td align="right">100.00</td>
+<td align="right">34</td>
+<td align="right">1.1400</td>
+<td align="right">286</td>
+<td align="right">18700</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">1-sided</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">NA</td>
+<td align="right">0.0</td>
+<td align="right">100.00</td>
+<td align="right">62</td>
+<td align="right">3.3700</td>
+<td align="right">521</td>
+<td align="right">34100</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">2-sided</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">100</td>
+<td align="right">0.5</td>
+<td align="right">98.05</td>
+<td align="right">39</td>
+<td align="right">0.1200</td>
+<td align="right">328</td>
+<td align="right">21450</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">2-sided</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">100</td>
+<td align="right">0.0</td>
+<td align="right">80.25</td>
+<td align="right">58</td>
+<td align="right">2.3100</td>
+<td align="right">674</td>
+<td align="right">44138</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">2-sided</td>
+<td align="right">10</td>
+<td align="right">1</td>
+<td align="right">100</td>
+<td align="right">0.5</td>
+<td align="right">98.19</td>
+<td align="right">35</td>
+<td align="right">0.1800</td>
+<td align="right">294</td>
+<td align="right">19250</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">2-sided</td>
+<td align="right">10</td>
+<td align="right">1</td>
+<td align="right">100</td>
+<td align="right">0.0</td>
+<td align="right">82.08</td>
+<td align="right">55</td>
+<td align="right">3.6900</td>
+<td align="right">689</td>
+<td align="right">45144</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">2-sided</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">100</td>
+<td align="right">0.5</td>
+<td align="right">98.05</td>
+<td align="right">39</td>
+<td align="right">0.2500</td>
+<td align="right">328</td>
+<td align="right">21450</td>
+</tr>
+<tr>
+<td align="left">Sequential</td>
+<td align="left">2-sided</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">100</td>
+<td align="right">0.0</td>
+<td align="right">79.27</td>
+<td align="right">59</td>
+<td align="right">2.9500</td>
+<td align="right">666</td>
+<td align="right">43599</td>
+</tr>
+</tbody>
+</table>
+<br>
+Note that the estimattion of the mis leading evidence rates is probably
+a bit noisy (despite running 10,000 iterations). The best way to keep
+this low is to start a higher minimal N. For the scope of my talk I
+haven’t ran a simulation yet. However, all in all the table above shows
+that sequential designs perform well regardless of the sampling plan.
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=%2fpost%2fbayesian-sequential-designs-are-superior%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fbayesian-sequential-designs-are-superior%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=%2fpost%2fbayesian-sequential-designs-are-superior%2f&amp;text=Bayesian%20sequential%20designs%20are%20superior" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 ml-auto blog-sidebar">
+    
+         <section class="sidebar-module">
+ <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+
+
+<li><a href="/post/bayesian-sequential-designs-are-superior/">Bayesian sequential designs are superior</a></li>
+
+<li><a href="/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/">Comparing different methods to calculate Bayes factors for a simple model</a></li>
+
+    </ol>
+ </section>
+
+    
+    
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+ <section class="sidebar-module">
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
+            
+        </p>
+        
+    
+</section>
+    
+</aside>
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+    
+
+    
+    <footer class="blog-footer">
+      <p dir="auto">
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+    
+
+  </body>
+
+</html>
