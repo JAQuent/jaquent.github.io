@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Bayesian sequential designs are superior" />
-<meta property="og:description" content="This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power, which can be found here. This repository also includes all the data and script that were used to run the simulations and to create the figures." />
+<meta property="og:description" content="This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power. The slides of presentation can be found in my GitHub repository. This repository also includes the data and the scripts that were used to run the simulations and to create the figures." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/bayesian-sequential-designs-are-superior/" />
 <meta property="article:published_time" content="2020-07-29T00:00:00+00:00" />
@@ -14,7 +14,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Bayesian sequential designs are superior"/>
-<meta name="twitter:description" content="This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power, which can be found here. This repository also includes all the data and script that were used to run the simulations and to create the figures."/>
+<meta name="twitter:description" content="This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power. The slides of presentation can be found in my GitHub repository. This repository also includes the data and the scripts that were used to run the simulations and to create the figures."/>
 <meta name="generator" content="Hugo 0.70.0" />
 
 
@@ -25,7 +25,7 @@
   "@type": "BlogPosting",
   "headline": "Bayesian sequential designs are superior",
   "url": "/post/bayesian-sequential-designs-are-superior/",
-  "wordCount": "1795",
+  "wordCount": "1991",
   "datePublished": "2020-07-29T00:00:00+00:00",
   "dateModified": "2020-07-29T00:00:00+00:00",
   "author": {
@@ -132,43 +132,49 @@ src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM
 </p>
   </header>
   <p>This post is based on a short talk that I gave at the MRC CBU on the 29
-July 2020 for a session on statistical power, which can be found
-<a href="https://github.com/JAQuent/bayesianSequentialDesign">here</a>. This
-repository also includes all the data and script that were used to run
+July 2020 for a session on statistical power. The slides of presentation
+can be found in my <a href="https://github.com/JAQuent/bayesianSequentialDesign">GitHub
+repository</a>. This
+repository also includes the data and the scripts that were used to run
 the simulations and to create the figures. Most of this talk as well as
-of this post is based on Schoenbrodt &amp; Wagenmakers (2018) fantastic
+of this post is based on Schoenbrodt &amp; Wagenmakers’ (2018) fantastic
 paper that I encourage you to read as well as the other good articles in
-that special on Bayesian statistics.</p>
-<p>Like a traditional power analysis using frequentist statistics, we can
-calculate for which fixed sample size we get a Bayes factor (BF)
-surpassing a certain criterion in let’s say 80 % of the cases if
-repeated the data collection multiple times assuming a specific fixed
-effect size.</p>
-<p>This is illustrated in the Figure below:</p>
+that <a href="https://link.springer.com/journal/13423/25/1">special issue on Bayesian
+statistics</a>.</p>
+<p>So let’s see what number we need for having a high probability of
+getting strong evidence for a medium effect (d = 0.5) and a null effect
+(d = 0.0). This cane be done in the same way a traditional power
+analysis using frequentist statistics is run. That is we can calculate
+for which fixed sample size we get a Bayes factor (BF) surpassing a
+certain criterion in let’s say 80 % of the cases if repeated the data
+collection multiple times.</p>
+<p>This procedure is illustrated in the figure below, which basically the
+same as a standard power caluclation:</p>
 <p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/traditional.png" alt="Figure 1"></p>
-<p>This figure shows the results of a traditoinal fixed sample size design
-analysis. It is based on a Bayesian one-sample <em>t</em>-test and shows the
-percentage of surpassing the criteria as a function of the sample size.
-The blue line shows the percentage for $BF_{10}$ over 10 for a true
-medium effect size of 0.5, while the red line shows a $BF_{10}$ below
-1/6 for a true null effect size of 0.0. I choose this assymmetric
-cut-off because it is much more difficult to get strong evidence for the
-point $H_0$ than it is for the $H_1$. Similarly, to each high
-percentage values like 95 %, we would need a sample size that is much
-larger than this in fact over 1000. Sidenote, this simulation like on
-the one in this post is based on 10,000 iterations. If we plan for true
+<p>Above you can see the results of a traditional fixed sample size design
+analysis. This analysis is based on a Bayesian one-sample <em>t</em>-test and
+shows the percentage of surpassing the criteria as a function of the
+sample size. The blue line shows the percentage for $BF_{10}) over 10
+for a true medium effect size, while the red line shows a (BF_{10})
+below 1/6 for a true null effect size. I chose this asymmetric cut-off
+because it is much more difficult to get strong evidence for the point
+(H_0) than it is for the (H_1). Actually, to reach high percentage
+values like 95 % (as some journals require), we would need a sample size
+that is much larger than this. By the way, this simulation like on the
+all in this post was based on 10,000 iterations. If we plan for true
 effect size of 0.5, the necessary sample size is 72, while it is 232 if
 the true effect size is 0.0. Collecting a sample size that is that large
 for one experiment is quite impossible for a basic science experiment in
-my field (cognitive neuroscience).</p>
-<p>Likely, there is a way to reliably produce strong evidence with sample
-that are much smaller. For that we need <em>Sequential Bayesian Designs</em>.
-The properties of the BF allows us to peak at the data multiple times to
-see what the current evidence from our data is. In a sequential design
-we essentially keep on collecting data until reached the pre-specified
-evidence criteria for instance a $BF_{10} &gt; 10$ or $BF_{10} &lt; 1/6$.
-Below you see an example piece of code that can run this kind of
-simulation in simple for loop.</p>
+my field (cognitive neuroscience) if it is not run online. Also remember
+that this is a one-sample *t*-test with two inpendent samples the
+necessary sample size would be even larger.</p>
+<p>The good thing though is that there is a way to reliably produce strong
+evidence with samples that are (on average) much smaller: <em>Sequential
+Bayesian Designs</em>. In a sequential design we essentially keep on
+collecting data until reach the one of the pre-specified evidence
+criteria for instance a (BF_{10} &gt; 10) or (BF_{10} &lt; 1/6). Below you
+see an piece of code that can run this kind of simulation in simple a
+loop.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Setting seed</span>
 <span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">2</span>)
 
@@ -210,35 +216,34 @@ individual line represents one run in this simulation.</p>
 <p>A full simulation of 10,000 iteration is shown in the figure below. The
 true effect size here is 0.0.</p>
 <p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/pure1.png" alt=""></p>
-<p>Here is a quick explanation of that this figure shows. For the code to
-generated this figure see
-<a href="https://github.com/JAQuent/bayesianSequentialDesign">here</a>. Like in the
+<p>Here is a quick explanation of that this figure shows. Like in the
 animation, each individual line in the middle part of the figure
 represents one iteration of this simulation. The lines are colour coded
-based on the final BF (red = $BF_{10} &gt; 10$, purple =
-$BF_{10} &lt; 1/6$). At the top and the bottom, you see histograms
+based on the final BF (red = (BF_{10} &gt; 10), purple =
+(BF_{10} &lt; 1/6)). At the top and the bottom, you see histograms
 showing how many BF were above and below the criteria for each sample
 size. Two things are apparent at the first glance. First, there is very
-little misleading evidence. Misleading evidence for this simulation mean
-$BF_{10} &gt; 10$ as the true effect is 0.0. The red lines in the middle
-and the barely percetpible red bars in the top histogram show this.
-Second, most simulations end well before the 232 that are need to get a
-$BF_{10} &lt; 1/6$ 80 % of the times in the traditional design but we
-also see that in some case data collection goes well beyond 500 data
-points and in fact this figure is capped at 1000 for illustration in
-fact the highest sample size was 2765 and 10 were above 1000. On
-average, however we can stop data collection with sample size of only
-83, which is much lower than the traditional design.</p>
-<p>For further illustration, I also present a simulation were we have true
-medium effect size of 0.5.</p>
+little misleading evidence. Misleading evidence for this simulation
+means (BF_{10} &gt; 10). The red lines in the middle and the barely
+perceptible red bars in the top histogram visualise this. Second, most
+simulations end well before the 232 that are need to get a
+(BF_{10} &lt; 1/6) in 80 % of the times as in the traditional design but
+we also see that in some cases data collection goes well beyond 500 data
+points. In fact this figure is capped at 1000 for illustration. The
+highest sample size was actually 2765 and 10 were above 1000. However
+over average, we can stop data collection with sample size of only 83,
+which is much lower than the need in the traditional approach. For
+further illustration, I also present a simulation were we have true
+medium effect size.</p>
 <p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/pure2.png" alt=""></p>
-<p>This figure also clearly shows that most runs end much earier than the
+<p>This figure also clearly shows that most runs end much earlier than the
 72 from the fixed sample size design. The highest sample size for this
 effect size is 170.</p>
 <p>Now, to the most interesting part that is comparing the traditional
-fixed sample size design and the sequential design. In the table below,
-you see the costs for an 1-hour long online experiment on prolific (£
-8.4) and an 1-hour long fMRI experiment (full economic costs £ 550).</p>
+fixed sample size design and the sequential design directly. In the
+table below, you see the costs for an 1-hour long online experiment on
+prolific (£ 8.4) and an 1-hour long fMRI experiment (full economic costs
+of £ 550).</p>
 
 
 
@@ -273,13 +278,13 @@ you see the costs for an 1-hour long online experiment on prolific (£
 </table>
 
 <p>Based on the results, we would need to spend a lot of money for each
-experiments. In the worst case scenario, where you plan for showing a
-null effect in fMRI experiment, you need to spend £ 127600 it’s less if
-you plan for a medium effect size but the problem is often we don’t
-really have good estimate of the effect size. If we did, we might not
-even run the experiment. Johan Carlin recently gave talk where he among
-other things talked about the problem of bias effect size estimates and
-low power. This tlaks can be found
+experiment. In the worst case scenario, where you plan to provide
+evidence for a null effect in fMRI experiment, you would have to spend £
+127600 it’s less if you plan for a medium effect size but the problem is
+often we don’t really have good estimate of the effect size. If we did,
+we might not even run the experiment. Johan Carlin recently gave a talk
+where he among other things discussed the problem of biased effect size
+estimates that lead to low power. His talk can be found
 <a href="https://twitter.com/johancarlin/status/1273186119564144641">here</a>.</p>
 
 
@@ -317,30 +322,33 @@ low power. This tlaks can be found
 </tbody>
 </table>
 
-<p>In true sequential design we don’t have this problem at all. Regardless
-of the true effect size we produce strong evidence and this on average
-much cheaper than with a fixed sample design. The average cost for an
-fMRI experiment for instance is only £ 45650. This is only 6549 % of the
-cost that’d have to play for a traditional design. At the same times, it
-needs to be knowledge that the misleading evidence rate in much higher
-in sequential designs is much higher but still very low. For instance,
-for null effect in this simulation it is NA %. If misleading evidence
-rates are of concerns than one thing that can be done is to increase the
-minimal sample size and the number of data points added in each batch.
-The effect of doing this is illustrated further below.</p>
+<p>With a true sequential design we don’t have this problem at all.
+Regardless of the true effect size we produce strong evidence and this
+on average much cheaper than with a fixed sample design. The average
+cost for an fMRI experiment for instance is only £ 45650. This is only
+36 % of the cost that we’d have to play for a traditional design. At the
+same time, it needs to be acknowledged that the misleading evidence
+rates in much higher in sequential designs are much higher but still
+very low. For instance, for null effect in this simulation it is 2.95 %.
+If misleading evidence rates are of concerns then one thing that can be
+done is to increase the minimal sample size and the number of data
+points added in each batch. The effect of doing this is illustrated
+further below.</p>
 <p>A much bigger problem is that while the average sample size is much
-lower, sometimes we’re unluckily and we haven’t reached a stopping
-criteria even after 1000 data points. For a PhD running an fMRI
+lower, sometimes we’re unlucky and we haven’t reached a stopping
+criterion even after 1000 data points. For a PhD student running an fMRI
 experiment, this is just not feasible. Despite what <a href="https://www.youtube.com/watch?v=awEnGXcmUXc">2
 Unlimited</a> wants us to
-believe, partically there is often a limit that can be based on money,
+believe, practically there is often a limit that can be based on money,
 available participants or time constraints. One way to protect oneself
 against collecting extremely large samples is to set an upper limit and
 to accept that in rare and extreme cases we might stop despite note
-having reached a criterion and ending with inconclusive evidence.</p>
-<p>In the following, I will present a simulation where data collection is
-stopped after collecting 100 data points regardless of whether an
-evidence criterion is reached.</p>
+having reached a criterion and ending with inconclusive evidence.
+Something that can also happen in a fixed sample size design. In the
+following, I will present simulations where data collection is stopped
+after collecting 100 data points regardless of whether an evidence
+criterion is reached. The additional histogram on the right side
+illustrates the distribution of (BF_{10}) when stopped at 100.</p>
 <p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/limit1.png" alt=""></p>
 <p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/limit2.png" alt=""></p>
 
@@ -376,21 +384,22 @@ evidence criterion is reached.</p>
 </tbody>
 </table>
 
-<p>Stopping data at 100 data points protects against having to collect
-extreme sample size but still produces solid evidence in most cases even
-is the true effect is zero as in the first example above.</p>
+<p>Stopping at 100 data points protects against having to collect extremely
+large samples but this approach still produces solid evidence in most
+cases even is the true effect is zero.</p>
 <h1 id="take-home-message">Take home message</h1>
 <p>It is important to find the right parameters for the specific situation
 that will lead to the most efficient data collection. Several factors
-influnece the performance of Bayesian Sequential Designs that are</p>
+influence the performance of Bayesian Sequential Designs. Those are</p>
 <ul>
 <li>minimum sample size influences the rate of misleading evidence,</li>
-<li>batch size (i.e. after how many new data points we check evidence),</li>
+<li>batch size (i.e. after how many new data points we check evidence),</li>
 <li>choice priors and likelihood functions (If you want evidence for
-$H_0$, there are better choices for this type of data. See my
-<strong><a href="https://jaquent.github.io/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/">post</a></strong>)
-and</li>
-<li>directed vs. undirected hypothesis.</li>
+(H_0), there are better choices for this type of data. See my
+previous
+<strong><a href="https://jaquent.github.io/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/">post</a></strong>
+on this issue) and</li>
+<li>directed vs. undirected hypothesis.</li>
 </ul>
 <p>To get some idea how the parameters affect the performance of the
 sequential designs I’ve compiled a summary table of a couple of
@@ -604,11 +613,27 @@ effect sizes and the same number of iterations (10,000).</p>
 </table>
 
 <br>
-Note that the estimattion of the mis leading evidence rates is probably
-a bit noisy (despite running 10,000 iterations). The best way to keep
-this low is to start a higher minimal N. For the scope of my talk I
-haven’t ran a simulation yet. However, all in all the table above shows
-that sequential designs perform well regardless of the sampling plan.
+Surprising sequential designs seem to be actually realtively robust.
+Note that the estimation of the misleading evidence rates also seems to
+be a bit noisy (despite running 10,000 iterations). For the scope of my
+talk I haven’t ran more simulations but it can be expected to find
+clearer results eith more extreme cases are compared.
+<p>All in all, I hope that I could show that sequential designs perform
+well regardless of the sampling plan and are in most cases to fixed
+sample size designs. I think as insitutions and individuals dealing with
+money from tax payers we should try to work efficiently. Therefore, we
+should collect only as much data as we need. Obviously this is even more
+important if our work (potentially) causes harm as in animal experiments
+or work with patients.</p>
+<h1 id="references">References</h1>
+<p>Schönbrodt, F. D., &amp; Wagenmakers, E.-J. (2018). <em>Bayes factor design
+analysis: Planning for compelling evidence</em>. Psychonomic Bulletin &amp;
+Review, 25(1), 128–142. <a href="https://doi.org/10.3758/s13423-017-1230-y">https://doi.org/10.3758/s13423-017-1230-y</a></p>
+<h1 id="code">Code</h1>
+<p>The data and the source code can be found
+<a href="https://github.com/JAQuent/bayesianSequentialDesign">here</a>. The .Rmd
+file used to generated the code can be found
+<a href="https://github.com/JAQuent/bayesianSequentialDesign/blob/master/backgroundScript.Rmd">here</a>.</p>
 
 
   
