@@ -154,11 +154,11 @@ same as a standard power caluclation:</p>
 <p>Above you can see the results of a traditional fixed sample size design
 analysis. This analysis is based on a Bayesian one-sample <em>t</em>-test and
 shows the percentage of surpassing the criteria as a function of the
-sample size. The blue line shows the percentage for $BF_{10}) over 10
-for a true medium effect size, while the red line shows a (BF_{10})
+sample size. The blue line shows the percentage for $BF_{10}$ over 10
+for a true medium effect size, while the red line shows a $BF_{10}$
 below 1/6 for a true null effect size. I chose this asymmetric cut-off
 because it is much more difficult to get strong evidence for the point
-(H_0) than it is for the (H_1). Actually, to reach high percentage
+$H_0$ than it is for the $H_1$. Actually, to reach high percentage
 values like 95 % (as some journals require), we would need a sample size
 that is much larger than this. By the way, this simulation like on the
 all in this post was based on 10,000 iterations. If we plan for true
@@ -172,7 +172,7 @@ necessary sample size would be even larger.</p>
 evidence with samples that are (on average) much smaller: <em>Sequential
 Bayesian Designs</em>. In a sequential design we essentially keep on
 collecting data until reach the one of the pre-specified evidence
-criteria for instance a (BF_{10} &gt; 10) or (BF_{10} &lt; 1/6). Below you
+criteria for instance a $BF_{10} &gt; 10$ or $BF_{10} &lt; 1/6$. Below you
 see an piece of code that can run this kind of simulation in simple a
 loop.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Setting seed</span>
@@ -219,15 +219,15 @@ true effect size here is 0.0.</p>
 <p>Here is a quick explanation of that this figure shows. Like in the
 animation, each individual line in the middle part of the figure
 represents one iteration of this simulation. The lines are colour coded
-based on the final BF (red = (BF_{10} &gt; 10), purple =
-(BF_{10} &lt; 1/6)). At the top and the bottom, you see histograms
+based on the final BF (red = $BF_{10} &gt; 10$, purple =
+$BF_{10} &lt; 1/6$). At the top and the bottom, you see histograms
 showing how many BF were above and below the criteria for each sample
 size. Two things are apparent at the first glance. First, there is very
 little misleading evidence. Misleading evidence for this simulation
-means (BF_{10} &gt; 10). The red lines in the middle and the barely
+means $BF_{10} &gt; 10$. The red lines in the middle and the barely
 perceptible red bars in the top histogram visualise this. Second, most
 simulations end well before the 232 that are need to get a
-(BF_{10} &lt; 1/6) in 80 % of the times as in the traditional design but
+$BF_{10} &lt; 1/6$ in 80 % of the times as in the traditional design but
 we also see that in some cases data collection goes well beyond 500 data
 points. In fact this figure is capped at 1000 for illustration. The
 highest sample size was actually 2765 and 10 were above 1000. However
@@ -348,7 +348,7 @@ Something that can also happen in a fixed sample size design. In the
 following, I will present simulations where data collection is stopped
 after collecting 100 data points regardless of whether an evidence
 criterion is reached. The additional histogram on the right side
-illustrates the distribution of (BF_{10}) when stopped at 100.</p>
+illustrates the distribution of $BF_{10}$ when stopped at 100.</p>
 <p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/limit1.png" alt=""></p>
 <p><img src="/post/2020-07-29-bayesian-sequential-designs-are-superior_files/limit2.png" alt=""></p>
 
@@ -395,7 +395,7 @@ influence the performance of Bayesian Sequential Designs. Those are</p>
 <li>minimum sample size influences the rate of misleading evidence,</li>
 <li>batch size (i.e. after how many new data points we check evidence),</li>
 <li>choice priors and likelihood functions (If you want evidence for
-(H_0), there are better choices for this type of data. See my
+$H_0$, there are better choices for this type of data. See my
 previous
 <strong><a href="https://jaquent.github.io/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/">post</a></strong>
 on this issue) and</li>
