@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>schemaVR on Jörn Alexander Quent&#39;s notebook</title>
+    <link>/tags/schemavr/</link>
+    <description>Recent content in schemaVR on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/schemavr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Analysing normative data</title>
+      <link>/post/analysing-normative-data/</link>
+      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/analysing-normative-data/</guid>
+      <description>Introduction In order to be able to present object at locations with a range of expectancy values, which is crucial to show that this has U-shaped relationship, I asked six member of my research group. to rate all combinations of objects and location that exist in the virtual enviroment for the schemaVR task.</description>
+    </item>
+    
+  </channel>
+</rss>
