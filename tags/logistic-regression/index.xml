@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>logistic regression on Jörn Alexander Quent&#39;s notebook</title>
+    <link>https://jaquent.github.io/tags/logistic-regression/</link>
+    <description>Recent content in logistic regression on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Jan 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jaquent.github.io/tags/logistic-regression/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The priors that I use for logsitic regression now</title>
+      <link>https://jaquent.github.io/post/the-priors-that-i-use-for-logsitic-regression-now/</link>
+      <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/post/the-priors-that-i-use-for-logsitic-regression-now/</guid>
+      <description>Problem In my power simulation of the U-shape experiment, I noticed that the suggested priors (click here) actually do not work very well for Bayes Factor (BF) analysis as they are too flat and hence BF are too conservative. That is because uniform or very flat priors lead to less evidence in favour of the alternative hypothesis.</description>
+    </item>
+    
+  </channel>
+</rss>

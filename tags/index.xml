@@ -2,39 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/</link>
+    <link>https://jaquent.github.io/tags/</link>
     <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 Jan 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bayesian Stats</title>
-      <link>/tags/bayesian-stats/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      <link>https://jaquent.github.io/tags/bayesian-stats/</link>
+      <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/tags/bayesian-stats/</guid>
+      <guid>https://jaquent.github.io/tags/bayesian-stats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>logistic regression</title>
+      <link>https://jaquent.github.io/tags/logistic-regression/</link>
+      <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/logistic-regression/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sequential design</title>
-      <link>/tags/sequential-design/</link>
+      <link>https://jaquent.github.io/tags/sequential-design/</link>
       <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/sequential-design/</guid>
+      <guid>https://jaquent.github.io/tags/sequential-design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>schemaVR</title>
-      <link>/tags/schemavr/</link>
+      <link>https://jaquent.github.io/tags/schemavr/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/schemavr/</guid>
+      <guid>https://jaquent.github.io/tags/schemavr/</guid>
       <description></description>
     </item>
     

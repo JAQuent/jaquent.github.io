@@ -3,67 +3,77 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/bayesian-sequential-designs-are-superior/</loc>
+    <loc>https://jaquent.github.io/tags/bayesian-stats/</loc>
+    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/categories/</loc>
+    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/categories/general/</loc>
+    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/</loc>
+    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/tags/logistic-regression/</loc>
+    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/post/</loc>
+    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/tags/</loc>
+    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/post/the-priors-that-i-use-for-logsitic-regression-now/</loc>
+    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jaquent.github.io/post/bayesian-sequential-designs-are-superior/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/bayesian-stats/</loc>
+    <loc>https://jaquent.github.io/tags/sequential-design/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/general/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/sequential-design/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</loc>
+    <loc>https://jaquent.github.io/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</loc>
     <lastmod>2020-07-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/analysing-normative-data/</loc>
+    <loc>https://jaquent.github.io/post/analysing-normative-data/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/experiments/</loc>
+    <loc>https://jaquent.github.io/categories/experiments/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/schemavr/</loc>
+    <loc>https://jaquent.github.io/tags/schemavr/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://jaquent.github.io/about/</loc>
   </url>
   
 </urlset>
