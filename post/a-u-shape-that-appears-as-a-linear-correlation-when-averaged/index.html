@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="A U-shape that appears as a linear correlation when averaged" />
+<meta property="og:description" content="The problem While analysing the data from our U-shape experiments (see pre-registration for context: https://osf.io/kcr2q), we ran into a peculiar problem. As expected, we did find that memory performance can be described as a U-shape function of how expected a certain object is in certain location. However, we also predicted that the memory advantage for highly incongruent item/locations pairings as well as for highly congruent pairings are driven by different processes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/" />
+<meta property="article:published_time" content="2021-02-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-12T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A U-shape that appears as a linear correlation when averaged"/>
+<meta name="twitter:description" content="The problem While analysing the data from our U-shape experiments (see pre-registration for context: https://osf.io/kcr2q), we ran into a peculiar problem. As expected, we did find that memory performance can be described as a U-shape function of how expected a certain object is in certain location. However, we also predicted that the memory advantage for highly incongruent item/locations pairings as well as for highly congruent pairings are driven by different processes."/>
+<meta name="generator" content="Hugo 0.70.0" />
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "A U-shape that appears as a linear correlation when averaged",
+  "url": "https://jaquent.github.io/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/",
+  "wordCount": "1015",
+  "datePublished": "2021-02-12T00:00:00+00:00",
+  "dateModified": "2021-02-12T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jörn Alexander Quent"
+  },
+  "keywords": "experiments, schemaVR, U-shape"
+}
+</script>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/">
+
+    <title>A U-shape that appears as a linear correlation when averaged | Jörn Alexander Quent&#39;s notebook</title>
+
+    
+    <!-- combined, minified CSS -->
+    
+    <link href="https://jaquent.github.io/css/style.e408605af1290e616960aef7be39db8d54400ce717e8e4f12f733d8fb56d62ee.css" rel="stylesheet" integrity="sha256-5AhgWvEpDmFpYK73vjnbjVRADOcX6OTxL3M9j7VtYu4=" crossorigin="anonymous">
+    
+
+    <!-- minified Font Awesome for SVG icons -->
+    
+    <script defer src="https://jaquent.github.io/js/fontawesome.min.16a86fa8fbdecc0f27392feecb61ee0803a507820bded359407103a49126b52c.js" integrity="sha256-FqhvqPvezA8nOS/uy2HuCAOlB4IL3tNZQHEDpJEmtSw=" crossorigin="anonymous"></script>
+
+    <!-- RSS 2.0 feed -->
+    
+
+    
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
+  </head>
+
+  <body>
+
+    
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="https://jaquent.github.io">Home</a>
+          
+          <a class="nav-link" href="/about/" title="">About</a>
+          
+          
+          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
+          
+        </nav>
+      </div>
+    </div>
+    
+
+    
+    
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title" dir="auto"><a href="https://jaquent.github.io" rel="home">Jörn Alexander Quent's notebook</a></h1>
+        <p class="lead blog-description" dir="auto">Posts on my work</p>
+      </div>
+    </header>
+    
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/">A U-shape that appears as a linear correlation when averaged</a></h2>
+    <p class="blog-post-meta"><time datetime="2021-02-12T00:00:00Z">Fri Feb 12, 2021</time> by Jörn Alexander Quent in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/schemavr/" rel="tag">schemaVR</a>, <a href="/tags/u-shape/" rel="tag">U-shape</a>
+
+</p>
+  </header>
+  <h1 id="the-problem">The problem</h1>
+<p>While analysing the data from our U-shape experiments (see
+pre-registration for context: <a href="https://osf.io/kcr2q">https://osf.io/kcr2q</a>), we ran into a
+peculiar problem. As expected, we did find that memory performance can
+be described as a U-shape function of how expected a certain object is
+in certain location. However, we also predicted that the memory
+advantage for highly incongruent item/locations pairings as well as for
+highly congruent pairings are driven by different processes. More
+specifically, we predicted that recollection is driving the incongruency
+advantage, while familiarity is contributing to the congruency
+advantage. In other words, we predicted linear negative as well as
+linear positive relationships respectively.</p>
+<p>We actually did find a linear negative relationship when averaging
+across subjects yielding one data point per item/location pairing.</p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-2-1.png" alt=""><!-- --></p>
+<p>In this case, we have a significant negative correlation, r= -.211, p=
+.035. We get similar a relationship when we use the normative data that
+we collected from 6 participants who viewed all 400 possible pairings
+but did not perform a memory task, which is not very surprising as the
+correlation between the averaged post-experimental ratings and those
+normative ratings are very high, r= .864, p&lt; .001.</p>
+<p>However, if we examine the raw (not averaged) data find a U-shape
+instead of a linear relationship, which for instance can be seen in this
+visualisation of the marginal effects of a corresponding mixed linear
+model.</p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-3-1.png" alt=""><!-- --></p>
+<p>This confused us a lot. To investigate what is going one we have plotted
+individual loess smoothing lines because we thought maybe we are
+observing something like the Simpson’s paradox. Due to the fact that per
+participants there are only 20 data points those lines are very noisy
+and difficult to interpret.</p>
+<p>On the quest to understand this discrepancy, I have noticed that there
+seems to be asymmetric spread. For instance, when we look up the
+normative ratings for any pairing that received the lowest expectancy
+rating possible (-100) and colour those to show the spread,</p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-4-1.png" alt=""><!-- --></p>
+<p>we see that there is less (rightward) spread than when we do the same
+thing for any pairing that received the highest expectancy rating (100).</p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-5-1.png" alt=""><!-- --></p>
+<p>While the mean spread from -100 toward the right is 50.59, the spread
+from 100 towards the left is 73.97, which are significantly different, p
+= .001. This raises the possibility that averaging introduces and
+artefact because of this asymmetry, which why we see this discrepancy.</p>
+<h1 id="simulation-to-reproduce-this-problem">Simulation to reproduce this problem</h1>
+<p>To investigate whether an explanation like this can account for our
+discrepancy, we simulated data. This simulation is based on the idea to
+have an average expectancy per object. The expectancy for a particular
+participants is generated by taking this average expectancy as the mean
+of a normal distribution, while using a standard deviation (SD) that
+becomes smaller/larger as a function of expectancy.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Set up seed</span>
+<span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">1241</span>)
+
+<span style="color:#75715e"># Parameters</span>
+numObj  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+numSub  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">75</span>
+</code></pre></div><p>Similar to our existing data, we have twenty pairings (i.e. objects) per
+participants (n = 75). We start with generating 20 random values between
+-100 and 100 for our objects.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Give 20 obj true values from uniform distribution between -100 and 100.</span>
+trueObj_val <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, <span style="color:#ae81ff">-100</span>, <span style="color:#ae81ff">100</span>)
+</code></pre></div><p>In order to have an asymmetric spread, we have to scale the standard
+deviation (SD) as function of expectancy.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">sdScale          <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-1</span>
+
+<span style="color:#75715e"># Have an SD that scales with the true obj values</span>
+sd_scaled_by_val <span style="color:#f92672">&lt;-</span> sdScale<span style="color:#f92672">*</span>trueObj_val <span style="color:#f92672">-</span> sdScale<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>
+</code></pre></div><p>In the next step we generate expectancy ratings for each participant.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># For each subject draw a random value with the mean of the object with SD that scales with this value</span>
+subjVal <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#66d9ef">NA</span>, numSub, numObj)
+
+<span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
+  <span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
+    subjVal[i, j] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">1</span>, trueObj_val[j], sd_scaled_by_val[j])
+  }
+}
+</code></pre></div><p>This process will create values that exceed the range of possible vaues,
+therefore everything is capped at -100 and 100.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Capping at -100 and 100</span>
+subjVal[subjVal <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span>]  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+subjVal[subjVal <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">-100</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-100</span>
+
+<span style="color:#75715e"># Everything is bound to one DF</span>
+df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(sub  <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, numObj),
+                 obj  <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, each <span style="color:#f92672">=</span> numSub),
+                 trueObj_val <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(trueObj_val, each <span style="color:#f92672">=</span> numSub),
+                 x    <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(subjVal))
+</code></pre></div><p>To make it easier to compare the results with our analyse we scale the
+data to have mean of 0 and SD of 1.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">df<span style="color:#f92672">$</span>s_trueObj_val <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(df<span style="color:#f92672">$</span>trueObj_val)
+df<span style="color:#f92672">$</span>s_x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(df<span style="color:#f92672">$</span>x)
+</code></pre></div><p>In the last step, we use those expectancy values to create remember
+judgements as a quadratic logistic model.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Generating memory performance</span>
+beta0 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
+beta1 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
+beta2 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1.2</span>
+z     <span style="color:#f92672">&lt;-</span> beta0 <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>df<span style="color:#f92672">$</span>s_x <span style="color:#f92672">+</span> beta2<span style="color:#f92672">*</span>df<span style="color:#f92672">$</span>s_x<span style="color:#f92672">*</span>df<span style="color:#f92672">$</span>s_x <span style="color:#75715e"># Regression in log odds</span>
+pr    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#a6e22e">exp</span>(<span style="color:#f92672">-</span>z)) <span style="color:#75715e"># Convert to probability.</span>
+df<span style="color:#f92672">$</span>y  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbinom</span>(numObj<span style="color:#f92672">*</span>numSub, <span style="color:#ae81ff">1</span>, pr) <span style="color:#75715e"># Get 0 and 1 with binomial link function</span>
+</code></pre></div><p>This leads to this result:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">ggplot</span>(df, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> s_x, y <span style="color:#f92672">=</span> y)) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">geom_jitter</span>(width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, height <span style="color:#f92672">=</span>  <span style="color:#ae81ff">0.1</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_smooth</span>(colour <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;blue&#39;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_smooth</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> s_trueObj_val), colour <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;red&#39;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Remembered (simulated)&#34;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Simulated ratings&#34;</span>, title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Result of simulation&#39;</span>)
+</code></pre></div><p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-14-1.png" alt=""><!-- --></p>
+<p>This shows that true quadratic relationship (blue loess line) can appear
+as straight line (red loess line) when averaged. Playing around with
+parameters of the regression and the SD scale allows one to easily
+create examples where the line is slightly negative.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Aggregating to correlate</span>
+df_agg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ddply</span>(df, 
+                <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;obj&#39;</span>, <span style="color:#e6db74">&#39;s_trueObj_val &#39;</span>), 
+                summarise, 
+                Individual    <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(s_x),
+                Individual_sd <span style="color:#f92672">=</span> <span style="color:#a6e22e">sd</span>(s_x),
+                remNum    <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(y),
+                remPer    <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(y))
+
+<span style="color:#75715e"># Get correlation</span>
+cor3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(df_agg<span style="color:#f92672">$</span>Individual, df_agg<span style="color:#f92672">$</span>remPer)
+</code></pre></div><p>In this case the correlation is r = -.732, p &lt; .001.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># calculate shift</span>
+rightShift <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">abs</span>(<span style="color:#ae81ff">-100</span> <span style="color:#f92672">-</span> df<span style="color:#f92672">$</span>trueObj_val[df<span style="color:#f92672">$</span>x <span style="color:#f92672">==</span> <span style="color:#ae81ff">-100</span>])
+leftShift  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">abs</span>(<span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> df<span style="color:#f92672">$</span>trueObj_val[df<span style="color:#f92672">$</span>x <span style="color:#f92672">==</span> <span style="color:#ae81ff">100</span>])
+
+<span style="color:#75715e"># T test for the difference</span>
+test2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t.test</span>(leftShift, rightShift, var.equal <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</code></pre></div><p>If we now calculate the same rightward and leftward shift, we also get a
+significant difference, p &lt; .001.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>It is possible to explain the discrepancy in our data with this
+asymmetry. This can be shown with this simulation. The only caveat that
+remains is that the empirical relationship between the the averaged
+post-experimental ratings and their SD</p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-17-1.png" alt=""><!-- --></p>
+<p>is different from the simulated ones as can be seen below.</p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-18-1.png" alt=""><!-- --></p>
+<p>However, we believe this is just a matter of findings the right
+parameters and is not as important.</p>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjaquent.github.io%2fpost%2fa-u-shape-that-appears-as-a-linear-correlation-when-averaged%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjaquent.github.io%2fpost%2fa-u-shape-that-appears-as-a-linear-correlation-when-averaged%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fjaquent.github.io%2fpost%2fa-u-shape-that-appears-as-a-linear-correlation-when-averaged%2f&amp;text=A%20U-shape%20that%20appears%20as%20a%20linear%20correlation%20when%20averaged" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 ml-auto blog-sidebar">
+    
+         <section class="sidebar-module">
+ <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+
+
+<li><a href="/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/">A U-shape that appears as a linear correlation when averaged</a></li>
+
+<li><a href="/post/the-priors-that-i-use-for-logsitic-regression-now/">The priors that I use for logsitic regression now</a></li>
+
+<li><a href="/post/bayesian-sequential-designs-are-superior/">Bayesian sequential designs are superior</a></li>
+
+<li><a href="/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/">Comparing different methods to calculate Bayes factors for a simple model</a></li>
+
+<li><a href="/post/analysing-normative-data/">Analysing normative data</a></li>
+
+    </ol>
+ </section>
+
+    
+    
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+ <section class="sidebar-module">
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-secondary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
+            
+            <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
+            
+            <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
+            
+        </p>
+        
+    
+</section>
+    
+</aside>
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+    
+
+    
+    <footer class="blog-footer">
+      <p dir="auto">
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+    
+
+  </body>
+
+</html>

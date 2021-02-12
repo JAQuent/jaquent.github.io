@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>schemaVR</title>
+      <link>https://jaquent.github.io/tags/schemavr/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/schemavr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>U-shape</title>
+      <link>https://jaquent.github.io/tags/u-shape/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/u-shape/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Bayesian Stats</title>
@@ -35,15 +53,6 @@
       <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://jaquent.github.io/tags/sequential-design/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>schemaVR</title>
-      <link>https://jaquent.github.io/tags/schemavr/</link>
-      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/schemavr/</guid>
       <description></description>
     </item>
     
