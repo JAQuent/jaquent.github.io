@@ -6,10 +6,19 @@
     <description>Recent content in Bayesian Stats on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jaquent.github.io/tags/bayesian-stats/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Finding a U-shape with Bayesian interrupted regression</title>
+      <link>https://jaquent.github.io/post/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
+      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/post/finding-a-u-shape-with-bayesian-interrupted-regression/</guid>
+      <description>The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape.</description>
+    </item>
     
     <item>
       <title>The priors that I use for logsitic regression now</title>
