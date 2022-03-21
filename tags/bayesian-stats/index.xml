@@ -6,11 +6,7 @@
     <description>Recent content in Bayesian Stats on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://jaquent.github.io/tags/bayesian-stats/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/bayesian-stats/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Finding a U-shape with Bayesian interrupted regression</title>
       <link>https://jaquent.github.io/post/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
