@@ -2,72 +2,72 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/post/</link>
+    <link>/post/</link>
     <description>Recent content in Posts on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Matlab function to create stacked texture maps for Unity</title>
-      <link>https://jaquent.github.io/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/</link>
+      <link>/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/</link>
       <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/</guid>
+      <guid>/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/</guid>
       <description>I&amp;rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
 Luckily, I found this obscure shader on Unity&amp;rsquo;s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.</description>
     </item>
     
     <item>
       <title>Finding a U-shape with Bayesian interrupted regression</title>
-      <link>https://jaquent.github.io/post/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
+      <link>/post/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
       <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/post/finding-a-u-shape-with-bayesian-interrupted-regression/</guid>
+      <guid>/post/finding-a-u-shape-with-bayesian-interrupted-regression/</guid>
       <description>The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape.</description>
     </item>
     
     <item>
       <title>A U-shape that appears as a linear correlation when averaged</title>
-      <link>https://jaquent.github.io/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</link>
+      <link>/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</link>
       <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</guid>
+      <guid>/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</guid>
       <description>The problem While analysing the data from our U-shape experiments (see pre-registration for context: https://osf.io/kcr2q), we ran into a peculiar problem. As expected, we did find that memory performance can be described as a U-shape function of how expected a certain object is in certain location. However, we also predicted that the memory advantage for highly incongruent item/locations pairings as well as for highly congruent pairings are driven by different processes.</description>
     </item>
     
     <item>
       <title>The priors that I use for logsitic regression now</title>
-      <link>https://jaquent.github.io/post/the-priors-that-i-use-for-logsitic-regression-now/</link>
+      <link>/post/the-priors-that-i-use-for-logsitic-regression-now/</link>
       <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/post/the-priors-that-i-use-for-logsitic-regression-now/</guid>
+      <guid>/post/the-priors-that-i-use-for-logsitic-regression-now/</guid>
       <description>Problem In my power simulation of the U-shape experiment, I noticed that the suggested priors (click here) actually do not work very well for Bayes Factor (BF) analysis as they are too flat and hence BF are too conservative. That is because uniform or very flat priors lead to less evidence in favour of the alternative hypothesis.</description>
     </item>
     
     <item>
       <title>Bayesian sequential designs are superior</title>
-      <link>https://jaquent.github.io/post/bayesian-sequential-designs-are-superior/</link>
+      <link>/post/bayesian-sequential-designs-are-superior/</link>
       <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/post/bayesian-sequential-designs-are-superior/</guid>
+      <guid>/post/bayesian-sequential-designs-are-superior/</guid>
       <description>This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power. The slides of presentation can be found in my GitHub repository. This repository also includes the data and the scripts that were used to run the simulations and to create the figures.</description>
     </item>
     
     <item>
       <title>Comparing different methods to calculate Bayes factors for a simple model</title>
-      <link>https://jaquent.github.io/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</link>
+      <link>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</link>
       <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</guid>
+      <guid>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</guid>
       <description>Introduction Comparing the four BF methods Evidence for null hypothesis: brms vs. ttestBF() How much more conservative is the bmrs approach? Directed vs. non-directed hypothesis Conclusion  Introduction In this post, I’d like to examine how different ways to calcualte Bayes factors (BF) compare with each other for a simple model.</description>
     </item>
     
     <item>
       <title>Analysing normative data</title>
-      <link>https://jaquent.github.io/post/analysing-normative-data/</link>
+      <link>/post/analysing-normative-data/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/post/analysing-normative-data/</guid>
+      <guid>/post/analysing-normative-data/</guid>
       <description>Introduction In order to be able to present object at locations with a range of expectancy values, which is crucial to show that this has U-shaped relationship, I asked six member of my research group. to rate all combinations of objects and location that exist in the virtual enviroment for the schemaVR task.</description>
     </item>
     
