@@ -13,9 +13,8 @@
       <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
       
       <guid>https://jaquent.github.io/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/</guid>
-      <description>I’ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
-Here is an example of tiling.
-Luckily, I found this obscure shader on Unity’s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.</description>
+      <description>I&amp;rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
+Luckily, I found this obscure shader on Unity&amp;rsquo;s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.</description>
     </item>
     
     <item>

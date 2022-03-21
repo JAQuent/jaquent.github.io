@@ -26,7 +26,7 @@
   "@type": "BlogPosting",
   "headline": "Matlab function to create stacked texture maps for Unity",
   "url": "https://jaquent.github.io/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/",
-  "wordCount": "371",
+  "wordCount": "362",
   "datePublished": "2022-03-21T00:00:00+00:00",
   "dateModified": "2022-03-21T00:00:00+00:00",
   "author": {
@@ -133,35 +133,23 @@ src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM
 
 </p>
   </header>
-  
-
-
-<p>I’ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:</p>
-<div class="figure">
-<img src="https://github.com/Unity-Technologies/TilingRandomization/raw/master/.images/TilingRandomizationBefore.jpg" alt="" />
-<p class="caption">Here is an example of tiling.</p>
-</div>
-<p>Luckily, I found this obscure shader on <a href="https://github.com/Unity-Technologies/TilingRandomization/raw/master/.images/TilingRandomizationBefore.jpg">Unity’s GitHub page</a>, which is amazing but it asked for something called a map texture, which took me ages to figure out.</p>
+  <p>I&rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:</p>
+<p><img src="https://github.com/Unity-Technologies/TilingRandomization/raw/master/.images/TilingRandomizationBefore.jpg" alt="Here is an example of tiling."></p>
+<p>Luckily, I found this obscure shader on <a href="https://github.com/Unity-Technologies/TilingRandomization/raw/master/.images/TilingRandomizationBefore.jpg">Unity&rsquo;s GitHub page</a>, which is amazing but it asked for something called a map texture, which took me ages to figure out.</p>
 <p>Essentially what you need to do is to use grayscale images of your metallic, ambient occlusion, detail mask and smoothness map and plug them into one RGBA image (<a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@7.1/manual/Mask-Map-and-Detail-Map.html">more information</a>), which is illustrated below:</p>
-<div class="figure">
-<img src="https://github.com/JAQuent/functions-for-matlab/raw/master/createStackedTexture/create_a_texture_map.png" alt="" />
-<p class="caption">Illustration of procedure.</p>
-</div>
-<p>I’ve spent hours trying to do this in GIMP but I failed so I quickly cooked up a function in MATLAB called <code>createStackedTexture.m</code> (<a href="https://github.com/JAQuent/functions-for-matlab/tree/master/createStackedTexture">GitHub repository</a>).</p>
-<div id="example-how-to-use-the-function" class="section level1">
-<h1>Example how to use the function</h1>
-<pre class="matlab"><code>createStackedTexture(&quot;factorylargerocksplain_maskMap.png&quot;, ...
-                     &quot;factorylargerocksplain_metallic.png&quot;, ...
-                     &quot;factorylargerocksplain_ao.png&quot;, ...
+<p><img src="https://github.com/JAQuent/functions-for-matlab/raw/master/createStackedTexture/create_a_texture_map.png" alt="Illustration of procedure."></p>
+<p>I&rsquo;ve spent hours trying to do this in GIMP but I failed so I quickly cooked up a function in MATLAB called <code>createStackedTexture.m</code> (<a href="https://github.com/JAQuent/functions-for-matlab/tree/master/createStackedTexture">GitHub repository</a>).</p>
+<h1 id="example-how-to-use-the-function">Example how to use the function</h1>
+<pre tabindex="0"><code class="language-{matlab}" data-lang="{matlab}">createStackedTexture(&#34;factorylargerocksplain_maskMap.png&#34;, ...
+                     &#34;factorylargerocksplain_metallic.png&#34;, ...
+                     &#34;factorylargerocksplain_ao.png&#34;, ...
                      zeros(250, 250, 3, &#39;uint8&#39;), ... % To leave out just add zeros. 
-                     &quot;factorylargerocksplain_smoothness.png&quot;)</code></pre>
-<p><br>
+                     &#34;factorylargerocksplain_smoothness.png&#34;)
+</code></pre><br>
 <br>
-<br></p>
-</div>
-<div id="code-for-the-function" class="section level1">
-<h1>Code for the function</h1>
-<pre class="matlab"><code>function createStackedTexture(fileName, go2R, go2G, go2B, go2A)
+<br>
+<h1 id="code-for-the-function">Code for the function</h1>
+<pre tabindex="0"><code class="language-{matlab}" data-lang="{matlab}">function createStackedTexture(fileName, go2R, go2G, go2B, go2A)
 %createStackedTexture This functions takes greyscale texture maps (currently only .png) and
 %copies them into one RGBA images in the respective channels. 
 % go2R = Greyscale image or array that should go into the R channel. 
@@ -208,9 +196,8 @@ textureMap(:, :, 3) = B(:, :, 1);
 
 %% Write new image
 imwrite(textureMap, fileName, &#39;png&#39;, &#39;Alpha&#39;, A(:, :, 1));
-end</code></pre>
-</div>
-
+end
+</code></pre>
 
   
 
