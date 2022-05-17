@@ -5,37 +5,23 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Posts" />
+<meta property="og:title" content="JSON" />
 <meta property="og:description" content="Posts on my work" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/post/" />
+<meta property="og:url" content="/tags/json/" />
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="JSON"/>
 <meta name="twitter:description" content="Posts on my work"/>
 <meta name="generator" content="Hugo 0.95.0" />
 
 
     
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Blog",
-  "headline": "Jörn Alexander Quent's notebook",
-  "url" : "/post/",
-  "author": {
-    "@type": "Person",
-    "name": "Alex Quent"
-  },
-  "dateModified": "2022-05-17T00:00:00+00:00",
-  "keywords": "experiments,""general,""bayesian-stats,""json,""logistic-regression,""matlab,""schemavr,""sequential-design,""textures,""u-shape,""unity,""unity3d,",
-  "description":"Posts on my work"
-}
-</script>
+      
+    
 
-
-    <link rel="canonical" href="/post/">
+    <link rel="canonical" href="/tags/json/">
 
     <title>Jörn Alexander Quent&#39;s notebook</title>
 
@@ -50,7 +36,7 @@
     <script defer src="/js/fontawesome.min.16a86fa8fbdecc0f27392feecb61ee0803a507820bded359407103a49126b52c.js" integrity="sha256-FqhvqPvezA8nOS/uy2HuCAOlB4IL3tNZQHEDpJEmtSw=" crossorigin="anonymous"></script>
 
     <!-- RSS 2.0 feed -->
-    <link rel="alternate" type="application/rss+xml" href="/post/index.xml" title="Jörn Alexander Quent's notebook" />
+    <link rel="alternate" type="application/rss+xml" href="/tags/json/index.xml" title="Jörn Alexander Quent's notebook" />
     
 
     
@@ -122,7 +108,6 @@ src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM
 
 
 
-
 <article class="blog-post">
   <header>
     <h2 class="blog-post-title" dir="auto"><a href="/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/">How you can easily load data into Unity3D using a .JSON file</a></h2>
@@ -140,97 +125,6 @@ src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM
 
 
 
-
-
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></h2>
-    <p class="blog-post-meta"><time datetime="2022-03-21T00:00:00Z">Mon Mar 21, 2022</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/unity/" rel="tag">unity</a>, <a href="/tags/textures/" rel="tag">textures</a>, <a href="/tags/matlab/" rel="tag">matlab</a>
-
-</p>
-  </header>
-  I&rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
-Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.
-  <a href='/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/'>Read more →</a>
-</article> 
-
-
-
-
-
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="/post/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></h2>
-    <p class="blog-post-meta"><time datetime="2021-02-17T00:00:00Z">Wed Feb 17, 2021</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/u-shape/" rel="tag">U-shape</a>
-
-</p>
-  </header>
-  The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape.
-  <a href='/post/finding-a-u-shape-with-bayesian-interrupted-regression/'>Read more →</a>
-</article> 
-
-
-
-
-
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/">A U-shape that appears as a linear correlation when averaged</a></h2>
-    <p class="blog-post-meta"><time datetime="2021-02-12T00:00:00Z">Fri Feb 12, 2021</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/schemavr/" rel="tag">schemaVR</a>, <a href="/tags/u-shape/" rel="tag">U-shape</a>
-
-</p>
-  </header>
-  The problem While analysing the data from our U-shape experiments (see pre-registration for context: https://osf.io/kcr2q), we ran into a peculiar problem. As expected, we did find that memory performance can be described as a U-shape function of how expected a certain object is in certain location. However, we also predicted that the memory advantage for highly incongruent item/locations pairings as well as for highly congruent pairings are driven by different processes.
-  <a href='/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/'>Read more →</a>
-</article> 
-
-
-
-
-
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="/post/the-priors-that-i-use-for-logsitic-regression-now/">The priors that I use for logsitic regression now</a></h2>
-    <p class="blog-post-meta"><time datetime="2021-01-19T00:00:00Z">Tue Jan 19, 2021</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/logistic-regression/" rel="tag">logistic regression</a>
-
-</p>
-  </header>
-  Problem In my power simulation of the U-shape experiment, I noticed that the suggested priors (click here) actually do not work very well for Bayes Factor (BF) analysis as they are too flat and hence BF are too conservative. That is because uniform or very flat priors lead to less evidence in favour of the alternative hypothesis.
-  <a href='/post/the-priors-that-i-use-for-logsitic-regression-now/'>Read more →</a>
-</article> 
-
-
-
-
-
-<nav class="blog-pagination">
-  
-  
-  
-  <a class="btn btn-outline-primary disabled" href="#" role="button" aria-disabled="true">Previous page</a>
-  <a class="btn btn-outline-primary" href="/post/page/2/" rel="next" role="button">Next page</a>
-  
-</nav>
 
 
 

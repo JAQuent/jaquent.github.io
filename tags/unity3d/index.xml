@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>unity3d on Jörn Alexander Quent&#39;s notebook</title>
+    <link>/tags/unity3d/</link>
+    <description>Recent content in unity3d on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/unity3d/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How you can easily load data into Unity3D using a .JSON file</title>
+      <link>/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/</link>
+      <pubDate>Tue, 17 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/</guid>
+      <description>In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp;amp; for the most part simpler ways if you use UXF - Unity Experiment Framework, which provide a way to parse on data via .json out of the box.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,25 +5,44 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="unity" />
-<meta property="og:description" content="Posts on my work" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/tags/unity/" />
+<meta property="og:title" content="How you can easily load data into Unity3D using a .JSON file" />
+<meta property="og:description" content="Load or read in json file into Unity3D" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-17T00:00:00+00:00" />
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="unity"/>
-<meta name="twitter:description" content="Posts on my work"/>
+<meta name="twitter:title" content="How you can easily load data into Unity3D using a .JSON file"/>
+<meta name="twitter:description" content="Load or read in json file into Unity3D"/>
 <meta name="generator" content="Hugo 0.95.0" />
 
 
     
-      
-    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How you can easily load data into Unity3D using a .JSON file",
+  "url": "/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/",
+  "wordCount": "409",
+  "datePublished": "2022-05-17T00:00:00+00:00",
+  "dateModified": "2022-05-17T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jörn Alexander Quent"
+  },
+  "keywords": "general, unity, unity3d, json, JSON",
+  "description": "Load or read in json file into Unity3D"
+}
+</script>
 
-    <link rel="canonical" href="/tags/unity/">
 
-    <title>Jörn Alexander Quent&#39;s notebook</title>
+
+    <link rel="canonical" href="/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/">
+
+    <title>How you can easily load data into Unity3D using a .JSON file | Jörn Alexander Quent&#39;s notebook</title>
 
     
     <!-- combined, minified CSS -->
@@ -36,7 +55,6 @@
     <script defer src="/js/fontawesome.min.16a86fa8fbdecc0f27392feecb61ee0803a507820bded359407103a49126b52c.js" integrity="sha256-FqhvqPvezA8nOS/uy2HuCAOlB4IL3tNZQHEDpJEmtSw=" crossorigin="anonymous"></script>
 
     <!-- RSS 2.0 feed -->
-    <link rel="alternate" type="application/rss+xml" href="/tags/unity/index.xml" title="Jörn Alexander Quent's notebook" />
     
 
     
@@ -104,10 +122,6 @@ src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM
           
 
 
-
-
-
-
 <article class="blog-post">
   <header>
     <h2 class="blog-post-title" dir="auto"><a href="/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/">How you can easily load data into Unity3D using a .JSON file</a></h2>
@@ -119,35 +133,74 @@ src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM
 
 </p>
   </header>
-  In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp; for the most part simpler ways if you use UXF - Unity Experiment Framework, which provide a way to parse on data via .json out of the box.
-  <a href='/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/'>Read more →</a>
+  <p>In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp; for the most part simpler ways if you use <a href="https://github.com/immersivecognition/unity-experiment-framework">UXF - Unity Experiment Framework</a>, which provide a way to parse on data via .json out of the box. However, the problem is that this only works if you already started the experiment and some people who might stumble on this don&rsquo;t even know what I am talking about. Anyway in my case, I want to provide information to Unity3D before I started my UXF session. In fact as I will show in my next post, I wan to control the text of the UXF start up panel itself using a .json file so I can easily switch between an English &amp; a Chinese version of a research task that I created.</p>
+<p>All the code &amp; the example file can be found in <a href="https://github.com/JAQuent/scripts-for-unity3d/tree/master/load_a_JSON_file">this</a> folder of my Unity script repo on <a href="https://github.com/JAQuent/scripts-for-unity3d">GitHub</a>.</p>
+<p>Now, let me show you how you can read &amp; use a simple .json file like this:</p>
+<pre tabindex="0"><code class="language-{json}" data-lang="{json}">{
+    &#34;var1&#34;: &#34; Hello World!&#34;,
+    &#34;var2&#34;: 1.0
+}
+</code></pre><p>The file has two variables called var1 &amp; var2. Step 1: In order to access them we have to create a custom class like this</p>
+<pre tabindex="0"><code class="language-{c#}" data-lang="{c#}">[System.Serializable]
+public class JSONDataClass {
+    	public string var1;
+    	public float var2;
+    }
+</code></pre><p>that has the same variable names as the .json file. Note if there is mismatch between the file and your class you might get an error. After that we can use a function like this</p>
+<pre tabindex="0"><code class="language-{c#}" data-lang="{c#}">    /// &lt;summary&gt;
+    /// Method to read in a JSON file that is placed in the StreamingAssets folder. 
+    /// &lt;/summary&gt;
+    void GetDataFromJSON(string fileName){
+    	// Get path
+        string path2file = Path.GetFullPath(Path.Combine(Application.streamingAssetsPath, fileName));
+
+        // Get JSON input
+        var sr = new StreamReader(path2file);
+        var fileContents = sr.ReadToEnd();
+        sr.Close();
+
+        // Get instruction data profile
+        JSONData = JsonUtility.FromJson&lt;JSONDataClass&gt;(fileContents);
+    }
+</code></pre><p>to read the file and so you can easily get the data by running everything inside the start function. For instance, like this:</p>
+<pre tabindex="0"><code class="language-{c#}" data-lang="{c#}">    // Start is called before the first frame update
+    void Start(){
+    	// Get the Startup Text from the JSON file
+    	GetDataFromJSON(JSON_fileName);
+
+    	// Show that it worked
+        Debug.Log(JSONData.var1);
+        Debug.Log(JSONData.var2);
+    	
+    }
+</code></pre><p>And voila we can now use the values inside the file and print them to the console.</p>
+<img src="https://github.com/JAQuent/scripts-for-unity3d/blob/master/load_a_JSON_file/results.PNG?raw=true"/>
+<p>The whole script can be found <a href="https://github.com/JAQuent/scripts-for-unity3d/blob/master/load_a_JSON_file/JSON_example.cs">here</a>. I hope this is useful to anyone as it took my while to get this one working for me.</p>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=%2fpost%2fhow-you-can-easily-load-data-into-unity3d-using-a-json-file%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fhow-you-can-easily-load-data-into-unity3d-using-a-json-file%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=%2fpost%2fhow-you-can-easily-load-data-into-unity3d-using-a-json-file%2f&amp;text=How%20you%20can%20easily%20load%20data%20into%20Unity3D%20using%20a%20.JSON%20file" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
 </article> 
-
-
-
-
-
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></h2>
-    <p class="blog-post-meta"><time datetime="2022-03-21T00:00:00Z">Mon Mar 21, 2022</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/unity/" rel="tag">unity</a>, <a href="/tags/textures/" rel="tag">textures</a>, <a href="/tags/matlab/" rel="tag">matlab</a>
-
-</p>
-  </header>
-  I&rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
-Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.
-  <a href='/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/'>Read more →</a>
-</article> 
-
-
-
-
-
 
 
 
