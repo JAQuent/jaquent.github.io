@@ -13,7 +13,7 @@
       <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
       
       <guid>/post/how-to-change-uxf-s-start-up-menu-using-a-json-input-file/</guid>
-      <description>In my last post a while back, I showed how to load a .json file in to Unity3D without using UXF, which if you can do this, is still the most easiest way for experiments. One of the problems with UXF however is that you cannot access the .json file before starting UXF&amp;rsquo;s session, which is exactly the problem that I ran into here.</description>
+      <description>In my last post a while back, I showed how to load a .json file in to Unity3D without using UXF, which if you can do this, is still the easiest way for experiments. One of the problems with UXF however is that you cannot access the .json file before starting UXF&amp;rsquo;s session, which is exactly the problem that I ran into here.</description>
     </item>
     
     <item>
