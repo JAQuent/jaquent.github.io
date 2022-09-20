@@ -5,25 +5,44 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="unity3d" />
-<meta property="og:description" content="Posts on my work" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/tags/unity3d/" />
+<meta property="og:title" content="How to change UXF&#39;s start up menu using a .json input file" />
+<meta property="og:description" content="Configure the UXF start up menu in finished build" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/how-to-change-uxf-s-start-up-menu-using-a-json-input-file/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-20T00:00:00+00:00" />
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="unity3d"/>
-<meta name="twitter:description" content="Posts on my work"/>
+<meta name="twitter:title" content="How to change UXF&#39;s start up menu using a .json input file"/>
+<meta name="twitter:description" content="Configure the UXF start up menu in finished build"/>
 <meta name="generator" content="Hugo 0.95.0" />
 
 
     
-      
-    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to change UXF's start up menu using a .json input file",
+  "url": "/post/how-to-change-uxf-s-start-up-menu-using-a-json-input-file/",
+  "wordCount": "348",
+  "datePublished": "2022-09-20T00:00:00+00:00",
+  "dateModified": "2022-09-20T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jörn Alexander Quent"
+  },
+  "keywords": "general, json, JSON, unity3d, unity",
+  "description": "Configure the UXF start up menu in finished build"
+}
+</script>
 
-    <link rel="canonical" href="/tags/unity3d/">
 
-    <title>Jörn Alexander Quent&#39;s notebook</title>
+
+    <link rel="canonical" href="/post/how-to-change-uxf-s-start-up-menu-using-a-json-input-file/">
+
+    <title>How to change UXF&rsquo;s start up menu using a .json input file | Jörn Alexander Quent&#39;s notebook</title>
 
     
     <!-- combined, minified CSS -->
@@ -36,7 +55,6 @@
     <script defer src="/js/fontawesome.min.16a86fa8fbdecc0f27392feecb61ee0803a507820bded359407103a49126b52c.js" integrity="sha256-FqhvqPvezA8nOS/uy2HuCAOlB4IL3tNZQHEDpJEmtSw=" crossorigin="anonymous"></script>
 
     <!-- RSS 2.0 feed -->
-    <link rel="alternate" type="application/rss+xml" href="/tags/unity3d/index.xml" title="Jörn Alexander Quent's notebook" />
     
 
     
@@ -104,10 +122,6 @@ src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM
           
 
 
-
-
-
-
 <article class="blog-post">
   <header>
     <h2 class="blog-post-title" dir="auto"><a href="/post/how-to-change-uxf-s-start-up-menu-using-a-json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></h2>
@@ -119,34 +133,54 @@ src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM
 
 </p>
   </header>
-  In my last post a while back, I showed how to load a .json file in to Unity3D without using UXF, which if you can do this, is still the most easiest way for experiments. One of the problems with UXF however is that you cannot access the .json file before starting UXF&rsquo;s session, which is exactly the problem that I ran into here.
-  <a href='/post/how-to-change-uxf-s-start-up-menu-using-a-json-input-file/'>Read more →</a>
-</article> 
-
-
-
-
-
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/">How you can easily load data into Unity3D using a .JSON file</a></h2>
-    <p class="blog-post-meta"><time datetime="2022-05-17T00:00:00Z">Tue May 17, 2022</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/unity/" rel="tag">unity</a>, <a href="/tags/unity3d/" rel="tag">unity3d</a>, <a href="/tags/json/" rel="tag">json</a>, <a href="/tags/json/" rel="tag">JSON</a>
-
+  <p>In my <a href="https://jaquent.github.io/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/">last post</a> a while back, I showed how to load a .json file in to Unity3D without using <a href="https://immersivecognition.com/unity-experiment-framework/">UXF</a>, which if you can do this, is still the most easiest way for experiments. One of the problems with UXF however is that you cannot access the .json file before starting <a href="https://immersivecognition.com/unity-experiment-framework/">UXF&rsquo;s</a> session, which is exactly the problem that I ran into here. Let me explain:</p>
+<p align="center">
+        <img src="https://github.com/JAQuent/scripts-for-unity3d/blob/master/images/example_menu.PNG?raw=true" width="1016" height="317">
 </p>
-  </header>
-  In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp; for the most part simpler ways if you use UXF - Unity Experiment Framework, which provide a way to parse on data via .json out of the box.
-  <a href='/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/'>Read more →</a>
+<p>One thing that bothered me was that the start up menu generated by UXF is hardcoded meaning that you have to change it in the Unity3D editor even for only small changes like for instance changing the instructions. This is why I wrote <a href="https://github.com/JAQuent/scripts-for-unity3d/blob/master/UXF_UI_controllScript.cs">this neat little script</a> that allows you to configure the start-up menu as you see it above.</p>
+<p>All that you need to do to get this start-up menu is to a) attach the script to any game object, b) copy the corresponding .json file into the <em>StreamingAssets</em> folder and c) provide the file name to th script.</p>
+<p>The example .json file to create the start up menu above:</p>
+<pre tabindex="0"><code>{
+    &#34;chromeBar&#34;: &#34;Startup&#34;,
+    &#34;instructionsPanelContent1&#34;: &#34;Welcome to OLM task! &#34;,
+    &#34;instructionsPanelContent2&#34;: &#34;You could use this space to display some instructions to the researcher or the participant.&#34;,
+    &#34;expSettingsprofile&#34;: &#34;Experiment settings profile&#34;,
+    &#34;localPathElement&#34;: &#34;Local data save directory&#34;,
+    &#34;localPathElement_placeHolder&#34;: &#34;Press browse button to select...&#34;,
+    &#34;participantID&#34;: &#34;Participant ID&#34;,
+    &#34;participantID_placeholder&#34;: &#34;Enter text...&#34;,
+    &#34;sessionNumber&#34;: &#34;Session number&#34;,
+    &#34;termsAndConditions&#34;: &#34;Please tick if you understand the instructions and agree for your data to be collected and used for research purposes.&lt;color=red&gt;*&lt;/color&gt;&#34;,
+    &#34;beginButton&#34;: &#34;Begin session.&#34;
+}
+</code></pre><p>With this small trick you can always edit the menu of your completed build without opening Unity3D again.</p>
+<p>Note: You need to set-up all variables that you want to get from the .json file. The variable names have to correspond to the input names in that file. If you want a different layout with additional things like dropdown menu you&rsquo;ll have to adapt the code &amp; the .json file.</p>
+<p>I have been using this script in all my latest tasks I am currently working on and can serves as a teaser for what is to come.</p>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=%2fpost%2fhow-to-change-uxf-s-start-up-menu-using-a-json-input-file%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fhow-to-change-uxf-s-start-up-menu-using-a-json-input-file%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=%2fpost%2fhow-to-change-uxf-s-start-up-menu-using-a-json-input-file%2f&amp;text=How%20to%20change%20UXF%27s%20start%20up%20menu%20using%20a%20.json%20input%20file" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
 </article> 
-
-
-
-
-
 
 
 
