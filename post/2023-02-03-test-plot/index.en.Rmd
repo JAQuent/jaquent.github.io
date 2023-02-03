@@ -1,0 +1,24 @@
+---
+title: Test plot
+author: ''
+date: '2023-02-03'
+slug: []
+categories: []
+tags: []
+lastmod: '2023-02-03T17:55:47+08:00'
+keywords: []
+description: ''
+comment: no
+toc: no
+autoCollapseToc: no
+contentCopyright: no
+reward: no
+mathjax: no
+---
+
+<!--more-->
+
+
+```{r}
+plot(rnorm(10), rnorm(10))
+```
