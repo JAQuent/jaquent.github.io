@@ -54,11 +54,11 @@ Luckily, I found this obscure shader on Unity&amp;rsquo;s GitHub page, which is 
     </item>
     
     <item>
-      <title>The priors that I use for logsitic regression now</title>
-      <link>/post/the-priors-that-i-use-for-logsitic-regression-now/</link>
+      <title>The priors that I use for logistic regression now</title>
+      <link>/post/the-priors-that-i-use-for-logistic-regression-now/</link>
       <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/post/the-priors-that-i-use-for-logsitic-regression-now/</guid>
+      <guid>/post/the-priors-that-i-use-for-logistic-regression-now/</guid>
       <description>Problem In my power simulation of the U-shape experiment, I noticed that the suggested priors (click here) actually do not work very well for Bayes Factor (BF) analysis as they are too flat and hence BF are too conservative. That is because uniform or very flat priors lead to less evidence in favour of the alternative hypothesis.</description>
     </item>
     
@@ -86,7 +86,7 @@ Luckily, I found this obscure shader on Unity&amp;rsquo;s GitHub page, which is 
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/analysing-normative-data/</guid>
-      <description>Introduction In order to be able to present object at locations with a range of expectancy values, which is crucial to show that this has U-shaped relationship, I asked six member of my research group. to rate all combinations of objects and location that exist in the virtual enviroment for the schemaVR task.</description>
+      <description>Introduction In order to be able to present object at locations with a range of expectancy values, which is crucial to show that this has U-shaped relationship, I asked six member of my research group. to rate all combinations of objects and location that exist in the virtual environment for the schemaVR task.</description>
     </item>
     
     <item>

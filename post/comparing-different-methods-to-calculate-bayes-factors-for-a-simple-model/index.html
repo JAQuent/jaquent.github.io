@@ -270,7 +270,7 @@ only 1100.</p>
 <p>To illustrate the difference between <code>brms</code> and <code>ttestBF()</code>, I binned
 the BF into 8 categories and compared their
 frequencies.</p>
-<p><img src="/post/2020-07-16-comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model_files/figure-markdown_github/unnamed-chunk-7-1.png" alt=""><!-- --></p>
+<p><img src="/post/2020-07-16-comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model_files/figure-markdown_github/unnamed-chunk-7-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>A look at the two distributions shows that the <code>brms</code> model with unit
 prior of N(0,1) leads to stronger evidence for the null when the null
 hypothesis is true than <code>ttestBF()</code> with its Cauchy/Jeffrey’s prior
@@ -279,7 +279,7 @@ This highlights the more conservative nature of the <code>brms</code> model. As 
 comparison, we can look at the distribution of BF10 when effect size is
 d =
 0.5.</p>
-<p><img src="/post/2020-07-16-comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model_files/figure-markdown_github/unnamed-chunk-8-1.png" alt=""><!-- --></p>
+<p><img src="/post/2020-07-16-comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model_files/figure-markdown_github/unnamed-chunk-8-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>In this case the percentages are very similar despite being more
 conservative, the <code>bmrs</code> model often leads to the same conclusion. Note
 that for d = 0.8 all BF10 were above 10, hence they are not displayed
@@ -289,7 +289,7 @@ well.</p>
 <p>The conservative nature can be illustrated by examining the distribution
 of the ratios between both BFs
 (<code>ttestBF()</code>/<code>bayes_factor()</code>).</p>
-<p><img src="/post/2020-07-16-comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model_files/figure-markdown_github/unnamed-chunk-9-1.png" alt=""><!-- --></p>
+<p><img src="/post/2020-07-16-comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model_files/figure-markdown_github/unnamed-chunk-9-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>The distributions of ratios show that the <code>brms</code> model more conservative
 than <code>ttestBF()</code> but as the effect size increase the max ratio drops
 from 1.8 to 1.4. Median values are 1.308, 1.162 and 1.113 for a d of
@@ -301,7 +301,7 @@ null hypothesis.</p>
 <p>On each run in these simulations, I also estimated the order-restricted
 BF (i.e. BF for directed hypothesis) that d = 0 vs d &gt;
 0.</p>
-<p><img src="/post/2020-07-16-comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model_files/figure-markdown_github/unnamed-chunk-10-1.png" alt=""><!-- --></p>
+<p><img src="/post/2020-07-16-comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model_files/figure-markdown_github/unnamed-chunk-10-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>This shows that when the null is true, the order-restricted BF is much
 lower (median of 0.989) compared to d = 0.8 because follows are uniform
 distribution. For positive effect sizes (d = 0.5 &amp; d = 0.8), the ratio

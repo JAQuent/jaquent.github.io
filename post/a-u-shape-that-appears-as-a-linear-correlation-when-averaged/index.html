@@ -146,7 +146,7 @@ advantage. In other words, we predicted linear negative as well as
 linear positive relationships respectively.</p>
 <p>We actually did find a linear negative relationship when averaging
 across subjects yielding one data point per item/location pairing.</p>
-<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-2-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-2-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>In this case, we have a significant negative correlation, r= -.211, p=
 .035. We get similar a relationship when we use the normative data that
 we collected from 6 participants who viewed all 400 possible pairings
@@ -157,7 +157,7 @@ normative ratings are very high, r= .864, p&lt; .001.</p>
 instead of a linear relationship, which for instance can be seen in this
 visualisation of the marginal effects of a corresponding mixed linear
 model.</p>
-<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-3-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-3-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>This confused us a lot. To investigate what is going one we have plotted
 individual loess smoothing lines because we thought maybe we are
 observing something like the Simpson’s paradox. Due to the fact that per
@@ -167,10 +167,10 @@ and difficult to interpret.</p>
 seems to be asymmetric spread. For instance, when we look up the
 normative ratings for any pairing that received the lowest expectancy
 rating possible (-100) and colour those to show the spread,</p>
-<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-4-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-4-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>we see that there is less (rightward) spread than when we do the same
 thing for any pairing that received the highest expectancy rating (100).</p>
-<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-5-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-5-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>While the mean spread from -100 toward the right is 50.59, the spread
 from 100 towards the left is 73.97, which are significantly different, p
 = .001. This raises the possibility that averaging introduces and
@@ -238,7 +238,7 @@ judgements as a quadratic logistic model.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_smooth</span>(colour <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;blue&#39;</span>) <span style="color:#f92672">+</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_smooth</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> s_trueObj_val), colour <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;red&#39;</span>) <span style="color:#f92672">+</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Remembered (simulated)&#34;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Simulated ratings&#34;</span>, title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Result of simulation&#39;</span>)
-</span></span></code></pre></div><p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-14-1.png" alt=""><!-- --></p>
+</span></span></code></pre></div><p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-14-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>This shows that true quadratic relationship (blue loess line) can appear
 as straight line (red loess line) when averaged. Playing around with
 parameters of the regression and the SD scale allows one to easily
@@ -268,9 +268,9 @@ significant difference, p &lt; .001.</p>
 asymmetry. This can be shown with this simulation. The only caveat that
 remains is that the empirical relationship between the the averaged
 post-experimental ratings and their SD</p>
-<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-17-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-17-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>is different from the simulated ones as can be seen below.</p>
-<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-18-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-18-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>However, we believe this is just a matter of findings the right
 parameters and is not as important.</p>
 

@@ -207,9 +207,9 @@ subjects and objects. For slope 1 its 27.508 % and for slope 2 50.297 %.
 This shows an extreme asymmetry that can be traced down to the
 distribution of the p-values of the shuffled original data.</p>
 <p>While the p-value for slope 1 is nicely uniform,</p>
-<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot1-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot1-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>the p-values for slope 2 show extreme pikes at 0 and 1.</p>
-<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot2-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot2-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>This is not due to an error in the code but due to the fact that the
 x-values are always the same with this shuffling method. When I randomly
 generated x-values like in the quadratic simulation below, we get the
@@ -248,9 +248,9 @@ corrected for multiple comparison.</p>
 <h2 id="power-curves-for-individual-slopes">Power curves for individual slopes</h2>
 <p>The FPR for generated data analysed with option 2 are 0.25073 and
 0.26067.</p>
-<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot3-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot3-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>In the following are the corrected slopes:</p>
-<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot4-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot4-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>At this point we can also look at the distribution of p-values for those
 simulated x-values.</p>
 <p>Also, just as a quick side note. When the data is generated instead of
@@ -260,7 +260,7 @@ distribution.</p>
 <p>Now, we can examine how this correction procedure affects the abilitiy
 to detect a U-shape using both methods implemeneted as frequentist
 models.</p>
-<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot7-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot7-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>As can be seen above, option 2 fares much better than option 1 even
 after quite rigorous correction of multiple comparison.</p>
 <p>One possible reason that option 1 fares poorly is that the estimation of
@@ -318,7 +318,7 @@ $BF_{10} &gt; 6$ without any form of correcting for the fact that we ran
 multiple tests on the same data. This is based on 100,000 simulations.</p>
 <p>Now we can examine the ‘power’ curve for our Bayesian model as function
 of using different $BF_{10}$ criteria.</p>
-<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/combine_plots-1.png" alt=""><!-- --></p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/combine_plots-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <h1 id="conclusion-1">Conclusion</h1>
 <p>The frequentist simulation showed without doubt that option 2 is better
 way of analysing the data. However, it also showed that testing multiple
