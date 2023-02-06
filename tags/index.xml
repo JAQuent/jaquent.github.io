@@ -1,189 +1,99 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Jane - A super concise theme for Hugo</title>
-    <link>https://jaquent.github.io/tags/</link>
-    <description>Recent content in Tags on Jane - A super concise theme for Hugo</description>
+    <title>Tags on Jörn Alexander Quent&#39;s notebook</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 15 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Tue, 20 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Contribute</title>
-      <link>https://jaquent.github.io/tags/contribute/</link>
-      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      <title>JSON</title>
+      <link>/tags/json/</link>
+      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/contribute/</guid>
+      <guid>/tags/json/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>go</title>
-      <link>https://jaquent.github.io/tags/go/</link>
-      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      <title>unity</title>
+      <link>/tags/unity/</link>
+      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/go/</guid>
+      <guid>/tags/unity/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>golang</title>
-      <link>https://jaquent.github.io/tags/golang/</link>
-      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      <title>unity3d</title>
+      <link>/tags/unity3d/</link>
+      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/golang/</guid>
+      <guid>/tags/unity3d/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>hugo</title>
-      <link>https://jaquent.github.io/tags/hugo/</link>
-      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+      <title>matlab</title>
+      <link>/tags/matlab/</link>
+      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/hugo/</guid>
+      <guid>/tags/matlab/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>plot</title>
-      <link>https://jaquent.github.io/tags/plot/</link>
-      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      <title>textures</title>
+      <link>/tags/textures/</link>
+      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/plot/</guid>
+      <guid>/tags/textures/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>R Markdown</title>
-      <link>https://jaquent.github.io/tags/r-markdown/</link>
-      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      <title>Bayesian Stats</title>
+      <link>/tags/bayesian-stats/</link>
+      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/r-markdown/</guid>
+      <guid>/tags/bayesian-stats/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>regression</title>
-      <link>https://jaquent.github.io/tags/regression/</link>
-      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      <title>U-shape</title>
+      <link>/tags/u-shape/</link>
+      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/regression/</guid>
+      <guid>/tags/u-shape/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>math</title>
-      <link>https://jaquent.github.io/tags/math/</link>
-      <pubDate>Mon, 04 Mar 2019 16:01:23 +0800</pubDate>
+      <title>schemaVR</title>
+      <link>/tags/schemavr/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/math/</guid>
+      <guid>/tags/schemavr/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>preview</title>
-      <link>https://jaquent.github.io/tags/preview/</link>
-      <pubDate>Mon, 04 Mar 2019 16:01:23 +0800</pubDate>
+      <title>logistic regression</title>
+      <link>/tags/logistic-regression/</link>
+      <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/preview/</guid>
+      <guid>/tags/logistic-regression/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>tag-6</title>
-      <link>https://jaquent.github.io/tags/tag-6/</link>
-      <pubDate>Mon, 04 Mar 2019 16:01:23 +0800</pubDate>
+      <title>Sequential design</title>
+      <link>/tags/sequential-design/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/tags/tag-6/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>shortcodes</title>
-      <link>https://jaquent.github.io/tags/shortcodes/</link>
-      <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/shortcodes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>image</title>
-      <link>https://jaquent.github.io/tags/image/</link>
-      <pubDate>Sat, 03 Mar 2018 16:01:23 +0800</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/image/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tag-7</title>
-      <link>https://jaquent.github.io/tags/tag-7/</link>
-      <pubDate>Sat, 03 Mar 2018 16:01:23 +0800</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/tag-7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>footnote</title>
-      <link>https://jaquent.github.io/tags/footnote/</link>
-      <pubDate>Thu, 01 Mar 2018 16:01:23 +0800</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/footnote/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>markdown</title>
-      <link>https://jaquent.github.io/tags/markdown/</link>
-      <pubDate>Thu, 01 Mar 2018 16:01:23 +0800</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tag-11</title>
-      <link>https://jaquent.github.io/tags/tag-11/</link>
-      <pubDate>Thu, 01 Mar 2018 16:01:23 +0800</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/tag-11/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>English</title>
-      <link>https://jaquent.github.io/tags/english/</link>
-      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/english/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tag-2</title>
-      <link>https://jaquent.github.io/tags/tag-2/</link>
-      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/tag-2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>development</title>
-      <link>https://jaquent.github.io/tags/development/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/development/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>templates</title>
-      <link>https://jaquent.github.io/tags/templates/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/templates/</guid>
+      <guid>/tags/sequential-design/</guid>
       <description></description>
     </item>
     
