@@ -1,99 +1,108 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Jörn Alexander Quent&#39;s notebook</title>
-    <link>/tags/</link>
-    <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
+    <title>Tags on Hugo Bootstrap v4 Blog</title>
+    <link>https://example.org/tags/</link>
+    <description>Recent content in Tags on Hugo Bootstrap v4 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>JSON</title>
-      <link>/tags/json/</link>
-      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
+      <title>tag1</title>
+      <link>https://example.org/tags/tag1/</link>
+      <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>/tags/json/</guid>
+      <guid>https://example.org/tags/tag1/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>unity</title>
-      <link>/tags/unity/</link>
-      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
+      <title>tag2</title>
+      <link>https://example.org/tags/tag2/</link>
+      <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>/tags/unity/</guid>
+      <guid>https://example.org/tags/tag2/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>unity3d</title>
-      <link>/tags/unity3d/</link>
-      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
+      <title>plot</title>
+      <link>https://example.org/tags/plot/</link>
+      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
       
-      <guid>/tags/unity3d/</guid>
+      <guid>https://example.org/tags/plot/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>matlab</title>
-      <link>/tags/matlab/</link>
-      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
+      <title>R Markdown</title>
+      <link>https://example.org/tags/r-markdown/</link>
+      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
       
-      <guid>/tags/matlab/</guid>
+      <guid>https://example.org/tags/r-markdown/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>textures</title>
-      <link>/tags/textures/</link>
-      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
+      <title>regression</title>
+      <link>https://example.org/tags/regression/</link>
+      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
       
-      <guid>/tags/textures/</guid>
+      <guid>https://example.org/tags/regression/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Bayesian Stats</title>
-      <link>/tags/bayesian-stats/</link>
-      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
+      <title>development</title>
+      <link>https://example.org/tags/development/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/tags/bayesian-stats/</guid>
+      <guid>https://example.org/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>U-shape</title>
-      <link>/tags/u-shape/</link>
-      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
+      <title>go</title>
+      <link>https://example.org/tags/go/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/tags/u-shape/</guid>
+      <guid>https://example.org/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>schemaVR</title>
-      <link>/tags/schemavr/</link>
-      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
+      <title>golang</title>
+      <link>https://example.org/tags/golang/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/tags/schemavr/</guid>
+      <guid>https://example.org/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>logistic regression</title>
-      <link>/tags/logistic-regression/</link>
-      <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
+      <title>hugo</title>
+      <link>https://example.org/tags/hugo/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/tags/logistic-regression/</guid>
+      <guid>https://example.org/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Sequential design</title>
-      <link>/tags/sequential-design/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      <title>templates</title>
+      <link>https://example.org/tags/templates/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/tags/sequential-design/</guid>
+      <guid>https://example.org/tags/templates/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>themes</title>
+      <link>https://example.org/tags/themes/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.org/tags/themes/</guid>
       <description></description>
     </item>
     

@@ -2,81 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/2014/09/creating-a-new-theme/</loc>
+    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/categories/general/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/2014/03/migrate-to-hugo-from-jekyll/</loc>
+    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/how-to-change-uxf-s-start-up-menu-using-a-json-input-file/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/categories/</loc>
+    <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/json/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/categories/category/</loc>
+    <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/</loc>
+    <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/posts/</loc>
+    <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/tag1/</loc>
+    <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/unity/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/tag2/</loc>
+    <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/unity3d/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/</loc>
+    <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/how-you-can-easily-load-data-into-unity3d-using-a-json-file/</loc>
-    <lastmod>2022-05-17T00:00:00+00:00</lastmod>
+    <loc>https://example.org/2023/02/test/</loc>
+    <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/matlab/</loc>
-    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
+    <loc>https://example.org/2020/12/hello-r-markdown/</loc>
+    <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>/post/2022-03-21-matlab-function-to-create-stacked-texture-maps-for-unity/</loc>
-    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/plot/</loc>
+    <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>/tags/textures/</loc>
-    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
+    <loc>https://example.org/categories/r/</loc>
+    <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>/tags/bayesian-stats/</loc>
-    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/r-markdown/</loc>
+    <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>/post/finding-a-u-shape-with-bayesian-interrupted-regression/</loc>
-    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/regression/</loc>
+    <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>/tags/u-shape/</loc>
-    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+    <loc>https://example.org/2014/04/hugo-template-primer/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</loc>
-    <lastmod>2021-02-12T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/development/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/categories/experiments/</loc>
-    <lastmod>2021-02-12T00:00:00+00:00</lastmod>
+    <loc>https://example.org/categories/development/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/schemavr/</loc>
-    <lastmod>2021-02-12T00:00:00+00:00</lastmod>
+    <loc>https://example.org/2014/04/getting-started-with-hugo/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/logistic-regression/</loc>
-    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/go/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/the-priors-that-i-use-for-logistic-regression-now/</loc>
-    <lastmod>2021-01-19T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/golang/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/bayesian-sequential-designs-are-superior/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+    <loc>https://example.org/categories/golang/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/sequential-design/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/hugo/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</loc>
-    <lastmod>2020-07-16T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/templates/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/analysing-normative-data/</loc>
-    <lastmod>2018-01-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/about/</loc>
+    <loc>https://example.org/tags/themes/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
 </urlset>
