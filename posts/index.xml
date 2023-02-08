@@ -54,6 +54,24 @@ Luckily, I found this obscure shader on Unity&amp;rsquo;s GitHub page, which is 
     </item>
     
     <item>
+      <title>The priors that I use for logistic regression now</title>
+      <link>https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/</link>
+      <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/</guid>
+      <description>Problem In my power simulation of the U-shape experiment, I noticed that the suggested priors (click here) actually do not work very well for Bayes Factor (BF) analysis as they are too flat and hence BF are too conservative. That is because uniform or very flat priors lead to less evidence in favour of the alternative hypothesis.</description>
+    </item>
+    
+    <item>
+      <title>Bayesian sequential designs are superior</title>
+      <link>https://jaquent.github.io/2020/07/bayesian-sequential-designs-are-superior/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2020/07/bayesian-sequential-designs-are-superior/</guid>
+      <description>This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power. The slides of presentation can be found in my GitHub repository. This repository also includes the data and the scripts that were used to run the simulations and to create the figures.</description>
+    </item>
+    
+    <item>
       <title>Comparing different methods to calculate Bayes factors for a simple model</title>
       <link>https://jaquent.github.io/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</link>
       <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
