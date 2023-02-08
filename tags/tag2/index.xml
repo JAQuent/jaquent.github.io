@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tag2 on Hugo Bootstrap v4 Blog</title>
-    <link>https://example.org/tags/tag2/</link>
+    <link>https://jaquent.github.io/tags/tag2/</link>
     <description>Recent content in tag2 on Hugo Bootstrap v4 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Test</title>
-      <link>https://example.org/2023/02/test/</link>
+      <link>https://jaquent.github.io/2023/02/test/</link>
       <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/2023/02/test/</guid>
+      <guid>https://jaquent.github.io/2023/02/test/</guid>
       <description>$ H_0$
 $$ H_0 $$</description>
     </item>

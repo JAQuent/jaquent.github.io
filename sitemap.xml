@@ -2,79 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://example.org/2014/09/creating-a-new-theme/</loc>
+    <loc>https://jaquent.github.io/2014/09/creating-a-new-theme/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2014/03/migrate-to-hugo-from-jekyll/</loc>
+    <loc>https://jaquent.github.io/2014/03/migrate-to-hugo-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/</loc>
+    <loc>https://jaquent.github.io/categories/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/category/</loc>
+    <loc>https://jaquent.github.io/categories/category/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/</loc>
+    <loc>https://jaquent.github.io/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/posts/</loc>
+    <loc>https://jaquent.github.io/posts/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/tag1/</loc>
+    <loc>https://jaquent.github.io/tags/tag1/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/tag2/</loc>
+    <loc>https://jaquent.github.io/tags/tag2/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/</loc>
+    <loc>https://jaquent.github.io/tags/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2023/02/test/</loc>
+    <loc>https://jaquent.github.io/2023/02/test/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2020/12/hello-r-markdown/</loc>
+    <loc>https://jaquent.github.io/2020/12/hello-r-markdown/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/plot/</loc>
+    <loc>https://jaquent.github.io/tags/plot/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/r/</loc>
+    <loc>https://jaquent.github.io/categories/r/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/r-markdown/</loc>
+    <loc>https://jaquent.github.io/tags/r-markdown/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/regression/</loc>
+    <loc>https://jaquent.github.io/tags/regression/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>https://example.org/2014/04/hugo-template-primer/</loc>
+    <loc>https://jaquent.github.io/2014/04/hugo-template-primer/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/development/</loc>
+    <loc>https://jaquent.github.io/tags/development/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/development/</loc>
+    <loc>https://jaquent.github.io/categories/development/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2014/04/getting-started-with-hugo/</loc>
+    <loc>https://jaquent.github.io/2014/04/getting-started-with-hugo/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/go/</loc>
+    <loc>https://jaquent.github.io/tags/go/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/golang/</loc>
+    <loc>https://jaquent.github.io/tags/golang/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/golang/</loc>
+    <loc>https://jaquent.github.io/categories/golang/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/hugo/</loc>
+    <loc>https://jaquent.github.io/tags/hugo/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/templates/</loc>
+    <loc>https://jaquent.github.io/tags/templates/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/themes/</loc>
+    <loc>https://jaquent.github.io/tags/themes/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
 </urlset>
