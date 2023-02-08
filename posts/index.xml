@@ -6,75 +6,69 @@
     <description>Recent content in Posts on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Creating a New Theme</title>
-      <link>https://jaquent.github.io/2014/09/creating-a-new-theme/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <title>How to change UXF&#39;s start up menu using a .json input file</title>
+      <link>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</link>
+      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2014/09/creating-a-new-theme/</guid>
-      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme.</description>
+      <guid>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</guid>
+      <description>In my last post a while back, I showed how to load a .json file in to Unity3D without using UXF, which if you can do this, is still the easiest way for experiments. One of the problems with UXF however is that you cannot access the .json file before starting UXF&amp;rsquo;s session, which is exactly the problem that I ran into here.</description>
     </item>
     
     <item>
-      <title>Migrate to Hugo from Jekyll</title>
-      <link>https://jaquent.github.io/2014/03/migrate-to-hugo-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      <title>How you can easily load data into Unity3D using a .JSON file</title>
+      <link>https://jaquent.github.io/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</link>
+      <pubDate>Tue, 17 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2014/03/migrate-to-hugo-from-jekyll/</guid>
-      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png should become</description>
+      <guid>https://jaquent.github.io/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</guid>
+      <description>In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp;amp; for the most part simpler ways if you use UXF - Unity Experiment Framework, which provide a way to parse on data via .json out of the box.</description>
     </item>
     
     <item>
-      <title>Test</title>
-      <link>https://jaquent.github.io/2023/02/test/</link>
-      <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
+      <title>Matlab function to create stacked texture maps for Unity</title>
+      <link>https://jaquent.github.io/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</link>
+      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2023/02/test/</guid>
-      <description>$ H_0$
-$$ H_0 $$</description>
+      <guid>https://jaquent.github.io/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</guid>
+      <description>I&amp;rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
+Luckily, I found this obscure shader on Unity&amp;rsquo;s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.</description>
     </item>
     
     <item>
-      <title>Test 2</title>
-      <link>https://jaquent.github.io/2023/02/test-2/</link>
-      <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
+      <title>Finding a U-shape with Bayesian interrupted regression</title>
+      <link>https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
+      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2023/02/test-2/</guid>
-      <description></description>
+      <guid>https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</guid>
+      <description>The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape.</description>
     </item>
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>https://jaquent.github.io/2020/12/hello-r-markdown/</link>
-      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      <title>A U-shape that appears as a linear correlation when averaged</title>
+      <link>https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2020/12/hello-r-markdown/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.</description>
+      <guid>https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</guid>
+      <description>The problem While analysing the data from our U-shape experiments (see pre-registration for context: https://osf.io/kcr2q), we ran into a peculiar problem. As expected, we did find that memory performance can be described as a U-shape function of how expected a certain object is in certain location. However, we also predicted that the memory advantage for highly incongruent item/locations pairings as well as for highly congruent pairings are driven by different processes.</description>
     </item>
     
     <item>
-      <title>(Hu)go Template Primer</title>
-      <link>https://jaquent.github.io/2014/04/hugo-template-primer/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Comparing different methods to calculate Bayes factors for a simple model</title>
+      <link>https://jaquent.github.io/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</link>
+      <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2014/04/hugo-template-primer/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.</description>
+      <guid>https://jaquent.github.io/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</guid>
+      <description>Introduction Comparing the four BF methods Evidence for null hypothesis: brms vs. ttestBF() How much more conservative is the bmrs approach? Directed vs. non-directed hypothesis Conclusion Introduction In this post, I’d like to examine how different ways to calcualte Bayes factors (BF) compare with each other for a simple model.</description>
     </item>
     
     <item>
-      <title>Getting Started with Hugo</title>
-      <link>https://jaquent.github.io/2014/04/getting-started-with-hugo/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Analysing normative data</title>
+      <link>https://jaquent.github.io/2018/01/analysing-normative-data/</link>
+      <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2014/04/getting-started-with-hugo/</guid>
-      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.</description>
+      <guid>https://jaquent.github.io/2018/01/analysing-normative-data/</guid>
+      <description>Introduction In order to be able to present object at locations with a range of expectancy values, which is crucial to show that this has U-shaped relationship, I asked six member of my research group. to rate all combinations of objects and location that exist in the virtual environment for the schemaVR task.</description>
     </item>
     
   </channel>

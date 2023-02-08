@@ -6,40 +6,22 @@
     <description>Recent content in Categories on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>category</title>
-      <link>https://jaquent.github.io/categories/category/</link>
-      <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
+      <title>general</title>
+      <link>https://jaquent.github.io/categories/general/</link>
+      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/categories/category/</guid>
+      <guid>https://jaquent.github.io/categories/general/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>R</title>
-      <link>https://jaquent.github.io/categories/r/</link>
-      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      <title>experiments</title>
+      <link>https://jaquent.github.io/categories/experiments/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/categories/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Development</title>
-      <link>https://jaquent.github.io/categories/development/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/categories/development/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>golang</title>
-      <link>https://jaquent.github.io/categories/golang/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/categories/golang/</guid>
+      <guid>https://jaquent.github.io/categories/experiments/</guid>
       <description></description>
     </item>
     
