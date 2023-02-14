@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<meta property="og:title" content="Understanding the basics of the general linear model (GLM) in the context of fMRI" />
+<meta property="og:description" content="A short post dedicated to understand the idea behind general linear models for functional MRI analysis" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/" />
+<meta property="article:published_time" content="2023-02-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-14T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Understanding the basics of the general linear model (GLM) in the context of fMRI"/>
+<meta name="twitter:description" content="A short post dedicated to understand the idea behind general linear models for functional MRI analysis"/>
+<meta name="generator" content="Hugo 0.110.0">
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Understanding the basics of the general linear model (GLM) in the context of fMRI",
+  "url": "https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/",
+  "wordCount": "5240",
+  "datePublished": "2023-02-14T00:00:00+00:00",
+  "dateModified": "2023-02-14T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jörn Alexander Quent"
+  },
+  "keywords": "experiments, GLM, stats, fMRI",
+  "description": "A short post dedicated to understand the idea behind general linear models for functional MRI analysis"
+}
+</script>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">
+
+    <title>Understanding the basics of the general linear model (GLM) in the context of fMRI | Jörn Alexander Quent&#39;s notebook</title>
+
+    
+    <!-- combined, minified CSS -->
+    
+    <link href="https://jaquent.github.io/css/style.c6ba80bc50669557645abe05f86b73cc5af84408ed20f1551a267bc19ece8228.css" rel="stylesheet" integrity="sha256-xrqAvFBmlVdkWr4F&#43;GtzzFr4RAjtIPFVGiZ7wZ7Ogig=" crossorigin="anonymous">
+    
+
+    <!-- minified Font Awesome for SVG icons -->
+    
+    <script defer src="https://jaquent.github.io/js/fontawesome.min.f5072c55a0721857184db93a50561d7dc13975b4de2e19db7f81eb5f3fa57270.js" integrity="sha256-9QcsVaByGFcYTbk6UFYdfcE5dbTeLhnbf4HrXz&#43;lcnA=" crossorigin="anonymous"></script>
+
+    <!-- RSS 2.0 feed -->
+    
+
+    
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
+  </head>
+
+  <body>
+
+    
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="https://jaquent.github.io/">Home</a>
+          
+          <a class="nav-link" href="/about/" title="">About</a>
+          
+          
+          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
+          
+        </nav>
+      </div>
+    </div>
+    
+
+    
+    
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title" dir="auto"><a href="https://jaquent.github.io/" rel="home">Jörn Alexander Quent's notebook</a></h1>
+        <p class="lead blog-description" dir="auto">where I share semi-interesting stuff from my work</p>
+      </div>
+    </header>
+    
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></h2>
+    <p class="blog-post-meta">
+<time datetime="2023-02-14T00:00:00Z">Tue Feb 14, 2023</time>
+ in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/glm/" rel="tag">GLM</a>, <a href="/tags/stats/" rel="tag">stats</a>, <a href="/tags/fmri/" rel="tag">fMRI</a>
+
+</p>
+  </header>
+  <ul>
+<li><a href="#prelude" id="toc-prelude">Prelude</a></li>
+<li><a href="#sources-that-i-found-useful"
+id="toc-sources-that-i-found-useful">Sources that I found useful</a></li>
+<li><a href="#general-libraries" id="toc-general-libraries">General
+libraries</a></li>
+<li><a href="#simple-linear-regression"
+id="toc-simple-linear-regression">Simple linear regression</a></li>
+<li><a href="#multiple-linear-regression"
+id="toc-multiple-linear-regression">Multiple linear regression</a></li>
+<li><a href="#special-cases" id="toc-special-cases">Special cases</a>
+<ul>
+<li><a href="#one-sample-t-test" id="toc-one-sample-t-test">One sample
+t-test</a></li>
+<li><a href="#two-sample-t-test" id="toc-two-sample-t-test">Two sample
+t-test</a></li>
+<li><a href="#paired-t-test" id="toc-paired-t-test">Paired t-test</a></li>
+<li><a href="#two-way-anova" id="toc-two-way-anova">Two-way ANOVA</a></li>
+</ul>
+</li>
+<li><a href="#does-the-contrast-weighting-matter-for-the-test-statistics"
+id="toc-does-the-contrast-weighting-matter-for-the-test-statistics">Does
+the contrast weighting matter for the test-statistics?</a></li>
+<li><a href="#covariance-matrix-of-the-residuals"
+id="toc-covariance-matrix-of-the-residuals">Covariance matrix of the
+residuals</a></li>
+<li><a href="#a-example-design-matrix-for-fmri"
+id="toc-a-example-design-matrix-for-fmri">A example design matrix for
+fMRI</a></li>
+<li><a href="#multiple-testing-problem"
+id="toc-multiple-testing-problem">Multiple testing problem</a>
+<ul>
+<li><a href="#calculate-fwe" id="toc-calculate-fwe">Calculate FWE</a></li>
+<li><a href="#fwe-correction" id="toc-fwe-correction">FWE correction</a>
+<ul>
+<li><a href="#random-field-theory" id="toc-random-field-theory">Random field
+theory</a></li>
+<li><a href="#permutation-tests" id="toc-permutation-tests">Permutation
+tests</a></li>
+</ul>
+</li>
+<li><a href="#fdr" id="toc-fdr">FDR</a></li>
+</ul>
+</li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+<li><a href="#glossary" id="toc-glossary">Glossary</a></li>
+</ul>
+<h1 id="prelude">Prelude</h1>
+<p>I was revisiting some of the basics surrounding fMRI especially the GLM
+and contrasts. I’ve tried to find code example and equations but I
+didn’t really find anything. While I found the accessible explanations
+and equations in Poldrack et al. (2011) and more advanced concepts in
+Kutner (2005), I didn’t find code examples. So in the spirit of Heinrich
+von Kleist, who pointed out your understanding will get much better if
+you try to explain things yourself, I am creating minimalist code
+examples myself while showing that those fit the results that I get from
+R’s built-in functions.</p>
+<p>Note I am not expert in this field and I might have gotten some
+terminology or equations wrong. If you find a mistake please find my
+e-mail and tell me about it. Think of this as me sharing my cheat sheet,
+which I would use when ever I have to refresh my knowledge. I am sharing
+this because I thought some one else might get stuck (like me) finding
+or understanding some of the concepts. For details I first recommend
+taking a look at Poldrack’s book (especially the appendix) and then
+Kutner. Generally, the examples used here are only illustrations and
+might not be the best approximations of actual brain data
+(e.g. smoothness etc.).</p>
+<p>Last important note: The contrasts and design matrices are only valid
+for the exact ordering of the data so you can only use those if your
+ordering of the data is the same.</p>
+<h1 id="sources-that-i-found-useful">Sources that I found useful</h1>
+<ul>
+<li>Statistical background:
+<ul>
+<li>Poldrack, R. A., Mumford, J. A., &amp; Nichols, T. E. (2011). Handbook
+of functional MRI data analysis. Cambridge University Press.</li>
+<li>Kutner, M. H. (Ed.). (2005). Applied linear statistical models (5th
+ed). McGraw-Hill Irwin.</li>
+</ul>
+</li>
+<li>For more on models &amp; their design matrices:
+<a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/GLM">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/GLM</a></li>
+<li>For reasoning behind the concept rank:
+<a href="https://www.youtube.com/watch?v=uQhTuRlWMxw&amp;ab_channel=3Blue1Brown">https://www.youtube.com/watch?v=uQhTuRlWMxw&amp;ab_channel=3Blue1Brown</a>
+(because it’s used for F-tests and more)</li>
+<li>For understanding p-values (always good to repeat this):
+<a href="https://correlaid.org/en/blog/understand-p-values/">https://correlaid.org/en/blog/understand-p-values/</a></li>
+</ul>
+<h1 id="general-libraries">General libraries</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Install via devtools:install_github(&#34;JAQuent/assortedRFunctions&#34;, upgrade = &#34;never&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(assortedRFunctions)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(Matrix)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lattice)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(soundgen)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cowplot)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(knitr)
+</span></span></code></pre></div><h1 id="simple-linear-regression">Simple linear regression</h1>
+<p>Starting off with something very easy: simple linear regression as
+viewed through the GLM-framework. I start with generating fake data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Set seed</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">102</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fake data parameters</span>
+</span></span><span style="display:flex;"><span>n     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>beta0 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>beta1 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create fake data</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(n)
+</span></span><span style="display:flex;"><span>Y <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rnorm</span>(n, beta0 <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x, <span style="color:#ae81ff">1</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot data</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(x, Y)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/s_l_r_fake_data-1.png" alt=""><!-- --></p>
+<p>The data is illustrated in a scatter plot. When analysing the data using
+<code>lm()</code> I get the following results</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Analysis using lm()</span>
+</span></span><span style="display:flex;"><span>lm_model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Y <span style="color:#f92672">~</span> x)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(lm_model)
+</span></span></code></pre></div><pre><code>## 
+## Call:
+## lm(formula = Y ~ x)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.49576 -0.61718 -0.08426  0.60519  2.07532 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   1.8667     0.2093   8.918 2.69e-14 ***
+## x             5.1762     0.3560  14.540  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9751 on 98 degrees of freedom
+## Multiple R-squared:  0.6833, Adjusted R-squared:   0.68 
+## F-statistic: 211.4 on 1 and 98 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+<p>which gives me an estimate of the intercept &amp; slope.</p>
+<p>The equation corresponding to the model above can be expressed as</p>
+<p>$$ Y = \beta_{0}+ \beta_{1}x_{1}+\epsilon $$ the model fit to the data
+via <code>lm()</code> estimated as $\beta_0$ = 1.8667 and $\beta_1$ = 5.1762.</p>
+<p>However, the model equation is useful in some ways (e.g. easy to
+understand) it is also highly specific and only pertains to models that
+exactly like this one (where we have an intercept and one slope). When
+conceptualising this in the GLM-framework we can do something much more
+powerful because generally one can also write this model as</p>
+<p>$$ Y = X\beta + \epsilon $$</p>
+<p>which is the a valid description for all the different kinds of models &amp;
+tests that fall under the GLM umbrella. Therefore we can use the same
+notation and tricks to deal with a wide variety of statistical problems.
+All that we have to do to analyse data following this notation is to
+create the design matrix $X$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Calculate the design matrix </span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span>, n), x), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Visualise design matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dispDesignMatrix</span>(X)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span>(main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Simple linear regression design matrix&#39;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/s_l_r_design_matrix-1.png" alt=""><!-- --></p>
+<p>In the simple example above our design matrix has 1s for the intercept
+(i.e. $\beta_0$) and the values of our variable $x$ for the second
+column representing $\beta_1$.</p>
+<p>When we have this, estimating the $\beta$s is very simple, assuming that
+$X^\intercal X$ is invertible (for an inverse of $X^\intercal X$ to
+exists $X$ must have full column rank, see Glossary for explanation or
+the YouTube video that I added), using this equation:</p>
+<p>$$ \hat{\beta} = (X^\intercal X)^{-1} X^\intercal Y$$</p>
+<p>Note that is what we get if we premultiply $Y = X\beta + \epsilon$ by
+$X^\intercal$:</p>
+<p>$$ X^\intercal Y = X^\intercal X\beta$$ which is a neat trick that
+allows us to invert the matrix.</p>
+<p>In R this would look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Estimate betas via Ordinary Least Squares (OLS) estimation</span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> Y
+</span></span></code></pre></div><p>Fortunately, using this equation we get the same values for $\beta_0$ =
+1.8667 and $\beta_0$ = 5.1762.</p>
+<p>Quick side note: <code>solve()</code> can only invert matrices that are square
+(e.g. 3 x 3) directly</p>
+<p>$$ A = \begin{bmatrix} 2 &amp; 5 &amp; 3 \ 4 &amp; 0 &amp; 8 \ 1 &amp; 3 &amp; 0 \end{bmatrix} $$</p>
+<p>in this case</p>
+<p>$$ A^{-1} = solve(A) = (A^\intercal A)^{-1} A^\intercal$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>A          <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">0</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>A_inverse1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(A)
+</span></span><span style="display:flex;"><span>A_inverse2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(A)<span style="color:#f92672">%*%</span> A) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(A)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Note A_inverse1 == A_inverse2 actually returns FALSE but the values are the same, which is due to rounding. </span>
+</span></span></code></pre></div><p>So the trick of transposing and then multiplying the matrix with itself
+is something we have to use because our design matrix $X$ are typically
+not square.</p>
+<p>Moving on, estimates for $Y$ can be calculated like this</p>
+<p>$$ \hat{Y} =  \hat{\beta_{0}} + \hat{\beta_{1}}x_{1}$$</p>
+<p>or in matrix notation</p>
+<p>$$ \hat{Y} = X\beta $$</p>
+<p>In R this works simply by</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>Y_hat <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> B
+</span></span></code></pre></div><p>The residuals can be obtained like this</p>
+<p>$$ e = Y - \hat{Y} $$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>E <span style="color:#f92672">&lt;-</span> Y <span style="color:#f92672">-</span> Y_hat
+</span></span></code></pre></div><p>To calculate the test statistics like $t$ we also need an estimation of
+the variance of the residuals</p>
+<p>$$ \hat{\sigma}^2 =  \frac{e^\intercal e}{N-p} $$ where $N$ is the
+number of rows and $p$ is the number of columns of the design matrix
+$X$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(X)
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(X)
+</span></span><span style="display:flex;"><span>resid_var <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>((<span style="color:#a6e22e">t</span>(E) <span style="color:#f92672">%*%</span> E)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span>p))
+</span></span></code></pre></div><p>In our case $\hat{\sigma}^2$ is 0.9508.</p>
+<p>With the help of contrasts that are row-vectors of length $p$ we can
+test hypotheses as t-tests (or even as F-tests).</p>
+<p>For instance, if we want to test if the intercept ($\beta_0$) is zero
+i.e. $H_o: \beta_0 = 0$, we can use the following contrast</p>
+<p>$$ con_1 = \begin{bmatrix} 1 &amp; 0\end{bmatrix}$$ If we want to test if
+our slope ($\beta_1$) is zero i.e. $H_o: \beta_1 = 0$, we use the
+following contrast</p>
+<p>$$ con_2 = \begin{bmatrix} 0 &amp; 1\end{bmatrix}$$ Both hypotheses can be
+expressed more generally as $H_0: c\beta =0$. In R we simply need to do</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>con1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>con2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><p>The $t$-statistic is then calculated by</p>
+<p>$$  t = \frac{con\hat{\beta}}{\sqrt{con(X^\intercal X)^{-1}con^\intercal \hat{\sigma}^2} }$$</p>
+<p>This looks more scary then it is. The numerator in case for $con_1$ is
+simply our $\beta_0$ estimate.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>numerator <span style="color:#f92672">&lt;-</span> con1 <span style="color:#f92672">%*%</span> B
+</span></span></code></pre></div><p>$c_1\hat{\beta}$ =1.8667. The denominator is the standard error of the
+estimate. Which can be calculated by</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>denominator <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sqrt</span>(con1 <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con1) <span style="color:#f92672">*</span> resid_var)
+</span></span></code></pre></div><p>so $\sqrt{con_1(X^\intercal X)^{-1}con_1^\intercal \hat{\sigma}^2}$ is
+0.2093.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>t1 <span style="color:#f92672">&lt;-</span> numerator<span style="color:#f92672">/</span>denominator
+</span></span></code></pre></div><p>So like above when calculated with <code>lm()</code> $t$ = 8.9182.</p>
+<p>Just to demonstrate, we also get the correct values for our second
+contrast:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>numerator   <span style="color:#f92672">&lt;-</span> con2 <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>denominator <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sqrt</span>(con2 <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con2) <span style="color:#f92672">*</span> resid_var)
+</span></span><span style="display:flex;"><span>t2          <span style="color:#f92672">&lt;-</span> numerator<span style="color:#f92672">/</span>denominator
+</span></span></code></pre></div><p>$t$ = 14.54.</p>
+<h1 id="multiple-linear-regression">Multiple linear regression</h1>
+<p>Within the GLM-framework, we can also run multiple regression models and
+most importantly F-tests.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Set seed</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">102</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fake data parameters</span>
+</span></span><span style="display:flex;"><span>n     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>beta0 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>beta1 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>beta2 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.4</span>
+</span></span><span style="display:flex;"><span>beta3 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create fake data</span>
+</span></span><span style="display:flex;"><span>x1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(n)
+</span></span><span style="display:flex;"><span>x2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(n)
+</span></span><span style="display:flex;"><span>x3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(n)
+</span></span><span style="display:flex;"><span>Y  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rnorm</span>(n, beta0 <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x1 <span style="color:#f92672">+</span> beta2<span style="color:#f92672">*</span>x2 <span style="color:#f92672">+</span> beta3<span style="color:#f92672">*</span>x3, <span style="color:#ae81ff">1</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Analysis using lm()</span>
+</span></span><span style="display:flex;"><span>lm_model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Y <span style="color:#f92672">~</span> x1 <span style="color:#f92672">+</span> x2 <span style="color:#f92672">+</span> x3)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(lm_model)
+</span></span></code></pre></div><pre><code>## 
+## Call:
+## lm(formula = Y ~ x1 + x2 + x3)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.2840 -0.6754 -0.0352  0.7310  2.2748 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.2686     0.3515   6.454 4.43e-09 ***
+## x1            4.6536     0.3740  12.442  &lt; 2e-16 ***
+## x2            0.2280     0.3633   0.628    0.532    
+## x3           -4.0781     0.3800 -10.732  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.02 on 96 degrees of freedom
+## Multiple R-squared:  0.741,  Adjusted R-squared:  0.7329 
+## F-statistic: 91.55 on 3 and 96 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Calculate the design matrix </span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span>, n), x1, x2, x3), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Visualise design matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dispDesignMatrix</span>(X)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span>(main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Multiple linear regression design matrix&#39;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/m_l_r_design_matrix-1.png" alt=""><!-- --></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Estimate betas via Ordinary Least Squares (OLS) estimation</span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> Y
+</span></span></code></pre></div><p>Again we get the same values as with <code>lm()</code> 2.2686, 4.6536, 0.228,
+-4.0781.</p>
+<p>If we want to test $H_0: \beta_1 = \beta_2 = \beta_3 = 0$ or in other
+words if any of the $\beta$s that are not the intercept are different
+from zero, then we can use the following contrast:</p>
+<p>$$ con = \begin{bmatrix} 0 &amp; 1 &amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 1 &amp; 0 \ 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix} $$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Quick &amp; dirty way to create the contrast is to remove the first row of an identity matrix</span>
+</span></span><span style="display:flex;"><span>con <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diag</span>(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>con <span style="color:#f92672">&lt;-</span> con[<span style="color:#ae81ff">-1</span>,]
+</span></span></code></pre></div><p>The test statistics is then calculated by</p>
+<p>$$ F = (con\hat{\beta})^\intercal [rcon(\hat{Cov}(\hat{\beta}))con^\intercal]^{-1}(con\hat{\beta})$$</p>
+<p>where $r$ is the rank of the contrast matrix/vector $con$,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>r <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">rankMatrix</span>(con))
+</span></span></code></pre></div><p>which in our case is 3 as there are 3 independent columns in $con$ and</p>
+<p>$$ \hat{Cov}(\hat{\beta}) = (X^\intercal X)^{-1}\hat{\sigma}^2 $$</p>
+<p>Now we can calculate our F-value by hand:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Calculate residual variance</span>
+</span></span><span style="display:flex;"><span>Y_hat <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">&lt;-</span> Y <span style="color:#f92672">-</span> Y_hat
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(X)
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(X)
+</span></span><span style="display:flex;"><span>resid_var <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>((<span style="color:#a6e22e">t</span>(E) <span style="color:#f92672">%*%</span> E)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span>p))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Covariance of beta</span>
+</span></span><span style="display:flex;"><span>Cov_hat_beta <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> X) <span style="color:#f92672">*</span> resid_var
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate F- test</span>
+</span></span><span style="display:flex;"><span>F_stat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(con <span style="color:#f92672">%*%</span> B) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(r <span style="color:#f92672">*</span> con <span style="color:#f92672">%*%</span> Cov_hat_beta <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con)) <span style="color:#f92672">%*%</span> (con <span style="color:#f92672">%*%</span> B)
+</span></span></code></pre></div><p>In this case, $F$ = 91.5454, which can matches the one that <code>lm()</code> spits
+out.</p>
+<h1 id="special-cases">Special cases</h1>
+<p>The GLM is also powerful not only for the these regression models but
+also for a number of special cases that we often use for imaging.</p>
+<h2 id="one-sample-t-test">One sample t-test</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Fake data parameters</span>
+</span></span><span style="display:flex;"><span>n     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>beta0 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>beta1 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create fake data</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(n)
+</span></span><span style="display:flex;"><span>Y <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rnorm</span>(n, beta0 <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x, <span style="color:#ae81ff">1</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create design matrix</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span>, n)), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Estimate betas</span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> Y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate residual variance</span>
+</span></span><span style="display:flex;"><span>Y_hat <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">&lt;-</span> Y <span style="color:#f92672">-</span> Y_hat
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(X)
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(X)
+</span></span><span style="display:flex;"><span>resid_var <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>((<span style="color:#a6e22e">t</span>(E) <span style="color:#f92672">%*%</span> E)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span>p))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Contrast</span>
+</span></span><span style="display:flex;"><span>con <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate the t value</span>
+</span></span><span style="display:flex;"><span>numerator   <span style="color:#f92672">&lt;-</span> con <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>denominator <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sqrt</span>(con <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con) <span style="color:#f92672">*</span> resid_var)
+</span></span><span style="display:flex;"><span>t_value     <span style="color:#f92672">&lt;-</span> numerator<span style="color:#f92672">/</span>denominator
+</span></span></code></pre></div><p>In this model $\beta_1 = mean(Y)$ = 4.4319552. As calculated when we use
+<code>t.test()</code>, the $t$-value is 26.2878. $H_0: \beta_1 = 0$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">t.test</span>(Y)
+</span></span></code></pre></div><pre><code>## 
+##  One Sample t-test
+## 
+## data:  Y
+## t = 26.288, df = 99, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  4.097429 4.766481
+## sample estimates:
+## mean of x 
+##  4.431955
+</code></pre>
+<h2 id="two-sample-t-test">Two sample t-test</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generate new data</span>
+</span></span><span style="display:flex;"><span>y1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>y2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0.3</span>)
+</span></span><span style="display:flex;"><span>Y  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(y1, y2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create design matrix</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>), each <span style="color:#f92672">=</span> n), <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>), each <span style="color:#f92672">=</span> n)), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display design matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dispDesignMatrix</span>(X)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span>(main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Two sample t-test design matrix&#39;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/two_sample_t_test1-1.png" alt=""><!-- --></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Estimate betas</span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> Y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate residual variance</span>
+</span></span><span style="display:flex;"><span>Y_hat <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">&lt;-</span> Y <span style="color:#f92672">-</span> Y_hat
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(X)
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(X)
+</span></span><span style="display:flex;"><span>resid_var <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>((<span style="color:#a6e22e">t</span>(E) <span style="color:#f92672">%*%</span> E)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span>p))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Contrast</span>
+</span></span><span style="display:flex;"><span>con <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate the t value</span>
+</span></span><span style="display:flex;"><span>numerator   <span style="color:#f92672">&lt;-</span> con <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>denominator <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sqrt</span>(con <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con) <span style="color:#f92672">*</span> resid_var)
+</span></span><span style="display:flex;"><span>t_value     <span style="color:#f92672">&lt;-</span> numerator<span style="color:#f92672">/</span>denominator
+</span></span></code></pre></div><p>In this model $\beta_1 = mean(y_1)$ and $\beta_2 = mean(y_2)$ which are
+-0.0807, 0.2204 (the group averages). As calculated with <code>t.test()</code>, the
+$t$-value is -2.3043. $H_0: \beta_1 - \beta_2 = 0$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">t.test</span>(y1, y2, var.equal <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><pre><code>## 
+##  Two Sample t-test
+## 
+## data:  y1 and y2
+## t = -2.3043, df = 198, p-value = 0.02224
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.55875369 -0.04341614
+## sample estimates:
+##   mean of x   mean of y 
+## -0.08068517  0.22039974
+</code></pre>
+<h2 id="paired-t-test">Paired t-test</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Fake data</span>
+</span></span><span style="display:flex;"><span>n  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>y1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>y2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0.3</span>)
+</span></span><span style="display:flex;"><span>Y  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, n <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>Y<span style="color:#a6e22e">[seq</span>(from <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, to <span style="color:#f92672">=</span> n<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>, by <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)] <span style="color:#f92672">&lt;-</span> y1
+</span></span><span style="display:flex;"><span>Y<span style="color:#a6e22e">[seq</span>(from <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, to <span style="color:#f92672">=</span> n<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>, by <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)] <span style="color:#f92672">&lt;-</span> y2
+</span></span><span style="display:flex;"><span>id <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>n, each <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create design matrix</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#ae81ff">0</span>, ncol <span style="color:#f92672">=</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, nrow <span style="color:#f92672">=</span> n<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change first column</span>
+</span></span><span style="display:flex;"><span>X[, <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>), n)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loop through X</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>n){
+</span></span><span style="display:flex;"><span>  X<span style="color:#a6e22e">[which</span>(id <span style="color:#f92672">==</span> i), i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display design matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dispDesignMatrix</span>(X)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span>(main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Paired t-test design matrix&#39;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/paired_t_test1-1.png" alt=""><!-- --></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Estimate betas</span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> Y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate residual variance</span>
+</span></span><span style="display:flex;"><span>Y_hat <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">&lt;-</span> Y <span style="color:#f92672">-</span> Y_hat
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(X)
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(X)
+</span></span><span style="display:flex;"><span>resid_var <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>((<span style="color:#a6e22e">t</span>(E) <span style="color:#f92672">%*%</span> E)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span>p))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Contrast</span>
+</span></span><span style="display:flex;"><span>con <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, n)), ncol <span style="color:#f92672">=</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate the t value</span>
+</span></span><span style="display:flex;"><span>numerator   <span style="color:#f92672">&lt;-</span> con <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>denominator <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sqrt</span>(con <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con) <span style="color:#f92672">*</span> resid_var)
+</span></span><span style="display:flex;"><span>t_value     <span style="color:#f92672">&lt;-</span> numerator<span style="color:#f92672">/</span>denominator
+</span></span></code></pre></div><p>Here the contrast has to be</p>
+<p>$$ con = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0\end{bmatrix}$$ in
+order to test $H_0: \beta_{diff} = 0$. As calculated with <code>t.test()</code>,
+the $t$-value is 0.2388.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">t.test</span>(y1, y2, paired <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><pre><code>## 
+##  Paired t-test
+## 
+## data:  y1 and y2
+## t = 0.2388, df = 19, p-value = 0.8138
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.6600471  0.8300599
+## sample estimates:
+## mean of the differences 
+##              0.08500641
+</code></pre>
+<h2 id="two-way-anova">Two-way ANOVA</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Fake data</span>
+</span></span><span style="display:flex;"><span>n  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>A1B1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n)
+</span></span><span style="display:flex;"><span>A1B2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>A1B3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">-0.3</span>)
+</span></span><span style="display:flex;"><span>A2B1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>A2B2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">-1</span>)
+</span></span><span style="display:flex;"><span>A2B3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>Y    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(A1B1, A1B2, A1B3, A2B1, A2B2, A2B3)
+</span></span><span style="display:flex;"><span>A_factor  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#34;A1&#34;</span>, n<span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>), <span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#34;A2&#34;</span>, n<span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>B_factor  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#34;B1&#34;</span>, n), <span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#34;B2&#34;</span>, n), <span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#34;B3&#34;</span>, n)), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>df        <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Y <span style="color:#f92672">=</span> Y, A_factor <span style="color:#f92672">=</span> A_factor, B_factor <span style="color:#f92672">=</span> B_factor)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create design matrix</span>
+</span></span><span style="display:flex;"><span>params <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#ae81ff">0</span>, ncol <span style="color:#f92672">=</span> params, nrow <span style="color:#f92672">=</span> n<span style="color:#f92672">*</span>params)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change first row to be the beta mean</span>
+</span></span><span style="display:flex;"><span>X[, <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change the second row to be betaA1</span>
+</span></span><span style="display:flex;"><span>X[, <span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(X)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change the third row to be betaB1</span>
+</span></span><span style="display:flex;"><span>X[, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> n), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change the fourth row to be betaB2</span>
+</span></span><span style="display:flex;"><span>X[, <span style="color:#ae81ff">4</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> n), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change the fifth row to be betaA1B1</span>
+</span></span><span style="display:flex;"><span>X[, <span style="color:#ae81ff">5</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> n), <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), each <span style="color:#f92672">=</span> n))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change the sixth row to be betaA1B2</span>
+</span></span><span style="display:flex;"><span>X[, <span style="color:#ae81ff">6</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> n), <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">1</span>), each <span style="color:#f92672">=</span> n))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display design matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dispDesignMatrix</span>(X)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span>(main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2 x 2 Anova design matrix&#39;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/two_way_anova-1.png" alt=""><!-- --></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Estimate betas</span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> Y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate residual variance</span>
+</span></span><span style="display:flex;"><span>Y_hat <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">&lt;-</span> Y <span style="color:#f92672">-</span> Y_hat
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(X)
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(X)
+</span></span><span style="display:flex;"><span>resid_var <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>((<span style="color:#a6e22e">t</span>(E) <span style="color:#f92672">%*%</span> E)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span>p))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Covariance of beta</span>
+</span></span><span style="display:flex;"><span>Cov_hat_beta <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> X) <span style="color:#f92672">*</span> resid_var
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Contrasts &amp; tests</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Con 1: Overall mean </span>
+</span></span><span style="display:flex;"><span>con1    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> ,<span style="color:#ae81ff">0</span> ,<span style="color:#ae81ff">0</span>), nrow <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>r       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">rankMatrix</span>(con1))
+</span></span><span style="display:flex;"><span>F_stat1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(con1 <span style="color:#f92672">%*%</span> B) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(r <span style="color:#f92672">*</span> con1 <span style="color:#f92672">%*%</span> Cov_hat_beta <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con1)) <span style="color:#f92672">%*%</span> (con1 <span style="color:#f92672">%*%</span> B)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Con 2: Main A effect</span>
+</span></span><span style="display:flex;"><span>con2    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> ,<span style="color:#ae81ff">0</span> ,<span style="color:#ae81ff">0</span>), nrow <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>r       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">rankMatrix</span>(con2))
+</span></span><span style="display:flex;"><span>F_stat2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(con2 <span style="color:#f92672">%*%</span> B) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(r <span style="color:#f92672">*</span> con2 <span style="color:#f92672">%*%</span> Cov_hat_beta <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con2)) <span style="color:#f92672">%*%</span> (con2 <span style="color:#f92672">%*%</span> B)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Con 3: Main B effect</span>
+</span></span><span style="display:flex;"><span>con3    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbind</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span> ,<span style="color:#ae81ff">0</span> ,<span style="color:#ae81ff">0</span>), <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>r       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">rankMatrix</span>(con3))
+</span></span><span style="display:flex;"><span>F_stat3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(con3 <span style="color:#f92672">%*%</span> B) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(r <span style="color:#f92672">*</span> con3 <span style="color:#f92672">%*%</span> Cov_hat_beta <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con3)) <span style="color:#f92672">%*%</span> (con3 <span style="color:#f92672">%*%</span> B)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Con 4: A/B interaction effect</span>
+</span></span><span style="display:flex;"><span>con4    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbind</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> ,<span style="color:#ae81ff">1</span> ,<span style="color:#ae81ff">0</span>), <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>r       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">rankMatrix</span>(con4))
+</span></span><span style="display:flex;"><span>F_stat4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(con4 <span style="color:#f92672">%*%</span> B) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(r <span style="color:#f92672">*</span> con4 <span style="color:#f92672">%*%</span> Cov_hat_beta <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con4)) <span style="color:#f92672">%*%</span> (con4 <span style="color:#f92672">%*%</span> B)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Con 5: Overall effect (any group difference)?</span>
+</span></span><span style="display:flex;"><span>con5    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diag</span>(<span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span>con5    <span style="color:#f92672">&lt;-</span> con5[<span style="color:#ae81ff">-1</span>,]
+</span></span><span style="display:flex;"><span>r       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">rankMatrix</span>(con5))
+</span></span><span style="display:flex;"><span>F_stat5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(con5 <span style="color:#f92672">%*%</span> B) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(r <span style="color:#f92672">*</span> con5 <span style="color:#f92672">%*%</span> Cov_hat_beta <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con5)) <span style="color:#f92672">%*%</span> (con5 <span style="color:#f92672">%*%</span> B)
+</span></span></code></pre></div><p>Again, we can compare this to what base R functions estimate:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>res.aov <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aov</span>(Y <span style="color:#f92672">~</span> A_factor  <span style="color:#f92672">*</span> B_factor, data <span style="color:#f92672">=</span> df)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(res.aov)
+</span></span></code></pre></div><pre><code>##                    Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## A_factor            1  188.2  188.22  175.42 &lt;2e-16 ***
+## B_factor            2  161.5   80.77   75.27 &lt;2e-16 ***
+## A_factor:B_factor   2  220.7  110.37  102.86 &lt;2e-16 ***
+## Residuals         114  122.3    1.07                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</code></pre>
+<p>which can fits with our $F$-values that we estimated 175.4229, 75.2738,
+102.8615.</p>
+<h1 id="does-the-contrast-weighting-matter-for-the-test-statistics">Does the contrast weighting matter for the test-statistics?</h1>
+<p>One thing I asked myself when thinking about it, is whether and if not
+why doesn’t it matter how we have weigh our contrast. Often we read that
+the contrast $ con_1 =
+$ gives use the average of the two betas but is this true? Let’s look
+at this for two-sample $t$-test.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generate new data</span>
+</span></span><span style="display:flex;"><span>y1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>y2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(n, <span style="color:#ae81ff">0.3</span>)
+</span></span><span style="display:flex;"><span>Y  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(y1, y2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create design matrix</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>), each <span style="color:#f92672">=</span> n), <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>), each <span style="color:#f92672">=</span> n)), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Estimate betas</span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> Y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate residual variance</span>
+</span></span><span style="display:flex;"><span>Y_hat <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">&lt;-</span> Y <span style="color:#f92672">-</span> Y_hat
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(X)
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(X)
+</span></span><span style="display:flex;"><span>resid_var <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>((<span style="color:#a6e22e">t</span>(E) <span style="color:#f92672">%*%</span> E)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span>p))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Contrast</span>
+</span></span><span style="display:flex;"><span>con1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>con2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.5</span>), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate the t value</span>
+</span></span><span style="display:flex;"><span>numerator1   <span style="color:#f92672">&lt;-</span> con1 <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>denominator1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sqrt</span>(con1 <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con1) <span style="color:#f92672">*</span> resid_var)
+</span></span><span style="display:flex;"><span>t_value1     <span style="color:#f92672">&lt;-</span> numerator1<span style="color:#f92672">/</span>denominator1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate the t value</span>
+</span></span><span style="display:flex;"><span>numerator2   <span style="color:#f92672">&lt;-</span> con2 <span style="color:#f92672">%*%</span> B
+</span></span><span style="display:flex;"><span>denominator2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sqrt</span>(con2 <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X)<span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(con2) <span style="color:#f92672">*</span> resid_var)
+</span></span><span style="display:flex;"><span>t_value2     <span style="color:#f92672">&lt;-</span> numerator2<span style="color:#f92672">/</span>denominator2
+</span></span></code></pre></div><p>when we look at the numerator for $con_1$, which is supposed to
+represent the average of both $\beta$s we see that it is 0.164 but the
+average of $Y$ is only 0.082. So, in fact we get the average of the
+$\beta$s/groups times 2! We only actually the average when we use $
+con_2 =
+$ as a contrast, here the numerator is indeed 0.082. Does this actually
+matter for the test statistic? Well, no because as we scale the
+numerator by two we also scale the denominator by the same amount and it
+cancels each other out. Both contrasts get exactly the same $t$-value of
+0.565176.</p>
+<h1 id="covariance-matrix-of-the-residuals">Covariance matrix of the residuals</h1>
+<p>So, while reading through the Poldrack’s book I kind of stumble over the
+concept of the covariance matrix of the residuals, which this is an
+important concept for time-series and heterogeneous variances but I
+didn’t really understand it when I am honest. So here I am trying to
+explore this:</p>
+<p>The variance-covariance matrix is given by (in Kutner, 2005 this is
+written as $\sigma^2{\epsilon}$ and $MSE$ is used for estimation)</p>
+<p>$$ \hat{Cov}(\hat{\epsilon}) = \sigma^2(I-H) $$</p>
+<p>where $I$ is the identity matrix and $H$ is the so-called hat matrix
+that essentially can be used to transform $Y$ into $\hat{Y}$ directly
+(i.e. $\hat{Y} = HY$).</p>
+<p>$$ H = X(X^\intercal X)^{-1}X^\intercal$$</p>
+<p>Let’s calculate the covariance-variance matrix for our last example (the
+2 x 2 ANOVA)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>H         <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">t</span>(X) <span style="color:#f92672">%*%</span> X) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(X)
+</span></span><span style="display:flex;"><span>I         <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">nrow</span>(H))
+</span></span><span style="display:flex;"><span>resid_cov <span style="color:#f92672">&lt;-</span> resid_var <span style="color:#f92672">*</span> (I <span style="color:#f92672">-</span> H)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display design matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dispDesignMatrix</span>(resid_cov)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span>(main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Variance-covariance matrix for the 2 x 2 ANOVA example&#39;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/calculate_hat_matrix-1.png" alt=""><!-- --></p>
+<p>as when using the formula we can see $\hat{Cov}(\hat{\epsilon})$ is
+indeed a matrix with values close to zero off the diagonals and the a
+constant value on the diagonals. <strong>Important note</strong>: this estimation is
+only based on the design matrix $X$ so it doesn’t represent a feature of
+the data because we can’t really estimate the covariance of the true
+residuals so calculating this for your model will tell you nothing. It
+is simply an important assumption that is made about the data in order
+for everything to check out as intended. I found
+<a href="https://stats.stackexchange.com/questions/467779/covariance-matrix-of-the-residuals-in-the-linear-regression-model">this</a>
+helpful post about it.</p>
+<h1 id="a-example-design-matrix-for-fmri">A example design matrix for fMRI</h1>
+<p>The last thing directly related to the GLM that I wanted to explore is
+what first-level fMRI GLMs typically look like. That is because the
+actual design matrix used when fitting a GLM to fMRI data are the
+regressors (i.e. time points) convolved with the
+<a href="https://en.wikipedia.org/wiki/Haemodynamic_response">HRF</a>. This is
+based on explanations and code from Jeanette Mumford
+(<a href="https://www.youtube.com/watch?v=H1S72z6o3HY">video</a> &amp;
+<a href="https://www.dropbox.com/s/j8t2be1604fnmnv/collinearity_illustration.R?dl=0">code</a>).
+Here I illustrate constructing regressors for an first-level fMRI
+analysis. Note that in principle you want to convolve your events
+(onset + duration) with the HRF at a higher temporal resolution but for
+what ever reason this doesn’t seem to work well with the package that I
+am using. (Update: This is soon to be fixed by the developers.)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Libs</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(fmri)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Input parameters</span>
+</span></span><span style="display:flex;"><span>TR_conv    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span> 
+</span></span><span style="display:flex;"><span>numOfScans <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>numEvents1 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>numEvents2 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>duration1  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">/</span>TR_conv   <span style="color:#75715e"># in scans</span>
+</span></span><span style="display:flex;"><span>duration2  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1.5</span><span style="color:#f92672">/</span>TR_conv <span style="color:#75715e"># in scans</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculated parameters based on input</span>
+</span></span><span style="display:flex;"><span>onsets1   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numOfScans, numEvents1) <span style="color:#75715e"># Onset in scans</span>
+</span></span><span style="display:flex;"><span>onsets2   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numOfScans, numEvents2) <span style="color:#75715e"># Onset in scans</span>
+</span></span><span style="display:flex;"><span>duration1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(duration1, <span style="color:#a6e22e">length</span>(onsets1))
+</span></span><span style="display:flex;"><span>duration2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(duration2, <span style="color:#a6e22e">length</span>(onsets2))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create regressors</span>
+</span></span><span style="display:flex;"><span>regressor1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fmri.stimulus</span>(numOfScans, onsets1, duration1, TR_conv)
+</span></span><span style="display:flex;"><span>regressor2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fmri.stimulus</span>(numOfScans, onsets2, duration2, TR_conv)
+</span></span></code></pre></div><p>The results can be visualised as</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Visualiation libs</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cowplot)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create DFs</span>
+</span></span><span style="display:flex;"><span>df1_events <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(onsets <span style="color:#f92672">=</span> onsets1, duration <span style="color:#f92672">=</span> duration1)
+</span></span><span style="display:flex;"><span>df2_events <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(onsets <span style="color:#f92672">=</span> onsets2, duration <span style="color:#f92672">=</span> duration2)
+</span></span><span style="display:flex;"><span>df1_BOLD   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(scans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(regressor1), Regressor <span style="color:#f92672">=</span> regressor1) 
+</span></span><span style="display:flex;"><span>df2_BOLD   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(scans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(regressor2), Regressor <span style="color:#f92672">=</span> regressor2) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plots</span>
+</span></span><span style="display:flex;"><span>stickPlot1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(df1_events) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_rect</span>(mapping <span style="color:#f92672">=</span> <span style="color:#a6e22e">aes</span>(xmin <span style="color:#f92672">=</span> onsets, xmax <span style="color:#f92672">=</span> onsets <span style="color:#f92672">+</span> duration, ymin <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ymax <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme</span>(axis.ticks.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(), axis.text.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>()) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Scans&#34;</span>) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">length</span>(regressor1)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>stickPlot2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(df2_events) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_rect</span>(mapping <span style="color:#f92672">=</span> <span style="color:#a6e22e">aes</span>(xmin <span style="color:#f92672">=</span> onsets, xmax <span style="color:#f92672">=</span> onsets <span style="color:#f92672">+</span> duration, ymin <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ymax <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme</span>(axis.ticks.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(), axis.text.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>()) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Scans&#34;</span>) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">length</span>(regressor2)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BOLD_plot1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(df1_BOLD, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> scans, y <span style="color:#f92672">=</span> Regressor)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_line</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">length</span>(regressor1)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BOLD_plot2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(df2_BOLD, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> scans, y <span style="color:#f92672">=</span> Regressor)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_line</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">length</span>(regressor2)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Combination</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot_grid</span>(BOLD_plot1, BOLD_plot2, stickPlot1, stickPlot2, align <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;v&#34;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/actual_fMRI_regressor_visualisation-1.png" alt=""><!-- --></p>
+<p>The resulting design matrix as used for fMRI would look like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Create design matrix</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">length</span>(regressor1)), regressor1, regressor2), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display design matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dispDesignMatrix</span>(X)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span>(main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Design matrix based on convolutation with HRF&#39;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/actual_fMRI_design_matrix-1.png" alt=""><!-- --></p>
+<p>This, in other words a simple multiple regression model with continuous
+regressors, is what actually would be used to model the brain responses
+(at least for the first level analysis). Again, this ignores the problem
+of auto-correlation in the time-series and that the assumption about the
+covariance variance matrix of the residuals would not hold without extra
+steps, which are ignored here.</p>
+<h1 id="multiple-testing-problem">Multiple testing problem</h1>
+<p>The last problem I looked is not really GLM specific but important for
+fMRI analyses. When doing mass-univariate statistics on the brain, this
+usually means that we in fact run more than 100,000 individual tests as
+at least one test is run per voxel in the brain image. This is
+illustrated with this example of 2D fake brain image:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Seed</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create smoothed image</span>
+</span></span><span style="display:flex;"><span>numberOfVoxels      <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">316</span><span style="color:#f92672">*</span><span style="color:#ae81ff">316</span>
+</span></span><span style="display:flex;"><span>brainImage          <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rnorm</span>(numberOfVoxels), ncol <span style="color:#f92672">=</span> <span style="color:#a6e22e">sqrt</span>(numberOfVoxels))
+</span></span><span style="display:flex;"><span>brainImage_smoothed <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">gaussianSmooth2D</span>(brainImage, kernelSize <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, kernelSD <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.6</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Significant values etc</span>
+</span></span><span style="display:flex;"><span>cutoff    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.05</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>) <span style="color:#75715e"># Cut off value for 95 % for two-tailed test</span>
+</span></span><span style="display:flex;"><span>sig_num1  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(brainImage <span style="color:#f92672">&lt;</span> cutoff <span style="color:#f92672">|</span> brainImage <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span>cutoff)
+</span></span><span style="display:flex;"><span>sig_num2  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(brainImage_smoothed <span style="color:#f92672">&lt;</span> cutoff <span style="color:#f92672">|</span> brainImage_smoothed <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span>cutoff)
+</span></span><span style="display:flex;"><span>sig_rate1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(brainImage <span style="color:#f92672">&lt;</span> cutoff <span style="color:#f92672">|</span> brainImage <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span>cutoff)
+</span></span><span style="display:flex;"><span>sig_rate2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(brainImage_smoothed <span style="color:#f92672">&lt;</span> cutoff <span style="color:#f92672">|</span> brainImage_smoothed <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span>cutoff)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Threshold the image</span>
+</span></span><span style="display:flex;"><span>brainImage_smoothed_threshold <span style="color:#f92672">&lt;-</span> brainImage_smoothed
+</span></span><span style="display:flex;"><span>brainImage_smoothed_threshold[brainImage_smoothed_threshold <span style="color:#f92672">&gt;</span> cutoff <span style="color:#f92672">&amp;</span> brainImage_smoothed_threshold <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span>cutoff] <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">NA</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot_grid</span>(<span style="color:#a6e22e">levelplot</span>(brainImage_smoothed), <span style="color:#a6e22e">levelplot</span>(brainImage_smoothed_threshold))
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/brain_image-1.png" alt=""><!-- --></p>
+<p>Even if there is no true effect, there are quite a number of significant
+voxels in that 2D brain image even when I smoothed it (13 voxel). In the
+unsmoothed image, we get a number of significant cases that is pretty
+much expected given the number of tests that we simulated (5060 voxels
+or 5.07 %). In real fMRI the false positive rate is obviously not that
+bad because voxels are not actually independent but it is still an
+important issue.</p>
+<p>Note I am only discussing voxel-wise corrections but many of the
+concepts below also work for cluster level.</p>
+<h2 id="calculate-fwe">Calculate FWE</h2>
+<p>As defined below, FWE = chance of 1 more significant voxels in the brain
+and we want that to be 5%. So how much is the FWE in my completely
+fictional example for smoothed image.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Simulation parameters</span>
+</span></span><span style="display:flex;"><span>cutoff <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.05</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>) <span style="color:#75715e"># Cut off value for 95 % for two-tailed test</span>
+</span></span><span style="display:flex;"><span>nSim   <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to calculate FWE and create max distribution (see below)</span>
+</span></span><span style="display:flex;"><span>simFun <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(numberOfVoxels, cutoff){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Create random smooth image</span>
+</span></span><span style="display:flex;"><span>  brainImage          <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rnorm</span>(numberOfVoxels), ncol <span style="color:#f92672">=</span> <span style="color:#a6e22e">sqrt</span>(numberOfVoxels))
+</span></span><span style="display:flex;"><span>  brainImage_smoothed <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">gaussianSmooth2D</span>(brainImage, kernelSize <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, kernelSD <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.6</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Calculate number of significant voxels</span>
+</span></span><span style="display:flex;"><span>  sig_num   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(brainImage_smoothed <span style="color:#f92672">&lt;</span> cutoff <span style="color:#f92672">|</span> brainImage_smoothed <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span>cutoff)
+</span></span><span style="display:flex;"><span>  max_value <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">abs</span>(brainImage_smoothed))
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(<span style="color:#a6e22e">c</span>(sig_num, max_value))
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save results in here</span>
+</span></span><span style="display:flex;"><span>sim_results <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#66d9ef">NA</span>,<span style="color:#66d9ef">NA</span>), each <span style="color:#f92672">=</span> nSim), ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loop for simulation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>nSim){
+</span></span><span style="display:flex;"><span>  sim_results[i, ] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">simFun</span>(numberOfVoxels, cutoff)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Even with this relatively low number of significant voxels in each
+smoothed image the FWE is very high with 99.9 %.</p>
+<h2 id="fwe-correction">FWE correction</h2>
+<p>As noted elsewhere Bonferroni is far too conservative. Two alternatives
+to correct for the FWE rates are random field theory (RFT) &amp; permutation
+testing.</p>
+<h3 id="random-field-theory">Random field theory</h3>
+<p>Famously, RFT is quite complex so I am not trying to dive much deeper
+into this matter other than repeating an equation taken out of Poldrack
+et al. (2011):</p>
+<p>$$p_{FWE}^{vox} \approx R \times  \frac{(4ln(2))^{3/2}}{(2\pi)^2}e^{-t^2/2}(t^2-1)$$</p>
+<p>where $R = V/(FWHM_xFWHM_yFWHM_z)$ (RESolution ELement aka RESEL) and
+$V$ is the search volume.</p>
+<h3 id="permutation-tests">Permutation tests</h3>
+<p>Permutation tests are something that can be relatively easily be
+simulated. This can be done by creating a number of brain images and
+saving the max-value test statistic in this image. I already did this
+while calculating the FWE above.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">data.frame</span>(z <span style="color:#f92672">=</span> sim_results[, <span style="color:#ae81ff">2</span>]), <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> z)) <span style="color:#f92672">+</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_histogram</span>(bins <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Z-value&#34;</span>, y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Count&#34;</span>, title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Distribution of maximal absolute Z value&#34;</span>)
+</span></span></code></pre></div><p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/max_distribtion-1.png" alt=""><!-- --></p>
+<p>The FWE-corrected $p$-value is simply the percentage of values that are
+larger than our test statistic in that distribution. Take for example a
+z-value of 2.2025748. The $p$-values are as follows:</p>
+<ul>
+<li>Uncorrected: 0.0276247</li>
+<li>Bonferroni corrected: 1 (the $\alpha$-level would be 5.0072104^{-7}).
+In other words, we would only count absolute z-values of 5.0260363 or
+higher as significant.</li>
+<li>Permutation corrected: 0.3366. Here we would count values of at least
+2.5175497 as significant.</li>
+</ul>
+<h2 id="fdr">FDR</h2>
+<p>Another way to correct the p-value is using FDR for instance using
+<a href="https://www.statology.org/benjamini-hochberg-procedure/">Benjamini’s &amp; Hochberg’s
+proecdure</a>. To
+simulate this, we again take our fake 2D brain image and convert the
+z-values into p-values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>zMap <span style="color:#f92672">&lt;-</span> brainImage_smoothed
+</span></span><span style="display:flex;"><span>pMap <span style="color:#f92672">&lt;-</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span><span style="color:#a6e22e">pnorm</span>(<span style="color:#a6e22e">abs</span>(zMap)))<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>As a reminder, we have 13 voxels that are deemed significant. In <em>Step
+1</em> we have to sort our p-values from smallest to largest and assign a
+rank.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>FDR_df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(p <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(pMap), rank <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(pMap))
+</span></span></code></pre></div><p>for <em>Step 2</em> we calculate the critical value for each p-value using</p>
+<p>$$ crit =    (i/m)\times Q $$</p>
+<ul>
+<li>$i$ = rank of p-value</li>
+<li>$m$ = total number of tests</li>
+<li>$Q$ = your chosen false discovery rate, which we set to 0.05.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Parameters for critical value calculation</span>
+</span></span><span style="display:flex;"><span>m <span style="color:#f92672">&lt;-</span> numberOfVoxels
+</span></span><span style="display:flex;"><span>Q <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.05</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculation itself</span>
+</span></span><span style="display:flex;"><span>FDR_df<span style="color:#f92672">$</span>crit <span style="color:#f92672">&lt;-</span> (FDR_df<span style="color:#f92672">$</span>rank<span style="color:#f92672">/</span>m) <span style="color:#f92672">*</span> Q
+</span></span></code></pre></div><p><em>Step 3</em> we try to find row where the value of the p-value is lower than
+the critical value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>FDR_df<span style="color:#f92672">$</span>lower <span style="color:#f92672">&lt;-</span> FDR_df<span style="color:#f92672">$</span>p <span style="color:#f92672">&lt;</span> FDR_df<span style="color:#f92672">$</span>crit
+</span></span></code></pre></div><p>In this case, <code>any(FDR_df$lower)</code> is FALSE. Finally for adjusting a
+p-value according to this procedure we can use
+<a href="https://stats.stackexchange.com/questions/238458/whats-the-formula-for-the-benjamini-hochberg-adjusted-p-value">this</a>
+formula that I found:</p>
+<center>
+<p><img src="/post/2023-02-14-understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/figure-gfm/BH_adjustment_equation.PNG" alt="p^\mathrm{BH}{(i)} = \min\Big\{\min{j\gei}\big\{\frac{mp_{(j)}}{j}\big\},1\Big}"><!-- --></p>
+</center>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>FDR_df<span style="color:#f92672">$</span>adjusted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ifelse</span>((FDR_df<span style="color:#f92672">$</span>p<span style="color:#f92672">*</span>m)<span style="color:#f92672">/</span>FDR_df<span style="color:#f92672">$</span>rank <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, (FDR_df<span style="color:#f92672">$</span>p<span style="color:#f92672">*</span>m)<span style="color:#f92672">/</span>FDR_df<span style="color:#f92672">$</span>rank)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Then check if completely decreasing</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#a6e22e">nrow</span>(FDR_df)<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if</span>(FDR_df<span style="color:#f92672">$</span>adjusted[i] <span style="color:#f92672">&lt;</span> FDR_df<span style="color:#f92672">$</span>adjusted[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]){
+</span></span><span style="display:flex;"><span>    FDR_df<span style="color:#f92672">$</span>adjusted[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;-</span> FDR_df<span style="color:#f92672">$</span>adjusted[i]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This adjustment makes all our p-values 1. In more interesting example,
+we get this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>ps     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>ps     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.001</span>, ps)
+</span></span><span style="display:flex;"><span>FDR_df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(p <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(ps), rank <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(ps))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>m <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">length</span>(ps)
+</span></span><span style="display:flex;"><span>Q <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.05</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculation itself</span>
+</span></span><span style="display:flex;"><span>FDR_df<span style="color:#f92672">$</span>crit <span style="color:#f92672">&lt;-</span> (FDR_df<span style="color:#f92672">$</span>rank<span style="color:#f92672">/</span>m) <span style="color:#f92672">*</span> Q
+</span></span><span style="display:flex;"><span>FDR_df<span style="color:#f92672">$</span>lower <span style="color:#f92672">&lt;-</span> FDR_df<span style="color:#f92672">$</span>p <span style="color:#f92672">&lt;</span> FDR_df<span style="color:#f92672">$</span>crit
+</span></span><span style="display:flex;"><span>FDR_df<span style="color:#f92672">$</span>adjust_manual  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ifelse</span>((FDR_df<span style="color:#f92672">$</span>p<span style="color:#f92672">*</span>m)<span style="color:#f92672">/</span>FDR_df<span style="color:#f92672">$</span>rank <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, (FDR_df<span style="color:#f92672">$</span>p<span style="color:#f92672">*</span>m)<span style="color:#f92672">/</span>FDR_df<span style="color:#f92672">$</span>rank)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Then check if completely decreasing</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#a6e22e">nrow</span>(FDR_df)<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if</span>(FDR_df<span style="color:#f92672">$</span>adjust_manual[i] <span style="color:#f92672">&lt;</span> FDR_df<span style="color:#f92672">$</span>adjust_manual[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]){
+</span></span><span style="display:flex;"><span>    FDR_df<span style="color:#f92672">$</span>adjust_manual[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;-</span> FDR_df<span style="color:#f92672">$</span>adjust_manual[i]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>FDR_df<span style="color:#f92672">$</span>adjust_adjust  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">p.adjust</span>(<span style="color:#a6e22e">sort</span>(ps), method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;BH&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display table</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">kable</span>(FDR_df)
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th style="text-align:right">p</th>
+<th style="text-align:right">rank</th>
+<th style="text-align:right">crit</th>
+<th style="text-align:left">lower</th>
+<th style="text-align:right">adjust_manual</th>
+<th style="text-align:right">adjust_adjust</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0.0010000</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.0045455</td>
+<td style="text-align:left">TRUE</td>
+<td style="text-align:right">0.0110000</td>
+<td style="text-align:right">0.0110000</td>
+</tr>
+<tr>
+<td style="text-align:right">0.0075637</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0.0090909</td>
+<td style="text-align:left">TRUE</td>
+<td style="text-align:right">0.0416003</td>
+<td style="text-align:right">0.0416003</td>
+</tr>
+<tr>
+<td style="text-align:right">0.1600754</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0.0136364</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.3877979</td>
+<td style="text-align:right">0.3877979</td>
+</tr>
+<tr>
+<td style="text-align:right">0.1727596</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0.0181818</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.3877979</td>
+<td style="text-align:right">0.3877979</td>
+</tr>
+<tr>
+<td style="text-align:right">0.1762718</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">0.0227273</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.3877979</td>
+<td style="text-align:right">0.3877979</td>
+</tr>
+<tr>
+<td style="text-align:right">0.2380772</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">0.0272727</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.4364749</td>
+<td style="text-align:right">0.4364749</td>
+</tr>
+<tr>
+<td style="text-align:right">0.4092754</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">0.0318182</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.5036225</td>
+<td style="text-align:right">0.5036225</td>
+</tr>
+<tr>
+<td style="text-align:right">0.4096089</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">0.0363636</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.5036225</td>
+<td style="text-align:right">0.5036225</td>
+</tr>
+<tr>
+<td style="text-align:right">0.4120547</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">0.0409091</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.5036225</td>
+<td style="text-align:right">0.5036225</td>
+</tr>
+<tr>
+<td style="text-align:right">0.6297573</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">0.0454545</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.6927330</td>
+<td style="text-align:right">0.6927330</td>
+</tr>
+<tr>
+<td style="text-align:right">0.9008737</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">0.0500000</td>
+<td style="text-align:left">FALSE</td>
+<td style="text-align:right">0.9008737</td>
+<td style="text-align:right">0.9008737</td>
+</tr>
+</tbody>
+</table>
+<h1 id="conclusion">Conclusion</h1>
+<p>Overall, I have to say that despite having dealt with these kind of
+questions &amp; problems for years only really playing around with the
+equations in code helped me understand the concepts in deeper way.
+Hopefully, other people might also find this somewhat useful.</p>
+<h1 id="glossary">Glossary</h1>
+<ul>
+<li>Rank = Number of independent columns in matrix or the number of
+dimensions in the output (if matrices are seen as transformations).</li>
+<li>Full rank = Rank is as high as the number of columns.</li>
+<li>FWE (rate) = “is the chance of one or more false positives anywhere in
+the image.” (Poldrack et al., 2011, p. 117)</li>
+<li>Bonferroni = A correction where simply
+$\frac{\alpha}{number\ of\ tests}$ assuming the the tests are
+independent. This is a method to correct FWE.</li>
+<li>FDR = Expected proportion of voxels deemed significant that are false
+positives.</li>
+</ul>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjaquent.github.io%2f2023%2f02%2funderstanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjaquent.github.io%2f2023%2f02%2funderstanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fjaquent.github.io%2f2023%2f02%2funderstanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri%2f&amp;text=Understanding%20the%20basics%20of%20the%20general%20linear%20model%20%28GLM%29%20in%20the%20context%20of%20fMRI" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 ml-auto blog-sidebar">
+  
+  <section class="sidebar-module sidebar-module-inset">
+    <h4>About</h4>
+    <p dir="auto">The idea behind this notebook can be found <a href="/about/">here</a>.</p>
+  </section>
+  
+
+  
+        <section class="sidebar-module">
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+
+
+<li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
+
+<li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
+
+<li><a href="/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></li>
+
+<li><a href="/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></li>
+
+<li><a href="/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></li>
+
+    </ol>
+  </section>
+
+  
+
+  
+  <section class="sidebar-module">
+    <h4>Links</h4>
+    <ol class="list-unstyled">
+      
+      <li><a href="https://github.com/JAQuent/">My GitHub page</a></li>
+      
+    </ol>
+  </section>
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <section class="sidebar-module">
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-secondary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
+            
+            <a class="badge badge-secondary" href="/tags/glm">glm</a>
+            
+            <a class="badge badge-secondary" href="/tags/json">json</a>
+            
+            <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
+            
+            <a class="badge badge-secondary" href="/tags/matlab">matlab</a>
+            
+            <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
+            
+            <a class="badge badge-secondary" href="/tags/stats">stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/textures">textures</a>
+            
+            <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity">unity</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity3d">unity3d</a>
+            
+        </p>
+        
+    
+ </section>
+</aside>
+
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+    
+
+    
+    <footer class="blog-footer">
+      <p dir="auto">
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+    
+
+  </body>
+
+</html>

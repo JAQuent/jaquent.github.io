@@ -10,7 +10,7 @@
 <meta property="og:description" content="where I share semi-interesting stuff from my work" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jaquent.github.io/" />
-<meta property="og:updated_time" content="2022-09-20T00:00:00+00:00" />
+<meta property="og:updated_time" content="2023-02-14T00:00:00+00:00" />
 
 
 
@@ -31,8 +31,8 @@
     "@type": "Person",
     "name": "Alex Quent"
   },
-  "dateModified": "2022-09-20T00:00:00+00:00",
-  "keywords": "experiments, general, bayesian-stats, json, logistic-regression, matlab, schemavr, sequential-design, textures, u-shape, unity, unity3d",
+  "dateModified": "2023-02-14T00:00:00+00:00",
+  "keywords": "experiments, general, bayesian-stats, fmri, glm, json, logistic-regression, matlab, schemavr, sequential-design, stats, textures, u-shape, unity, unity3d",
   "description":"where I share semi-interesting stuff from my work"
 }
 </script>
@@ -93,6 +93,9 @@
           
           <a class="nav-link" href="/about/" title="">About</a>
           
+          
+          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
+          
         </nav>
       </div>
     </div>
@@ -116,6 +119,26 @@
 
           
 
+
+
+
+
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></h2>
+    <p class="blog-post-meta"><time datetime="2023-02-14T00:00:00Z">Tue Feb 14, 2023</time> by Jörn Alexander Quent in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/glm/" rel="tag">GLM</a>, <a href="/tags/stats/" rel="tag">stats</a>, <a href="/tags/fmri/" rel="tag">fMRI</a>
+
+</p>
+  </header>
+  Prelude Sources that I found useful General libraries Simple linear regression Multiple linear regression Special cases One sample t-test Two sample t-test Paired t-test Two-way ANOVA Does the contrast weighting matter for the test-statistics? Covariance matrix of the residuals A example design matrix for fMRI Multiple testing problem Calculate FWE FWE correction Random field theory Permutation tests FDR Conclusion Glossary Prelude I was revisiting some of the basics surrounding fMRI especially the GLM and contrasts.
+  <a href='https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/'>Read more →</a>
+</article> 
 
 
 
@@ -202,26 +225,6 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
 
 
 
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/">A U-shape that appears as a linear correlation when averaged</a></h2>
-    <p class="blog-post-meta"><time datetime="2021-02-12T00:00:00Z">Fri Feb 12, 2021</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/schemavr/" rel="tag">schemaVR</a>, <a href="/tags/u-shape/" rel="tag">U-shape</a>
-
-</p>
-  </header>
-  The problem While analysing the data from our U-shape experiments (see pre-registration for context: https://osf.io/kcr2q), we ran into a peculiar problem. As expected, we did find that memory performance can be described as a U-shape function of how expected a certain object is in certain location. However, we also predicted that the memory advantage for highly incongruent item/locations pairings as well as for highly congruent pairings are driven by different processes.
-  <a href='https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/'>Read more →</a>
-</article> 
-
-
-
-
-
 <nav class="blog-pagination">
   
   
@@ -251,6 +254,8 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
     <ol class="list-unstyled">
 
 
+<li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
+
 <li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
 
 <li><a href="/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></li>
@@ -258,8 +263,6 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
 <li><a href="/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></li>
 
 <li><a href="/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></li>
-
-<li><a href="/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/">A U-shape that appears as a linear correlation when averaged</a></li>
 
     </ol>
   </section>
@@ -297,6 +300,10 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
             
             <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
             
+            <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
+            
+            <a class="badge badge-secondary" href="/tags/glm">glm</a>
+            
             <a class="badge badge-secondary" href="/tags/json">json</a>
             
             <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
@@ -306,6 +313,8 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
             <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
             
             <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
+            
+            <a class="badge badge-secondary" href="/tags/stats">stats</a>
             
             <a class="badge badge-secondary" href="/tags/textures">textures</a>
             

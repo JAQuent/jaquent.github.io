@@ -6,7 +6,16 @@
     <description>Recent content on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding the basics of the general linear model (GLM) in the context of fMRI</title>
+      <link>https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</link>
+      <pubDate>Tue, 14 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</guid>
+      <description>Prelude Sources that I found useful General libraries Simple linear regression Multiple linear regression Special cases One sample t-test Two sample t-test Paired t-test Two-way ANOVA Does the contrast weighting matter for the test-statistics? Covariance matrix of the residuals A example design matrix for fMRI Multiple testing problem Calculate FWE FWE correction Random field theory Permutation tests FDR Conclusion Glossary Prelude I was revisiting some of the basics surrounding fMRI especially the GLM and contrasts.</description>
+    </item>
+    
     <item>
       <title>How to change UXF&#39;s start up menu using a .json input file</title>
       <link>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</link>
