@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "Understanding the basics of the general linear model (GLM) in the context of fMRI",
   "url": "https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/",
-  "wordCount": "5239",
+  "wordCount": "5236",
   "datePublished": "2023-02-14T00:00:00+00:00",
   "dateModified": "2023-02-14T00:00:00+00:00",
   "author": {
@@ -278,12 +278,12 @@ viewed through the GLM-framework. I start with generating fake data.</p>
 <p>which gives me an estimate of the intercept &amp; slope.</p>
 <p>The equation corresponding to the model above can be expressed as</p>
 <p>$$ Y = \beta_{0}+ \beta_{1}x_{1}+\epsilon $$ the model fit to the data
-via <code>lm()</code> estimated as $\beta_0$ = 1.8667 and $\beta_1$ = 5.1762.</p>
-<p>However, the model equation is useful in some ways (e.g. easy to
+via <code>lm()</code> estimated that $\beta_0$ = 1.8667 and $\beta_1$ = 5.1762.</p>
+<p>While, the model equation is useful in some ways (e.g. easy to
 understand) it is also highly specific and only pertains to models that
-exactly like this one (where we have an intercept and one slope). When
-conceptualising this in the GLM-framework we can do something much more
-powerful because generally one can also write this model as</p>
+exactly like this one  have an intercept and a slope. When
+conceptualising everything in the GLM-framework, we can do something much more
+powerful as we can generally write this model as</p>
 <p>$$ Y = X\beta + \epsilon $$</p>
 <p>which is the a valid description for all the different kinds of models &amp;
 tests that fall under the GLM umbrella. Therefore we can use the same
