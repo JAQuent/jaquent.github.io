@@ -10,7 +10,7 @@
 <meta property="og:description" content="A simple Hugo theme based on the Bootstrap v4 blog example." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://example.org/posts/" />
-<meta property="og:updated_time" content="2023-02-14T00:00:00+00:00" />
+<meta property="og:updated_time" content="2014-09-28T00:00:00+00:00" />
 
 
 
@@ -31,8 +31,8 @@
     "@type": "Person",
     "name": "Your Name"
   },
-  "dateModified": "2023-02-14T00:00:00+00:00",
-  "keywords": "experiments, general, bayesian-stats, fmri, glm, json, logistic-regression, matlab, noveltyvr, schemavr, sequential-design, stats, textures, u-shape, unity, unity3d",
+  "dateModified": "2014-09-28T00:00:00+00:00",
+  "keywords": "development, golang, development, go, golang, hugo, templates, themes",
   "description":"A simple Hugo theme based on the Bootstrap v4 blog example."
 }
 </script>
@@ -98,17 +98,11 @@
 
 <article class="blog-post">
   <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></h2>
-    <p class="blog-post-meta"><time datetime="2023-02-14T00:00:00Z">Tue Feb 14, 2023</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/glm/" rel="tag">GLM</a>, <a href="/tags/stats/" rel="tag">stats</a>, <a href="/tags/fmri/" rel="tag">fMRI</a>
-
-</p>
+    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2014/09/creating-a-new-theme/">Creating a New Theme</a></h2>
+    <p class="blog-post-meta"><time datetime="2014-09-28T00:00:00Z">Sun Sep 28, 2014</time> by Michael Henderson</p>
   </header>
-  Prelude Sources that I found useful General libraries Simple linear regression Multiple linear regression Special cases One sample t-test Two sample t-test Paired t-test Two-way ANOVA Does the contrast weighting matter for the test-statistics? Covariance matrix of the residuals A example design matrix for fMRI Multiple testing problem Calculate FWE FWE correction Random field theory Permutation tests FDR Conclusion Glossary Prelude I was revisiting some of the basics surrounding fMRI especially the GLM and contrasts.
-  <a href='https://example.org/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/'>Read more →</a>
+  Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme.
+  <a href='https://example.org/2014/09/creating-a-new-theme/'>Read more →</a>
 </article> 
 
 
@@ -118,17 +112,12 @@
 
 <article class="blog-post">
   <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></h2>
-    <p class="blog-post-meta"><time datetime="2022-09-20T00:00:00Z">Tue Sep 20, 2022</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/json/" rel="tag">json</a>, <a href="/tags/json/" rel="tag">JSON</a>, <a href="/tags/unity3d/" rel="tag">unity3d</a>, <a href="/tags/unity/" rel="tag">unity</a>
-
-</p>
+    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2014/03/migrate-to-hugo-from-jekyll/">Migrate to Hugo from Jekyll</a></h2>
+    <p class="blog-post-meta"><time datetime="2014-03-10T00:00:00Z">Mon Mar 10, 2014</time> by Your Name</p>
   </header>
-  In my last post a while back, I showed how to load a .json file in to Unity3D without using UXF, which if you can do this, is still the easiest way for experiments. One of the problems with UXF however is that you cannot access the .json file before starting UXF&rsquo;s session, which is exactly the problem that I ran into here.
-  <a href='https://example.org/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/'>Read more →</a>
+  Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
+▾ &lt;root&gt;/ ▾ images/ logo.png should become
+  <a href='https://example.org/2014/03/migrate-to-hugo-from-jekyll/'>Read more →</a>
 </article> 
 
 
@@ -138,17 +127,17 @@
 
 <article class="blog-post">
   <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></h2>
-    <p class="blog-post-meta"><time datetime="2022-05-17T00:00:00Z">Tue May 17, 2022</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2014/04/hugo-template-primer/">(Hu)go Template Primer</a></h2>
+    <p class="blog-post-meta"><time datetime="2014-04-02T00:00:00Z">Wed Apr 02, 2014</time> by Your Name in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/development/" rel="category tag">Development</a>, <a href="/categories/golang/" rel="category tag">golang</a>
 
 
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/unity/" rel="tag">unity</a>, <a href="/tags/unity3d/" rel="tag">unity3d</a>, <a href="/tags/json/" rel="tag">json</a>, <a href="/tags/json/" rel="tag">JSON</a>
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/go/" rel="tag">go</a>, <a href="/tags/golang/" rel="tag">golang</a>, <a href="/tags/templates/" rel="tag">templates</a>, <a href="/tags/themes/" rel="tag">themes</a>, <a href="/tags/development/" rel="tag">development</a>
 
 </p>
   </header>
-  In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp; for the most part simpler ways if you use UXF - Unity Experiment Framework, which provide a way to parse on data via .json out of the box.
-  <a href='https://example.org/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/'>Read more →</a>
+  Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
+  <a href='https://example.org/2014/04/hugo-template-primer/'>Read more →</a>
 </article> 
 
 
@@ -158,52 +147,24 @@
 
 <article class="blog-post">
   <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></h2>
-    <p class="blog-post-meta"><time datetime="2022-03-21T00:00:00Z">Mon Mar 21, 2022</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2014/04/getting-started-with-hugo/">Getting Started with Hugo</a></h2>
+    <p class="blog-post-meta"><time datetime="2014-04-02T00:00:00Z">Wed Apr 02, 2014</time> by Your Name in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/development/" rel="category tag">Development</a>, <a href="/categories/golang/" rel="category tag">golang</a>
 
 
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/unity/" rel="tag">unity</a>, <a href="/tags/textures/" rel="tag">textures</a>, <a href="/tags/matlab/" rel="tag">matlab</a>
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/go/" rel="tag">go</a>, <a href="/tags/golang/" rel="tag">golang</a>, <a href="/tags/hugo/" rel="tag">hugo</a>, <a href="/tags/development/" rel="tag">development</a>
 
 </p>
   </header>
-  I&rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
-Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.
-  <a href='https://example.org/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/'>Read more →</a>
+  Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
+Save it somewhere specific as we will be using it in the next step.
+More complete instructions are available at installing hugo
+Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
+  <a href='https://example.org/2014/04/getting-started-with-hugo/'>Read more →</a>
 </article> 
 
 
 
-
-
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></h2>
-    <p class="blog-post-meta"><time datetime="2021-02-17T00:00:00Z">Wed Feb 17, 2021</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/u-shape/" rel="tag">U-shape</a>
-
-</p>
-  </header>
-  The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape.
-  <a href='https://example.org/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/'>Read more →</a>
-</article> 
-
-
-
-
-
-<nav class="blog-pagination">
-  
-  
-  
-  <a class="btn btn-outline-primary disabled" href="#" role="button" aria-disabled="true">Previous page</a>
-  <a class="btn btn-outline-primary" href="/posts/page/2/" rel="next" role="button">Next page</a>
-  
-</nav>
 
 
 
@@ -225,15 +186,13 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
     <ol class="list-unstyled">
 
 
-<li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
+<li><a href="/2014/09/creating-a-new-theme/">Creating a New Theme</a></li>
 
-<li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
+<li><a href="/2014/03/migrate-to-hugo-from-jekyll/">Migrate to Hugo from Jekyll</a></li>
 
-<li><a href="/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></li>
+<li><a href="/2014/04/hugo-template-primer/">(Hu)go Template Primer</a></li>
 
-<li><a href="/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></li>
-
-<li><a href="/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></li>
+<li><a href="/2014/04/getting-started-with-hugo/">Getting Started with Hugo</a></li>
 
     </ol>
   </section>

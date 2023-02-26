@@ -6,130 +6,58 @@
     <description>Recent content in Tags on Hugo Bootstrap v4 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>fMRI</title>
-      <link>https://example.org/tags/fmri/</link>
-      <pubDate>Tue, 14 Feb 2023 00:00:00 +0000</pubDate>
+      <title>development</title>
+      <link>https://example.org/tags/development/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/tags/fmri/</guid>
+      <guid>https://example.org/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>glm</title>
-      <link>https://example.org/tags/glm/</link>
-      <pubDate>Tue, 14 Feb 2023 00:00:00 +0000</pubDate>
+      <title>go</title>
+      <link>https://example.org/tags/go/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/tags/glm/</guid>
+      <guid>https://example.org/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>stats</title>
-      <link>https://example.org/tags/stats/</link>
-      <pubDate>Tue, 14 Feb 2023 00:00:00 +0000</pubDate>
+      <title>golang</title>
+      <link>https://example.org/tags/golang/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/tags/stats/</guid>
+      <guid>https://example.org/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>JSON</title>
-      <link>https://example.org/tags/json/</link>
-      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
+      <title>hugo</title>
+      <link>https://example.org/tags/hugo/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/tags/json/</guid>
+      <guid>https://example.org/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>unity</title>
-      <link>https://example.org/tags/unity/</link>
-      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
+      <title>templates</title>
+      <link>https://example.org/tags/templates/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/tags/unity/</guid>
+      <guid>https://example.org/tags/templates/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>unity3d</title>
-      <link>https://example.org/tags/unity3d/</link>
-      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
+      <title>themes</title>
+      <link>https://example.org/tags/themes/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/tags/unity3d/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>matlab</title>
-      <link>https://example.org/tags/matlab/</link>
-      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://example.org/tags/matlab/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>textures</title>
-      <link>https://example.org/tags/textures/</link>
-      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://example.org/tags/textures/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bayesian Stats</title>
-      <link>https://example.org/tags/bayesian-stats/</link>
-      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://example.org/tags/bayesian-stats/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>U-shape</title>
-      <link>https://example.org/tags/u-shape/</link>
-      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://example.org/tags/u-shape/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>schemaVR</title>
-      <link>https://example.org/tags/schemavr/</link>
-      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://example.org/tags/schemavr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>logistic regression</title>
-      <link>https://example.org/tags/logistic-regression/</link>
-      <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://example.org/tags/logistic-regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sequential design</title>
-      <link>https://example.org/tags/sequential-design/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://example.org/tags/sequential-design/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>noveltyVR</title>
-      <link>https://example.org/tags/noveltyvr/</link>
-      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://example.org/tags/noveltyvr/</guid>
+      <guid>https://example.org/tags/themes/</guid>
       <description></description>
     </item>
     
