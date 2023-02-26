@@ -16,5 +16,15 @@
       <description>Prelude Sources that I found useful General libraries Simple linear regression Multiple linear regression Special cases One sample t-test Two sample t-test Paired t-test Two-way ANOVA Does the contrast weighting matter for the test-statistics? Covariance matrix of the residuals A example design matrix for fMRI Multiple testing problem Calculate FWE FWE correction Random field theory Permutation tests FDR Conclusion Glossary Prelude I was revisiting some of the basics surrounding fMRI especially the GLM and contrasts.</description>
     </item>
     
+    <item>
+      <title>Understanding mixed linear models</title>
+      <link>https://jaquent.github.io/2018/03/understanding-mixed-linear-models/</link>
+      <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2018/03/understanding-mixed-linear-models/</guid>
+      <description>Preface Note: This is an old post from my early PhD time that I slightly edited but share again because it would be interesting to one or two people.
+This work documents my attempt to understand the model structure of mixed linear models or multilevel models. I adapted a formula that I found on Wikipedia and work myself through the different models and test whether I am able to retrieve the different parameters with lmerTest.</description>
+    </item>
+    
   </channel>
 </rss>
