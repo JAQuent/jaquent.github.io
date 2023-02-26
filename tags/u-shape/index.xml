@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>U-shape on Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/tags/u-shape/</link>
-    <description>Recent content in U-shape on Jörn Alexander Quent&#39;s notebook</description>
+    <title>U-shape on Hugo Bootstrap v4 Blog</title>
+    <link>https://example.org/tags/u-shape/</link>
+    <description>Recent content in U-shape on Hugo Bootstrap v4 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/u-shape/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/tags/u-shape/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Finding a U-shape with Bayesian interrupted regression</title>
-      <link>https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
+      <link>https://example.org/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
       <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</guid>
+      <guid>https://example.org/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</guid>
       <description>The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape.</description>
     </item>
     
     <item>
       <title>A U-shape that appears as a linear correlation when averaged</title>
-      <link>https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</link>
+      <link>https://example.org/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</link>
       <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</guid>
+      <guid>https://example.org/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</guid>
       <description>The problem While analysing the data from our U-shape experiments (see pre-registration for context: https://osf.io/kcr2q), we ran into a peculiar problem. As expected, we did find that memory performance can be described as a U-shape function of how expected a certain object is in certain location. However, we also predicted that the memory advantage for highly incongruent item/locations pairings as well as for highly congruent pairings are driven by different processes.</description>
     </item>
     

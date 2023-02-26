@@ -10,7 +10,7 @@
 <meta property="og:description" content="Aim of this document The aim of this document is to accompany the design analysis for noveltyVR (see here) and to shed light on the deliberations concerning the planned analysis.
 The planned design is a 2 x 2 x 2 design with one between and two within subject factors. There will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E)." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/" />
+<meta property="og:url" content="https://example.org/2019/03/prior-deliberation-on-analysis-for-noveltyvr/" />
 <meta property="article:published_time" content="2019-03-18T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-03-18T00:00:00+00:00" />
 
@@ -29,62 +29,39 @@ The planned design is a 2 x 2 x 2 design with one between and two within subject
   "@context": "http://schema.org",
   "@type": "BlogPosting",
   "headline": "Prior deliberation on analysis for noveltyVR",
-  "url": "https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/",
+  "url": "https://example.org/2019/03/prior-deliberation-on-analysis-for-noveltyvr/",
   "wordCount": "2619",
   "datePublished": "2019-03-18T00:00:00+00:00",
   "dateModified": "2019-03-18T00:00:00+00:00",
   "author": {
     "@type": "Person",
-    "name": "Alex Quent"
+    "name": "Jörn Alexander Quent"
   },
-  "keywords": "general, Bayesian Stats, noveltyVR, glm"
+  "keywords": "experiments, Bayesian Stats, noveltyVR, glm"
 }
 </script>
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/">
+    <link rel="canonical" href="https://example.org/2019/03/prior-deliberation-on-analysis-for-noveltyvr/">
 
-    <title>Prior deliberation on analysis for noveltyVR | Jörn Alexander Quent&#39;s notebook</title>
+    <title>Prior deliberation on analysis for noveltyVR | Hugo Bootstrap v4 Blog</title>
 
     
     <!-- combined, minified CSS -->
     
-    <link href="https://jaquent.github.io/css/style.0b72f41a0f22d687d912a8e7c945fc14c7a36daee062380f9fae9958e7d17da6.css" rel="stylesheet" integrity="sha256-C3L0Gg8i1ofZEqjnyUX8FMejba7gYjgPn66ZWOfRfaY=" crossorigin="anonymous">
+    <link href="https://example.org/css/style.c6ba80bc50669557645abe05f86b73cc5af84408ed20f1551a267bc19ece8228.css" rel="stylesheet" integrity="sha256-xrqAvFBmlVdkWr4F&#43;GtzzFr4RAjtIPFVGiZ7wZ7Ogig=" crossorigin="anonymous">
     
 
     <!-- minified Font Awesome for SVG icons -->
     
-    <script defer src="https://jaquent.github.io/js/fontawesome.min.a290d22177f491b8a83b0ee7eb739224c57ab052d8fab69d8f52aab860e42027.js" integrity="sha256-opDSIXf0kbioOw7n63OSJMV6sFLY&#43;radj1KquGDkICc=" crossorigin="anonymous"></script>
+    <script defer src="https://example.org/js/fontawesome.min.f5072c55a0721857184db93a50561d7dc13975b4de2e19db7f81eb5f3fa57270.js" integrity="sha256-9QcsVaByGFcYTbk6UFYdfcE5dbTeLhnbf4HrXz&#43;lcnA=" crossorigin="anonymous"></script>
 
     <!-- RSS 2.0 feed -->
     
 
     
 
-
-<script src="//yihui.org/js/math-code.js"></script>
-<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapes: true,
-            processEnvironments: true
-        },
-        // Center justify equations in code and markdown cells. Elsewhere
-        // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
-        "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
-        }
-    });
-</script>
- 
   </head>
 
   <body>
@@ -93,13 +70,7 @@ The planned design is a 2 x 2 x 2 design with one between and two within subject
     <div class="blog-masthead">
       <div class="container">
         <nav class="nav blog-nav">
-          <a class="nav-link " href="https://jaquent.github.io/">Home</a>
-          
-          <a class="nav-link" href="/about/" title="">About</a>
-          
-          
-          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
-          
+          <a class="nav-link " href="https://example.org/">Home</a>
         </nav>
       </div>
     </div>
@@ -109,8 +80,8 @@ The planned design is a 2 x 2 x 2 design with one between and two within subject
     
     <header class="blog-header">
       <div class="container">
-        <h1 class="blog-title" dir="auto"><a href="https://jaquent.github.io/" rel="home">Jörn Alexander Quent's notebook</a></h1>
-        <p class="lead blog-description" dir="auto">where I share semi-interesting stuff from my work</p>
+        <h1 class="blog-title" dir="auto"><a href="https://example.org/" rel="home">Hugo Bootstrap v4 Blog</a></h1>
+        <p class="lead blog-description" dir="auto">A simple Hugo theme based on the Bootstrap v4 blog example.</p>
       </div>
     </header>
     
@@ -126,11 +97,11 @@ The planned design is a 2 x 2 x 2 design with one between and two within subject
 
 <article class="blog-post">
   <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/">Prior deliberation on analysis for noveltyVR</a></h2>
+    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2019/03/prior-deliberation-on-analysis-for-noveltyvr/">Prior deliberation on analysis for noveltyVR</a></h2>
     <p class="blog-post-meta">
 <time datetime="2019-03-18T00:00:00Z">Mon Mar 18, 2019</time>
  in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
 
 
 <span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/noveltyvr/" rel="tag">noveltyVR</a>, <a href="/tags/glm/" rel="tag">glm</a>
@@ -152,7 +123,7 @@ The planned design is a 2 x 2 x 2 design with one between and two within subject
 </span></span></code></pre></div><h1 id="generating-a-dataset-with-a-mixed-2-x-2-x-2-design">Generating a dataset with a mixed 2 x 2 x 2 design</h1>
 <p>The design will be mixed 2 x 2 x 2 with one between and two within subject factors. The GLM for the full model is defined by this equation</p>
 <p><img src="/post/2019-03-18-prior-deliberation-on-analysis_files/equation1.png" alt="Equation 1"></p>
-<p>where the response from the <em>n</em>th subject from group <em>g</em> is modeled as the effect of N (between), g = [1 2], effect of E (within), i = [1 2], and effect of M (within), j = [1 2], and all the two-way and three way interactions. In addition to error term for all observations <em>N</em>(0, <em>σ</em><sub><em>e</em></sub><sup>2</sup>), there is an additional subject specific error term, <em>N</em>(0, <em>σ</em><sub><em>e</em></sub><sup>2</sup>). Note that for simplicity, this model does not include interactions with subject as additional error terms. In other words, we assume &ldquo;effect-by-subject&rdquo; errors to have the same scaling (<a href="https://www.fil.ion.ucl.ac.uk/~wpenny/publications/rik_anova.pdf">see here for discussion</a>).</p>
+<p>where the response from the <em>n</em>th subject from group <em>g</em> is modeled as the effect of N (between), g = [1 2], effect of E (within), i = [1 2], and effect of M (within), j = [1 2], and all the two-way and three way interactions. In addition to error term for all observations <em>N</em>(0, <em>σ</em><!-- raw HTML omitted --><em>e</em><!-- raw HTML omitted --><!-- raw HTML omitted -->2<!-- raw HTML omitted -->), there is an additional subject specific error term, <em>N</em>(0, <em>σ</em><!-- raw HTML omitted --><em>e</em><!-- raw HTML omitted --><!-- raw HTML omitted -->2<!-- raw HTML omitted -->). Note that for simplicity, this model does not include interactions with subject as additional error terms. In other words, we assume &ldquo;effect-by-subject&rdquo; errors to have the same scaling (<a href="https://www.fil.ion.ucl.ac.uk/~wpenny/publications/rik_anova.pdf">see here for discussion</a>).</p>
 <p>The code below creates a GLM where every <em>β</em>-value is set to 0.2 for 36 subjects per group.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Setting seed!</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">392571</span>)
@@ -505,9 +476,9 @@ The planned design is a 2 x 2 x 2 design with one between and two within subject
     <section>
     <h4>Share</h4>
     <nav class="nav sharing-icons">
-      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjaquent.github.io%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
-      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjaquent.github.io%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
-      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fjaquent.github.io%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f&amp;text=Prior%20deliberation%20on%20analysis%20for%20noveltyVR" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fexample.org%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fexample.org%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fexample.org%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f&amp;text=Prior%20deliberation%20on%20analysis%20for%20noveltyVR" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
     </nav>
   </section>
 
@@ -527,7 +498,7 @@ The planned design is a 2 x 2 x 2 design with one between and two within subject
   
   <section class="sidebar-module sidebar-module-inset">
     <h4>About</h4>
-    <p dir="auto">The idea behind this notebook can be found <a href="/about/">here</a>.</p>
+    <p dir="auto">A simple Hugo theme based on the <a href="http://v4-alpha.getbootstrap.com/examples/blog/">Bootstrap v4 blog example</a>.</p>
   </section>
   
 
@@ -557,62 +528,13 @@ The planned design is a 2 x 2 x 2 design with one between and two within subject
     <h4>Links</h4>
     <ol class="list-unstyled">
       
-      <li><a href="https://github.com/JAQuent/">My GitHub page</a></li>
+      <li><a href="https://example.com">Link 1</a></li>
+      
+      <li><a href="https://example.org">Link 2</a></li>
       
     </ol>
   </section>
   
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <section class="sidebar-module">
-    
-        
-        <h4>Categories</h4>
-        <p>
-            
-            <a class="badge badge-secondary" href="/categories/experiments">experiments</a>
-            
-            <a class="badge badge-secondary" href="/categories/general">general</a>
-            
-        </p>
-        
-    
-        
-        <h4>Tags</h4>
-        <p>
-            
-            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
-            
-            <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
-            
-            <a class="badge badge-secondary" href="/tags/glm">glm</a>
-            
-            <a class="badge badge-secondary" href="/tags/json">json</a>
-            
-            <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
-            
-            <a class="badge badge-secondary" href="/tags/matlab">matlab</a>
-            
-            <a class="badge badge-secondary" href="/tags/noveltyvr">noveltyvr</a>
-            
-            <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
-            
-            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
-            
-            <a class="badge badge-secondary" href="/tags/stats">stats</a>
-            
-            <a class="badge badge-secondary" href="/tags/textures">textures</a>
-            
-            <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
-            
-            <a class="badge badge-secondary" href="/tags/unity">unity</a>
-            
-            <a class="badge badge-secondary" href="/tags/unity3d">unity3d</a>
-            
-        </p>
-        
-    
- </section>
 </aside>
 
 

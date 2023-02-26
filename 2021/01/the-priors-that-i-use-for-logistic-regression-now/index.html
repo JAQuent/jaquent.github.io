@@ -9,7 +9,7 @@
 <meta property="og:title" content="The priors that I use for logistic regression now" />
 <meta property="og:description" content="Problem In my power simulation of the U-shape experiment, I noticed that the suggested priors (click here) actually do not work very well for Bayes Factor (BF) analysis as they are too flat and hence BF are too conservative. That is because uniform or very flat priors lead to less evidence in favour of the alternative hypothesis." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/" />
+<meta property="og:url" content="https://example.org/2021/01/the-priors-that-i-use-for-logistic-regression-now/" />
 <meta property="article:published_time" content="2021-01-19T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-01-19T00:00:00+00:00" />
 
@@ -27,7 +27,7 @@
   "@context": "http://schema.org",
   "@type": "BlogPosting",
   "headline": "The priors that I use for logistic regression now",
-  "url": "https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/",
+  "url": "https://example.org/2021/01/the-priors-that-i-use-for-logistic-regression-now/",
   "wordCount": "1928",
   "datePublished": "2021-01-19T00:00:00+00:00",
   "dateModified": "2021-01-19T00:00:00+00:00",
@@ -41,48 +41,25 @@
 
 
 
-    <link rel="canonical" href="https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/">
+    <link rel="canonical" href="https://example.org/2021/01/the-priors-that-i-use-for-logistic-regression-now/">
 
-    <title>The priors that I use for logistic regression now | Jörn Alexander Quent&#39;s notebook</title>
+    <title>The priors that I use for logistic regression now | Hugo Bootstrap v4 Blog</title>
 
     
     <!-- combined, minified CSS -->
     
-    <link href="https://jaquent.github.io/css/style.0b72f41a0f22d687d912a8e7c945fc14c7a36daee062380f9fae9958e7d17da6.css" rel="stylesheet" integrity="sha256-C3L0Gg8i1ofZEqjnyUX8FMejba7gYjgPn66ZWOfRfaY=" crossorigin="anonymous">
+    <link href="https://example.org/css/style.c6ba80bc50669557645abe05f86b73cc5af84408ed20f1551a267bc19ece8228.css" rel="stylesheet" integrity="sha256-xrqAvFBmlVdkWr4F&#43;GtzzFr4RAjtIPFVGiZ7wZ7Ogig=" crossorigin="anonymous">
     
 
     <!-- minified Font Awesome for SVG icons -->
     
-    <script defer src="https://jaquent.github.io/js/fontawesome.min.a290d22177f491b8a83b0ee7eb739224c57ab052d8fab69d8f52aab860e42027.js" integrity="sha256-opDSIXf0kbioOw7n63OSJMV6sFLY&#43;radj1KquGDkICc=" crossorigin="anonymous"></script>
+    <script defer src="https://example.org/js/fontawesome.min.f5072c55a0721857184db93a50561d7dc13975b4de2e19db7f81eb5f3fa57270.js" integrity="sha256-9QcsVaByGFcYTbk6UFYdfcE5dbTeLhnbf4HrXz&#43;lcnA=" crossorigin="anonymous"></script>
 
     <!-- RSS 2.0 feed -->
     
 
     
 
-
-<script src="//yihui.org/js/math-code.js"></script>
-<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapes: true,
-            processEnvironments: true
-        },
-        // Center justify equations in code and markdown cells. Elsewhere
-        // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
-        "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
-        }
-    });
-</script>
- 
   </head>
 
   <body>
@@ -91,13 +68,7 @@
     <div class="blog-masthead">
       <div class="container">
         <nav class="nav blog-nav">
-          <a class="nav-link " href="https://jaquent.github.io/">Home</a>
-          
-          <a class="nav-link" href="/about/" title="">About</a>
-          
-          
-          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
-          
+          <a class="nav-link " href="https://example.org/">Home</a>
         </nav>
       </div>
     </div>
@@ -107,8 +78,8 @@
     
     <header class="blog-header">
       <div class="container">
-        <h1 class="blog-title" dir="auto"><a href="https://jaquent.github.io/" rel="home">Jörn Alexander Quent's notebook</a></h1>
-        <p class="lead blog-description" dir="auto">where I share semi-interesting stuff from my work</p>
+        <h1 class="blog-title" dir="auto"><a href="https://example.org/" rel="home">Hugo Bootstrap v4 Blog</a></h1>
+        <p class="lead blog-description" dir="auto">A simple Hugo theme based on the Bootstrap v4 blog example.</p>
       </div>
     </header>
     
@@ -124,7 +95,7 @@
 
 <article class="blog-post">
   <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/">The priors that I use for logistic regression now</a></h2>
+    <h2 class="blog-post-title" dir="auto"><a href="https://example.org/2021/01/the-priors-that-i-use-for-logistic-regression-now/">The priors that I use for logistic regression now</a></h2>
     <p class="blog-post-meta">
 <time datetime="2021-01-19T00:00:00Z">Tue Jan 19, 2021</time>
  in 
@@ -188,7 +159,7 @@ choose.</p>
 and recommends a student distribution with degrees of freedom (df)
 between 3 and 7 with a scale of 2.5. For illustration of how Student’s
 distribution changes with df, I created this graphic.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/dists1-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>The figure above illustrates that there is an inverse relationship of
 the density at the peak and the density at the tails. For comparing df =
 3 with df = 7, at the mode of the distribution the df = 7 is higher,
@@ -247,7 +218,7 @@ this that the BF in contrast to the p-value is not uniformly distributed
 and it gets smaller and smaller with more data (for a null effect). In
 my frequentist simulation (see below), the nominal FPR was 0.045 for p
 &lt; 0.05.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>This power curve shows how badly the prior performance is. Even with a
 beta of 0.7 or odds of exp(0.7) = 2.013753, we only barely get past 15%.
 This is quite different from what we would get if we used frequentist
@@ -258,7 +229,7 @@ conservatism problem of BF analysis, as I show in the next simulation.</p>
 illustrate the difference between a scale of 2.5 and a scale of 1. Here
 both plotted on the same axis. For comparison, I also overlaid a normal
 prior, N(0, 1) illustrated by the dashed line.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/dists2-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>The student’s distribution with scale of 2.5 is far too wide explaining
 the low ‘power’ for $BF_{10}$ &gt; 6. To see, how a prior with scale of
 1 behave I ran Simulation 2. In this simulation, the $\beta_1$-values
@@ -266,14 +237,14 @@ range from 0 to 2.</p>
 <p>The average FPR for a $BF_{10}$ &gt; 6 for the priors with this scale is
 0.01288 (0.00111), which is still quite low compared to frequentist
 models.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot2-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>Looking at the power curve it seems that there is no big difference for
 different df.</p>
 <h2 id="comparison-of-slope-estimation">Comparison of slope estimation</h2>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot3-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>In addition, we can look at the shrinkage properties. By comparing the
 true and the average estimated slope in scatter plot.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot4-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>Despite the different ranges (0 to 0.7 and 0 to 2) in the simulations,
 it is obvious that narrower priors leads to more shrinkage toward zero.
 This is probably a good feature as this protects us from overestimating
@@ -284,7 +255,7 @@ BF analysis. Hence, I will run another simulation comparing normal
 versus student priors with scales of 1, 1.5, 2 and 2.5 to investigate
 this issue further.</p>
 <h1 id="illustrative-example">Illustrative example</h1>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/unnamed-chunk-5-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>Before looking at the results, here is a quick illustration why this is
 the case. Above, two figures showing the analysis of the same data can
 be seen. The left one uses a scale of 1, the other one uses a scale of
@@ -303,15 +274,15 @@ frequentist model (10,000 iteration per $\beta_1$ value).</p>
 <p>The model that I used was:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">glm</span>(y <span style="color:#f92672">~</span> s_x, data <span style="color:#f92672">=</span> df, family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;binomial&#34;</span>)
 </span></span></code></pre></div><h1 id="full-simulation">Full simulation</h1>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot5-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>Above the power curves of this simulation can be found. The black line
 represents the power curve for equivalent frequentist model and shows
 that all priors are more conservative.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot6-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>In contrast to Bayesian models, for the frequentist simulation we don’t
 find shrinkage of the estimator towards zero.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot11-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot7-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>One thin that stand out when comparing the standard error is abnormally
 low for a prior with scale of 0.5 irrespective of the family.</p>
 <p>One other number we can look at is the effective sample size. This
@@ -319,11 +290,11 @@ number is not referring to the effect size of the coefficient but how
 many samples for analysis are effectively available. The more the better
 because estimation especially of the BF get more stable the more samples
 we’ve got.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot8-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>Here we see something interesting that is while the bulk ESS decreases
 for a scale of 0.5 as the beta-value get larger for the student prior,
 the opposite is true for the normal prior.</p>
-<p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot9-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>Yet again the reverse is true for tail ESS. This probably indicates that
 a scale of 0.5 is too narrow.</p>
 <h1 id="conclusions">Conclusions</h1>
@@ -460,9 +431,9 @@ for logistic regression models.</strong></p>
     <section>
     <h4>Share</h4>
     <nav class="nav sharing-icons">
-      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjaquent.github.io%2f2021%2f01%2fthe-priors-that-i-use-for-logistic-regression-now%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
-      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjaquent.github.io%2f2021%2f01%2fthe-priors-that-i-use-for-logistic-regression-now%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
-      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fjaquent.github.io%2f2021%2f01%2fthe-priors-that-i-use-for-logistic-regression-now%2f&amp;text=The%20priors%20that%20I%20use%20for%20logistic%20regression%20now" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fexample.org%2f2021%2f01%2fthe-priors-that-i-use-for-logistic-regression-now%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fexample.org%2f2021%2f01%2fthe-priors-that-i-use-for-logistic-regression-now%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fexample.org%2f2021%2f01%2fthe-priors-that-i-use-for-logistic-regression-now%2f&amp;text=The%20priors%20that%20I%20use%20for%20logistic%20regression%20now" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
     </nav>
   </section>
 
@@ -482,7 +453,7 @@ for logistic regression models.</strong></p>
   
   <section class="sidebar-module sidebar-module-inset">
     <h4>About</h4>
-    <p dir="auto">The idea behind this notebook can be found <a href="/about/">here</a>.</p>
+    <p dir="auto">A simple Hugo theme based on the <a href="http://v4-alpha.getbootstrap.com/examples/blog/">Bootstrap v4 blog example</a>.</p>
   </section>
   
 
@@ -512,62 +483,13 @@ for logistic regression models.</strong></p>
     <h4>Links</h4>
     <ol class="list-unstyled">
       
-      <li><a href="https://github.com/JAQuent/">My GitHub page</a></li>
+      <li><a href="https://example.com">Link 1</a></li>
+      
+      <li><a href="https://example.org">Link 2</a></li>
       
     </ol>
   </section>
   
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <section class="sidebar-module">
-    
-        
-        <h4>Categories</h4>
-        <p>
-            
-            <a class="badge badge-secondary" href="/categories/experiments">experiments</a>
-            
-            <a class="badge badge-secondary" href="/categories/general">general</a>
-            
-        </p>
-        
-    
-        
-        <h4>Tags</h4>
-        <p>
-            
-            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
-            
-            <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
-            
-            <a class="badge badge-secondary" href="/tags/glm">glm</a>
-            
-            <a class="badge badge-secondary" href="/tags/json">json</a>
-            
-            <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
-            
-            <a class="badge badge-secondary" href="/tags/matlab">matlab</a>
-            
-            <a class="badge badge-secondary" href="/tags/noveltyvr">noveltyvr</a>
-            
-            <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
-            
-            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
-            
-            <a class="badge badge-secondary" href="/tags/stats">stats</a>
-            
-            <a class="badge badge-secondary" href="/tags/textures">textures</a>
-            
-            <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
-            
-            <a class="badge badge-secondary" href="/tags/unity">unity</a>
-            
-            <a class="badge badge-secondary" href="/tags/unity3d">unity3d</a>
-            
-        </p>
-        
-    
- </section>
 </aside>
 
 

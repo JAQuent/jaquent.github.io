@@ -2,99 +2,99 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://jaquent.github.io/categories/</loc>
+    <loc>https://example.org/categories/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/categories/experiments/</loc>
+    <loc>https://example.org/categories/experiments/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/fmri/</loc>
+    <loc>https://example.org/tags/fmri/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/glm/</loc>
+    <loc>https://example.org/tags/glm/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/</loc>
+    <loc>https://example.org/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/posts/</loc>
+    <loc>https://example.org/posts/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/stats/</loc>
+    <loc>https://example.org/tags/stats/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/</loc>
+    <loc>https://example.org/tags/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</loc>
+    <loc>https://example.org/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/categories/general/</loc>
+    <loc>https://example.org/categories/general/</loc>
     <lastmod>2022-09-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</loc>
+    <loc>https://example.org/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</loc>
     <lastmod>2022-09-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/json/</loc>
+    <loc>https://example.org/tags/json/</loc>
     <lastmod>2022-09-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/unity/</loc>
+    <loc>https://example.org/tags/unity/</loc>
     <lastmod>2022-09-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/unity3d/</loc>
+    <loc>https://example.org/tags/unity3d/</loc>
     <lastmod>2022-09-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</loc>
+    <loc>https://example.org/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</loc>
     <lastmod>2022-05-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/matlab/</loc>
+    <loc>https://example.org/tags/matlab/</loc>
     <lastmod>2022-03-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</loc>
+    <loc>https://example.org/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</loc>
     <lastmod>2022-03-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/textures/</loc>
+    <loc>https://example.org/tags/textures/</loc>
     <lastmod>2022-03-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/bayesian-stats/</loc>
+    <loc>https://example.org/tags/bayesian-stats/</loc>
     <lastmod>2021-02-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</loc>
+    <loc>https://example.org/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</loc>
     <lastmod>2021-02-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/u-shape/</loc>
+    <loc>https://example.org/tags/u-shape/</loc>
     <lastmod>2021-02-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</loc>
+    <loc>https://example.org/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</loc>
     <lastmod>2021-02-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/schemavr/</loc>
+    <loc>https://example.org/tags/schemavr/</loc>
     <lastmod>2021-02-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/logistic-regression/</loc>
+    <loc>https://example.org/tags/logistic-regression/</loc>
     <lastmod>2021-01-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/</loc>
+    <loc>https://example.org/2021/01/the-priors-that-i-use-for-logistic-regression-now/</loc>
     <lastmod>2021-01-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2020/07/bayesian-sequential-designs-are-superior/</loc>
+    <loc>https://example.org/2020/07/bayesian-sequential-designs-are-superior/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/sequential-design/</loc>
+    <loc>https://example.org/tags/sequential-design/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</loc>
+    <loc>https://example.org/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</loc>
     <lastmod>2020-07-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/tags/noveltyvr/</loc>
+    <loc>https://example.org/tags/noveltyvr/</loc>
     <lastmod>2019-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/</loc>
+    <loc>https://example.org/2019/03/prior-deliberation-on-analysis-for-noveltyvr/</loc>
     <lastmod>2019-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/2018/01/analysing-normative-data/</loc>
+    <loc>https://example.org/2018/01/analysing-normative-data/</loc>
     <lastmod>2018-01-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/about/</loc>
+    <loc>https://example.org/about/</loc>
   </url>
 </urlset>

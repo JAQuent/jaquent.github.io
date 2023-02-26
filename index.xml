@@ -1,119 +1,119 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jörn Alexander Quent&#39;s notebook</title>
-    <link>https://jaquent.github.io/</link>
-    <description>Recent content on Jörn Alexander Quent&#39;s notebook</description>
+    <title>Hugo Bootstrap v4 Blog</title>
+    <link>https://example.org/</link>
+    <description>Recent content on Hugo Bootstrap v4 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Understanding the basics of the general linear model (GLM) in the context of fMRI</title>
-      <link>https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</link>
+      <link>https://example.org/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</link>
       <pubDate>Tue, 14 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</guid>
+      <guid>https://example.org/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</guid>
       <description>Prelude Sources that I found useful General libraries Simple linear regression Multiple linear regression Special cases One sample t-test Two sample t-test Paired t-test Two-way ANOVA Does the contrast weighting matter for the test-statistics? Covariance matrix of the residuals A example design matrix for fMRI Multiple testing problem Calculate FWE FWE correction Random field theory Permutation tests FDR Conclusion Glossary Prelude I was revisiting some of the basics surrounding fMRI especially the GLM and contrasts.</description>
     </item>
     
     <item>
       <title>How to change UXF&#39;s start up menu using a .json input file</title>
-      <link>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</link>
+      <link>https://example.org/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</link>
       <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</guid>
+      <guid>https://example.org/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</guid>
       <description>In my last post a while back, I showed how to load a .json file in to Unity3D without using UXF, which if you can do this, is still the easiest way for experiments. One of the problems with UXF however is that you cannot access the .json file before starting UXF&amp;rsquo;s session, which is exactly the problem that I ran into here.</description>
     </item>
     
     <item>
       <title>How you can easily load data into Unity3D using a .JSON file</title>
-      <link>https://jaquent.github.io/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</link>
+      <link>https://example.org/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</link>
       <pubDate>Tue, 17 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</guid>
+      <guid>https://example.org/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</guid>
       <description>In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp;amp; for the most part simpler ways if you use UXF - Unity Experiment Framework, which provide a way to parse on data via .json out of the box.</description>
     </item>
     
     <item>
       <title>Matlab function to create stacked texture maps for Unity</title>
-      <link>https://jaquent.github.io/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</link>
+      <link>https://example.org/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</link>
       <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</guid>
+      <guid>https://example.org/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</guid>
       <description>I&amp;rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
 Luckily, I found this obscure shader on Unity&amp;rsquo;s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.</description>
     </item>
     
     <item>
       <title>Finding a U-shape with Bayesian interrupted regression</title>
-      <link>https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
+      <link>https://example.org/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</link>
       <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</guid>
+      <guid>https://example.org/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/</guid>
       <description>The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape.</description>
     </item>
     
     <item>
       <title>A U-shape that appears as a linear correlation when averaged</title>
-      <link>https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</link>
+      <link>https://example.org/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</link>
       <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</guid>
+      <guid>https://example.org/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/</guid>
       <description>The problem While analysing the data from our U-shape experiments (see pre-registration for context: https://osf.io/kcr2q), we ran into a peculiar problem. As expected, we did find that memory performance can be described as a U-shape function of how expected a certain object is in certain location. However, we also predicted that the memory advantage for highly incongruent item/locations pairings as well as for highly congruent pairings are driven by different processes.</description>
     </item>
     
     <item>
       <title>The priors that I use for logistic regression now</title>
-      <link>https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/</link>
+      <link>https://example.org/2021/01/the-priors-that-i-use-for-logistic-regression-now/</link>
       <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/</guid>
+      <guid>https://example.org/2021/01/the-priors-that-i-use-for-logistic-regression-now/</guid>
       <description>Problem In my power simulation of the U-shape experiment, I noticed that the suggested priors (click here) actually do not work very well for Bayes Factor (BF) analysis as they are too flat and hence BF are too conservative. That is because uniform or very flat priors lead to less evidence in favour of the alternative hypothesis.</description>
     </item>
     
     <item>
       <title>Bayesian sequential designs are superior</title>
-      <link>https://jaquent.github.io/2020/07/bayesian-sequential-designs-are-superior/</link>
+      <link>https://example.org/2020/07/bayesian-sequential-designs-are-superior/</link>
       <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2020/07/bayesian-sequential-designs-are-superior/</guid>
+      <guid>https://example.org/2020/07/bayesian-sequential-designs-are-superior/</guid>
       <description>This post is based on a short talk that I gave at the MRC CBU on the 29 July 2020 for a session on statistical power. The slides of presentation can be found in my GitHub repository. This repository also includes the data and the scripts that were used to run the simulations and to create the figures.</description>
     </item>
     
     <item>
       <title>Comparing different methods to calculate Bayes factors for a simple model</title>
-      <link>https://jaquent.github.io/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</link>
+      <link>https://example.org/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</link>
       <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</guid>
+      <guid>https://example.org/2020/07/comparing-different-methods-to-calculate-bayes-factors-for-a-simple-model/</guid>
       <description>Introduction Comparing the four BF methods Evidence for null hypothesis: brms vs. ttestBF() How much more conservative is the bmrs approach? Directed vs. non-directed hypothesis Conclusion Introduction In this post, I’d like to examine how different ways to calcualte Bayes factors (BF) compare with each other for a simple model.</description>
     </item>
     
     <item>
       <title>Prior deliberation on analysis for noveltyVR</title>
-      <link>https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/</link>
+      <link>https://example.org/2019/03/prior-deliberation-on-analysis-for-noveltyvr/</link>
       <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/</guid>
+      <guid>https://example.org/2019/03/prior-deliberation-on-analysis-for-noveltyvr/</guid>
       <description>Aim of this document The aim of this document is to accompany the design analysis for noveltyVR (see here) and to shed light on the deliberations concerning the planned analysis.
 The planned design is a 2 x 2 x 2 design with one between and two within subject factors. There will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E).</description>
     </item>
     
     <item>
       <title>Analysing normative data</title>
-      <link>https://jaquent.github.io/2018/01/analysing-normative-data/</link>
+      <link>https://example.org/2018/01/analysing-normative-data/</link>
       <pubDate>Wed, 10 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/2018/01/analysing-normative-data/</guid>
+      <guid>https://example.org/2018/01/analysing-normative-data/</guid>
       <description>Introduction In order to be able to present object at locations with a range of expectancy values, which is crucial to show that this has U-shaped relationship, I asked six member of my research group. to rate all combinations of objects and location that exist in the virtual environment for the schemaVR task.</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>https://jaquent.github.io/about/</link>
+      <link>https://example.org/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://jaquent.github.io/about/</guid>
+      <guid>https://example.org/about/</guid>
       <description>This is my open notebook. My main homepage can be found here. This should be regarded as an attempt though to live up to the ideals that I have. It will take some time to develop good routines and incorporate those into my typical working day. This notebook will also witness my development as a researcher.</description>
     </item>
     
