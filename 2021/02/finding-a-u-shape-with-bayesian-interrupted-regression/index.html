@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<meta property="og:title" content="Finding a U-shape with Bayesian interrupted regression" />
+<meta property="og:description" content="The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/" />
+<meta property="article:published_time" content="2021-02-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-17T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Finding a U-shape with Bayesian interrupted regression"/>
+<meta name="twitter:description" content="The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape."/>
+<meta name="generator" content="Hugo 0.110.0">
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Finding a U-shape with Bayesian interrupted regression",
+  "url": "https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/",
+  "wordCount": "1992",
+  "datePublished": "2021-02-17T00:00:00+00:00",
+  "dateModified": "2021-02-17T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jörn Alexander Quent"
+  },
+  "keywords": "general, Bayesian Stats, U-shape"
+}
+</script>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">
+
+    <title>Finding a U-shape with Bayesian interrupted regression | Jörn Alexander Quent&#39;s notebook</title>
+
+    
+    <!-- combined, minified CSS -->
+    
+    <link href="https://jaquent.github.io/css/style.0b72f41a0f22d687d912a8e7c945fc14c7a36daee062380f9fae9958e7d17da6.css" rel="stylesheet" integrity="sha256-C3L0Gg8i1ofZEqjnyUX8FMejba7gYjgPn66ZWOfRfaY=" crossorigin="anonymous">
+    
+
+    <!-- minified Font Awesome for SVG icons -->
+    
+    <script defer src="https://jaquent.github.io/js/fontawesome.min.a290d22177f491b8a83b0ee7eb739224c57ab052d8fab69d8f52aab860e42027.js" integrity="sha256-opDSIXf0kbioOw7n63OSJMV6sFLY&#43;radj1KquGDkICc=" crossorigin="anonymous"></script>
+
+    <!-- RSS 2.0 feed -->
+    
+
+    
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
+  </head>
+
+  <body>
+
+    
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="https://jaquent.github.io/">Home</a>
+          
+          <a class="nav-link" href="/about/" title="">About</a>
+          
+          
+          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
+          
+        </nav>
+      </div>
+    </div>
+    
+
+    
+    
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title" dir="auto"><a href="https://jaquent.github.io/" rel="home">Jörn Alexander Quent's notebook</a></h1>
+        <p class="lead blog-description" dir="auto">where I share semi-interesting stuff from my work</p>
+      </div>
+    </header>
+    
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></h2>
+    <p class="blog-post-meta">
+<time datetime="2021-02-17T00:00:00Z">Wed Feb 17, 2021</time>
+ in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/u-shape/" rel="tag">U-shape</a>
+
+</p>
+  </header>
+  <h1 id="the-outset-of-the-problem">The outset of the problem</h1>
+<p>In one of my project, I’d like to show that there is a U-shape
+relationship between two variables. The traditional way to do this would
+be to fit a quadratic model and test whether the quadratic term is
+different from zero. However, <a href="https://journals.sagepub.com/doi/10.1177/2515245918805755#">Simonsohn
+(2018)</a>
+among other correctly points out that evidence for a quadratic fit is
+not enough and there might be situations where the quadratic term is not
+zero but there is no true u-shape.</p>
+<p>To avoid this, Simonsohn proposed to use interrupt regression that tests
+whether each slope is different from zero. While the exact proposal
+(Robin Hood algorithm) might work well for frequentist statistics, it is
+not clear how we can adopt this for our Bayesian models. The main
+question being that it is unclear how to choose the correct breaking
+point. This is what I explore here extensively as a preparation for a
+pre-registration <a href="https://osf.io/4sw2t/">(for context click on link)</a>.</p>
+<h1 id="explanation-of-the-simulation">Explanation of the simulation</h1>
+<p>We identified two options to analyse our data with interrupted
+regression or more specifically how to find the best breaking point.</p>
+<p><strong>Option 1</strong> is to split the data in half using a spline (or similar) to
+find the minimum/maximum in one half of the data and then analyse the
+other half of the data to test whether both slopes at a that point are
+significantly different from 0.</p>
+<p><strong>Option 2</strong> is to use all data and test a whole range of points within
+an interval and then apply an appropriate correction for multiple
+testing. The aim of this document is to explore all the options and
+their implications. Also whether correction is necessary at all.</p>
+<p>For option 1, I subset the simulated data to only include the middle 80%
+and then find the minimum via smoothing model. The smoothing model is
+the same used by Simonsohn’s two line test, which is a general additive
+model using a cubic regression spline. When I played around with it, it
+usually did a good job finding the point that would also be chosen via
+visual examination for the plotted loess line. I used only 80 % of the
+middle because especially when the $\beta_2$ is zero, the minimum was
+often the extreme points, which make a meaningful estimation impossible.
+An alternative for this could be to fit the smoothing model to the full
+range of the values but to only consider minima within the middle 80 %
+but this wasn’t tested here.</p>
+<p>For option 2, I also restricted the range to same middle 80%, for which
+10 breaking points evenly spaced out were examined. For each different
+$\beta_2$ I run 100,000 simulations.</p>
+<p>Also note that some models couldn’t be estimated that is because some
+model didn’t return a minimum or only return NA. This happens
+particularly often in the frequentist models.</p>
+<p>I start with frequentist mixed linear models to get an idea how both
+options compare in terms of how they behave and use those results as a
+perspective for the Bayesian implementation.</p>
+<p>Like in the two-line test we fitted two individual models to the data.
+One model to get the p-value/BF for slope 1 that includes the breaking
+point. Since in this model slope 2 can’t contain the breaking point, we
+fitted another model where the breaking point is included in slope 2 but
+not slope 1, so that both slopes include the minimum/maximum and make
+best use of the data.</p>
+<p>Note that links to the repository will be added at a later time point.
+If you read this in the far future and I haven’t done this yet, feel
+free to kick me.</p>
+<h1 id="frequentist-models">Frequentist models</h1>
+<h2 id="using-previous-data-to-generated-null-data-by-shuffling">Using previous data to generated null data by shuffling</h2>
+<p>In order to find a way for appropriate multiple testing correction that
+is less severe than Bonferroni, I shuffled the 0 and 1 of original data
+<a href="https://osf.io/4sw2t/">(for context click on link)</a> within subjects.
+This means that the average performance within subjects as in our actual
+data that we want to analyse after pre-registration is the same but the
+information for objects is lost. Due to the fact that in our example
+each subject only saw each type of object once, we cannot shuffle within
+both subjects and objects. After shuffling mixed linear models with a
+random intercept are fitted to the data following this equation</p>
+<p>y ~ xlow + xhigh + high + (1 | sub).</p>
+<p>Now, we examine the results of this simulation.</p>
+<p>The FDR for U-shapes for null data generated by shuffling 0 and 1 within
+subjects is 3.796 % for mixed linear model with random intercept for
+subjects and objects. For slope 1 its 27.508 % and for slope 2 50.297 %.
+This shows an extreme asymmetry that can be traced down to the
+distribution of the p-values of the shuffled original data.</p>
+<p>While the p-value for slope 1 is nicely uniform,</p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot1-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p>the p-values for slope 2 show extreme pikes at 0 and 1.</p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot2-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p>This is not due to an error in the code but due to the fact that the
+x-values are always the same with this shuffling method. When I randomly
+generated x-values like in the quadratic simulation below, we get the
+similar FPR for both slopes. To be sure about this, I ran a normal glm
+(without random effects) and got similar results, which means that the
+problem is not the model but the shuffled data where the x-values remain
+unchanged.</p>
+<p>On a side note, I found for 18.7 % of the cases I had some kind of
+convergence warning while fitting the mixed linear model but since the
+glm showed the same results, this is not an important issue but shows
+how Bayesian models might be more robust against these kind of things.</p>
+<h2 id="one-slope--005">One Slope &lt; 0.05</h2>
+<p>With this simulation, I can now look for an alpha level for individual
+slopes so that we only have one or more significant slopes per iteration
+across the breaking points in 5 % of the cases.</p>
+<p>For the shuffled data we get an alpha level of 0.0068 for individual
+slopes. This mean that we can accept the significance of individuals
+slopes if the p-value is below that level and still only be wrong in 5%
+of the cases. This is already slightly less conservative than a
+Bonferroni correction.</p>
+<h1 id="quadratic-simulation">Quadratic simulation</h1>
+<p>To show that a) the data generated de-novo is not skewed like the
+shuffled above and b) to draw a power curve I ran another simulation
+that generated data via quadratic logistic regression with 100,000
+iterations per $\beta_2$ (0, 0.175, 0.35, 0.525, 0.7). All simulations
+are run with sample size of 80. In the first step, I optimise the alpha
+level for the generated data in the same way I did above. The data was
+generated with this function:</p>
+<p>The optimised alpha level for individual slopes is very similar for both
+slopes. Averaged it is p &lt; 0.0081604.</p>
+<p>There are two things we can look at. First is how two both methods fair
+in detecting significant individual slopes in terms of power and FPR.
+The second thing we can look is how do the methods fair when the aim is
+to detect a U-shape (i.e. two significant slopes) especially once we
+corrected for multiple comparison.</p>
+<h2 id="power-curves-for-individual-slopes">Power curves for individual slopes</h2>
+<p>The FPR for generated data analysed with option 2 are 0.25073 and
+0.26067.</p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot3-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p>In the following are the corrected slopes:</p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot4-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p>At this point we can also look at the distribution of p-values for those
+simulated x-values.</p>
+<p>Also, just as a quick side note. When the data is generated instead of
+shuffled the p-values for both slopes follow a nice uniform
+distribution.</p>
+<h2 id="power-for-detecting-u-shape-after-correction">Power for detecting u-shape after correction</h2>
+<p>Now, we can examine how this correction procedure affects the abilitiy
+to detect a U-shape using both methods implemeneted as frequentist
+models.</p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/plot7-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<p>As can be seen above, option 2 fares much better than option 1 even
+after quite rigorous correction of multiple comparison.</p>
+<p>One possible reason that option 1 fares poorly is that the estimation of
+the breaking point is very noisy. In fact the mean absolute difference
+is 0.7478701, which is quite large considering the range of values on
+the predictor variable in the simulation (min = -2.439 and max = 1.58).
+Typically, the values range between (+/- 1.2) though.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This simulation has shown that the FPR rate is indeed increased for
+individual slopes when testing 10 breaking points per analysis. However,
+this can be alleviated with appropriate correction of the alpha level
+for the individual slopes. Not that the correction is markedly less
+strict than a Bonferroni correction ($\alpha$) divided by the number of
+tests).</p>
+<p>We can conclude that option 2 is preferable to option 1. Now in the next
+step, we apply the same approach to our Bayesian model and see how this
+behaves under the same circumstances.</p>
+<h1 id="bayes-factors">Bayes factors</h1>
+<p>I used the same data generating function for this simulation and we also
+used 100,000 iterations with a $\beta_2$ of 0. For the Bayesian model
+I used these priors (for justification to use these priors see
+<a href="https://jaquent.github.io/post/the-priors-that-i-use-for-logsitic-regression-now/">here</a>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>priors  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">prior</span>(<span style="color:#a6e22e">student_t</span>(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>) , class <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Intercept&#34;</span>),
+</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">prior</span>(<span style="color:#a6e22e">student_t</span>(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>) , class <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)) 
+</span></span></code></pre></div><p>and the following model.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Preparation for interrupted regression (for more info see Simonsohn, 2018) of slope 1.</span>
+</span></span><span style="display:flex;"><span>breakingPoints <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># In this case I&#39;d split it at zero. </span>
+</span></span><span style="display:flex;"><span>x              <span style="color:#f92672">&lt;-</span> df<span style="color:#f92672">$</span>s_x 
+</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>xlow        <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ifelse</span>(x <span style="color:#f92672">&lt;=</span> breakingPoints, x <span style="color:#f92672">-</span> breakingPoints, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>xhigh       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ifelse</span>(x <span style="color:#f92672">&gt;</span> breakingPoints, x <span style="color:#f92672">-</span> breakingPoints, <span style="color:#ae81ff">0</span>)     
+</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>high        <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ifelse</span>(x <span style="color:#f92672">&gt;</span> breakingPoints, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The model </span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">brm</span>(y <span style="color:#f92672">~</span> xlow <span style="color:#f92672">+</span> xhigh <span style="color:#f92672">+</span> high,
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> df,
+</span></span><span style="display:flex;"><span>    prior <span style="color:#f92672">=</span> priors,
+</span></span><span style="display:flex;"><span>    family <span style="color:#f92672">=</span> <span style="color:#a6e22e">bernoulli</span>()) 
+</span></span></code></pre></div><p>Note that I didn’t add a random intercept because even when only using a
+total number of samples of 9000, adding a random intercepts would have
+increased the run time of this simulation significantly. The data was
+generated and scaled with this function:</p>
+<p>This null data allows us to examine which $BF_{10}$ we could accept as
+individual slopes despite multiple testing and still retain a FPR of 5 %
+in total.</p>
+<p>The results show in contrast to frequentist models where we have to
+lower the alpha level compared to the convention (p &lt; 0.05) that we
+could accept $BF_{10}$ as low as 5.66 have the same FPR rate as we
+have for the frequentist models. Typically, journals accept a
+$BF_{10} &gt; 6$ and sometimes a $BF_{10} &gt; 10$ as sufficient evidence.
+The main reason for this stark discrepancy between frequentist and
+Bayesian statistics is that the latter are far more conservative than
+the former.</p>
+<p>In our case, the FPR for individual slopes is 4.66 % with
+$BF_{10} &gt; 6$ without any form of correcting for the fact that we ran
+multiple tests on the same data. This is based on 100,000 simulations.</p>
+<p>Now we can examine the ‘power’ curve for our Bayesian model as function
+of using different $BF_{10}$ criteria.</p>
+<p><img src="/post/2021-02-17-finding-a-u-shape-with-bayesian-interrupted-regression/combine_plots-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<h1 id="conclusion-1">Conclusion</h1>
+<p>The frequentist simulation showed without doubt that option 2 is better
+way of analysing the data. However, it also showed that testing multiple
+breaking points inflates the Type 1 error. The Bayesian simulation on
+the other hand provide us with evidence that is not an issue for this
+type of analysis as the FPR is much lower than that what we accept for
+frequentist models. That means that we could even lower the $BF_{10}$
+to for accepting non-zero slopes below the commonly accepted evidence
+criterion of $BF_{10} &gt; 6$ and still have a FPR of 5 %
+(i.e. $BF_{10} &gt;$ 5.66). However, I do not propose to do this but stick
+with accepting individual slopes if they have a $BF_{10} &gt; 6$, which
+provides me with enough confidence. Especially since we need both lines
+to surpass this level of evidence at the same time to conclude that we
+have U-shape.</p>
+<p>In sum, I conclude that it is fine to take a $BF_{10} &gt; 6$ as evidence
+for a non-zero slope even if I test 10 different breaking points for our
+data.</p>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjaquent.github.io%2f2021%2f02%2ffinding-a-u-shape-with-bayesian-interrupted-regression%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjaquent.github.io%2f2021%2f02%2ffinding-a-u-shape-with-bayesian-interrupted-regression%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fjaquent.github.io%2f2021%2f02%2ffinding-a-u-shape-with-bayesian-interrupted-regression%2f&amp;text=Finding%20a%20U-shape%20with%20Bayesian%20interrupted%20regression" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 ml-auto blog-sidebar">
+  
+  <section class="sidebar-module sidebar-module-inset">
+    <h4>About</h4>
+    <p dir="auto">The idea behind this notebook can be found <a href="/about/">here</a>.</p>
+  </section>
+  
+
+  
+        <section class="sidebar-module">
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+
+
+<li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
+
+<li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
+
+<li><a href="/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></li>
+
+<li><a href="/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></li>
+
+<li><a href="/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></li>
+
+    </ol>
+  </section>
+
+  
+
+  
+  <section class="sidebar-module">
+    <h4>Links</h4>
+    <ol class="list-unstyled">
+      
+      <li><a href="https://github.com/JAQuent/">My GitHub page</a></li>
+      
+    </ol>
+  </section>
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <section class="sidebar-module">
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-secondary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
+            
+            <a class="badge badge-secondary" href="/tags/glm">glm</a>
+            
+            <a class="badge badge-secondary" href="/tags/json">json</a>
+            
+            <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
+            
+            <a class="badge badge-secondary" href="/tags/matlab">matlab</a>
+            
+            <a class="badge badge-secondary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
+            
+            <a class="badge badge-secondary" href="/tags/stats">stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/textures">textures</a>
+            
+            <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity">unity</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity3d">unity3d</a>
+            
+        </p>
+        
+    
+ </section>
+</aside>
+
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+    
+
+    
+    <footer class="blog-footer">
+      <p dir="auto">
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+    
+
+  </body>
+
+</html>

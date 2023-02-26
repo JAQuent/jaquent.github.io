@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>unity on Jörn Alexander Quent&#39;s notebook</title>
+    <link>https://jaquent.github.io/tags/unity/</link>
+    <description>Recent content in unity on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 20 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to change UXF&#39;s start up menu using a .json input file</title>
+      <link>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</link>
+      <pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</guid>
+      <description>In my last post a while back, I showed how to load a .json file in to Unity3D without using UXF, which if you can do this, is still the easiest way for experiments. One of the problems with UXF however is that you cannot access the .json file before starting UXF&amp;rsquo;s session, which is exactly the problem that I ran into here.</description>
+    </item>
+    
+    <item>
+      <title>How you can easily load data into Unity3D using a .JSON file</title>
+      <link>https://jaquent.github.io/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</link>
+      <pubDate>Tue, 17 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/</guid>
+      <description>In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp;amp; for the most part simpler ways if you use UXF - Unity Experiment Framework, which provide a way to parse on data via .json out of the box.</description>
+    </item>
+    
+    <item>
+      <title>Matlab function to create stacked texture maps for Unity</title>
+      <link>https://jaquent.github.io/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</link>
+      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/</guid>
+      <description>I&amp;rsquo;ve been experimenting with different materials and shaders in Unity recently. One problem is that especially if you want use the same texture for the same large object you get these nasty tiling effects:
+Luckily, I found this obscure shader on Unity&amp;rsquo;s GitHub page, which is amazing but it asked for something called a map texture, which took me ages to figure out.</description>
+    </item>
+    
+  </channel>
+</rss>
