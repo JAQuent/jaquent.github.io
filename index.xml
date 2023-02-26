@@ -6,7 +6,7 @@
     <description>Recent content on Hugo Bootstrap v4 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating a New Theme</title>
       <link>https://example.org/2014/09/creating-a-new-theme/</link>
@@ -24,6 +24,15 @@
       <guid>https://example.org/2014/03/migrate-to-hugo-from-jekyll/</guid>
       <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
 ▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png should become</description>
+    </item>
+    
+    <item>
+      <title>test</title>
+      <link>https://example.org/2023/02/test/</link>
+      <pubDate>Sun, 26 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.org/2023/02/test/</guid>
+      <description></description>
     </item>
     
     <item>
