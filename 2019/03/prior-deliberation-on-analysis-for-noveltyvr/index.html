@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<meta property="og:title" content="Prior deliberation on analysis for noveltyVR" />
+<meta property="og:description" content="Aim of this document The aim of this document is to accompany the design analysis for noveltyVR (see here) and to shed light on the deliberations concerning the planned analysis.
+The planned design is a 2 x 2 x 2 design with one between and two within subject factors. There will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/" />
+<meta property="article:published_time" content="2019-03-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-03-18T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Prior deliberation on analysis for noveltyVR"/>
+<meta name="twitter:description" content="Aim of this document The aim of this document is to accompany the design analysis for noveltyVR (see here) and to shed light on the deliberations concerning the planned analysis.
+The planned design is a 2 x 2 x 2 design with one between and two within subject factors. There will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E)."/>
+<meta name="generator" content="Hugo 0.110.0">
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Prior deliberation on analysis for noveltyVR",
+  "url": "https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/",
+  "wordCount": "2619",
+  "datePublished": "2019-03-18T00:00:00+00:00",
+  "dateModified": "2019-03-18T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Alex Quent"
+  },
+  "keywords": "experiments, Bayesian Stats, noveltyVR, glm"
+}
+</script>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/">
+
+    <title>Prior deliberation on analysis for noveltyVR | Jörn Alexander Quent&#39;s notebook</title>
+
+    
+    <!-- combined, minified CSS -->
+    
+    <link href="https://jaquent.github.io/css/style.0b72f41a0f22d687d912a8e7c945fc14c7a36daee062380f9fae9958e7d17da6.css" rel="stylesheet" integrity="sha256-C3L0Gg8i1ofZEqjnyUX8FMejba7gYjgPn66ZWOfRfaY=" crossorigin="anonymous">
+    
+
+    <!-- minified Font Awesome for SVG icons -->
+    
+    <script defer src="https://jaquent.github.io/js/fontawesome.min.a290d22177f491b8a83b0ee7eb739224c57ab052d8fab69d8f52aab860e42027.js" integrity="sha256-opDSIXf0kbioOw7n63OSJMV6sFLY&#43;radj1KquGDkICc=" crossorigin="anonymous"></script>
+
+    <!-- RSS 2.0 feed -->
+    
+
+    
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
+  </head>
+
+  <body>
+
+    
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="https://jaquent.github.io/">Home</a>
+          
+          <a class="nav-link" href="/about/" title="">About</a>
+          
+          
+          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
+          
+        </nav>
+      </div>
+    </div>
+    
+
+    
+    
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title" dir="auto"><a href="https://jaquent.github.io/" rel="home">Jörn Alexander Quent's notebook</a></h1>
+        <p class="lead blog-description" dir="auto">where I share semi-interesting stuff from my work</p>
+      </div>
+    </header>
+    
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2019/03/prior-deliberation-on-analysis-for-noveltyvr/">Prior deliberation on analysis for noveltyVR</a></h2>
+    <p class="blog-post-meta">
+<time datetime="2019-03-18T00:00:00Z">Mon Mar 18, 2019</time>
+ in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/noveltyvr/" rel="tag">noveltyVR</a>, <a href="/tags/glm/" rel="tag">glm</a>
+
+</p>
+  </header>
+  <h1 id="aim-of-this-document">Aim of this document</h1>
+<p>The aim of this document is to accompany the design analysis for noveltyVR (<a href="https://github.com/JAQuent/noveltyVR/blob/master/preparation/bayesianDesignAnalysis_tTest_fixedN.md">see here</a>) and to shed light on the deliberations concerning the planned analysis.</p>
+<p>The planned design is a 2 x 2 x 2 design with one between and two within subject factors. There will be a novelty and a control group (Factor N) and we will examine recollection/familiarity (Factor M) for weakly/strongly learned words (Factor E).</p>
+<h1 id="libraries">Libraries</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(plyr)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(knitr)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cowplot)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(BayesFactor)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ez)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(reshape2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">theme_set</span>(<span style="color:#a6e22e">theme_grey</span>()) <span style="color:#75715e"># Important to retain the ggplot theme</span>
+</span></span></code></pre></div><h1 id="generating-a-dataset-with-a-mixed-2-x-2-x-2-design">Generating a dataset with a mixed 2 x 2 x 2 design</h1>
+<p>The design will be mixed 2 x 2 x 2 with one between and two within subject factors. The GLM for the full model is defined by this equation</p>
+<p><img src="/post/2019-03-18-prior-deliberation-on-analysis_files/equation1.png" alt="Equation 1"></p>
+<p>where the response from the <em>n</em>th subject from group <em>g</em> is modeled as the effect of N (between), g = [1 2], effect of E (within), i = [1 2], and effect of M (within), j = [1 2], and all the two-way and three way interactions. In addition to error term for all observations <em>N</em>(0, <em>σ</em><sub><em>e</em></sub><sup>2</sup>), there is an additional subject specific error term, <em>N</em>(0, <em>σ</em><sub><em>e</em></sub><sup>2</sup>). Note that for simplicity, this model does not include interactions with subject as additional error terms. In other words, we assume &ldquo;effect-by-subject&rdquo; errors to have the same scaling (<a href="https://www.fil.ion.ucl.ac.uk/~wpenny/publications/rik_anova.pdf">see here for discussion</a>).</p>
+<p>The code below creates a GLM where every <em>β</em>-value is set to 0.2 for 36 subjects per group.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Setting seed!</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">392571</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample size, groups and levels</span>
+</span></span><span style="display:flex;"><span>groups      <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>groupSize   <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>n           <span style="color:#f92672">&lt;-</span> groupSize  <span style="color:#f92672">*</span> groups
+</span></span><span style="display:flex;"><span>levels1     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>levels2     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>totalLevels <span style="color:#f92672">&lt;-</span> levels1 <span style="color:#f92672">*</span> levels2
+</span></span><span style="display:flex;"><span>nObvs       <span style="color:#f92672">&lt;-</span> n <span style="color:#f92672">*</span> totalLevels
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Variables</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span>, groupSize <span style="color:#f92672">*</span> totalLevels), <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">-1</span>, groupSize <span style="color:#f92672">*</span> totalLevels))
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> groupSize), <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> groupSize))
+</span></span><span style="display:flex;"><span>M <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> groupSize), <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> groupSize))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Coefficients with all the interactions</span>
+</span></span><span style="display:flex;"><span>beta0  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>beta1  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>beta2  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>beta3  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>beta4  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>beta5  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>beta6  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>beta7  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>e_subj <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(groupSize, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>b      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(beta2 <span style="color:#f92672">+</span> beta4, 
+</span></span><span style="display:flex;"><span>            beta3 <span style="color:#f92672">+</span> beta5, 
+</span></span><span style="display:flex;"><span>            beta6 <span style="color:#f92672">+</span> beta7, 
+</span></span><span style="display:flex;"><span>            e_subj)
+</span></span><span style="display:flex;"><span>b      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(beta0, 
+</span></span><span style="display:flex;"><span>            beta1, 
+</span></span><span style="display:flex;"><span>            b, 
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">c</span>(beta2 <span style="color:#f92672">-</span> beta4, 
+</span></span><span style="display:flex;"><span>              beta3 <span style="color:#f92672">-</span> beta5, 
+</span></span><span style="display:flex;"><span>              beta6 <span style="color:#f92672">-</span> beta7, 
+</span></span><span style="display:flex;"><span>              e_subj))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Creating design matrix</span>
+</span></span><span style="display:flex;"><span>cons <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>( <span style="color:#ae81ff">1</span>,  <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>,  <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">-1</span>,  <span style="color:#ae81ff">1</span>),
+</span></span><span style="display:flex;"><span>               nrow <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>               byrow <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>X    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(<span style="color:#a6e22e">kronecker</span>(<span style="color:#a6e22e">t</span>(cons), <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span>, groupSize)), 
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">kronecker</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span>, totalLevels), <span style="color:#a6e22e">diag</span>(groupSize)))
+</span></span><span style="display:flex;"><span>X    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">bdiag</span>(X, X)
+</span></span><span style="display:flex;"><span>X    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>), each <span style="color:#f92672">=</span> groupSize <span style="color:#f92672">*</span> totalLevels), X)
+</span></span></code></pre></div><p>The design matrix is shown below for visualisation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Displaying design matrix</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dispDesignMatrix</span>(X)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span>(main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Design matrix for 2 x 2 x 2 design&#39;</span>)
+</span></span></code></pre></div><p><img src="/post/2019-03-18-prior-deliberation-on-analysis_files/figure-markdown_github/unnamed-chunk-3-1.png" alt=""></p>
+<p>The first column of this design matrix represents the intercept followed by the group effect and then by the within subject effects and subject specific effects on the diagonals.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generating data and creating data.frame</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">&lt;-</span> X <span style="color:#f92672">%*%</span> b <span style="color:#f92672">+</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#a6e22e">dim</span>(X)[1], mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.matrix</span>(y),
+</span></span><span style="display:flex;"><span>                 N <span style="color:#f92672">=</span> N,
+</span></span><span style="display:flex;"><span>                 E <span style="color:#f92672">=</span> E,
+</span></span><span style="display:flex;"><span>                 M <span style="color:#f92672">=</span> M)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fit model</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(<span style="color:#a6e22e">lm</span>(y <span style="color:#f92672">~</span> N<span style="color:#f92672">*</span>E<span style="color:#f92672">*</span>M, data <span style="color:#f92672">=</span> df))
+</span></span></code></pre></div><pre><code>## 
+## Call:
+## lm(formula = y ~ N * E * M, data = df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.0643 -0.8523  0.0412  0.7922  4.0278 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.3188     0.0767   4.157 0.000043 ***
+## N             0.1752     0.0767   2.284 0.023112 *  
+## E             0.1974     0.0767   2.574 0.010577 *  
+## M             0.1671     0.0767   2.179 0.030177 *  
+## N:E           0.2314     0.0767   3.018 0.002781 ** 
+## N:M           0.1387     0.0767   1.808 0.071630 .  
+## E:M           0.2841     0.0767   3.705 0.000255 ***
+## N:E:M         0.2178     0.0767   2.840 0.004840 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.302 on 280 degrees of freedom
+## Multiple R-squared:  0.1535, Adjusted R-squared:  0.1323 
+## F-statistic: 7.251 on 7 and 280 DF,  p-value: 5.446e-08
+</code></pre>
+<p>The fitted values in the GLM above can accurately retrieve the true <em>β</em>-values. Note that the effect size of the within-subject factors <em>β</em>-values can be calculated by dividing it with the SD of the error term, which is set to 1 in that example. In a case, where there only one two-level factor the effect size of the <em>β</em>-value is equivalent to <a href="https://en.wikipedia.org/wiki/Effect_size#Cohen's_d">Cohen&rsquo;s d</a>.</p>
+<p><strong>Warning</strong>: Note that N, E, and M must be coded as 1/-1, otherwise lm() will not give the right <em>β</em>-values. For anovaBF() on the other hand they need to be converted to factors.</p>
+<h1 id="analysing-data-with-that-model-structure">Analysing data with that model structure</h1>
+<p>For us, four effects are of interest: main effect of novelty (N) with better memory for the novelty group, interaction of novelty with encoding strength (N x E) where novelty benefits weakly encoded words more, interaction of novelty with memory quality (N x M) where novelty increases recollection and lastly the interaction of novelty with encoding strength and memory quality (N x E x M) where novelty increases recollection for weakly encoded words. Theoretically, the most important effect is the interaction between novelty and and encoding strength (weakly/strongly).</p>
+<h2 id="data-visualisation">Data visualisation</h2>
+<p>See below how the data generated with parameters specified above would look like.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Preparing data.frame</span>
+</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>N         <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.factor</span>(df<span style="color:#f92672">$</span>N)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">levels</span>(df<span style="color:#f92672">$</span>N) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;Group 1&#39;</span>, <span style="color:#e6db74">&#39;Group 2&#39;</span>)
+</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>E         <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.factor</span>(df<span style="color:#f92672">$</span>E)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">levels</span>(df<span style="color:#f92672">$</span>E) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;Level 2&#39;</span>)
+</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>M         <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.factor</span>(df<span style="color:#f92672">$</span>M)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">levels</span>(df<span style="color:#f92672">$</span>M) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;Level 2&#39;</span>)
+</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>id        <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>groupSize, totalLevels), <span style="color:#a6e22e">rep</span>((groupSize <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">:</span>n, totalLevels)))<span style="color:#75715e"># Adding subject id</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Aggregating and plotting data</span>
+</span></span><span style="display:flex;"><span>df_agg           <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ddply</span>(df, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;E&#39;</span>, <span style="color:#e6db74">&#39;M&#39;</span>), summarise, Value <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(y))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(df_agg, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> E, y<span style="color:#f92672">=</span> Value, fill <span style="color:#f92672">=</span> M, group <span style="color:#f92672">=</span> M)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">facet_grid</span>( <span style="color:#f92672">~</span> N) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_bar</span>(stat<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;identity&#34;</span>, position<span style="color:#f92672">=</span><span style="color:#a6e22e">position_dodge</span>())
+</span></span></code></pre></div><p><img src="/post/2019-03-18-prior-deliberation-on-analysis_files/figure-markdown_github/unnamed-chunk-5-1.png" alt=""></p>
+<h2 id="standard-anova">Standard ANOVA</h2>
+<p>Even though, I don&rsquo;t intend to use a standard (frequentist version) ANOVA, I report it as a comparison.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Anova</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ezANOVA</span>(data <span style="color:#f92672">=</span> df,
+</span></span><span style="display:flex;"><span>        dv <span style="color:#f92672">=</span> .(y),
+</span></span><span style="display:flex;"><span>        wid <span style="color:#f92672">=</span> .(id),
+</span></span><span style="display:flex;"><span>        between <span style="color:#f92672">=</span> .(N),
+</span></span><span style="display:flex;"><span>        within <span style="color:#f92672">=</span> .(E, M),
+</span></span><span style="display:flex;"><span>        detailed <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><pre><code>## $ANOVA
+##        Effect DFn DFd       SSn       SSd         F            p p&lt;.05
+## 1 (Intercept)   1  70 29.267876 284.79677  7.193731 9.119498e-03     *
+## 2           N   1  70  8.838444 284.79677  2.172395 1.449904e-01      
+## 3           E   1  70 11.221089  53.24454 14.752239 2.664225e-04     *
+## 5           M   1  70  8.042334  69.64162  8.083720 5.849486e-03     *
+## 4         N:E   1  70 15.427602  53.24454 20.282495 2.603574e-05     *
+## 6         N:M   1  70  5.539589  69.64162  5.568096 2.108397e-02     *
+## 7         E:M   1  70 23.249215  66.65363 24.416450 5.098138e-06     *
+## 8       N:E:M   1  70 13.664784  66.65363 14.350829 3.177422e-04     *
+##          ges
+## 1 0.05811679
+## 2 0.01829243
+## 3 0.02310969
+## 5 0.01667223
+## 4 0.03150006
+## 6 0.01154379
+## 7 0.04672403
+## 8 0.02800153
+</code></pre>
+<p>Most main effects and interactions are significant as expected. The only effect that is not significant is the main effect of novelty.</p>
+<h2 id="bayesian-anova">Bayesian ANOVA</h2>
+<p>The first idea is to run Bayesian ANOVA to test our specific hypotheses. Below, I follow the examples for Bayes factor analysis from <a href="https://richarddmorey.github.io/BayesFactor/#fixed">Richard Morey</a>. To evaluate the evidence for the effects of interest (see above), I compare only models that are plausible (for a discussion see Rouder, Engelhardt, McCabe, &amp; Morey, 2016). This means that no model is used that contains interactions without the respective main effects. In a standard ANOVA, the full model is compared against model that doesn&rsquo;t include the factor in question.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Fitting model</span>
+</span></span><span style="display:flex;"><span>bf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">anovaBF</span>(y <span style="color:#f92672">~</span> N<span style="color:#f92672">*</span>E<span style="color:#f92672">*</span>M <span style="color:#f92672">+</span> id,
+</span></span><span style="display:flex;"><span>              whichRandom <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;id&#39;</span>,
+</span></span><span style="display:flex;"><span>              data <span style="color:#f92672">=</span> df, 
+</span></span><span style="display:flex;"><span>              progress <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Legend: N = novelty, E =  encoding strength, M = memory quality</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># What&#39;s the evidence for a main effect of N?</span>
+</span></span><span style="display:flex;"><span>bf[14]<span style="color:#f92672">/</span>bf[13]
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] N + E + M + E:M + id : 0.5545789 ±4.02%
+## 
+## Against denominator:
+##   y ~ E + M + E:M + id 
+## ---
+## Bayes factor type: BFlinearModel, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># What&#39;s the evidence for an interaction between N and E?</span>
+</span></span><span style="display:flex;"><span>bf[9]<span style="color:#f92672">/</span>bf[8]
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] N + E + N:E + M + id : 105.7927 ±4.39%
+## 
+## Against denominator:
+##   y ~ N + E + M + id 
+## ---
+## Bayes factor type: BFlinearModel, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># What&#39;s the evidence for an interaction between N and M?</span>
+</span></span><span style="display:flex;"><span>bf[11]<span style="color:#f92672">/</span>bf[8]
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] N + E + M + N:M + id : 1.743846 ±5.72%
+## 
+## Against denominator:
+##   y ~ N + E + M + id 
+## ---
+## Bayes factor type: BFlinearModel, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># What&#39;s the evidence for an interaction between N and E and M?</span>
+</span></span><span style="display:flex;"><span>bf[18]<span style="color:#f92672">/</span>bf[17]
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] N + E + N:E + M + N:M + E:M + N:E:M + id : 167.7876 ±4.42%
+## 
+## Against denominator:
+##   y ~ N + E + N:E + M + N:M + E:M + id 
+## ---
+## Bayes factor type: BFlinearModel, JZS
+</code></pre>
+<p>These are the models that I would plan to compare in the actual analysis. It is interesting to see that the choice of models does not seem to be of much importance at least for the generated data. For instance, the evidence for an effect of N is similar if model 14 &amp; 13 (BF = 0.55) model 8 &amp; 7 (BF = 0.57) or model 3 &amp; 2 (BF = 0.57) are compared.</p>
+<p>However like the standard frequentist ANOVA, the Bayesian model comparison doesn&rsquo;t provide evidence to reject the null hypothesis for the main effect of N.</p>
+<p>The problem with that approach is that the ANOVA is two-sided but we have specific one-sided hypotheses. If we adopted that approach, we would need to collect data from too many participants than necessary.</p>
+<h2 id="directional-t-tests">Directional t-tests</h2>
+<p>Luckily, our independent variables only have two levels, which allows us to use directional t-tests instead of two-sided ANOVAs by comparing the differences of the differences between groups.</p>
+<p>The t-tests are calculated the following way: For the main effect of N, data is aggregated across the other within-variables yielding one mean per subjects. For both two-way interactions, the t-tests are calculated by aggregating across the other variable and comparing the within-subject differences of both groups. The t-test for the three-way interaction is calculated by difference between each level of E for both levels of M and the difference of them, which is then compared between groups.</p>
+<p>Following Richard Morey&rsquo;s <a href="https://richarddmorey.github.io/BayesFactor/#fixed">explanations</a> for one-sided t-tests, there are two possibilities. The first one is to compare the alternative hypothesis to the point null, the other option is to compare the alternative to its complement so for instance <em>δ</em> &gt; 0 against <em>δ</em> &lt; 0.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># What&#39;s the evidence for a main effect of N?</span>
+</span></span><span style="display:flex;"><span>mainEffect_N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ddply</span>(df, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;N&#39;</span>), summarise, y <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(y))
+</span></span><span style="display:flex;"><span>test1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ttestBF</span>(x <span style="color:#f92672">=</span> mainEffect_N<span style="color:#f92672">$</span>y[mainEffect_N<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span>],
+</span></span><span style="display:flex;"><span>                 y <span style="color:#f92672">=</span> mainEffect_N<span style="color:#f92672">$</span>y[mainEffect_N<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span>],
+</span></span><span style="display:flex;"><span>                 paired <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>,
+</span></span><span style="display:flex;"><span>                 nullInterval <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Point null vs. alt</span>
+</span></span><span style="display:flex;"><span>test1
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 -Inf&lt;d&lt;0    : 0.1080171 ±0%
+## [2] Alt., r=0.707 !(-Inf&lt;d&lt;0) : 1.120888  ±0.01%
+## 
+## Against denominator:
+##   Null, mu1-mu2 = 0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Alt vs. complement</span>
+</span></span><span style="display:flex;"><span>test1[2]<span style="color:#f92672">/</span>test1[1]
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 !(-Inf&lt;d&lt;0) : 10.37695 ±0.01%
+## 
+## Against denominator:
+##   Alternative, r = 0.707106781186548, mu =/= 0 -Inf&lt;d&lt;0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># What&#39;s the evidence for an interaction between N and E?</span>
+</span></span><span style="display:flex;"><span>inter_N_E <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ddply</span>(df, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;E&#39;</span>), summarise, y <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(y))
+</span></span><span style="display:flex;"><span>diff1     <span style="color:#f92672">&lt;-</span> inter_N_E[inter_N_E<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span> <span style="color:#f92672">&amp;</span> inter_N_E<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">-</span> inter_N_E[inter_N_E<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span> <span style="color:#f92672">&amp;</span> inter_N_E<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>]
+</span></span><span style="display:flex;"><span>diff2     <span style="color:#f92672">&lt;-</span> inter_N_E[inter_N_E<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span> <span style="color:#f92672">&amp;</span> inter_N_E<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">-</span> inter_N_E[inter_N_E<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span> <span style="color:#f92672">&amp;</span> inter_N_E<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>]
+</span></span><span style="display:flex;"><span>test2     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ttestBF</span>(x <span style="color:#f92672">=</span> diff2,
+</span></span><span style="display:flex;"><span>                     y <span style="color:#f92672">=</span> diff1,
+</span></span><span style="display:flex;"><span>                     nullInterval <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Point null vs. alt</span>
+</span></span><span style="display:flex;"><span>test2
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 -Inf&lt;d&lt;0    : 0.05019146 ±0%
+## [2] Alt., r=0.707 !(-Inf&lt;d&lt;0) : 1456.546   ±0%
+## 
+## Against denominator:
+##   Null, mu1-mu2 = 0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Alt vs. complement</span>
+</span></span><span style="display:flex;"><span>test2[2]<span style="color:#f92672">/</span>test2[1]
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 !(-Inf&lt;d&lt;0) : 29019.8 ±0%
+## 
+## Against denominator:
+##   Alternative, r = 0.707106781186548, mu =/= 0 -Inf&lt;d&lt;0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># What&#39;s the evidence for an interaction between N and M?</span>
+</span></span><span style="display:flex;"><span>inter_N_M <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ddply</span>(df, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;M&#39;</span>), summarise, y <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(y))
+</span></span><span style="display:flex;"><span>diff1     <span style="color:#f92672">&lt;-</span> inter_N_M[inter_N_M<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span> <span style="color:#f92672">&amp;</span> inter_N_M<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">-</span> inter_N_M[inter_N_M<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span> <span style="color:#f92672">&amp;</span> inter_N_M<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>]
+</span></span><span style="display:flex;"><span>diff2     <span style="color:#f92672">&lt;-</span> inter_N_M[inter_N_M<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span> <span style="color:#f92672">&amp;</span> inter_N_M<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">-</span> inter_N_M[inter_N_M<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span> <span style="color:#f92672">&amp;</span> inter_N_M<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>]
+</span></span><span style="display:flex;"><span>test3     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ttestBF</span>(x <span style="color:#f92672">=</span> diff2,
+</span></span><span style="display:flex;"><span>                     y <span style="color:#f92672">=</span> diff1,
+</span></span><span style="display:flex;"><span>                     nullInterval <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Point null vs. alt</span>
+</span></span><span style="display:flex;"><span>test3
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 -Inf&lt;d&lt;0    : 0.07943138 ±0%
+## [2] Alt., r=0.707 !(-Inf&lt;d&lt;0) : 4.987149   ±0%
+## 
+## Against denominator:
+##   Null, mu1-mu2 = 0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Alt vs. complement</span>
+</span></span><span style="display:flex;"><span>test3[2]<span style="color:#f92672">/</span>test3[1]
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 !(-Inf&lt;d&lt;0) : 62.78562 ±0%
+## 
+## Against denominator:
+##   Alternative, r = 0.707106781186548, mu =/= 0 -Inf&lt;d&lt;0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># What&#39;s the evidence for an interaction between N and E and M?</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Group 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (E1M1 – E2M1)</span>
+</span></span><span style="display:flex;"><span>diff1 <span style="color:#f92672">&lt;-</span> df[df<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">-</span> df[df<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (E1M2 – E2M2)</span>
+</span></span><span style="display:flex;"><span>diff2 <span style="color:#f92672">&lt;-</span> df[df<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">-</span> df[df<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 1&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Difference of differences (E1M1 – E2M1) – (E1M2 – E2M2)</span>
+</span></span><span style="display:flex;"><span>diff3     <span style="color:#f92672">&lt;-</span> diff1 <span style="color:#f92672">-</span> diff2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Group 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (E1M1 – E2M1)</span>
+</span></span><span style="display:flex;"><span>diff4 <span style="color:#f92672">&lt;-</span> df[df<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">-</span> df[df<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (E1M2 – E2M2)</span>
+</span></span><span style="display:flex;"><span>diff5 <span style="color:#f92672">&lt;-</span> df[df<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 1&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">-</span> df[df<span style="color:#f92672">$</span>N <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Group 2&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>E <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span> <span style="color:#f92672">&amp;</span> df<span style="color:#f92672">$</span>M <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Level 2&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Difference of differences (E1M1 – E2M1) – (E1M2 – E2M2)</span>
+</span></span><span style="display:flex;"><span>diff7     <span style="color:#f92672">&lt;-</span> diff4 <span style="color:#f92672">-</span> diff5
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>test4     <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ttestBF</span>(x <span style="color:#f92672">=</span> diff7,
+</span></span><span style="display:flex;"><span>                     y <span style="color:#f92672">=</span> diff3,
+</span></span><span style="display:flex;"><span>                     nullInterval <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Point null vs. alt</span>
+</span></span><span style="display:flex;"><span>test4
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 -Inf&lt;d&lt;0    : 0.05664496 ±0%
+## [2] Alt., r=0.707 !(-Inf&lt;d&lt;0) : 162.9295   ±0%
+## 
+## Against denominator:
+##   Null, mu1-mu2 = 0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Alt vs. complement</span>
+</span></span><span style="display:flex;"><span>test4[2]<span style="color:#f92672">/</span>test4[1]
+</span></span></code></pre></div><pre><code>## Bayes factor analysis
+## --------------
+## [1] Alt., r=0.707 !(-Inf&lt;d&lt;0) : 2876.329 ±0%
+## 
+## Against denominator:
+##   Alternative, r = 0.707106781186548, mu =/= 0 -Inf&lt;d&lt;0 
+## ---
+## Bayes factor type: BFindepSample, JZS
+</code></pre>
+<p>As we can see, the choice of the null hypothesis is very important. While the BF for the main effect of N is only 1.12) compared to the point null. It&rsquo;s 10.38) compared to its complement. However, we don&rsquo;t anticipate negative effects here and values close to zero would result in inconclusive evidence (BF close to 1), we decided to use the point null hypothesis.</p>
+<h1 id="conclusions">Conclusions</h1>
+<p>All in all, the t-tests give us the possibility to provide evidence for the effects of interests while testing less participants compared to what would be necessary if we used two-sided ANOVAS.</p>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjaquent.github.io%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjaquent.github.io%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fjaquent.github.io%2f2019%2f03%2fprior-deliberation-on-analysis-for-noveltyvr%2f&amp;text=Prior%20deliberation%20on%20analysis%20for%20noveltyVR" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 ml-auto blog-sidebar">
+  
+  <section class="sidebar-module sidebar-module-inset">
+    <h4>About</h4>
+    <p dir="auto">The idea behind this notebook can be found <a href="/about/">here</a>.</p>
+  </section>
+  
+
+  
+        <section class="sidebar-module">
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+
+
+<li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
+
+<li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
+
+<li><a href="/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></li>
+
+<li><a href="/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></li>
+
+<li><a href="/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></li>
+
+    </ol>
+  </section>
+
+  
+
+  
+  <section class="sidebar-module">
+    <h4>Links</h4>
+    <ol class="list-unstyled">
+      
+      <li><a href="https://github.com/JAQuent/">My GitHub page</a></li>
+      
+    </ol>
+  </section>
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <section class="sidebar-module">
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-secondary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
+            
+            <a class="badge badge-secondary" href="/tags/glm">glm</a>
+            
+            <a class="badge badge-secondary" href="/tags/json">json</a>
+            
+            <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
+            
+            <a class="badge badge-secondary" href="/tags/matlab">matlab</a>
+            
+            <a class="badge badge-secondary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
+            
+            <a class="badge badge-secondary" href="/tags/stats">stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/textures">textures</a>
+            
+            <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity">unity</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity3d">unity3d</a>
+            
+        </p>
+        
+    
+ </section>
+</aside>
+
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+    
+
+    
+    <footer class="blog-footer">
+      <p dir="auto">
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+    
+
+  </body>
+
+</html>
