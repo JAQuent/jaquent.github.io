@@ -6,7 +6,16 @@
     <description>Recent content in general on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/categories/general/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/categories/general/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A way to get MNI coordinates for subcortical voxels of a CIFTI file</title>
+      <link>https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/</guid>
+      <description>What do I want to do? In this post, I will demonstrate how it is possible to use the R packages cifti and ciftiTools to get the MNI coordinates of the subcortical voxels in your CIFTI file. This table can then be used to select voxels based on their coordinates and do further things with them like creating masks.</description>
+    </item>
+    
     <item>
       <title>How to change UXF&#39;s start up menu using a .json input file</title>
       <link>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</link>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<meta property="og:title" content="A way to get MNI coordinates for subcortical voxels of a CIFTI file" />
+<meta property="og:description" content="What do I want to do? In this post, I will demonstrate how it is possible to use the R packages cifti and ciftiTools to get the MNI coordinates of the subcortical voxels in your CIFTI file. This table can then be used to select voxels based on their coordinates and do further things with them like creating masks." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/" />
+<meta property="article:published_time" content="2023-07-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-24T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A way to get MNI coordinates for subcortical voxels of a CIFTI file"/>
+<meta name="twitter:description" content="What do I want to do? In this post, I will demonstrate how it is possible to use the R packages cifti and ciftiTools to get the MNI coordinates of the subcortical voxels in your CIFTI file. This table can then be used to select voxels based on their coordinates and do further things with them like creating masks."/>
+<meta name="generator" content="Hugo 0.110.0">
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "A way to get MNI coordinates for subcortical voxels of a CIFTI file",
+  "url": "https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/",
+  "wordCount": "1328",
+  "datePublished": "2023-07-24T00:00:00+00:00",
+  "dateModified": "2023-07-24T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jörn Alexander Quent"
+  },
+  "keywords": "general, fMRI, CIFTI, HCP, MNI, IJK, voxel index coordinates"
+}
+</script>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/">
+
+    <title>A way to get MNI coordinates for subcortical voxels of a CIFTI file | Jörn Alexander Quent&#39;s notebook</title>
+
+    
+    <!-- combined, minified CSS -->
+    
+    <link href="https://jaquent.github.io/css/style.0b72f41a0f22d687d912a8e7c945fc14c7a36daee062380f9fae9958e7d17da6.css" rel="stylesheet" integrity="sha256-C3L0Gg8i1ofZEqjnyUX8FMejba7gYjgPn66ZWOfRfaY=" crossorigin="anonymous">
+    
+
+    <!-- minified Font Awesome for SVG icons -->
+    
+    <script defer src="https://jaquent.github.io/js/fontawesome.min.a290d22177f491b8a83b0ee7eb739224c57ab052d8fab69d8f52aab860e42027.js" integrity="sha256-opDSIXf0kbioOw7n63OSJMV6sFLY&#43;radj1KquGDkICc=" crossorigin="anonymous"></script>
+
+    <!-- RSS 2.0 feed -->
+    
+
+    
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
+  </head>
+
+  <body>
+
+    
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="https://jaquent.github.io/">Home</a>
+          
+          <a class="nav-link" href="/about/" title="">About</a>
+          
+          
+          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
+          
+        </nav>
+      </div>
+    </div>
+    
+
+    
+    
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title" dir="auto"><a href="https://jaquent.github.io/" rel="home">Jörn Alexander Quent's notebook</a></h1>
+        <p class="lead blog-description" dir="auto">where I share semi-interesting stuff from my work</p>
+      </div>
+    </header>
+    
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/">A way to get MNI coordinates for subcortical voxels of a CIFTI file</a></h2>
+    <p class="blog-post-meta">
+<time datetime="2023-07-24T00:00:00Z">Mon Jul 24, 2023</time>
+ in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/fmri/" rel="tag">fMRI</a>, <a href="/tags/cifti/" rel="tag">CIFTI</a>, <a href="/tags/hcp/" rel="tag">HCP</a>, <a href="/tags/mni/" rel="tag">MNI</a>, <a href="/tags/ijk/" rel="tag">IJK</a>, <a href="/tags/voxel-index-coordinates/" rel="tag">voxel index coordinates</a>
+
+</p>
+  </header>
+  <h1 id="what-do-i-want-to-do">What do I want to do?</h1>
+<p>In this post, I will demonstrate how it is possible to use the R
+packages <code>cifti</code> and <code>ciftiTools</code> to get the MNI coordinates of the
+subcortical voxels in your CIFTI file. This table can then be used to select voxels based
+on their coordinates and do further things with them like creating masks.</p>
+<p>For this, the IJK voxel index coordinates have be converted to MNI coordinates.</p>
+<h1 id="libraries-used">Libraries used</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(data.table)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cifti)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ciftiTools)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ciftiTools.setOption</span>(<span style="color:#e6db74">&#34;wb_path&#34;</span>, <span style="color:#e6db74">&#34;D:/Program Files/workbench/bin_windows64&#34;</span>)
+</span></span></code></pre></div><pre><code>## Using this Workbench path: 'D:/Program Files/workbench/bin_windows64/wb_command.exe'.
+</code></pre>
+<details>
+<summary>
+Click here for detailed session information.
+</summary>
+<p>Note that I am using <code>ciftiTools</code> installed from the 12.0 GitHub branch
+even though it still says 0.11.0 below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>sessioninfo<span style="color:#f92672">::</span><span style="color:#a6e22e">session_info</span>()
+</span></span></code></pre></div><pre><code>## - Session info ---------------------------------------------------------------
+##  setting  value
+##  version  R version 4.2.2 (2022-10-31 ucrt)
+##  os       Windows 10 x64 (build 19045)
+##  system   x86_64, mingw32
+##  ui       RTerm
+##  language (EN)
+##  collate  English_United States.1252
+##  ctype    English_United States.1252
+##  tz       Asia/Taipei
+##  date     2023-07-24
+##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
+## 
+## - Packages -------------------------------------------------------------------
+##  package      * version date (UTC) lib source
+##  abind          1.4-5   2016-07-21 [1] CRAN (R 4.2.0)
+##  base64enc      0.1-3   2015-07-28 [1] CRAN (R 4.2.0)
+##  bitops         1.0-7   2021-04-24 [1] CRAN (R 4.2.0)
+##  cifti        * 0.4.5   2018-02-01 [1] CRAN (R 4.2.3)
+##  ciftiTools   * 0.11.0  2023-07-24 [1] Github (mandymejia/ciftiTools@109fb2e)
+##  cli            3.6.0   2023-01-09 [1] CRAN (R 4.2.2)
+##  data.table   * 1.14.8  2023-02-17 [1] CRAN (R 4.2.2)
+##  digest         0.6.31  2022-12-11 [1] CRAN (R 4.2.2)
+##  evaluate       0.20    2023-01-17 [1] CRAN (R 4.2.2)
+##  fastmap        1.1.0   2021-01-25 [1] CRAN (R 4.2.2)
+##  gifti          0.8.0   2020-11-11 [1] CRAN (R 4.2.3)
+##  htmltools      0.5.4   2022-12-07 [1] CRAN (R 4.2.2)
+##  knitr          1.42    2023-01-25 [1] CRAN (R 4.2.2)
+##  oro.nifti      0.11.4  2022-08-10 [1] CRAN (R 4.2.2)
+##  R.methodsS3    1.8.2   2022-06-13 [1] CRAN (R 4.2.2)
+##  R.oo           1.25.0  2022-06-12 [1] CRAN (R 4.2.2)
+##  R.utils        2.12.2  2022-11-11 [1] CRAN (R 4.2.3)
+##  RColorBrewer   1.1-3   2022-04-03 [1] CRAN (R 4.2.0)
+##  Rcpp           1.0.10  2023-01-22 [1] CRAN (R 4.2.2)
+##  rlang          1.0.6   2022-09-24 [1] CRAN (R 4.2.2)
+##  rmarkdown      2.20    2023-01-19 [1] CRAN (R 4.2.2)
+##  RNifti         1.4.5   2023-01-30 [1] CRAN (R 4.2.2)
+##  rstudioapi     0.14    2022-08-22 [1] CRAN (R 4.2.2)
+##  sessioninfo    1.2.2   2021-12-06 [1] CRAN (R 4.2.2)
+##  viridisLite    0.4.1   2022-08-22 [1] CRAN (R 4.2.2)
+##  xfun           0.37    2023-01-31 [1] CRAN (R 4.2.2)
+##  xml2           1.3.3   2021-11-30 [1] CRAN (R 4.2.2)
+##  yaml           2.3.7   2023-01-23 [1] CRAN (R 4.2.2)
+## 
+##  [1] C:/Users/Alex/AppData/Local/R/win-library/4.2
+##  [2] C:/Program Files/R/R-4.2.2/library
+## 
+## ------------------------------------------------------------------------------
+</code></pre>
+</details>
+<br>
+<h1 id="loading-the-cifti-files">Loading the CIFTI files</h1>
+<p>Below, you can see how I load CIFTI files based on “A Multi-modal
+Parcellation of Human Cerebral Cortex”.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Surface and cifti files</span>
+</span></span><span style="display:flex;"><span>cifti_fname  <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;sourceFiles/Q1-Q6_RelatedValidation210.CorticalAreas_dil_Final_Final_Areas_Group_Colors_with_Atlas_ROIs2.32k_fs_LR.dlabel.nii&#34;</span>
+</span></span><span style="display:flex;"><span>surfLeft     <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;sourceFiles/S1200.L.inflated_MSMAll.32k_fs_LR.surf.gii&#34;</span>
+</span></span><span style="display:flex;"><span>surfRight    <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;sourceFiles/S1200.R.inflated_MSMAll.32k_fs_LR.surf.gii&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Read cifti via ciftiTools</span>
+</span></span><span style="display:flex;"><span>xii <span style="color:#f92672">&lt;-</span> ciftiTools<span style="color:#f92672">::</span><span style="color:#a6e22e">read_cifti</span>(cifti_fname, brainstructures <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;all&#34;</span>, 
+</span></span><span style="display:flex;"><span>                  surfL_fname <span style="color:#f92672">=</span> surfLeft, 
+</span></span><span style="display:flex;"><span>                  surfR_fname <span style="color:#f92672">=</span> surfRight)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get some info for the cifti file via ciftiTools</span>
+</span></span><span style="display:flex;"><span>xii_info <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">info_cifti</span>(cifti_fname)
+</span></span></code></pre></div><p>We can get some information of what we just loaded by using</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(xii)
+</span></span></code></pre></div><pre><code>## ====CIFTI METADATA===================
+## Intent:           3007 (dlabel)
+## - names           &quot;vertex areas&quot;
+## Measurements:     1 column
+## 
+## ====BRAIN STRUCTURES=================
+## - left cortex     29696 data vertices
+##                   2796 medial wall vertices (32492 total)
+##                   left surface geometry is present
+## 
+## - right cortex    29716 data vertices
+##                   2776 medial wall vertices (32492 total)
+##                   right surface geometry is present
+## 
+## - subcortex       31870 data voxels
+##                   subcortical structures and number of voxels in each:
+##                     Cortex-L (0), Cortex-R (0),
+##                     Accumbens-L (135), Accumbens-R (140),
+##                     Amygdala-L (315), Amygdala-R (332),
+##                     Brain Stem (3472),
+##                     Caudate-L (728), Caudate-R (755),
+##                     Cerebellum-L (8709), Cerebellum-R (9144),
+##                     Diencephalon-L (706), Diencephalon-R (712),
+##                     Hippocampus-L (764), Hippocampus-R (795),
+##                     Pallidum-L (297), Pallidum-R (260),
+##                     Putamen-L (1060), Putamen-R (1010),
+##                     Thalamus-L (1288), Thalamus-R (1248).
+</code></pre>
+<p>These steps can all be done using <code>ciftiTools</code>, however as far as I know
+we can’t get the XML meta data with <code>ciftiTools</code>. For this, we can use the
+package <code>cifti</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Get the XML meta</span>
+</span></span><span style="display:flex;"><span>xii_xml      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cifti_xml</span>(cifti_fname)
+</span></span><span style="display:flex;"><span>xii_xml_list <span style="color:#f92672">&lt;-</span> xml2<span style="color:#f92672">::</span><span style="color:#a6e22e">as_list</span>(xii_xml)
+</span></span></code></pre></div><br>
+<h1 id="get-information-from-xml">Get information from XML</h1>
+<p>After loading the XML data, I convert it to a list using the <code>xml2</code>
+package.</p>
+<p>Now, we have loaded everything that is needed to create a table
+with all MNI coordinates. <code>xii_xml_list</code> is quite a complicated
+structure so I am not really going through this. The important bit is
+that it contains VoxelIndicesIJK (<a href="https://www.slicer.org/wiki/Slicer3:Coordinates">see
+here</a>), which we need
+to get our MNI coordinates. The voxel index coordinates can be found in matrix
+index map:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>matrix_indices_map <span style="color:#f92672">&lt;-</span> xii_xml_list<span style="color:#f92672">$</span>CIFTI<span style="color:#f92672">$</span>Matrix[[3]]
+</span></span></code></pre></div><p>In <code>matrix_indices_map</code>, List 4 to 22 contains the information for the
+subcortical voxels in the order listed in the summary above. I
+will now extract all voxel index coordinates and put them into one 31870 by 3
+matrix.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># First lets get the regions in the order</span>
+</span></span><span style="display:flex;"><span>regions <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Accumbens-L&#34;</span>, <span style="color:#e6db74">&#34;Accumbens-R&#34;</span>, <span style="color:#e6db74">&#34;Amygdala-L&#34;</span>, <span style="color:#e6db74">&#34;Amygdala-R&#34;</span>, <span style="color:#e6db74">&#34;Brain Stem&#34;</span>, 
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#34;Caudate-L&#34;</span>, <span style="color:#e6db74">&#34;Caudate-R&#34;</span>, <span style="color:#e6db74">&#34;Cerebellum-L&#34;</span>, <span style="color:#e6db74">&#34;Cerebellum-R&#34;</span>, <span style="color:#e6db74">&#34;Diencephalon-L&#34;</span>, 
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#34;Diencephalon-R&#34;</span>, <span style="color:#e6db74">&#34;Hippocampus-L&#34;</span>, <span style="color:#e6db74">&#34;Hippocampus-R&#34;</span>, <span style="color:#e6db74">&#34;Pallidum-L&#34;</span>, <span style="color:#e6db74">&#34;Pallidum-R&#34;</span>, 
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#34;Putamen-L&#34;</span>, <span style="color:#e6db74">&#34;Putamen-R&#34;</span>, <span style="color:#e6db74">&#34;Thalamus-L&#34;</span>,  <span style="color:#e6db74">&#34;Thalamus-L&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loop through regions from 4 to 22</span>
+</span></span><span style="display:flex;"><span>numVoxels       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">NA</span>, <span style="color:#a6e22e">length</span>(regions))
+</span></span><span style="display:flex;"><span>VoxelIndicesIJK <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, nrow <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">4</span><span style="color:#f92672">:</span><span style="color:#ae81ff">22</span>){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get the current region and the coordinates as a string</span>
+</span></span><span style="display:flex;"><span>  currentRegion          <span style="color:#f92672">&lt;-</span> matrix_indices_map[[i]]
+</span></span><span style="display:flex;"><span>  VoxelIndicesIJK_string <span style="color:#f92672">&lt;-</span> currentRegion<span style="color:#f92672">$</span>VoxelIndicesIJK[[1]]
+</span></span><span style="display:flex;"><span>  tempM                  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.matrix</span>(<span style="color:#a6e22e">fread</span>(VoxelIndicesIJK_string))
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Now the we have a matrix of the coordinates, we need to convert them from integer</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># to numeric because otherwise the matrix multiplication doesn&#39;t work</span>
+</span></span><span style="display:flex;"><span>  tempM <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">as.numeric</span>(tempM), ncol <span style="color:#f92672">=</span> <span style="color:#a6e22e">ncol</span>(tempM))
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get the number of voxels for that region</span>
+</span></span><span style="display:flex;"><span>  numVoxels[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(tempM)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add to VoxelIndicesIJK</span>
+</span></span><span style="display:flex;"><span>  VoxelIndicesIJK <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbind</span>(VoxelIndicesIJK, tempM)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>After running this, our matrix <code>VoxelIndicesIJK</code> has the desired
+dimensions (31870, 3). This fits with the number of subcortical voxels
+listed in the summary, so everything is good. Now, we can repeat the
+region names so they match the rows of the matrix.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>regions_row <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(regions, times <span style="color:#f92672">=</span> numVoxels)
+</span></span></code></pre></div><br>
+<h1 id="convert-from-voxel-index-coordinates-to-mni">Convert from voxel index coordinates to MNI</h1>
+<p>After all that preparation, we can simply use the translation matrix and follow <a href="http://rfmri.org/node/1300">these
+steps</a>. We get the translation matrix from
+the meta data of the xifti variable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>A <span style="color:#f92672">&lt;-</span> xii<span style="color:#f92672">$</span>meta<span style="color:#f92672">$</span>subcort<span style="color:#f92672">$</span>trans_mat
+</span></span></code></pre></div><p>The translation matrix is</p>
+
+
+
+
+
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:right"></th>
+<th style="text-align:right"></th>
+<th style="text-align:right"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">-2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">90</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">-126</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">-72</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+</tbody>
+</table>
+<p>We need to add a column of 1s (no idea actually why) and transpose
+the matrix.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>VoxelIndicesIJK_t <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(<span style="color:#a6e22e">cbind</span>(VoxelIndicesIJK, <span style="color:#ae81ff">1</span>))
+</span></span></code></pre></div><p>Once this is done, we can get the MNI coordinates by using this formula:
+$MNI^\intercal = A * IJK^\intercal$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Convert from IJK to MNI</span>
+</span></span><span style="display:flex;"><span>MNI <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t</span>(A <span style="color:#f92672">%*%</span> VoxelIndicesIJK_t)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Remove unnecessary 4th column</span>
+</span></span><span style="display:flex;"><span>MNI <span style="color:#f92672">&lt;-</span> MNI[, <span style="color:#ae81ff">-4</span>]
+</span></span></code></pre></div><p>Finally, we got what we wanted, which a 31870 by 3 matrix with the MNI
+coordinates as columns. Here are the first six values, which should all
+belong to the left accumbens:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(MNI)
+</span></span></code></pre></div><pre><code>##      [,1] [,2] [,3]
+## [1,]   -8    6  -16
+## [2,]  -10    6  -16
+## [3,]   -6    8  -16
+## [4,]   -8    8  -16
+## [5,]  -10    8  -16
+## [6,]   -6    4  -14
+</code></pre>
+<p>As a last step, I am going to verify whether the MNI coordinates fit. For that, I take a
+random voxel from the left hippocampus and use wb_view to see if this voxel is indeed in the
+hippocampus based on the parcellation file used above.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Select random voxel</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">20230724</span>)
+</span></span><span style="display:flex;"><span>rowIndex <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#a6e22e">which</span>(regions_row <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Hippocampus-L&#34;</span>), <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Show coordinate</span>
+</span></span><span style="display:flex;"><span>MNI[rowIndex, ]
+</span></span></code></pre></div><pre><code>## [1] -30 -26 -16
+</code></pre>
+<p>When I use wb_view and look this voxel up, then it is definitely in the
+hippocampus.</p>
+<p><img src="/post/2023-07-24-a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/random_voxel_in_HC.PNG" alt=""><!-- -->
+<br></p>
+<h1 id="write-mni-coordinates-to-csv-file">Write MNI coordinates to .csv file</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Convert to DF</span>
+</span></span><span style="display:flex;"><span>MNI_DF <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(MNI)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add region names as another column</span>
+</span></span><span style="display:flex;"><span>MNI_DF <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(regions_row, MNI_DF)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Rename columns</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">names</span>(MNI_DF) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;region&#34;</span>, <span style="color:#e6db74">&#34;x&#34;</span>, <span style="color:#e6db74">&#34;y&#34;</span>, <span style="color:#e6db74">&#34;z&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Write csv</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">write.csv</span>(MNI_DF, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cifti_subcortical_MNI152_coordinates.csv&#34;</span>, 
+</span></span><span style="display:flex;"><span>          row.names <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>,
+</span></span><span style="display:flex;"><span>          quote <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span></code></pre></div><p>This file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(MNI_DF)
+</span></span></code></pre></div><pre><code>##        region   x y   z
+## 1 Accumbens-L  -8 6 -16
+## 2 Accumbens-L -10 6 -16
+## 3 Accumbens-L  -6 8 -16
+## 4 Accumbens-L  -8 8 -16
+## 5 Accumbens-L -10 8 -16
+## 6 Accumbens-L  -6 4 -14
+</code></pre>
+<p>can now be downloaded <a href="https://gist.github.com/JAQuent/b1abc8e5e3375d461850eb641efde601">here</a>.</p>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjaquent.github.io%2f2023%2f07%2fa-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjaquent.github.io%2f2023%2f07%2fa-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fjaquent.github.io%2f2023%2f07%2fa-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file%2f&amp;text=A%20way%20to%20get%20MNI%20coordinates%20for%20subcortical%20voxels%20of%20a%20CIFTI%20file" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 ml-auto blog-sidebar">
+  
+  <section class="sidebar-module sidebar-module-inset">
+    <h4>About</h4>
+    <p dir="auto">The idea behind this notebook can be found <a href="/about/">here</a>.</p>
+  </section>
+  
+
+  
+        <section class="sidebar-module">
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+
+
+<li><a href="/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/">A way to get MNI coordinates for subcortical voxels of a CIFTI file</a></li>
+
+<li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
+
+<li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
+
+<li><a href="/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></li>
+
+<li><a href="/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></li>
+
+    </ol>
+  </section>
+
+  
+
+  
+  <section class="sidebar-module">
+    <h4>Links</h4>
+    <ol class="list-unstyled">
+      
+      <li><a href="https://github.com/JAQuent/">My GitHub page</a></li>
+      
+    </ol>
+  </section>
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <section class="sidebar-module">
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-secondary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/cifti">cifti</a>
+            
+            <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
+            
+            <a class="badge badge-secondary" href="/tags/glm">glm</a>
+            
+            <a class="badge badge-secondary" href="/tags/hcp">hcp</a>
+            
+            <a class="badge badge-secondary" href="/tags/ijk">ijk</a>
+            
+            <a class="badge badge-secondary" href="/tags/json">json</a>
+            
+            <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
+            
+            <a class="badge badge-secondary" href="/tags/matlab">matlab</a>
+            
+            <a class="badge badge-secondary" href="/tags/mixed-linear-models">mixed-linear-models</a>
+            
+            <a class="badge badge-secondary" href="/tags/mni">mni</a>
+            
+            <a class="badge badge-secondary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
+            
+            <a class="badge badge-secondary" href="/tags/stats">stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/textures">textures</a>
+            
+            <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity">unity</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-secondary" href="/tags/voxel-index-coordinates">voxel-index-coordinates</a>
+            
+        </p>
+        
+    
+ </section>
+</aside>
+
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+    
+
+    
+    <footer class="blog-footer">
+      <p dir="auto">
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+    
+
+  </body>
+
+</html>

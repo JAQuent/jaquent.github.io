@@ -2,35 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://jaquent.github.io/categories/</loc>
-    <lastmod>2023-02-14T00:00:00+00:00</lastmod>
+    <loc>https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/categories/experiments/</loc>
-    <lastmod>2023-02-14T00:00:00+00:00</lastmod>
+    <loc>https://jaquent.github.io/categories/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/cifti/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jaquent.github.io/tags/fmri/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/categories/general/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/hcp/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/ijk/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/mni/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/posts/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/voxel-index-coordinates/</loc>
+    <lastmod>2023-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/categories/experiments/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jaquent.github.io/tags/glm/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://jaquent.github.io/</loc>
-    <lastmod>2023-02-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jaquent.github.io/posts/</loc>
-    <lastmod>2023-02-14T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://jaquent.github.io/tags/stats/</loc>
-    <lastmod>2023-02-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jaquent.github.io/tags/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/</loc>
     <lastmod>2023-02-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jaquent.github.io/categories/general/</loc>
-    <lastmod>2022-09-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/</loc>
     <lastmod>2022-09-20T00:00:00+00:00</lastmod>

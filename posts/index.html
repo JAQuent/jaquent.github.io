@@ -10,7 +10,7 @@
 <meta property="og:description" content="where I share semi-interesting stuff from my work" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jaquent.github.io/posts/" />
-<meta property="og:updated_time" content="2023-02-14T00:00:00+00:00" />
+<meta property="og:updated_time" content="2023-07-24T00:00:00+00:00" />
 
 
 
@@ -31,8 +31,8 @@
     "@type": "Person",
     "name": "Alex Quent"
   },
-  "dateModified": "2023-02-14T00:00:00+00:00",
-  "keywords": "experiments, general, bayesian-stats, fmri, glm, json, logistic-regression, matlab, mixed-linear-models, noveltyvr, schemavr, sequential-design, stats, textures, u-shape, unity, unity3d",
+  "dateModified": "2023-07-24T00:00:00+00:00",
+  "keywords": "experiments, general, bayesian-stats, cifti, fmri, glm, hcp, ijk, json, logistic-regression, matlab, mixed-linear-models, mni, noveltyvr, schemavr, sequential-design, stats, textures, u-shape, unity, unity3d, voxel-index-coordinates",
   "description":"where I share semi-interesting stuff from my work"
 }
 </script>
@@ -127,6 +127,26 @@
 
 <article class="blog-post">
   <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/">A way to get MNI coordinates for subcortical voxels of a CIFTI file</a></h2>
+    <p class="blog-post-meta"><time datetime="2023-07-24T00:00:00Z">Mon Jul 24, 2023</time> by Jörn Alexander Quent in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/fmri/" rel="tag">fMRI</a>, <a href="/tags/cifti/" rel="tag">CIFTI</a>, <a href="/tags/hcp/" rel="tag">HCP</a>, <a href="/tags/mni/" rel="tag">MNI</a>, <a href="/tags/ijk/" rel="tag">IJK</a>, <a href="/tags/voxel-index-coordinates/" rel="tag">voxel index coordinates</a>
+
+</p>
+  </header>
+  What do I want to do? In this post, I will demonstrate how it is possible to use the R packages cifti and ciftiTools to get the MNI coordinates of the subcortical voxels in your CIFTI file. This table can then be used to select voxels based on their coordinates and do further things with them like creating masks.
+  <a href='https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/'>Read more →</a>
+</article> 
+
+
+
+
+
+
+<article class="blog-post">
+  <header>
     <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></h2>
     <p class="blog-post-meta"><time datetime="2023-02-14T00:00:00Z">Tue Feb 14, 2023</time> by Jörn Alexander Quent in 
 <span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
@@ -205,26 +225,6 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
 
 
 
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></h2>
-    <p class="blog-post-meta"><time datetime="2021-02-17T00:00:00Z">Wed Feb 17, 2021</time> by Jörn Alexander Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/u-shape/" rel="tag">U-shape</a>
-
-</p>
-  </header>
-  The outset of the problem In one of my project, I’d like to show that there is a U-shape relationship between two variables. The traditional way to do this would be to fit a quadratic model and test whether the quadratic term is different from zero. However, Simonsohn (2018) among other correctly points out that evidence for a quadratic fit is not enough and there might be situations where the quadratic term is not zero but there is no true u-shape.
-  <a href='https://jaquent.github.io/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/'>Read more →</a>
-</article> 
-
-
-
-
-
 <nav class="blog-pagination">
   
   
@@ -254,6 +254,8 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
     <ol class="list-unstyled">
 
 
+<li><a href="/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/">A way to get MNI coordinates for subcortical voxels of a CIFTI file</a></li>
+
 <li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
 
 <li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
@@ -261,8 +263,6 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
 <li><a href="/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></li>
 
 <li><a href="/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/">Matlab function to create stacked texture maps for Unity</a></li>
-
-<li><a href="/2021/02/finding-a-u-shape-with-bayesian-interrupted-regression/">Finding a U-shape with Bayesian interrupted regression</a></li>
 
     </ol>
   </section>
@@ -300,9 +300,15 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
             
             <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
             
+            <a class="badge badge-secondary" href="/tags/cifti">cifti</a>
+            
             <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
             
             <a class="badge badge-secondary" href="/tags/glm">glm</a>
+            
+            <a class="badge badge-secondary" href="/tags/hcp">hcp</a>
+            
+            <a class="badge badge-secondary" href="/tags/ijk">ijk</a>
             
             <a class="badge badge-secondary" href="/tags/json">json</a>
             
@@ -311,6 +317,8 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
             <a class="badge badge-secondary" href="/tags/matlab">matlab</a>
             
             <a class="badge badge-secondary" href="/tags/mixed-linear-models">mixed-linear-models</a>
+            
+            <a class="badge badge-secondary" href="/tags/mni">mni</a>
             
             <a class="badge badge-secondary" href="/tags/noveltyvr">noveltyvr</a>
             
@@ -327,6 +335,8 @@ Luckily, I found this obscure shader on Unity&rsquo;s GitHub page, which is amaz
             <a class="badge badge-secondary" href="/tags/unity">unity</a>
             
             <a class="badge badge-secondary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-secondary" href="/tags/voxel-index-coordinates">voxel-index-coordinates</a>
             
         </p>
         

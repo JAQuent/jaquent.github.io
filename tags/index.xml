@@ -6,13 +6,58 @@
     <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CIFTI</title>
+      <link>https://jaquent.github.io/tags/cifti/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/cifti/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>fMRI</title>
       <link>https://jaquent.github.io/tags/fmri/</link>
-      <pubDate>Tue, 14 Feb 2023 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://jaquent.github.io/tags/fmri/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HCP</title>
+      <link>https://jaquent.github.io/tags/hcp/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/hcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IJK</title>
+      <link>https://jaquent.github.io/tags/ijk/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/ijk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MNI</title>
+      <link>https://jaquent.github.io/tags/mni/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/mni/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>voxel index coordinates</title>
+      <link>https://jaquent.github.io/tags/voxel-index-coordinates/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/voxel-index-coordinates/</guid>
       <description></description>
     </item>
     
