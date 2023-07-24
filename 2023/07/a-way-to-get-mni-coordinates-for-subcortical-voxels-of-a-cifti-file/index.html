@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "A way to get MNI coordinates for subcortical voxels of a CIFTI file",
   "url": "https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/",
-  "wordCount": "1338",
+  "wordCount": "1391",
   "datePublished": "2023-07-24T00:00:00+00:00",
   "dateModified": "2023-07-24T00:00:00+00:00",
   "author": {
@@ -415,6 +415,12 @@ hippocampus.</p>
 ## 6 Accumbens-L  -6 4 -14
 </code></pre>
 <p>can now be downloaded <a href="https://gist.github.com/JAQuent/b1abc8e5e3375d461850eb641efde601">here</a>.</p>
+<h1 id="edit-25072023">Edit 25/07/2023</h1>
+<p>The maintainer of the <a href="https://github.com/mandymejia/ciftiTools/issues/53">GitHub page</a> pointed
+out that the information saved in the <code>xifti</code> variable is actually also enough to calculate
+the voxel index coordinates. This can be done via:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>VoxelIndicesIJK <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">which</span>(xii<span style="color:#f92672">$</span>meta<span style="color:#f92672">$</span>subcort<span style="color:#f92672">$</span>mask, arr.ind<span style="color:#f92672">=</span><span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>The minus 1 seems to be necessary to ensure both values are the same.</p>
 
 
   
