@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "A way to get MNI coordinates for subcortical voxels of a CIFTI file",
   "url": "https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/",
-  "wordCount": "1328",
+  "wordCount": "1337",
   "datePublished": "2023-07-24T00:00:00+00:00",
   "dateModified": "2023-07-24T00:00:00+00:00",
   "author": {
@@ -140,7 +140,8 @@
 packages <code>cifti</code> and <code>ciftiTools</code> to get the MNI coordinates of the
 subcortical voxels in your CIFTI file. This table can then be used to select voxels based
 on their coordinates and do further things with them like creating masks.</p>
-<p>For this, the IJK voxel index coordinates have be converted to MNI coordinates.</p>
+<p>For this, we convert the IJK voxel index coordinates found in th XML meta data of the CIFTI file
+to MNI coordinates.</p>
 <h1 id="libraries-used">Libraries used</h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(data.table)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(cifti)
@@ -207,7 +208,7 @@ even though it still says 0.11.0 below.</p>
 </details>
 <br>
 <h1 id="loading-the-cifti-files">Loading the CIFTI files</h1>
-<p>Below, you can see how I load CIFTI files based on “A Multi-modal
+<p>Below, you can see how I load the CIFTI file from “A Multi-modal
 Parcellation of Human Cerebral Cortex”.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Surface and cifti files</span>
 </span></span><span style="display:flex;"><span>cifti_fname  <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;sourceFiles/Q1-Q6_RelatedValidation210.CorticalAreas_dil_Final_Final_Areas_Group_Colors_with_Atlas_ROIs2.32k_fs_LR.dlabel.nii&#34;</span>
@@ -261,10 +262,10 @@ package <code>cifti</code>.</p>
 <h1 id="get-information-from-xml">Get information from XML</h1>
 <p>After loading the XML data, I convert it to a list using the <code>xml2</code>
 package.</p>
-<p>Now, we have loaded everything that is needed to create a table
+<p>Now we have loaded everything that is needed to create a table
 with all MNI coordinates. <code>xii_xml_list</code> is quite a complicated
 structure so I am not really going through this. The important bit is
-that it contains VoxelIndicesIJK (<a href="https://www.slicer.org/wiki/Slicer3:Coordinates">see
+that it contains <code>VoxelIndicesIJK</code> (<a href="https://www.slicer.org/wiki/Slicer3:Coordinates">see
 here</a>), which we need
 to get our MNI coordinates. The voxel index coordinates can be found in matrix
 index map:</p>
@@ -282,7 +283,6 @@ matrix.</p>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Loop through regions from 4 to 22</span>
 </span></span><span style="display:flex;"><span>numVoxels       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#66d9ef">NA</span>, <span style="color:#a6e22e">length</span>(regions))
 </span></span><span style="display:flex;"><span>VoxelIndicesIJK <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, nrow <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">4</span><span style="color:#f92672">:</span><span style="color:#ae81ff">22</span>){
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get the current region and the coordinates as a string</span>
