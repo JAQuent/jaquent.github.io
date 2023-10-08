@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<meta property="og:title" content="Running large simulations on a desktop computer with R (tips &amp; tricks)" />
+<meta property="og:description" content="What I learned when I ran a large simulation on my desktop computer" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jaquent.github.io/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/" />
+<meta property="article:published_time" content="2023-10-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-10-08T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Running large simulations on a desktop computer with R (tips &amp; tricks)"/>
+<meta name="twitter:description" content="What I learned when I ran a large simulation on my desktop computer"/>
+<meta name="generator" content="Hugo 0.110.0">
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Running large simulations on a desktop computer with R (tips \u0026 tricks)",
+  "url": "https://jaquent.github.io/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/",
+  "wordCount": "970",
+  "datePublished": "2023-10-08T00:00:00+00:00",
+  "dateModified": "2023-10-08T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jörn Alexander Quent"
+  },
+  "keywords": "general, scientific computing, computing, R, parallelisation, brms",
+  "description": "What I learned when I ran a large simulation on my desktop computer"
+}
+</script>
+
+
+
+    <link rel="canonical" href="https://jaquent.github.io/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/">
+
+    <title>Running large simulations on a desktop computer with R (tips &amp; tricks) | Jörn Alexander Quent&#39;s notebook</title>
+
+    
+    <!-- combined, minified CSS -->
+    
+    <link href="https://jaquent.github.io/css/style.0b72f41a0f22d687d912a8e7c945fc14c7a36daee062380f9fae9958e7d17da6.css" rel="stylesheet" integrity="sha256-C3L0Gg8i1ofZEqjnyUX8FMejba7gYjgPn66ZWOfRfaY=" crossorigin="anonymous">
+    
+
+    <!-- minified Font Awesome for SVG icons -->
+    
+    <script defer src="https://jaquent.github.io/js/fontawesome.min.a290d22177f491b8a83b0ee7eb739224c57ab052d8fab69d8f52aab860e42027.js" integrity="sha256-opDSIXf0kbioOw7n63OSJMV6sFLY&#43;radj1KquGDkICc=" crossorigin="anonymous"></script>
+
+    <!-- RSS 2.0 feed -->
+    
+
+    
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+</script>
+ 
+  </head>
+
+  <body>
+
+    
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="https://jaquent.github.io/">Home</a>
+          
+          <a class="nav-link" href="/about/" title="">About</a>
+          
+          
+          <a class="nav-link" href="https://jaquent.me/" title="">jaquent.me</a>
+          
+        </nav>
+      </div>
+    </div>
+    
+
+    
+    
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title" dir="auto"><a href="https://jaquent.github.io/" rel="home">Jörn Alexander Quent's notebook</a></h1>
+        <p class="lead blog-description" dir="auto">where I share semi-interesting stuff from my work</p>
+      </div>
+    </header>
+    
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/">Running large simulations on a desktop computer with R (tips &amp; tricks)</a></h2>
+    <p class="blog-post-meta">
+<time datetime="2023-10-08T00:00:00Z">Sun Oct 08, 2023</time>
+ in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/scientific-computing/" rel="tag">scientific computing</a>, <a href="/tags/computing/" rel="tag">computing</a>, <a href="/tags/r/" rel="tag">R</a>, <a href="/tags/parallelisation/" rel="tag">parallelisation</a>, <a href="/tags/brms/" rel="tag">brms</a>
+
+</p>
+  </header>
+  <p>Let me briefly describe what I learned while attempting to run a large simulation on my desktop computer as I think it might be useful to others. Here is the problem: I was forced to run a simulation on my desktop computer because <a href="https://cran.r-project.org/web/packages/brms/index.html"><code>brms</code></a> couldn&rsquo;t be installed on my department&rsquo;s high performance computing (HPC) cluster. My first realisation was:  <strong>Don&rsquo;t use Windows!</strong></p>
+<h1 id="problem-0-you-cannot-stop-windows-from-rebooting">Problem 0: You cannot stop Windows from rebooting</h1>
+<p>Trying to get this simulation to finish, showed me how terrible of a working environment Windows actually is. The biggest problem is that Windows doesn&rsquo;t give you a choice if you want to update your system or not. I wasted a couple of days trying to find out if I can disable automatic updates. However, it is just not possible. As a consequence, the computer sometimes just restarted without my approval (outside of &ldquo;working hours&rdquo; despite the fact that the simulation was still running). This infuriated me so much that I set-up my desktop machine to dual boot Windows &amp; Ubuntu. If you don&rsquo;t use Ubuntu (or different linux), I&rsquo;d suggest you start.</p>
+<h1 id="problem-1-the-simulation-takes-several-days-but-i-also-work-on-the-computer">Problem 1: The simulation takes several days but I also work on the computer</h1>
+<p>For this simulation I had use my desktop computer in my office. This is the computer that I actually work on. So, I had to come up with a way to pause and restart the simulation whenever I have to use the computer for other stuff. This is done relatively easily. Whenever I have to use the computer for something else, I just press ESCAPE (for instance when running it via RStudio) or in my case use CTRL + C when running it via console. This allowed me to stop and restart the simulation whenever the need arises.</p>
+<p>Here are the most important steps:</p>
+<ol>
+<li>Use <code>tryCatch()</code>.</li>
+<li>Add a function that saves the progress in case an error occurs.</li>
+<li>Use parallelisation if it possible (more on this later).</li>
+<li>Add save points at which the progress is automatically saved if you don&rsquo;t it for each iteration.</li>
+<li>Optional: Predict the time when the whole thing is supposed to finish.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># /* </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ----------------------------- Prepare cluster ---------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># */</span>
+</span></span><span style="display:flex;"><span>my.cluster <span style="color:#f92672">&lt;-</span> parallel<span style="color:#f92672">::</span><span style="color:#a6e22e">makeCluster</span>(<span style="color:#a6e22e">detectCores</span>() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;PSOCK&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#my.cluster &lt;- parallel::makeCluster(detectCores() - 2, type = &#34;FORK&#34;)</span>
+</span></span><span style="display:flex;"><span>doParallel<span style="color:#f92672">::</span><span style="color:#a6e22e">registerDoParallel</span>(cl <span style="color:#f92672">=</span> my.cluster)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /* </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ----------------------------- Run simulation  ---------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get time at the start</span>
+</span></span><span style="display:flex;"><span>startTime <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.time</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Main loop running through the number of simulations</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tryCatch</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(rowIndex in startIndex<span style="color:#f92672">:</span>nSim){
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Run chunks in parallel</span>
+</span></span><span style="display:flex;"><span>    tempTest <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">foreach</span>(i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>nTests, .combine <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;c&#34;</span>, .packages <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;polspline&#39;</span>, <span style="color:#e6db74">&#39;brms&#39;</span>)) <span style="color:#f92672">%dopar%</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">simulationFunction</span>(<span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Check if it is a save point, then save the data to make sure progress is</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># saved regularly</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>(rowIndex <span style="color:#f92672">%in%</span> savePoints){
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">exit_loop_gracefully</span>(fileName, startIndex, rowIndex)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Print &amp; visualise predicted finish</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">predicted_finish</span>(startIndex, rowIndex, nSim, startTime)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">progressBar_plot</span>(rowIndex, nSim)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  finally <span style="color:#f92672">=</span> <span style="color:#a6e22e">exit_loop_gracefully</span>(fileName, startIndex, rowIndex)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Stop</span>
+</span></span><span style="display:flex;"><span>parallel<span style="color:#f92672">::</span><span style="color:#a6e22e">stopCluster</span>(cl <span style="color:#f92672">=</span> my.cluster)
+</span></span></code></pre></div><p>A word on parallesition: I used <code>foreach</code> and <code>doParallel</code> here and I found that it is important to run the parallelisation in chunks of the right size. Here, I used <code>foreach()</code> nested inside a <code>for()</code>-loop.</p>
+<p>The functions <code>predicted_finish()</code>, <code>progressBar_plot()</code> and <code>exit_loop_gracefully()</code> can be found <a href="https://github.com/JAQuent/assortedRFunctions/tree/master/R">here</a>.</p>
+<p>When restarting the script, make sure to load the progress at the beginning, so you can pick-up where you stopped:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># File name to save progress</span>
+</span></span><span style="display:flex;"><span>fileName <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;correction_value_simulation.RData&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check fileName already exists</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">file.exists</span>(fileName)) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">load</span>(fileName)
+</span></span><span style="display:flex;"><span>  startIndex <span style="color:#f92672">&lt;-</span> rowIndex <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>} else {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># If it is the first time starting the script</span>
+</span></span><span style="display:flex;"><span>  startIndex <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This could already be enough for most applications but I actually encountered another obstacle that needed fixing.</p>
+<h1 id="problem-2-brms-creates-temporary-files-that-fill-up-the-hard-disk">Problem 2: BRMS creates temporary files that fill up the hard disk</h1>
+<p>The final problem that I encountered was that <code>brms</code> creates temporary files for each model it fits. Normally this is not an issue but if you create hundred of thosuands of models then a few MB per model suddenly fill up the disk. The problem is that even if you delete these temporary files, the space is not cleared until you close &amp; restart R.</p>
+<p>So I wrote a function that checks the current disk space that is remaining&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>check_root_disk_space <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Idea fro ChatGPT </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Execute the &#39;df&#39; command and capture its output</span>
+</span></span><span style="display:flex;"><span>  df_output <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">system2</span>(<span style="color:#e6db74">&#34;df&#34;</span>, args <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-h /&#34;</span>, stdout <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get available space</span>
+</span></span><span style="display:flex;"><span>  avail_space_str <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">strsplit</span>(df_output[2], <span style="color:#e6db74">&#34;  &#34;</span>)[[1]][4]
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if availabe space is GB, MB or KB</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">grep</span>(<span style="color:#e6db74">&#34;G&#34;</span>, avail_space_str)){
+</span></span><span style="display:flex;"><span>    measurement <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;G&#34;</span>
+</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">grep</span>(<span style="color:#e6db74">&#34;M&#34;</span>, avail_space_str)){
+</span></span><span style="display:flex;"><span>    measurement <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;M&#34;</span>
+</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">grep</span>(<span style="color:#e6db74">&#34;K&#34;</span>, avail_space_str)){
+</span></span><span style="display:flex;"><span>    measurement <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;K&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Remove letter</span>
+</span></span><span style="display:flex;"><span>  avail_space <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">gsub</span>(<span style="color:#e6db74">&#34;[KMG]&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, avail_space_str))
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Convert KB/MB to GB</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if</span>(measurement <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;K&#34;</span>){
+</span></span><span style="display:flex;"><span>    avail_space_in_GB  <span style="color:#f92672">&lt;-</span> avail_space<span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>^3
+</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if</span>(measurement <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;M&#34;</span>){
+</span></span><span style="display:flex;"><span>    avail_space_in_GB  <span style="color:#f92672">&lt;-</span> avail_space<span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>^2
+</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if</span>(measurement <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;G&#34;</span>){
+</span></span><span style="display:flex;"><span>    avail_space_in_GB  <span style="color:#f92672">&lt;-</span> avail_space 
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Write to console</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n Notice: Available space in root is&#34;</span>, avail_space_in_GB, <span style="color:#e6db74">&#34;GB\n&#34;</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Return value</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(avail_space_in_GB)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>&hellip; and use this function to occasionally check if enough space is available and stop the script if it is not.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>    <span style="color:#75715e"># Check if the space is enough</span>
+</span></span><span style="display:flex;"><span>    avail_space <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">check_root_disk_space</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>(avail_space <span style="color:#f92672">&lt;</span> minimumSpace){
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;Space is not enough. &#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>This together with a bash script, which restarts R script if it doesn&rsquo;t finish successfully, solved the remaining issues.</p>
+<h1 id="making-it-extra-robust-with-this-bash-script">Making it extra robust with this bash script</h1>
+<p>To avoid crashes because my computer ran out of memory (see above), I created this bash script (rscript_rboust.sh) that automatically restarts the r-script in case it encounters an error. This can be used as a robust alternative to <code>Rscript</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# -ne <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Usage: </span>$0<span style="color:#e6db74"> &lt;rscript&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>  exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>rscript<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  Rscript $rscript
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $? -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;R script finished successfully&#34;</span>
+</span></span><span style="display:flex;"><span>    break
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;R script crashed. Restarting in 60 seconds...&#34;</span>
+</span></span><span style="display:flex;"><span>    sleep <span style="color:#ae81ff">60</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div>
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjaquent.github.io%2f2023%2f10%2frunning-large-simulations-on-a-desktop-computer-with-r-tips-tricks%2f" title="Share on Facebook"><span class="fab fa-facebook-f fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjaquent.github.io%2f2023%2f10%2frunning-large-simulations-on-a-desktop-computer-with-r-tips-tricks%2f" title="Share on LinkedIn"><span class="fab fa-linkedin-in fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/intent/tweet?url=https%3a%2f%2fjaquent.github.io%2f2023%2f10%2frunning-large-simulations-on-a-desktop-computer-with-r-tips-tricks%2f&amp;text=Running%20large%20simulations%20on%20a%20desktop%20computer%20with%20R%20%28tips%20%26%20tricks%29" title="Tweet this"><span class="fab fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 ml-auto blog-sidebar">
+  
+  <section class="sidebar-module sidebar-module-inset">
+    <h4>About</h4>
+    <p dir="auto">The idea behind this notebook can be found <a href="/about/">here</a>.</p>
+  </section>
+  
+
+  
+        <section class="sidebar-module">
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
+
+
+<li><a href="/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/">Running large simulations on a desktop computer with R (tips &amp; tricks)</a></li>
+
+<li><a href="/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/">A way to get MNI coordinates for subcortical voxels of a CIFTI file</a></li>
+
+<li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
+
+<li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
+
+<li><a href="/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/">How you can easily load data into Unity3D using a .JSON file</a></li>
+
+    </ol>
+  </section>
+
+  
+
+  
+  <section class="sidebar-module">
+    <h4>Links</h4>
+    <ol class="list-unstyled">
+      
+      <li><a href="https://github.com/JAQuent/">My GitHub page</a></li>
+      
+    </ol>
+  </section>
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <section class="sidebar-module">
+    
+        
+        <h4>Categories</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/categories/experiments">experiments</a>
+            
+            <a class="badge badge-secondary" href="/categories/general">general</a>
+            
+        </p>
+        
+    
+        
+        <h4>Tags</h4>
+        <p>
+            
+            <a class="badge badge-secondary" href="/tags/bayesian-stats">bayesian-stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/brms">brms</a>
+            
+            <a class="badge badge-secondary" href="/tags/cifti">cifti</a>
+            
+            <a class="badge badge-secondary" href="/tags/computing">computing</a>
+            
+            <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
+            
+            <a class="badge badge-secondary" href="/tags/glm">glm</a>
+            
+            <a class="badge badge-secondary" href="/tags/hcp">hcp</a>
+            
+            <a class="badge badge-secondary" href="/tags/ijk">ijk</a>
+            
+            <a class="badge badge-secondary" href="/tags/json">json</a>
+            
+            <a class="badge badge-secondary" href="/tags/logistic-regression">logistic-regression</a>
+            
+            <a class="badge badge-secondary" href="/tags/matlab">matlab</a>
+            
+            <a class="badge badge-secondary" href="/tags/mixed-linear-models">mixed-linear-models</a>
+            
+            <a class="badge badge-secondary" href="/tags/mni">mni</a>
+            
+            <a class="badge badge-secondary" href="/tags/noveltyvr">noveltyvr</a>
+            
+            <a class="badge badge-secondary" href="/tags/parallelisation">parallelisation</a>
+            
+            <a class="badge badge-secondary" href="/tags/r">r</a>
+            
+            <a class="badge badge-secondary" href="/tags/schemavr">schemavr</a>
+            
+            <a class="badge badge-secondary" href="/tags/scientific-computing">scientific-computing</a>
+            
+            <a class="badge badge-secondary" href="/tags/sequential-design">sequential-design</a>
+            
+            <a class="badge badge-secondary" href="/tags/stats">stats</a>
+            
+            <a class="badge badge-secondary" href="/tags/textures">textures</a>
+            
+            <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity">unity</a>
+            
+            <a class="badge badge-secondary" href="/tags/unity3d">unity3d</a>
+            
+            <a class="badge badge-secondary" href="/tags/voxel-index-coordinates">voxel-index-coordinates</a>
+            
+        </p>
+        
+    
+ </section>
+</aside>
+
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+    
+
+    
+    <footer class="blog-footer">
+      <p dir="auto">
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+    
+
+  </body>
+
+</html>

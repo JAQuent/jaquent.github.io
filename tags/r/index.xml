@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Jörn Alexander Quent&#39;s notebook</title>
+    <link>https://jaquent.github.io/tags/r/</link>
+    <description>Recent content in R on Jörn Alexander Quent&#39;s notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/r/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Running large simulations on a desktop computer with R (tips &amp; tricks)</title>
+      <link>https://jaquent.github.io/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/</link>
+      <pubDate>Sun, 08 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/</guid>
+      <description>Let me briefly describe what I learned while attempting to run a large simulation on my desktop computer as I think it might be useful to others. Here is the problem: I was forced to run a simulation on my desktop computer because brms couldn&amp;rsquo;t be installed on my department&amp;rsquo;s high performance computing (HPC) cluster.</description>
+    </item>
+    
+  </channel>
+</rss>
