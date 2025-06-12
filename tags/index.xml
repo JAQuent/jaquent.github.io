@@ -6,7 +6,34 @@
     <description>Recent content in Tags on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CIFTI</title>
+      <link>https://jaquent.github.io/tags/cifti/</link>
+      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/cifti/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fMRI</title>
+      <link>https://jaquent.github.io/tags/fmri/</link>
+      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/fmri/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HCP</title>
+      <link>https://jaquent.github.io/tags/hcp/</link>
+      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/tags/hcp/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>brms</title>
       <link>https://jaquent.github.io/tags/brms/</link>
@@ -49,33 +76,6 @@
       <pubDate>Sun, 08 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://jaquent.github.io/tags/scientific-computing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CIFTI</title>
-      <link>https://jaquent.github.io/tags/cifti/</link>
-      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/cifti/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>fMRI</title>
-      <link>https://jaquent.github.io/tags/fmri/</link>
-      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/fmri/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HCP</title>
-      <link>https://jaquent.github.io/tags/hcp/</link>
-      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://jaquent.github.io/tags/hcp/</guid>
       <description></description>
     </item>
     

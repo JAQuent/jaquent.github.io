@@ -6,7 +6,17 @@
     <description>Recent content in fMRI on Jörn Alexander Quent&#39;s notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/fmri/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://jaquent.github.io/tags/fmri/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Visualise your surface-based neuroimaging data on flat maps using `ciftiTools`</title>
+      <link>https://jaquent.github.io/2025/06/visualise-your-surface-based-neuroimaging-data-on-flat-maps-using-ciftitools/</link>
+      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://jaquent.github.io/2025/06/visualise-your-surface-based-neuroimaging-data-on-flat-maps-using-ciftitools/</guid>
+      <description>Recently I&amp;rsquo;ve tried to use the fantastic R-package ciftiTools to visualise surface-based neuroimaging data on flat maps.
+This was surprisingly tricky compared to using the standard inflated surfaces, which can be as easy as view_cifti_surface(my_xii). However when I supplied the flat surfaces that come with the HCP_S1200_Atlas, I ran into the issue that nothing was visible because of the initial rotation of the maps.</description>
+    </item>
+    
     <item>
       <title>A way to get MNI coordinates for subcortical voxels of a CIFTI file</title>
       <link>https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/</link>
