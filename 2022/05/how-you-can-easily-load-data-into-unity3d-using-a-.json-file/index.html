@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "How you can easily load data into Unity3D using a .JSON file",
   "url": "https://jaquent.github.io/2022/05/how-you-can-easily-load-data-into-unity3d-using-a-.json-file/",
-  "wordCount": "409",
+  "wordCount": "443",
   "datePublished": "2022-05-17T00:00:00+00:00",
   "dateModified": "2022-05-17T00:00:00+00:00",
   "author": {
@@ -62,6 +62,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -69,16 +235,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -139,44 +305,102 @@
   <p>In this post, I quickly show a way to load data into Unity3D using a simple .json file. Note there are other &amp; for the most part simpler ways if you use <a href="https://github.com/immersivecognition/unity-experiment-framework">UXF - Unity Experiment Framework</a>, which provide a way to parse on data via .json out of the box. However, the problem is that this only works if you already started the experiment and some people who might stumble on this don&rsquo;t even know what I am talking about. Anyway in my case, I want to provide information to Unity3D before I started my UXF session. In fact as I will show in my next post, I wan to control the text of the UXF start up panel itself using a .json file so I can easily switch between an English &amp; a Chinese version of a research task that I created.</p>
 <p>All the code &amp; the example file can be found in <a href="https://github.com/JAQuent/scripts-for-unity3d/tree/master/load_a_JSON_file">this</a> folder of my Unity script repo on <a href="https://github.com/JAQuent/scripts-for-unity3d">GitHub</a>.</p>
 <p>Now, let me show you how you can read &amp; use a simple .json file like this:</p>
-<pre tabindex="0"><code>{
-    &#34;var1&#34;: &#34; Hello World!&#34;,
-    &#34;var2&#34;: 1.0
-}
-</code></pre><p>The file has two variables called var1 &amp; var2. Step 1: In order to access them we have to create a custom class like this</p>
-<pre tabindex="0"><code>[System.Serializable]
-public class JSONDataClass {
-    	public string var1;
-    	public float var2;
-    }
-</code></pre><p>that has the same variable names as the .json file. Note if there is mismatch between the file and your class you might get an error. After that we can use a function like this</p>
-<pre tabindex="0"><code>    /// &lt;summary&gt;
-    /// Method to read in a JSON file that is placed in the StreamingAssets folder. 
-    /// &lt;/summary&gt;
-    void GetDataFromJSON(string fileName){
-    	// Get path
-        string path2file = Path.GetFullPath(Path.Combine(Application.streamingAssetsPath, fileName));
-
-        // Get JSON input
-        var sr = new StreamReader(path2file);
-        var fileContents = sr.ReadToEnd();
-        sr.Close();
-
-        // Get instruction data profile
-        JSONData = JsonUtility.FromJson&lt;JSONDataClass&gt;(fileContents);
-    }
-</code></pre><p>to read the file and so you can easily get the data by running everything inside the start function. For instance, like this:</p>
-<pre tabindex="0"><code>    // Start is called before the first frame update
-    void Start(){
-    	// Get the Startup Text from the JSON file
-    	GetDataFromJSON(JSON_fileName);
-
-    	// Show that it worked
-        Debug.Log(JSONData.var1);
-        Debug.Log(JSONData.var2);
-    	
-    }
-</code></pre><p>And voila we can now use the values inside the file and print them to the console.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;var1&#34;</span><span class="p">:</span> <span class="s2">&#34; Hello World!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;var2&#34;</span><span class="p">:</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The file has two variables called var1 &amp; var2. Step 1: In order to access them we have to create a custom class like this</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="na">[System.Serializable]</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">JSONDataClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    	<span class="k">public</span> <span class="kt">string</span> <span class="n">var1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    	<span class="k">public</span> <span class="kt">float</span> <span class="n">var2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>that has the same variable names as the .json file. Note if there is mismatch between the file and your class you might get an error. After that we can use a function like this</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// Method to read in a JSON file that is placed in the StreamingAssets folder. </span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">GetDataFromJSON</span><span class="p">(</span><span class="kt">string</span> <span class="n">fileName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    	<span class="c1">// Get path</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">path2file</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="n">GetFullPath</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="n">streamingAssetsPath</span><span class="p">,</span> <span class="n">fileName</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Get JSON input</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">sr</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StreamReader</span><span class="p">(</span><span class="n">path2file</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">fileContents</span> <span class="p">=</span> <span class="n">sr</span><span class="p">.</span><span class="n">ReadToEnd</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sr</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Get instruction data profile</span>
+</span></span><span class="line"><span class="cl">        <span class="n">JSONData</span> <span class="p">=</span> <span class="n">JsonUtility</span><span class="p">.</span><span class="n">FromJson</span><span class="p">&lt;</span><span class="n">JSONDataClass</span><span class="p">&gt;(</span><span class="n">fileContents</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>to read the file and so you can easily get the data by running everything inside the start function. For instance, like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl">    <span class="c1">// Start is called before the first frame update</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Start</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    	<span class="c1">// Get the Startup Text from the JSON file</span>
+</span></span><span class="line"><span class="cl">    	<span class="n">GetDataFromJSON</span><span class="p">(</span><span class="n">JSON_fileName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    	<span class="c1">// Show that it worked</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">JSONData</span><span class="p">.</span><span class="n">var1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="n">JSONData</span><span class="p">.</span><span class="n">var2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    	
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And voila we can now use the values inside the file and print them to the console.</p>
 <img src="https://github.com/JAQuent/scripts-for-unity3d/blob/master/load_a_JSON_file/results.PNG?raw=true"/>
 <p>The whole script can be found <a href="https://github.com/JAQuent/scripts-for-unity3d/blob/master/load_a_JSON_file/JSON_example.cs">here</a>. I hope this is useful to anyone as it took my while to get this one working for me.</p>
 

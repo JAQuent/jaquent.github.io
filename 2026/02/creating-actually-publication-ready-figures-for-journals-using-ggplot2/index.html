@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "Creating actually publication-ready figures for journals using `ggplot2`",
   "url": "https://jaquent.github.io/2026/02/creating-actually-publication-ready-figures-for-journals-using-ggplot2/",
-  "wordCount": "1616",
+  "wordCount": "1804",
   "datePublished": "2026-02-10T00:00:00+00:00",
   "dateModified": "2026-02-10T00:00:00+00:00",
   "author": {
@@ -62,6 +62,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -69,16 +235,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -149,139 +315,289 @@
 <h2 id="the-problem-why-figures-look-different-when-exported">The Problem: why figures look different When exported</h2>
 <p>Here’s a typical scenario: you create a multi-panel figure in RStudio, set fig.width and fig.height in inches, and everything looks fine. But when you save it at the required millimeter dimensions, the result is disappointing.</p>
 <p>Let’s illustrate with an example—a 1×4 panel figure using the classic iris dataset. Settings used for the chunk: <code>fig.width = 9,  fig.height = 2.25</code>. In my mind, the results looks pretty decent (e.g. font &amp; geom sizes) even without any further styling.</p>
-<pre tabindex="0"><code># Colours
-colour_pal &lt;- c(&#34;#ffb3ba&#34;, &#34;#ffdfba&#34;, &#34;#ffffba&#34;, &#34;#baffc9&#34;, &#34;#bae1ff&#34;)
-
-p1 &lt;- ggplot(iris, aes(x = Sepal.Length)) + 
-  geom_density(fill = colour_pal[1]) +
-  theme_classic() +
-  labs(x = &#34;Sepal length (cm)&#34;, y = &#34;Density&#34;, title = &#34;Sepal length\ndistribution&#34;)
-
-p2 &lt;- ggplot(iris, aes(x = Sepal.Width)) + 
-  geom_density(fill = colour_pal[2]) +
-  theme_classic() +
-  labs(x = &#34;Sepal width (cm)&#34;, y = &#34;Density&#34;, title = &#34;Sepal width\ndistribution&#34;)
-
-p3 &lt;- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-  geom_jitter(height = 0, width = 0.2) +
-  geom_boxplot(outlier.shape = NA) +
-  theme_classic() +
-  scale_fill_manual(values = colour_pal[c(1, 3, 5)]) +
-  theme(legend.position = &#34;none&#34;) +
-  labs(x = &#34;Species&#34;, y = &#34;Sepal length (cm)&#34;, title = &#34;Sepal length\nby species&#34;)
-
-p4 &lt;- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, colour = Species)) + 
-  geom_point() +
-  theme_classic() +
-  scale_colour_manual(values = colour_pal[c(1, 3, 5)]) +
-  theme(legend.position = &#34;none&#34;) +
-  labs(x = &#34;Sepal width (cm)&#34;, y = &#34;Sepal length (cm)&#34;, title = &#34;Sepal length\nby width&#34;)
-
-# Combine the figures using cowplot
-plot_grid(p1, p2, p3, p4, nrow = 1, ncol = 4, align = &#34;hv&#34;)
-</code></pre><p><img src="/post/2026-02-10-create-publication-ready-figures/fig0.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Colours</span>
+</span></span><span class="line"><span class="cl"><span class="n">colour_pal</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;#ffb3ba&#34;</span><span class="p">,</span> <span class="s">&#34;#ffdfba&#34;</span><span class="p">,</span> <span class="s">&#34;#ffffba&#34;</span><span class="p">,</span> <span class="s">&#34;#baffc9&#34;</span><span class="p">,</span> <span class="s">&#34;#bae1ff&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Sepal.Length</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_density</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">colour_pal[1]</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Sepal length (cm)&#34;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Density&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sepal length\ndistribution&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p2</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Sepal.Width</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_density</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">colour_pal[2]</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Sepal width (cm)&#34;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Density&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sepal width\ndistribution&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p3</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Species</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Sepal.Length</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">Species</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_jitter</span><span class="p">(</span><span class="n">height</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">outlier.shape</span> <span class="o">=</span> <span class="kc">NA</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">scale_fill_manual</span><span class="p">(</span><span class="n">values</span> <span class="o">=</span> <span class="n">colour_pal</span><span class="nf">[c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span><span class="n">]</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Species&#34;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Sepal length (cm)&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sepal length\nby species&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p4</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Sepal.Width</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Sepal.Length</span><span class="p">,</span> <span class="n">colour</span> <span class="o">=</span> <span class="n">Species</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">scale_colour_manual</span><span class="p">(</span><span class="n">values</span> <span class="o">=</span> <span class="n">colour_pal</span><span class="nf">[c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span><span class="n">]</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Sepal width (cm)&#34;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Sepal length (cm)&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sepal length\nby width&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Combine the figures using cowplot</span>
+</span></span><span class="line"><span class="cl"><span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">4</span><span class="p">,</span> <span class="n">align</span> <span class="o">=</span> <span class="s">&#34;hv&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/post/2026-02-10-create-publication-ready-figures/fig0.png" alt=""></p>
 <p>Now, save it as a 180 mm wide figure:</p>
-<pre tabindex="0"><code># Combine the figures using cowplot and save as an object
-p &lt;- plot_grid(p1, p2, p3, p4, nrow = 1, ncol = 4, align = &#34;hv&#34;)
-
-# Get the r-chunk ratio
-fig_ratio &lt;- 2.25/9
-
-# Create folder to save figures in
-dir.create(&#34;pub_fig_guide&#34;, showWarnings = FALSE)
-
-# Save to file
-ggsave(p, filename = &#34;pub_fig_guide/fig1.png&#34;, 
-       dpi = 1000,
-       width = 180,
-       height = 180*fig_ratio,
-       units = &#34;mm&#34;)
-</code></pre><p><img src="/post/2026-02-10-create-publication-ready-figures/fig1.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Combine the figures using cowplot and save as an object</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">4</span><span class="p">,</span> <span class="n">align</span> <span class="o">=</span> <span class="s">&#34;hv&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Get the r-chunk ratio</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig_ratio</span> <span class="o">&lt;-</span> <span class="m">2.25</span><span class="o">/</span><span class="m">9</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create folder to save figures in</span>
+</span></span><span class="line"><span class="cl"><span class="nf">dir.create</span><span class="p">(</span><span class="s">&#34;pub_fig_guide&#34;</span><span class="p">,</span> <span class="n">showWarnings</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Save to file</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggsave</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s">&#34;pub_fig_guide/fig1.png&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">       <span class="n">dpi</span> <span class="o">=</span> <span class="m">1000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">width</span> <span class="o">=</span> <span class="m">180</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">height</span> <span class="o">=</span> <span class="m">180</span><span class="o">*</span><span class="n">fig_ratio</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">units</span> <span class="o">=</span> <span class="s">&#34;mm&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/post/2026-02-10-create-publication-ready-figures/fig1.png" alt=""></p>
 <p>Some elements look okay, but many are out of proportion. So, here is how I deal with this.</p>
 <h2 id="my-current-approach-a-custom-theme-and-updated-defaults">My current approach: A custom Theme and updated defaults</h2>
 <h3 id="1-create-a-custom-theme-function">1. Create a custom theme function</h3>
 <p>Instead of adjusting each plot’s theme individually, I define a reusable <code>theme_journal()</code> function. It standardizes text sizes, line widths, and other elements based on a chosen base theme.</p>
-<pre tabindex="0"><code>theme_journal &lt;- function(base_size = 7, linewidth = 0.35, theme_name = &#34;classic&#34;) {
-  # Select a base theme from https://ggplot2.tidyverse.org/reference/ggtheme.html
-  if(theme_name == &#34;grey&#34; | theme_name == &#34;gray&#34;){
-    base_theme &lt;- theme_grey(base_size = base_size)
-    
-  } else if(theme_name == &#34;bw&#34;){
-    base_theme &lt;- theme_bw(base_size = base_size)
-    
-  } else if(theme_name == &#34;linedraw&#34;){
-    base_theme &lt;- theme_linedraw(base_size = base_size)
-    
-  } else if(theme_name == &#34;light&#34;){
-    base_theme &lt;- theme_light(base_size = base_size)
-    
-  } else if(theme_name == &#34;dark&#34;){
-    base_theme &lt;- theme_dark(base_size = base_size)
-    
-  } else if(theme_name == &#34;minimal&#34;){
-    base_theme &lt;- theme_minimal(base_size = base_size)
-    
-  } else if(theme_name == &#34;classic&#34;){
-    base_theme &lt;- theme_classic(base_size = base_size)
-    
-  } else {
-    stop(&#34;Unknown theme. Check https://ggplot2.tidyverse.org/reference/ggtheme.html&#34;)
-  }
-  
-  # Base them plus customisation
-  base_theme +
-    theme(text = element_text(color = &#34;black&#34;, size = base_size),
-          axis.text = element_text(size = base_size * 0.9),  # 90% of base
-          axis.line = element_line(linewidth = linewidth),
-          axis.ticks = element_line(linewidth = linewidth),
-          legend.text = element_text(size = base_size * 0.9), # 90% of base
-          legend.key.size = unit(0.5, &#34;lines&#34;),
-          plot.title = element_text(hjust = 0.5, size = base_size))
-}
-</code></pre><h3 id="2-update-default-aesthetics-for-geoms">2. Update default aesthetics for geoms</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">theme_journal</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="m">7</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="m">0.35</span><span class="p">,</span> <span class="n">theme_name</span> <span class="o">=</span> <span class="s">&#34;classic&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Select a base theme from https://ggplot2.tidyverse.org/reference/ggtheme.html</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">if</span><span class="p">(</span><span class="n">theme_name</span> <span class="o">==</span> <span class="s">&#34;grey&#34;</span> <span class="o">|</span> <span class="n">theme_name</span> <span class="o">==</span> <span class="s">&#34;gray&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">base_theme</span> <span class="o">&lt;-</span> <span class="nf">theme_grey</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">theme_name</span> <span class="o">==</span> <span class="s">&#34;bw&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">base_theme</span> <span class="o">&lt;-</span> <span class="nf">theme_bw</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">theme_name</span> <span class="o">==</span> <span class="s">&#34;linedraw&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">base_theme</span> <span class="o">&lt;-</span> <span class="nf">theme_linedraw</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">theme_name</span> <span class="o">==</span> <span class="s">&#34;light&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">base_theme</span> <span class="o">&lt;-</span> <span class="nf">theme_light</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">theme_name</span> <span class="o">==</span> <span class="s">&#34;dark&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">base_theme</span> <span class="o">&lt;-</span> <span class="nf">theme_dark</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">theme_name</span> <span class="o">==</span> <span class="s">&#34;minimal&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">base_theme</span> <span class="o">&lt;-</span> <span class="nf">theme_minimal</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">theme_name</span> <span class="o">==</span> <span class="s">&#34;classic&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">base_theme</span> <span class="o">&lt;-</span> <span class="nf">theme_classic</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">stop</span><span class="p">(</span><span class="s">&#34;Unknown theme. Check https://ggplot2.tidyverse.org/reference/ggtheme.html&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Base them plus customisation</span>
+</span></span><span class="line"><span class="cl">  <span class="n">base_theme</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">theme</span><span class="p">(</span><span class="n">text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s">&#34;black&#34;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="n">axis.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">base_size</span> <span class="o">*</span> <span class="m">0.9</span><span class="p">),</span>  <span class="c1"># 90% of base</span>
+</span></span><span class="line"><span class="cl">          <span class="n">axis.line</span> <span class="o">=</span> <span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span> <span class="o">=</span> <span class="n">linewidth</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="n">axis.ticks</span> <span class="o">=</span> <span class="nf">element_line</span><span class="p">(</span><span class="n">linewidth</span> <span class="o">=</span> <span class="n">linewidth</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="n">legend.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">base_size</span> <span class="o">*</span> <span class="m">0.9</span><span class="p">),</span> <span class="c1"># 90% of base</span>
+</span></span><span class="line"><span class="cl">          <span class="n">legend.key.size</span> <span class="o">=</span> <span class="nf">unit</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="s">&#34;lines&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="n">plot.title</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">hjust</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">base_size</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-update-default-aesthetics-for-geoms">2. Update default aesthetics for geoms</h3>
 <p>Finding the default aesthetic values for each geom can be annoying. Fortunately, you can inspect them directly (e.g., <code>GeomPoint$default_aes</code>) and then set new defaults globally using <code>update_geom_defaults()</code>.</p>
-<pre tabindex="0"><code># Can be checked via GeomDensity$default_aes, GeomBoxplot$default_aes etc.
-update_geom_defaults(&#34;point&#34;, list(size = 0.5))
-update_geom_defaults(&#34;density&#34;, list(linewidth = 0.25))
-update_geom_defaults(&#34;boxplot&#34;, list(linewidth = 0.25))
-</code></pre><p>This way, every subsequent plot uses these updated defaults—no need to manually set <code>size</code> or <code>linewidth</code> in each <code>geom_*()</code> call.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Can be checked via GeomDensity$default_aes, GeomBoxplot$default_aes etc.</span>
+</span></span><span class="line"><span class="cl"><span class="nf">update_geom_defaults</span><span class="p">(</span><span class="s">&#34;point&#34;</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nf">update_geom_defaults</span><span class="p">(</span><span class="s">&#34;density&#34;</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">linewidth</span> <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nf">update_geom_defaults</span><span class="p">(</span><span class="s">&#34;boxplot&#34;</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">linewidth</span> <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This way, every subsequent plot uses these updated defaults—no need to manually set <code>size</code> or <code>linewidth</code> in each <code>geom_*()</code> call.</p>
 <h3 id="3-recreate-the-figure-with-the-new-settings">3. Recreate the figure with the new settings</h3>
 <p>Now, let’s rebuild the same four-panel figure using our custom theme and updated defaults:</p>
-<pre tabindex="0"><code>p1 &lt;- ggplot(iris, aes(x = Sepal.Length)) + 
-  geom_density(fill = colour_pal[1]) +
-  theme_journal() +
-  labs(x = &#34;Sepal length (cm)&#34;, y = &#34;Density&#34;, title = &#34;Sepal length\ndistribution&#34;)
-
-p2 &lt;- ggplot(iris, aes(x = Sepal.Width)) + 
-  geom_density(fill = colour_pal[2]) +
-  theme_journal() +
-  labs(x = &#34;Sepal width (cm)&#34;, y = &#34;Density&#34;, title = &#34;Sepal width\ndistribution&#34;)
-
-p3 &lt;- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) + 
-  geom_jitter(height = 0, width = 0.2) +
-  geom_boxplot(outlier.shape = NA) +
-  theme_journal() +
-  scale_fill_manual(values = colour_pal[c(1, 3, 5)]) +
-  theme(legend.position = &#34;none&#34;) +
-  labs(x = &#34;Species&#34;, y = &#34;Sepal length (cm)&#34;, title = &#34;Sepal length\nby species&#34;)
-
-p4 &lt;- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, colour = Species)) + 
-  geom_point() +
-  theme_journal() +
-  scale_colour_manual(values = colour_pal[c(1, 3, 5)]) +
-  theme(legend.position = &#34;none&#34;) +
-  labs(x = &#34;Sepal width (cm)&#34;, y = &#34;Sepal length (cm)&#34;, title = &#34;Sepal length\nby width&#34;)
-
-# Combine the figures using cowplot and save as an object
-p &lt;- plot_grid(p1, p2, p3, p4, nrow = 1, ncol = 4, align = &#34;hv&#34;)
-
-# Save to file
-ggsave(p, filename = &#34;pub_fig_guide/fig2.png&#34;, 
-       dpi = 1000,
-       width = 180,
-       height = 180*fig_ratio,
-       units = &#34;mm&#34;)
-</code></pre><p><img src="/post/2026-02-10-create-publication-ready-figures/fig2.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Sepal.Length</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_density</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">colour_pal[1]</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_journal</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Sepal length (cm)&#34;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Density&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sepal length\ndistribution&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p2</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Sepal.Width</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_density</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">colour_pal[2]</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_journal</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Sepal width (cm)&#34;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Density&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sepal width\ndistribution&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p3</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Species</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Sepal.Length</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">Species</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_jitter</span><span class="p">(</span><span class="n">height</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">outlier.shape</span> <span class="o">=</span> <span class="kc">NA</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_journal</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">scale_fill_manual</span><span class="p">(</span><span class="n">values</span> <span class="o">=</span> <span class="n">colour_pal</span><span class="nf">[c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span><span class="n">]</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Species&#34;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Sepal length (cm)&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sepal length\nby species&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p4</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Sepal.Width</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Sepal.Length</span><span class="p">,</span> <span class="n">colour</span> <span class="o">=</span> <span class="n">Species</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_journal</span><span class="p">()</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">scale_colour_manual</span><span class="p">(</span><span class="n">values</span> <span class="o">=</span> <span class="n">colour_pal</span><span class="nf">[c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span><span class="n">]</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Sepal width (cm)&#34;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Sepal length (cm)&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sepal length\nby width&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Combine the figures using cowplot and save as an object</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">4</span><span class="p">,</span> <span class="n">align</span> <span class="o">=</span> <span class="s">&#34;hv&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Save to file</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggsave</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s">&#34;pub_fig_guide/fig2.png&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">       <span class="n">dpi</span> <span class="o">=</span> <span class="m">1000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">width</span> <span class="o">=</span> <span class="m">180</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">height</span> <span class="o">=</span> <span class="m">180</span><span class="o">*</span><span class="n">fig_ratio</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">units</span> <span class="o">=</span> <span class="s">&#34;mm&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/post/2026-02-10-create-publication-ready-figures/fig2.png" alt=""></p>
 <p>The result is a clean, proportionally balanced figure that meets typical journal requirements with minimal manual adjustment.</p>
 <h3 id="extra-exporting-to-svg-instead-of-png">Extra: Exporting to SVG instead of PNG</h3>
 <p>For greater flexibility, consider exporting your figures as SVG instead of PNG. SVG files are:</p>
@@ -291,13 +607,25 @@ ggsave(p, filename = &#34;pub_fig_guide/fig2.png&#34;,
 <li>Version-control friendly (text-based).</li>
 </ul>
 <p>Use <code>svglite</code> for reliable SVG export:</p>
-<pre tabindex="0"><code># Use this because viewport/scaling issues
-library(svglite)
-ggsave(p, filename = plot_filename, 
-       device = svglite,  width = 90,  
-       height = 45,  units = &#34;mm&#34;,
-       scaling = 1,  fix_text_size = FALSE)
-</code></pre><p>When importing into Inkscape, select the option “Include SVG image as editable object(s) in the current file.” When I exported my .svg files without <code>svglite</code>, the figures that very odd artefacts in them.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Use this because viewport/scaling issues</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">svglite</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggsave</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">plot_filename</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">       <span class="n">device</span> <span class="o">=</span> <span class="n">svglite</span><span class="p">,</span>  <span class="n">width</span> <span class="o">=</span> <span class="m">90</span><span class="p">,</span>  
+</span></span><span class="line"><span class="cl">       <span class="n">height</span> <span class="o">=</span> <span class="m">45</span><span class="p">,</span>  <span class="n">units</span> <span class="o">=</span> <span class="s">&#34;mm&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">scaling</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>  <span class="n">fix_text_size</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>When importing into Inkscape, select the option “Include SVG image as editable object(s) in the current file.” When I exported my .svg files without <code>svglite</code>, the figures that very odd artefacts in them.</p>
 <h3 id="additional-tips">Additional Tips</h3>
 <ul>
 <li><strong>PowerPoint users</strong>: You can convert SVG images into editable PowerPoint objects.</li>
@@ -308,69 +636,143 @@ ggsave(p, filename = plot_filename,
 <h2 id="session-details">Session details</h2>
 <details>
  <summary>Click here for detailed for libraries used and session information. </summary>
-<pre tabindex="0"><code>sessioninfo::session_info()
-</code></pre><pre tabindex="0"><code>## ─ Session info ───────────────────────────────────────────────────────────────
-##  setting  value
-##  version  R version 4.4.0 (2024-04-24)
-##  os       Ubuntu 22.04.5 LTS
-##  system   x86_64, linux-gnu
-##  ui       X11
-##  language en_GB:en
-##  collate  en_GB.UTF-8
-##  ctype    en_GB.UTF-8
-##  tz       Asia/Shanghai
-##  date     2026-02-05
-##  pandoc   3.1.1 @ /usr/lib/rstudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
-## 
-## ─ Packages ───────────────────────────────────────────────────────────────────
-##  package     * version date (UTC) lib source
-##  bslib         0.7.0   2024-03-29 [1] CRAN (R 4.4.0)
-##  cachem        1.1.0   2024-05-16 [1] CRAN (R 4.4.0)
-##  cli           3.6.2   2023-12-11 [1] CRAN (R 4.4.0)
-##  colorspace    2.1-0   2023-01-23 [1] CRAN (R 4.4.0)
-##  cowplot     * 1.1.3   2024-01-22 [1] CRAN (R 4.4.0)
-##  digest        0.6.35  2024-03-11 [1] CRAN (R 4.4.0)
-##  dplyr         1.1.4   2023-11-17 [1] CRAN (R 4.4.0)
-##  evaluate      0.23    2023-11-01 [1] CRAN (R 4.4.0)
-##  fansi         1.0.6   2023-12-08 [1] CRAN (R 4.4.0)
-##  fastmap       1.2.0   2024-05-15 [1] CRAN (R 4.4.0)
-##  generics      0.1.3   2022-07-05 [1] CRAN (R 4.4.0)
-##  ggplot2     * 3.5.2   2025-04-09 [1] CRAN (R 4.4.0)
-##  glue          1.7.0   2024-01-09 [1] CRAN (R 4.4.0)
-##  gtable        0.3.5   2024-04-22 [1] CRAN (R 4.4.0)
-##  htmltools     0.5.8.1 2024-04-04 [1] CRAN (R 4.4.0)
-##  jquerylib     0.1.4   2021-04-26 [1] CRAN (R 4.4.0)
-##  jsonlite      1.8.8   2023-12-04 [1] CRAN (R 4.4.0)
-##  knitr         1.50    2025-03-16 [1] CRAN (R 4.4.0)
-##  lifecycle     1.0.4   2023-11-07 [1] CRAN (R 4.4.0)
-##  magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.4.0)
-##  munsell       0.5.1   2024-04-01 [1] CRAN (R 4.4.0)
-##  pillar        1.9.0   2023-03-22 [1] CRAN (R 4.4.0)
-##  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.4.0)
-##  plyr        * 1.8.9   2023-10-02 [1] CRAN (R 4.4.0)
-##  R6            2.5.1   2021-08-19 [1] CRAN (R 4.4.0)
-##  Rcpp          1.0.12  2024-01-09 [1] CRAN (R 4.4.0)
-##  rlang         1.1.4   2024-06-04 [1] CRAN (R 4.4.0)
-##  rmarkdown     2.27    2024-05-17 [1] CRAN (R 4.4.0)
-##  rstudioapi    0.16.0  2024-03-24 [1] CRAN (R 4.4.0)
-##  sass          0.4.9   2024-03-15 [1] CRAN (R 4.4.0)
-##  scales        1.3.0   2023-11-28 [1] CRAN (R 4.4.0)
-##  sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.4.0)
-##  tibble        3.2.1   2023-03-20 [1] CRAN (R 4.4.0)
-##  tidyselect    1.2.1   2024-03-11 [1] CRAN (R 4.4.0)
-##  utf8          1.2.4   2023-10-22 [1] CRAN (R 4.4.0)
-##  vctrs         0.6.5   2023-12-01 [1] CRAN (R 4.4.0)
-##  withr         3.0.0   2024-01-16 [1] CRAN (R 4.4.0)
-##  xfun          0.52    2025-04-02 [1] CRAN (R 4.4.0)
-##  yaml          2.3.12  2025-12-10 [1] CRAN (R 4.4.0)
-## 
-##  [1] /home/alex/R/x86_64-pc-linux-gnu-library/4.4
-##  [2] /usr/local/lib/R/site-library
-##  [3] /usr/lib/R/site-library
-##  [4] /usr/lib/R/library
-## 
-## ──────────────────────────────────────────────────────────────────────────────
-</code></pre></details>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sessioninfo::session_info()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">##</span> <span class="err">─</span> <span class="nx">Session</span> <span class="nx">info</span> <span class="err">───────────────────────────────────────────────────────────────</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">setting</span>  <span class="nx">value</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">version</span>  <span class="nx">R</span> <span class="nx">version</span> <span class="mf">4.4.0</span> <span class="p">(</span><span class="mi">2024</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">24</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">os</span>       <span class="nx">Ubuntu</span> <span class="mf">22.04.5</span> <span class="nx">LTS</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">system</span>   <span class="nx">x86_64</span><span class="p">,</span> <span class="nx">linux</span><span class="o">-</span><span class="nx">gnu</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">ui</span>       <span class="nx">X11</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">language</span> <span class="nx">en_GB</span><span class="p">:</span><span class="nx">en</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">collate</span>  <span class="nx">en_GB</span><span class="p">.</span><span class="nx">UTF</span><span class="o">-</span><span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">ctype</span>    <span class="nx">en_GB</span><span class="p">.</span><span class="nx">UTF</span><span class="o">-</span><span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">tz</span>       <span class="nx">Asia</span><span class="o">/</span><span class="nx">Shanghai</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">date</span>     <span class="mi">2026</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mo">05</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">pandoc</span>   <span class="mf">3.1.1</span> <span class="err">@</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">rstudio</span><span class="o">/</span><span class="nx">resources</span><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">quarto</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">tools</span><span class="o">/</span> <span class="p">(</span><span class="nx">via</span> <span class="nx">rmarkdown</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span> 
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="err">─</span> <span class="nx">Packages</span> <span class="err">───────────────────────────────────────────────────────────────────</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="kn">package</span>     <span class="o">*</span> <span class="nx">version</span> <span class="nf">date</span> <span class="p">(</span><span class="nx">UTC</span><span class="p">)</span> <span class="nx">lib</span> <span class="nx">source</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">bslib</span>         <span class="mf">0.7.0</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">29</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">cachem</span>        <span class="mf">1.1.0</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">16</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">cli</span>           <span class="mf">3.6.2</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">11</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">colorspace</span>    <span class="mf">2.1</span><span class="o">-</span><span class="mi">0</span>   <span class="mi">2023</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">23</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">cowplot</span>     <span class="o">*</span> <span class="mf">1.1.3</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">22</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">digest</span>        <span class="mf">0.6.35</span>  <span class="mi">2024</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">11</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">dplyr</span>         <span class="mf">1.1.4</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">17</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">evaluate</span>      <span class="mf">0.23</span>    <span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">01</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">fansi</span>         <span class="mf">1.0.6</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">fastmap</span>       <span class="mf">1.2.0</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">15</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">generics</span>      <span class="mf">0.1.3</span>   <span class="mi">2022</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">05</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">ggplot2</span>     <span class="o">*</span> <span class="mf">3.5.2</span>   <span class="mi">2025</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">09</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">glue</span>          <span class="mf">1.7.0</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">09</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">gtable</span>        <span class="mf">0.3.5</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">22</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">htmltools</span>     <span class="mf">0.5.8.1</span> <span class="mi">2024</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">jquerylib</span>     <span class="mf">0.1.4</span>   <span class="mi">2021</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">26</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">jsonlite</span>      <span class="mf">1.8.8</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">04</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">knitr</span>         <span class="mf">1.50</span>    <span class="mi">2025</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">16</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">lifecycle</span>     <span class="mf">1.0.4</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">07</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">magrittr</span>      <span class="mf">2.0.3</span>   <span class="mi">2022</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">30</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">munsell</span>       <span class="mf">0.5.1</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">01</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">pillar</span>        <span class="mf">1.9.0</span>   <span class="mi">2023</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">22</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">pkgconfig</span>     <span class="mf">2.0.3</span>   <span class="mi">2019</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">22</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">plyr</span>        <span class="o">*</span> <span class="mf">1.8.9</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">02</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">R6</span>            <span class="mf">2.5.1</span>   <span class="mi">2021</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">19</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">Rcpp</span>          <span class="mf">1.0.12</span>  <span class="mi">2024</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">09</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">rlang</span>         <span class="mf">1.1.4</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mo">04</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">rmarkdown</span>     <span class="mf">2.27</span>    <span class="mi">2024</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">17</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">rstudioapi</span>    <span class="mf">0.16.0</span>  <span class="mi">2024</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">24</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">sass</span>          <span class="mf">0.4.9</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">15</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">scales</span>        <span class="mf">1.3.0</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">28</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">sessioninfo</span>   <span class="mf">1.2.2</span>   <span class="mi">2021</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">06</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">tibble</span>        <span class="mf">3.2.1</span>   <span class="mi">2023</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">20</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">tidyselect</span>    <span class="mf">1.2.1</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">11</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">utf8</span>          <span class="mf">1.2.4</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">22</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">vctrs</span>         <span class="mf">0.6.5</span>   <span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">01</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">withr</span>         <span class="mf">3.0.0</span>   <span class="mi">2024</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">16</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">xfun</span>          <span class="mf">0.52</span>    <span class="mi">2025</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">02</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="nx">yaml</span>          <span class="mf">2.3.12</span>  <span class="mi">2025</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">10</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">CRAN</span> <span class="p">(</span><span class="nx">R</span> <span class="mf">4.4.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span> 
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">alex</span><span class="o">/</span><span class="nx">R</span><span class="o">/</span><span class="nx">x86_64</span><span class="o">-</span><span class="nx">pc</span><span class="o">-</span><span class="nx">linux</span><span class="o">-</span><span class="nx">gnu</span><span class="o">-</span><span class="nx">library</span><span class="o">/</span><span class="mf">4.4</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">local</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">R</span><span class="o">/</span><span class="nx">site</span><span class="o">-</span><span class="nx">library</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">R</span><span class="o">/</span><span class="nx">site</span><span class="o">-</span><span class="nx">library</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span>  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">R</span><span class="o">/</span><span class="nx">library</span>
+</span></span><span class="line"><span class="cl"><span class="err">##</span> 
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="err">──────────────────────────────────────────────────────────────────────────────</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></details>
 
   
 

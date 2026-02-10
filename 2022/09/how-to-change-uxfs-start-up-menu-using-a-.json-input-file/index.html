@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "How to change UXF's start up menu using a .json input file",
   "url": "https://jaquent.github.io/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/",
-  "wordCount": "343",
+  "wordCount": "356",
   "datePublished": "2022-09-20T00:00:00+00:00",
   "dateModified": "2022-09-20T00:00:00+00:00",
   "author": {
@@ -62,6 +62,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -69,16 +235,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -144,20 +310,39 @@
 <p>One thing that bothered me was that the start up menu generated by UXF is hardcoded meaning that you have to change it in the Unity3D editor even for only small changes like for instance changing the instructions. This is why I wrote <a href="https://github.com/JAQuent/scripts-for-unity3d/blob/master/UXF_UI_controllScript.cs">this neat little script</a> that allows you to configure the start-up menu as you see it above.</p>
 <p>All that you need to do to get this start-up menu is to a) attach the script to any game object, b) copy the corresponding .json file into the <em>StreamingAssets</em> folder and c) provide the file name to th script.</p>
 <p>The example .json file to create the start up menu above:</p>
-<pre tabindex="0"><code>{
-    &#34;chromeBar&#34;: &#34;Startup&#34;,
-    &#34;instructionsPanelContent1&#34;: &#34;Welcome to OLM task! &#34;,
-    &#34;instructionsPanelContent2&#34;: &#34;You could use this space to display some instructions to the researcher or the participant.&#34;,
-    &#34;expSettingsprofile&#34;: &#34;Experiment settings profile&#34;,
-    &#34;localPathElement&#34;: &#34;Local data save directory&#34;,
-    &#34;localPathElement_placeHolder&#34;: &#34;Press browse button to select...&#34;,
-    &#34;participantID&#34;: &#34;Participant ID&#34;,
-    &#34;participantID_placeholder&#34;: &#34;Enter text...&#34;,
-    &#34;sessionNumber&#34;: &#34;Session number&#34;,
-    &#34;termsAndConditions&#34;: &#34;Please tick if you understand the instructions and agree for your data to be collected and used for research purposes.&lt;color=red&gt;*&lt;/color&gt;&#34;,
-    &#34;beginButton&#34;: &#34;Begin session.&#34;
-}
-</code></pre><p>With this small trick you can always edit the menu of your completed build without opening Unity3D again.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;chromeBar&#34;</span><span class="p">:</span> <span class="s2">&#34;Startup&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;instructionsPanelContent1&#34;</span><span class="p">:</span> <span class="s2">&#34;Welcome to OLM task! &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;instructionsPanelContent2&#34;</span><span class="p">:</span> <span class="s2">&#34;You could use this space to display some instructions to the researcher or the participant.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;expSettingsprofile&#34;</span><span class="p">:</span> <span class="s2">&#34;Experiment settings profile&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;localPathElement&#34;</span><span class="p">:</span> <span class="s2">&#34;Local data save directory&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;localPathElement_placeHolder&#34;</span><span class="p">:</span> <span class="s2">&#34;Press browse button to select...&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;participantID&#34;</span><span class="p">:</span> <span class="s2">&#34;Participant ID&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;participantID_placeholder&#34;</span><span class="p">:</span> <span class="s2">&#34;Enter text...&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;sessionNumber&#34;</span><span class="p">:</span> <span class="s2">&#34;Session number&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;termsAndConditions&#34;</span><span class="p">:</span> <span class="s2">&#34;Please tick if you understand the instructions and agree for your data to be collected and used for research purposes.&lt;color=red&gt;*&lt;/color&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;beginButton&#34;</span><span class="p">:</span> <span class="s2">&#34;Begin session.&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>With this small trick you can always edit the menu of your completed build without opening Unity3D again.</p>
 <p>Note: You need to set-up all variables that you want to get from the .json file. The variable names have to correspond to the input names in that file. If you want a different layout with additional things like another dropdown menu you&rsquo;ll have to adapt the code &amp; the .json file.</p>
 <p>I have been using this script in all my latest tasks and it serves as a teaser for what is to come.</p>
 

@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "Matlab function to create stacked texture maps for Unity",
   "url": "https://jaquent.github.io/2022/03/matlab-function-to-create-stacked-texture-maps-for-unity/",
-  "wordCount": "362",
+  "wordCount": "415",
   "datePublished": "2022-03-21T00:00:00+00:00",
   "dateModified": "2022-03-21T00:00:00+00:00",
   "author": {
@@ -62,6 +62,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -69,16 +235,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -143,64 +309,129 @@
 <img src="https://github.com/JAQuent/functions-for-matlab/raw/master/createStackedTexture/create_a_texture_map.png" alt="Illustration of procedure." width="600"/>
 <p>I&rsquo;ve spent hours trying to do this in GIMP but I failed so I quickly cooked up a function in MATLAB called <code>createStackedTexture.m</code> (<a href="https://github.com/JAQuent/functions-for-matlab/tree/master/createStackedTexture">GitHub repository</a>).</p>
 <h1 id="example-how-to-use-the-function">Example how to use the function</h1>
-<pre tabindex="0"><code>createStackedTexture(&#34;factorylargerocksplain_maskMap.png&#34;, ...
-                     &#34;factorylargerocksplain_metallic.png&#34;, ...
-                     &#34;factorylargerocksplain_ao.png&#34;, ...
-                     zeros(250, 250, 3, &#39;uint8&#39;), ... % To leave out just add zeros. 
-                     &#34;factorylargerocksplain_smoothness.png&#34;)
-</code></pre><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="n">createStackedTexture</span><span class="p">(</span>&#34;<span class="n">factorylargerocksplain_maskMap</span><span class="p">.</span><span class="n">png</span>&#34;<span class="p">,</span> <span class="c">...</span>
+</span></span><span class="line"><span class="cl">                     &#34;<span class="n">factorylargerocksplain_metallic</span><span class="p">.</span><span class="n">png</span>&#34;<span class="p">,</span> <span class="c">...</span>
+</span></span><span class="line"><span class="cl">                     &#34;<span class="n">factorylargerocksplain_ao</span><span class="p">.</span><span class="n">png</span>&#34;<span class="p">,</span> <span class="c">...</span>
+</span></span><span class="line"><span class="cl">                     <span class="nb">zeros</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;uint8&#39;</span><span class="p">),</span> <span class="c">... % To leave out just add zeros. </span>
+</span></span><span class="line"><span class="cl">                     &#34;<span class="n">factorylargerocksplain_smoothness</span><span class="p">.</span><span class="n">png</span>&#34;<span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
 <br>
 <br>
 <h1 id="code-for-the-function">Code for the function</h1>
-<pre tabindex="0"><code>function createStackedTexture(fileName, go2R, go2G, go2B, go2A)
-%createStackedTexture This functions takes greyscale texture maps (currently only .png) and
-%copies them into one RGBA images in the respective channels. 
-% go2R = Greyscale image or array that should go into the R channel. 
-% go2G = Greyscale image or array that should go into the G channel. 
-% go2B = Greyscale image or array that should go into the B channel. 
-% go2A = Greyscale image or array that should go into the A channel. 
-
-%% Reade files or copy if arrays
-if isstring(go2R) || ischar(go2R)
-    R = imread(go2R);
-else 
-    R = go2R;
-end
-
-if isstring(go2G) || ischar(go2G)
-    G = imread(go2G);
-else 
-    R = go2G;
-end
-
-if isstring(go2B) || ischar(go2B)
-    B = imread(go2B);
-else 
-    B = go2B;
-end
-
-if isstring(go2A) || ischar(go2A)
-    A = imread(go2A);
-else 
-    A = go2A;
-end
-
-
-%% Check dimensions
-if ~all(size(R) == size(G)) || ~all(size(G) == size(B)) || ~all(size(R) == size(B)) || ~all(size(A) == size(B))
-   error(&#39;Not all files have the same dimensions.&#39;);
-end
-
-%% Get new image
-textureMap = zeros(size(R, 1), size(R, 1), 3, &#39;uint8&#39;); %initialise
-textureMap(:, :, 1) = R(:, :, 1);
-textureMap(:, :, 2) = G(:, :, 1);
-textureMap(:, :, 3) = B(:, :, 1);
-
-%% Write new image
-imwrite(textureMap, fileName, &#39;png&#39;, &#39;Alpha&#39;, A(:, :, 1));
-end
-</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="k">function</span><span class="w"> </span><span class="nf">createStackedTexture</span><span class="p">(</span>fileName, go2R, go2G, go2B, go2A<span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">%createStackedTexture This functions takes greyscale texture maps (currently only .png) and</span>
+</span></span><span class="line"><span class="cl"><span class="c">%copies them into one RGBA images in the respective channels. </span>
+</span></span><span class="line"><span class="cl"><span class="c">% go2R = Greyscale image or array that should go into the R channel. </span>
+</span></span><span class="line"><span class="cl"><span class="c">% go2G = Greyscale image or array that should go into the G channel. </span>
+</span></span><span class="line"><span class="cl"><span class="c">% go2B = Greyscale image or array that should go into the B channel. </span>
+</span></span><span class="line"><span class="cl"><span class="c">% go2A = Greyscale image or array that should go into the A channel. </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">%% Reade files or copy if arrays</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">isstring</span><span class="p">(</span><span class="n">go2R</span><span class="p">)</span> <span class="o">||</span> <span class="n">ischar</span><span class="p">(</span><span class="n">go2R</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">R</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">go2R</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">R</span> <span class="p">=</span> <span class="n">go2R</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">isstring</span><span class="p">(</span><span class="n">go2G</span><span class="p">)</span> <span class="o">||</span> <span class="n">ischar</span><span class="p">(</span><span class="n">go2G</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">G</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">go2G</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">R</span> <span class="p">=</span> <span class="n">go2G</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">isstring</span><span class="p">(</span><span class="n">go2B</span><span class="p">)</span> <span class="o">||</span> <span class="n">ischar</span><span class="p">(</span><span class="n">go2B</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">B</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">go2B</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">B</span> <span class="p">=</span> <span class="n">go2B</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">isstring</span><span class="p">(</span><span class="n">go2A</span><span class="p">)</span> <span class="o">||</span> <span class="n">ischar</span><span class="p">(</span><span class="n">go2A</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">go2A</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">A</span> <span class="p">=</span> <span class="n">go2A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">%% Check dimensions</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">~</span><span class="n">all</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">==</span> <span class="nb">size</span><span class="p">(</span><span class="n">G</span><span class="p">))</span> <span class="o">||</span> <span class="o">~</span><span class="n">all</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="o">==</span> <span class="nb">size</span><span class="p">(</span><span class="n">B</span><span class="p">))</span> <span class="o">||</span> <span class="o">~</span><span class="n">all</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">==</span> <span class="nb">size</span><span class="p">(</span><span class="n">B</span><span class="p">))</span> <span class="o">||</span> <span class="o">~</span><span class="n">all</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">==</span> <span class="nb">size</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">   <span class="n">error</span><span class="p">(</span><span class="s">&#39;Not all files have the same dimensions.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">%% Get new image</span>
+</span></span><span class="line"><span class="cl"><span class="n">textureMap</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">size</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;uint8&#39;</span><span class="p">);</span> <span class="c">%initialise</span>
+</span></span><span class="line"><span class="cl"><span class="n">textureMap</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="n">R</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">textureMap</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">)</span> <span class="p">=</span> <span class="n">G</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">textureMap</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="n">B</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">%% Write new image</span>
+</span></span><span class="line"><span class="cl"><span class="n">imwrite</span><span class="p">(</span><span class="n">textureMap</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="s">&#39;png&#39;</span><span class="p">,</span> <span class="s">&#39;Alpha&#39;</span><span class="p">,</span> <span class="n">A</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 
   
 

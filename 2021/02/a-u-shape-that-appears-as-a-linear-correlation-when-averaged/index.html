@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "A U-shape that appears as a linear correlation when averaged",
   "url": "https://jaquent.github.io/2021/02/a-u-shape-that-appears-as-a-linear-correlation-when-averaged/",
-  "wordCount": "1015",
+  "wordCount": "1075",
   "datePublished": "2021-02-12T00:00:00+00:00",
   "dateModified": "2021-02-12T00:00:00+00:00",
   "author": {
@@ -61,6 +61,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -68,16 +234,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -185,86 +351,206 @@ have an average expectancy per object. The expectancy for a particular
 participants is generated by taking this average expectancy as the mean
 of a normal distribution, while using a standard deviation (SD) that
 becomes smaller/larger as a function of expectancy.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Set up seed</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">1241</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Parameters</span>
-</span></span><span style="display:flex;"><span>numObj  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>numSub  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">75</span>
-</span></span></code></pre></div><p>Similar to our existing data, we have twenty pairings (i.e. objects) per
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Set up seed</span>
+</span></span><span class="line"><span class="cl"><span class="nf">set.seed</span><span class="p">(</span><span class="m">1241</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Parameters</span>
+</span></span><span class="line"><span class="cl"><span class="n">numObj</span>  <span class="o">&lt;-</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">numSub</span>  <span class="o">&lt;-</span> <span class="m">75</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Similar to our existing data, we have twenty pairings (i.e. objects) per
 participants (n = 75). We start with generating 20 random values between
 -100 and 100 for our objects.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Give 20 obj true values from uniform distribution between -100 and 100.</span>
-</span></span><span style="display:flex;"><span>trueObj_val <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, <span style="color:#ae81ff">-100</span>, <span style="color:#ae81ff">100</span>)
-</span></span></code></pre></div><p>In order to have an asymmetric spread, we have to scale the standard
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Give 20 obj true values from uniform distribution between -100 and 100.</span>
+</span></span><span class="line"><span class="cl"><span class="n">trueObj_val</span> <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="m">-100</span><span class="p">,</span> <span class="m">100</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In order to have an asymmetric spread, we have to scale the standard
 deviation (SD) as function of expectancy.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>sdScale          <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-1</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Have an SD that scales with the true obj values</span>
-</span></span><span style="display:flex;"><span>sd_scaled_by_val <span style="color:#f92672">&lt;-</span> sdScale<span style="color:#f92672">*</span>trueObj_val <span style="color:#f92672">-</span> sdScale<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>
-</span></span></code></pre></div><p>In the next step we generate expectancy ratings for each participant.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># For each subject draw a random value with the mean of the object with SD that scales with this value</span>
-</span></span><span style="display:flex;"><span>subjVal <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#66d9ef">NA</span>, numSub, numObj)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
-</span></span><span style="display:flex;"><span>    subjVal[i, j] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">1</span>, trueObj_val[j], sd_scaled_by_val[j])
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This process will create values that exceed the range of possible vaues,
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">sdScale</span>          <span class="o">&lt;-</span> <span class="m">-1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Have an SD that scales with the true obj values</span>
+</span></span><span class="line"><span class="cl"><span class="n">sd_scaled_by_val</span> <span class="o">&lt;-</span> <span class="n">sdScale</span><span class="o">*</span><span class="n">trueObj_val</span> <span class="o">-</span> <span class="n">sdScale</span><span class="o">*</span><span class="m">100</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In the next step we generate expectancy ratings for each participant.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># For each subject draw a random value with the mean of the object with SD that scales with this value</span>
+</span></span><span class="line"><span class="cl"><span class="n">subjVal</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">numObj</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">for</span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">subjVal[i</span><span class="p">,</span> <span class="n">j]</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">trueObj_val[j]</span><span class="p">,</span> <span class="n">sd_scaled_by_val[j]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This process will create values that exceed the range of possible vaues,
 therefore everything is capped at -100 and 100.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Capping at -100 and 100</span>
-</span></span><span style="display:flex;"><span>subjVal[subjVal <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span>]  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span>subjVal[subjVal <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">-100</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-100</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Everything is bound to one DF</span>
-</span></span><span style="display:flex;"><span>df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(sub  <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, numObj),
-</span></span><span style="display:flex;"><span>                 obj  <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, each <span style="color:#f92672">=</span> numSub),
-</span></span><span style="display:flex;"><span>                 trueObj_val <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(trueObj_val, each <span style="color:#f92672">=</span> numSub),
-</span></span><span style="display:flex;"><span>                 x    <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(subjVal))
-</span></span></code></pre></div><p>To make it easier to compare the results with our analyse we scale the
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Capping at -100 and 100</span>
+</span></span><span class="line"><span class="cl"><span class="n">subjVal[subjVal</span> <span class="o">&gt;</span> <span class="m">100</span><span class="n">]</span>  <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">subjVal[subjVal</span> <span class="o">&lt;</span> <span class="m">-100</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="m">-100</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Everything is bound to one DF</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">sub</span>  <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">,</span> <span class="n">numObj</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">obj</span>  <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="n">numSub</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">trueObj_val</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="n">trueObj_val</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="n">numSub</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">x</span>    <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">subjVal</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To make it easier to compare the results with our analyse we scale the
 data to have mean of 0 and SD of 1.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>df<span style="color:#f92672">$</span>s_trueObj_val <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(df<span style="color:#f92672">$</span>trueObj_val)
-</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>s_x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(df<span style="color:#f92672">$</span>x)
-</span></span></code></pre></div><p>In the last step, we use those expectancy values to create remember
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">df</span><span class="o">$</span><span class="n">s_trueObj_val</span> <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">trueObj_val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">$</span><span class="n">s_x</span> <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">x</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In the last step, we use those expectancy values to create remember
 judgements as a quadratic logistic model.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generating memory performance</span>
-</span></span><span style="display:flex;"><span>beta0 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>beta1 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>beta2 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1.2</span>
-</span></span><span style="display:flex;"><span>z     <span style="color:#f92672">&lt;-</span> beta0 <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>df<span style="color:#f92672">$</span>s_x <span style="color:#f92672">+</span> beta2<span style="color:#f92672">*</span>df<span style="color:#f92672">$</span>s_x<span style="color:#f92672">*</span>df<span style="color:#f92672">$</span>s_x <span style="color:#75715e"># Regression in log odds</span>
-</span></span><span style="display:flex;"><span>pr    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#a6e22e">exp</span>(<span style="color:#f92672">-</span>z)) <span style="color:#75715e"># Convert to probability.</span>
-</span></span><span style="display:flex;"><span>df<span style="color:#f92672">$</span>y  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbinom</span>(numObj<span style="color:#f92672">*</span>numSub, <span style="color:#ae81ff">1</span>, pr) <span style="color:#75715e"># Get 0 and 1 with binomial link function</span>
-</span></span></code></pre></div><p>This leads to this result:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(df, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> s_x, y <span style="color:#f92672">=</span> y)) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_jitter</span>(width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, height <span style="color:#f92672">=</span>  <span style="color:#ae81ff">0.1</span>) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_smooth</span>(colour <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;blue&#39;</span>) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_smooth</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> s_trueObj_val), colour <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;red&#39;</span>) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Remembered (simulated)&#34;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Simulated ratings&#34;</span>, title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Result of simulation&#39;</span>)
-</span></span></code></pre></div><p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-14-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Generating memory performance</span>
+</span></span><span class="line"><span class="cl"><span class="n">beta0</span> <span class="o">&lt;-</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">beta1</span> <span class="o">&lt;-</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">beta2</span> <span class="o">&lt;-</span> <span class="m">1.2</span>
+</span></span><span class="line"><span class="cl"><span class="n">z</span>     <span class="o">&lt;-</span> <span class="n">beta0</span> <span class="o">+</span> <span class="n">beta1</span><span class="o">*</span><span class="n">df</span><span class="o">$</span><span class="n">s_x</span> <span class="o">+</span> <span class="n">beta2</span><span class="o">*</span><span class="n">df</span><span class="o">$</span><span class="n">s_x</span><span class="o">*</span><span class="n">df</span><span class="o">$</span><span class="n">s_x</span> <span class="c1"># Regression in log odds</span>
+</span></span><span class="line"><span class="cl"><span class="n">pr</span>    <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="p">(</span><span class="m">1</span><span class="o">+</span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span> <span class="c1"># Convert to probability.</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">$</span><span class="n">y</span>  <span class="o">&lt;-</span> <span class="nf">rbinom</span><span class="p">(</span><span class="n">numObj</span><span class="o">*</span><span class="n">numSub</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">pr</span><span class="p">)</span> <span class="c1"># Get 0 and 1 with binomial link function</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This leads to this result:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">s_x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_jitter</span><span class="p">(</span><span class="n">width</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span>  <span class="m">0.1</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_smooth</span><span class="p">(</span><span class="n">colour</span> <span class="o">=</span> <span class="s">&#39;blue&#39;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_smooth</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">s_trueObj_val</span><span class="p">),</span> <span class="n">colour</span> <span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Remembered (simulated)&#34;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Simulated ratings&#34;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#39;Result of simulation&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/post/2021-02-12-a-u-shape-that-appears-as-a-linear-correlation-when-averaged/unnamed-chunk-14-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>This shows that true quadratic relationship (blue loess line) can appear
 as straight line (red loess line) when averaged. Playing around with
 parameters of the regression and the SD scale allows one to easily
 create examples where the line is slightly negative.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Aggregating to correlate</span>
-</span></span><span style="display:flex;"><span>df_agg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ddply</span>(df, 
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;obj&#39;</span>, <span style="color:#e6db74">&#39;s_trueObj_val &#39;</span>), 
-</span></span><span style="display:flex;"><span>                summarise, 
-</span></span><span style="display:flex;"><span>                Individual    <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(s_x),
-</span></span><span style="display:flex;"><span>                Individual_sd <span style="color:#f92672">=</span> <span style="color:#a6e22e">sd</span>(s_x),
-</span></span><span style="display:flex;"><span>                remNum    <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(y),
-</span></span><span style="display:flex;"><span>                remPer    <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(y))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get correlation</span>
-</span></span><span style="display:flex;"><span>cor3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(df_agg<span style="color:#f92672">$</span>Individual, df_agg<span style="color:#f92672">$</span>remPer)
-</span></span></code></pre></div><p>In this case the correlation is r = -.732, p &lt; .001.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># calculate shift</span>
-</span></span><span style="display:flex;"><span>rightShift <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">abs</span>(<span style="color:#ae81ff">-100</span> <span style="color:#f92672">-</span> df<span style="color:#f92672">$</span>trueObj_val[df<span style="color:#f92672">$</span>x <span style="color:#f92672">==</span> <span style="color:#ae81ff">-100</span>])
-</span></span><span style="display:flex;"><span>leftShift  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">abs</span>(<span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> df<span style="color:#f92672">$</span>trueObj_val[df<span style="color:#f92672">$</span>x <span style="color:#f92672">==</span> <span style="color:#ae81ff">100</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># T test for the difference</span>
-</span></span><span style="display:flex;"><span>test2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t.test</span>(leftShift, rightShift, var.equal <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
-</span></span></code></pre></div><p>If we now calculate the same rightward and leftward shift, we also get a
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Aggregating to correlate</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_agg</span> <span class="o">&lt;-</span> <span class="nf">ddply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="nf">c</span><span class="p">(</span><span class="s">&#39;obj&#39;</span><span class="p">,</span> <span class="s">&#39;s_trueObj_val &#39;</span><span class="p">),</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">summarise</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">Individual</span>    <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">s_x</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Individual_sd</span> <span class="o">=</span> <span class="nf">sd</span><span class="p">(</span><span class="n">s_x</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">remNum</span>    <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">remPer</span>    <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Get correlation</span>
+</span></span><span class="line"><span class="cl"><span class="n">cor3</span> <span class="o">&lt;-</span> <span class="nf">cor.test</span><span class="p">(</span><span class="n">df_agg</span><span class="o">$</span><span class="n">Individual</span><span class="p">,</span> <span class="n">df_agg</span><span class="o">$</span><span class="n">remPer</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In this case the correlation is r = -.732, p &lt; .001.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># calculate shift</span>
+</span></span><span class="line"><span class="cl"><span class="n">rightShift</span> <span class="o">&lt;-</span> <span class="nf">abs</span><span class="p">(</span><span class="m">-100</span> <span class="o">-</span> <span class="n">df</span><span class="o">$</span><span class="n">trueObj_val[df</span><span class="o">$</span><span class="n">x</span> <span class="o">==</span> <span class="m">-100</span><span class="n">]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">leftShift</span>  <span class="o">&lt;-</span> <span class="nf">abs</span><span class="p">(</span><span class="m">100</span> <span class="o">-</span> <span class="n">df</span><span class="o">$</span><span class="n">trueObj_val[df</span><span class="o">$</span><span class="n">x</span> <span class="o">==</span> <span class="m">100</span><span class="n">]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># T test for the difference</span>
+</span></span><span class="line"><span class="cl"><span class="n">test2</span> <span class="o">&lt;-</span> <span class="nf">t.test</span><span class="p">(</span><span class="n">leftShift</span><span class="p">,</span> <span class="n">rightShift</span><span class="p">,</span> <span class="n">var.equal</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If we now calculate the same rightward and leftward shift, we also get a
 significant difference, p &lt; .001.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>It is possible to explain the discrepancy in our data with this

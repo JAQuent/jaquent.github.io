@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "Visualise your surface-based neuroimaging data on flat maps using `ciftiTools`",
   "url": "https://jaquent.github.io/2025/06/visualise-your-surface-based-neuroimaging-data-on-flat-maps-using-ciftitools/",
-  "wordCount": "251",
+  "wordCount": "270",
   "datePublished": "2025-06-12T00:00:00+00:00",
   "dateModified": "2025-06-12T00:00:00+00:00",
   "author": {
@@ -62,6 +62,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -69,16 +235,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -138,26 +304,51 @@
   </header>
   <p>Recently I&rsquo;ve tried to use the fantastic R-package <code>ciftiTools</code> to visualise surface-based neuroimaging data on flat maps.</p>
 <p>This was surprisingly tricky compared to using the standard inflated surfaces, which can be as easy as <code>view_cifti_surface(my_xii)</code>. However when I supplied the flat surfaces that come with the <code>HCP_S1200_Atlas</code>, I ran into the issue that nothing was visible because of the initial rotation of the maps. This prevented me to directly use <code>view_cifti_surface()</code> to save the maps as figures, which was not solved by using the mouse to rotate the maps to the desired orientation. However, I&rsquo;ve found a solution, which allowed me to match the what you get when using flat maps inside <code>wb_view</code>. See the code snippet below.</p>
-<pre tabindex="0"><code># Flat surface files
-flat_surfL &lt;- paste0(support_locations, &#34;HCP_S1200_Atlas/S1200.L.flat.32k_fs_LR.surf.gii&#34;)
-flat_surfR &lt;- paste0(support_locations, &#34;HCP_S1200_Atlas/S1200.R.flat.32k_fs_LR.surf.gii&#34;)
-
-# Rotate flat surface files so they match wb_view&#39;s
-flat_surfL_gii &lt;- read_surf(flat_surfL, expected_hemisphere = &#34;left&#34;)
-flat_surfL_gii &lt;- rotate_surf(flat_surfL_gii, r1 = 0, r2 = 90, r3 = 0, units = c(&#34;degrees&#34;))
-flat_surfL_gii &lt;- rotate_surf(flat_surfL_gii, r1 = 0, r2 = 0, r3 = 90, units = c(&#34;degrees&#34;))
-
-flat_surfR_gii &lt;- read_surf(flat_surfR, expected_hemisphere = &#34;right&#34;)
-flat_surfR_gii &lt;- rotate_surf(flat_surfR_gii, r1 = 0, r2 = 90, r3 = 0, units = c(&#34;degrees&#34;))
-flat_surfR_gii &lt;- rotate_surf(flat_surfR_gii, r1 = 180, r2 = 0, r3 = 90, units = c(&#34;degrees&#34;))
-
-# Create figure
-view_cifti_surface(con1_tstat_c1, fname = &#34;flat_map.png&#34;, 
-                   surfL = flat_surfL_gii, surfR = flat_surfR_gii, view = &#34;medial&#34;,
-                   width = CIFTI_width, colors = col_pal_name, zlim = c(-3.51, 3.51),
-                   title = &#34;&#34;, legend_fname = &#34;flat_map_legend.png&#34;,
-                   legend_embed = FALSE)
-</code></pre><p>This creates this pretty map:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Flat surface files</span>
+</span></span><span class="line"><span class="cl"><span class="n">flat_surfL</span> <span class="o">&lt;-</span> <span class="nf">paste0</span><span class="p">(</span><span class="n">support_locations</span><span class="p">,</span> <span class="s">&#34;HCP_S1200_Atlas/S1200.L.flat.32k_fs_LR.surf.gii&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">flat_surfR</span> <span class="o">&lt;-</span> <span class="nf">paste0</span><span class="p">(</span><span class="n">support_locations</span><span class="p">,</span> <span class="s">&#34;HCP_S1200_Atlas/S1200.R.flat.32k_fs_LR.surf.gii&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Rotate flat surface files so they match wb_view&#39;s</span>
+</span></span><span class="line"><span class="cl"><span class="n">flat_surfL_gii</span> <span class="o">&lt;-</span> <span class="nf">read_surf</span><span class="p">(</span><span class="n">flat_surfL</span><span class="p">,</span> <span class="n">expected_hemisphere</span> <span class="o">=</span> <span class="s">&#34;left&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">flat_surfL_gii</span> <span class="o">&lt;-</span> <span class="nf">rotate_surf</span><span class="p">(</span><span class="n">flat_surfL_gii</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="m">90</span><span class="p">,</span> <span class="n">r3</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;degrees&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">flat_surfL_gii</span> <span class="o">&lt;-</span> <span class="nf">rotate_surf</span><span class="p">(</span><span class="n">flat_surfL_gii</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">r3</span> <span class="o">=</span> <span class="m">90</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;degrees&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">flat_surfR_gii</span> <span class="o">&lt;-</span> <span class="nf">read_surf</span><span class="p">(</span><span class="n">flat_surfR</span><span class="p">,</span> <span class="n">expected_hemisphere</span> <span class="o">=</span> <span class="s">&#34;right&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">flat_surfR_gii</span> <span class="o">&lt;-</span> <span class="nf">rotate_surf</span><span class="p">(</span><span class="n">flat_surfR_gii</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="m">90</span><span class="p">,</span> <span class="n">r3</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;degrees&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">flat_surfR_gii</span> <span class="o">&lt;-</span> <span class="nf">rotate_surf</span><span class="p">(</span><span class="n">flat_surfR_gii</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="m">180</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">r3</span> <span class="o">=</span> <span class="m">90</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;degrees&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create figure</span>
+</span></span><span class="line"><span class="cl"><span class="nf">view_cifti_surface</span><span class="p">(</span><span class="n">con1_tstat_c1</span><span class="p">,</span> <span class="n">fname</span> <span class="o">=</span> <span class="s">&#34;flat_map.png&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                   <span class="n">surfL</span> <span class="o">=</span> <span class="n">flat_surfL_gii</span><span class="p">,</span> <span class="n">surfR</span> <span class="o">=</span> <span class="n">flat_surfR_gii</span><span class="p">,</span> <span class="n">view</span> <span class="o">=</span> <span class="s">&#34;medial&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">width</span> <span class="o">=</span> <span class="n">CIFTI_width</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">col_pal_name</span><span class="p">,</span> <span class="n">zlim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-3.51</span><span class="p">,</span> <span class="m">3.51</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">legend_fname</span> <span class="o">=</span> <span class="s">&#34;flat_map_legend.png&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">legend_embed</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This creates this pretty map:</p>
 <p><img src="/post/2025-06-12-visualise-your-data-on-flat-maps-using-ciftitools/example_flat.png" alt=""></p>
 
 

@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "Running large simulations on a desktop computer with R (tips \u0026 tricks)",
   "url": "https://jaquent.github.io/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/",
-  "wordCount": "970",
+  "wordCount": "1078",
   "datePublished": "2023-10-08T00:00:00+00:00",
   "dateModified": "2023-10-08T00:00:00+00:00",
   "author": {
@@ -62,6 +62,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -69,16 +235,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -149,126 +315,264 @@
 <li>Add save points at which the progress is automatically saved if you don&rsquo;t it for each iteration.</li>
 <li>Optional: Predict the time when the whole thing is supposed to finish.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># /* </span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ----------------------------- Prepare cluster ---------------------------</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># */</span>
-</span></span><span style="display:flex;"><span>my.cluster <span style="color:#f92672">&lt;-</span> parallel<span style="color:#f92672">::</span><span style="color:#a6e22e">makeCluster</span>(<span style="color:#a6e22e">detectCores</span>() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;PSOCK&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#my.cluster &lt;- parallel::makeCluster(detectCores() - 2, type = &#34;FORK&#34;)</span>
-</span></span><span style="display:flex;"><span>doParallel<span style="color:#f92672">::</span><span style="color:#a6e22e">registerDoParallel</span>(cl <span style="color:#f92672">=</span> my.cluster)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># /* </span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ----------------------------- Run simulation  ---------------------------</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># */</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get time at the start</span>
-</span></span><span style="display:flex;"><span>startTime <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.time</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Main loop running through the number of simulations</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tryCatch</span>(
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(rowIndex in startIndex<span style="color:#f92672">:</span>nSim){
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Run chunks in parallel</span>
-</span></span><span style="display:flex;"><span>    tempTest <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">foreach</span>(i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>nTests, .combine <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;c&#34;</span>, .packages <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;polspline&#39;</span>, <span style="color:#e6db74">&#39;brms&#39;</span>)) <span style="color:#f92672">%dopar%</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">simulationFunction</span>(<span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Check if it is a save point, then save the data to make sure progress is</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># saved regularly</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>(rowIndex <span style="color:#f92672">%in%</span> savePoints){
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">exit_loop_gracefully</span>(fileName, startIndex, rowIndex)
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Print &amp; visualise predicted finish</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">predicted_finish</span>(startIndex, rowIndex, nSim, startTime)
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">progressBar_plot</span>(rowIndex, nSim)
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>  finally <span style="color:#f92672">=</span> <span style="color:#a6e22e">exit_loop_gracefully</span>(fileName, startIndex, rowIndex)
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Stop</span>
-</span></span><span style="display:flex;"><span>parallel<span style="color:#f92672">::</span><span style="color:#a6e22e">stopCluster</span>(cl <span style="color:#f92672">=</span> my.cluster)
-</span></span></code></pre></div><p>A word on parallesition: I used <code>foreach</code> and <code>doParallel</code> here and I found that it is important to run the parallelisation in chunks of the right size. Here, I used <code>foreach()</code> nested inside a <code>for()</code>-loop.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># /* </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ----------------------------- Prepare cluster ---------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># */</span>
+</span></span><span class="line"><span class="cl"><span class="n">my.cluster</span> <span class="o">&lt;-</span> <span class="n">parallel</span><span class="o">::</span><span class="nf">makeCluster</span><span class="p">(</span><span class="nf">detectCores</span><span class="p">()</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#34;PSOCK&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#my.cluster &lt;- parallel::makeCluster(detectCores() - 2, type = &#34;FORK&#34;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">doParallel</span><span class="o">::</span><span class="nf">registerDoParallel</span><span class="p">(</span><span class="n">cl</span> <span class="o">=</span> <span class="n">my.cluster</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># /* </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ----------------------------- Run simulation  ---------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># */</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Get time at the start</span>
+</span></span><span class="line"><span class="cl"><span class="n">startTime</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Main loop running through the number of simulations</span>
+</span></span><span class="line"><span class="cl"><span class="nf">tryCatch</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">for</span><span class="p">(</span><span class="n">rowIndex</span> <span class="n">in</span> <span class="n">startIndex</span><span class="o">:</span><span class="n">nSim</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># Run chunks in parallel</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tempTest</span> <span class="o">&lt;-</span> <span class="nf">foreach</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">nTests</span><span class="p">,</span> <span class="n">.combine</span> <span class="o">=</span> <span class="s">&#34;c&#34;</span><span class="p">,</span> <span class="n">.packages</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;polspline&#39;</span><span class="p">,</span> <span class="s">&#39;brms&#39;</span><span class="p">))</span> <span class="o">%dopar%</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">simulationFunction</span><span class="p">(</span><span class="m">36</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Check if it is a save point, then save the data to make sure progress is</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># saved regularly</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if</span><span class="p">(</span><span class="n">rowIndex</span> <span class="o">%in%</span> <span class="n">savePoints</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">exit_loop_gracefully</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">startIndex</span><span class="p">,</span> <span class="n">rowIndex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Print &amp; visualise predicted finish</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">predicted_finish</span><span class="p">(</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">rowIndex</span><span class="p">,</span> <span class="n">nSim</span><span class="p">,</span> <span class="n">startTime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">progressBar_plot</span><span class="p">(</span><span class="n">rowIndex</span><span class="p">,</span> <span class="n">nSim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="n">finally</span> <span class="o">=</span> <span class="nf">exit_loop_gracefully</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">startIndex</span><span class="p">,</span> <span class="n">rowIndex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Stop</span>
+</span></span><span class="line"><span class="cl"><span class="n">parallel</span><span class="o">::</span><span class="nf">stopCluster</span><span class="p">(</span><span class="n">cl</span> <span class="o">=</span> <span class="n">my.cluster</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>A word on parallesition: I used <code>foreach</code> and <code>doParallel</code> here and I found that it is important to run the parallelisation in chunks of the right size. Here, I used <code>foreach()</code> nested inside a <code>for()</code>-loop.</p>
 <p>The functions <code>predicted_finish()</code>, <code>progressBar_plot()</code> and <code>exit_loop_gracefully()</code> can be found <a href="https://github.com/JAQuent/assortedRFunctions/tree/master/R">here</a>.</p>
 <p>When restarting the script, make sure to load the progress at the beginning, so you can pick-up where you stopped:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># File name to save progress</span>
-</span></span><span style="display:flex;"><span>fileName <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;correction_value_simulation.RData&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check fileName already exists</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">file.exists</span>(fileName)) {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">load</span>(fileName)
-</span></span><span style="display:flex;"><span>  startIndex <span style="color:#f92672">&lt;-</span> rowIndex <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>} else {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># If it is the first time starting the script</span>
-</span></span><span style="display:flex;"><span>  startIndex <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This could already be enough for most applications but I actually encountered another obstacle that needed fixing.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># File name to save progress</span>
+</span></span><span class="line"><span class="cl"><span class="n">fileName</span> <span class="o">&lt;-</span> <span class="s">&#34;correction_value_simulation.RData&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check fileName already exists</span>
+</span></span><span class="line"><span class="cl"><span class="nf">if </span><span class="p">(</span><span class="nf">file.exists</span><span class="p">(</span><span class="n">fileName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">load</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">startIndex</span> <span class="o">&lt;-</span> <span class="n">rowIndex</span> <span class="o">-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># If it is the first time starting the script</span>
+</span></span><span class="line"><span class="cl">  <span class="n">startIndex</span> <span class="o">&lt;-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This could already be enough for most applications but I actually encountered another obstacle that needed fixing.</p>
 <h1 id="problem-2-brms-creates-temporary-files-that-fill-up-the-hard-disk">Problem 2: BRMS creates temporary files that fill up the hard disk</h1>
 <p>The final problem that I encountered was that <code>brms</code> creates temporary files for each model it fits. Normally this is not an issue but if you create hundred of thosuands of models then a few MB per model suddenly fill up the disk. The problem is that even if you delete these temporary files, the space is not cleared until you close &amp; restart R.</p>
 <p>So I wrote a function that checks the current disk space that is remaining&hellip;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>check_root_disk_space <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(){
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Idea fro ChatGPT </span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Execute the &#39;df&#39; command and capture its output</span>
-</span></span><span style="display:flex;"><span>  df_output <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">system2</span>(<span style="color:#e6db74">&#34;df&#34;</span>, args <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-h /&#34;</span>, stdout <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get available space</span>
-</span></span><span style="display:flex;"><span>  avail_space_str <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">strsplit</span>(df_output[2], <span style="color:#e6db74">&#34;  &#34;</span>)[[1]][4]
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if availabe space is GB, MB or KB</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">grep</span>(<span style="color:#e6db74">&#34;G&#34;</span>, avail_space_str)){
-</span></span><span style="display:flex;"><span>    measurement <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;G&#34;</span>
-</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">grep</span>(<span style="color:#e6db74">&#34;M&#34;</span>, avail_space_str)){
-</span></span><span style="display:flex;"><span>    measurement <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;M&#34;</span>
-</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">grep</span>(<span style="color:#e6db74">&#34;K&#34;</span>, avail_space_str)){
-</span></span><span style="display:flex;"><span>    measurement <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;K&#34;</span>
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Remove letter</span>
-</span></span><span style="display:flex;"><span>  avail_space <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">gsub</span>(<span style="color:#e6db74">&#34;[KMG]&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, avail_space_str))
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Convert KB/MB to GB</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if</span>(measurement <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;K&#34;</span>){
-</span></span><span style="display:flex;"><span>    avail_space_in_GB  <span style="color:#f92672">&lt;-</span> avail_space<span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>^3
-</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if</span>(measurement <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;M&#34;</span>){
-</span></span><span style="display:flex;"><span>    avail_space_in_GB  <span style="color:#f92672">&lt;-</span> avail_space<span style="color:#f92672">/</span><span style="color:#ae81ff">1024</span>^2
-</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if</span>(measurement <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;G&#34;</span>){
-</span></span><span style="display:flex;"><span>    avail_space_in_GB  <span style="color:#f92672">&lt;-</span> avail_space 
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Write to console</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n Notice: Available space in root is&#34;</span>, avail_space_in_GB, <span style="color:#e6db74">&#34;GB\n&#34;</span>)
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Return value</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(avail_space_in_GB)
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>&hellip; and use this function to occasionally check if enough space is available and stop the script if it is not.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>    <span style="color:#75715e"># Check if the space is enough</span>
-</span></span><span style="display:flex;"><span>    avail_space <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">check_root_disk_space</span>()
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>(avail_space <span style="color:#f92672">&lt;</span> minimumSpace){
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;Space is not enough. &#34;</span>)
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><p>This together with a bash script, which restarts R script if it doesn&rsquo;t finish successfully, solved the remaining issues.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">check_root_disk_space</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Idea fro ChatGPT </span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Execute the &#39;df&#39; command and capture its output</span>
+</span></span><span class="line"><span class="cl">  <span class="n">df_output</span> <span class="o">&lt;-</span> <span class="nf">system2</span><span class="p">(</span><span class="s">&#34;df&#34;</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="s">&#34;-h /&#34;</span><span class="p">,</span> <span class="n">stdout</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Get available space</span>
+</span></span><span class="line"><span class="cl">  <span class="n">avail_space_str</span> <span class="o">&lt;-</span> <span class="nf">strsplit</span><span class="p">(</span><span class="n">df_output[2]</span><span class="p">,</span> <span class="s">&#34;  &#34;</span><span class="p">)</span><span class="n">[[1]][4]</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Check if availabe space is GB, MB or KB</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">if</span><span class="p">(</span><span class="nf">grep</span><span class="p">(</span><span class="s">&#34;G&#34;</span><span class="p">,</span> <span class="n">avail_space_str</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">measurement</span> <span class="o">&lt;-</span> <span class="s">&#34;G&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="nf">grep</span><span class="p">(</span><span class="s">&#34;M&#34;</span><span class="p">,</span> <span class="n">avail_space_str</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">measurement</span> <span class="o">&lt;-</span> <span class="s">&#34;M&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="nf">grep</span><span class="p">(</span><span class="s">&#34;K&#34;</span><span class="p">,</span> <span class="n">avail_space_str</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">measurement</span> <span class="o">&lt;-</span> <span class="s">&#34;K&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Remove letter</span>
+</span></span><span class="line"><span class="cl">  <span class="n">avail_space</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#34;[KMG]&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">avail_space_str</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Convert KB/MB to GB</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">if</span><span class="p">(</span><span class="n">measurement</span> <span class="o">==</span> <span class="s">&#34;K&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avail_space_in_GB</span>  <span class="o">&lt;-</span> <span class="n">avail_space</span><span class="o">/</span><span class="m">1024</span><span class="n">^3</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">measurement</span> <span class="o">==</span> <span class="s">&#34;M&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avail_space_in_GB</span>  <span class="o">&lt;-</span> <span class="n">avail_space</span><span class="o">/</span><span class="m">1024</span><span class="n">^2</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">measurement</span> <span class="o">==</span> <span class="s">&#34;G&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avail_space_in_GB</span>  <span class="o">&lt;-</span> <span class="n">avail_space</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Write to console</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">cat</span><span class="p">(</span><span class="s">&#34;\n Notice: Available space in root is&#34;</span><span class="p">,</span> <span class="n">avail_space_in_GB</span><span class="p">,</span> <span class="s">&#34;GB\n&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Return value</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">return</span><span class="p">(</span><span class="n">avail_space_in_GB</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>&hellip; and use this function to occasionally check if enough space is available and stop the script if it is not.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl">    <span class="c1"># Check if the space is enough</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avail_space</span> <span class="o">&lt;-</span> <span class="nf">check_root_disk_space</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if</span><span class="p">(</span><span class="n">avail_space</span> <span class="o">&lt;</span> <span class="n">minimumSpace</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">stop</span><span class="p">(</span><span class="s">&#34;Space is not enough. &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This together with a bash script, which restarts R script if it doesn&rsquo;t finish successfully, solved the remaining issues.</p>
 <h1 id="making-it-extra-robust-with-this-bash-script">Making it extra robust with this bash script</h1>
 <p>To avoid crashes because my computer ran out of memory (see above), I created this bash script (rscript_rboust.sh) that automatically restarts the r-script in case it encounters an error. This can be used as a robust alternative to <code>Rscript</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# -ne <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Usage: </span>$0<span style="color:#e6db74"> &lt;rscript&gt;&#34;</span>
-</span></span><span style="display:flex;"><span>  exit <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">fi</span>
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>rscript<span style="color:#f92672">=</span>$1
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>  Rscript $rscript
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $? -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;R script finished successfully&#34;</span>
-</span></span><span style="display:flex;"><span>    break
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;R script crashed. Restarting in 60 seconds...&#34;</span>
-</span></span><span style="display:flex;"><span>    sleep <span style="color:#ae81ff">60</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
-</span></span></code></pre></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -ne <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;Usage: </span><span class="nv">$0</span><span class="s2"> &lt;rscript&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"> <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="nv">rscript</span><span class="o">=</span><span class="nv">$1</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  Rscript <span class="nv">$rscript</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;R script finished successfully&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">break</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;R script crashed. Restarting in 60 seconds...&#34;</span>
+</span></span><span class="line"><span class="cl">    sleep <span class="m">60</span>
+</span></span><span class="line"><span class="cl">  <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 
   
 

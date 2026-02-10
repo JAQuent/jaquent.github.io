@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "The priors that I use for logistic regression now",
   "url": "https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/",
-  "wordCount": "1928",
+  "wordCount": "1958",
   "datePublished": "2021-01-19T00:00:00+00:00",
   "dateModified": "2021-01-19T00:00:00+00:00",
   "author": {
@@ -61,6 +61,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -68,16 +234,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -198,46 +364,99 @@ following, I examine how choosing different df affects evidence in a BF
 analysis.</p>
 <h1 id="background-on-pre-simulation">Background on pre-simulation</h1>
 <p>The data in the simulations were generated data with this function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Function used to generate data</span>
-</span></span><span style="display:flex;"><span>data_generator <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(numSub, beta0, beta1){
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Create DF and also scale x </span>
-</span></span><span style="display:flex;"><span>  df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(sub  <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub),
-</span></span><span style="display:flex;"><span>                   x    <span style="color:#f92672">=</span> <span style="color:#a6e22e">rnorm</span>(numSub))
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Scaling based on https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Mean = 0 and SD = 0.5</span>
-</span></span><span style="display:flex;"><span>  df<span style="color:#f92672">$</span>s_x <span style="color:#f92672">&lt;-</span> (df<span style="color:#f92672">$</span>x <span style="color:#f92672">-</span> <span style="color:#a6e22e">mean</span>(df<span style="color:#f92672">$</span>x))<span style="color:#f92672">/</span>(<span style="color:#a6e22e">sd</span>(df<span style="color:#f92672">$</span>x)<span style="color:#f92672">/</span><span style="color:#ae81ff">0.5</span>)
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Predicting memory</span>
-</span></span><span style="display:flex;"><span>  z     <span style="color:#f92672">&lt;-</span> beta0 <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>df<span style="color:#f92672">$</span>s_x <span style="color:#75715e"># Regression in log odds</span>
-</span></span><span style="display:flex;"><span>  pr    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#a6e22e">exp</span>(<span style="color:#f92672">-</span>z)) <span style="color:#75715e"># Convert to probability.</span>
-</span></span><span style="display:flex;"><span>  df<span style="color:#f92672">$</span>y  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbinom</span>(numSub, <span style="color:#ae81ff">1</span>, pr)
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(df)
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Note that I follow Gelman’s (2008) recommendation about scaling the
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Function used to generate data</span>
+</span></span><span class="line"><span class="cl"><span class="n">data_generator</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">beta0</span><span class="p">,</span> <span class="n">beta1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Create DF and also scale x </span>
+</span></span><span class="line"><span class="cl">  <span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">sub</span>  <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">x</span>    <span class="o">=</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Scaling based on https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Mean = 0 and SD = 0.5</span>
+</span></span><span class="line"><span class="cl">  <span class="n">df</span><span class="o">$</span><span class="n">s_x</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">x</span> <span class="o">-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="nf">sd</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="m">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Predicting memory</span>
+</span></span><span class="line"><span class="cl">  <span class="n">z</span>     <span class="o">&lt;-</span> <span class="n">beta0</span> <span class="o">+</span> <span class="n">beta1</span><span class="o">*</span><span class="n">df</span><span class="o">$</span><span class="n">s_x</span> <span class="c1"># Regression in log odds</span>
+</span></span><span class="line"><span class="cl">  <span class="n">pr</span>    <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="p">(</span><span class="m">1</span><span class="o">+</span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span> <span class="c1"># Convert to probability.</span>
+</span></span><span class="line"><span class="cl">  <span class="n">df</span><span class="o">$</span><span class="n">y</span>  <span class="o">&lt;-</span> <span class="nf">rbinom</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">pr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">return</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Note that I follow Gelman’s (2008) recommendation about scaling the
 variable to have standard deviation (SD) of 0.5. The considerations
 concerning the priors therefore only pertain to this scaling. For the
 first simulation, I used the recommended 2.5 for the scale of the
 Student’s distribution (1000 iterations per condition).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>priors_student_1  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">prior</span>(<span style="color:#a6e22e">student_t</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>) , class <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Intercept&#34;</span>),
-</span></span><span style="display:flex;"><span>                       <span style="color:#a6e22e">prior</span>(<span style="color:#a6e22e">student_t</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2.5</span>) , class <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)) 
-</span></span></code></pre></div><p>In a second simulation, I contrasted the results with a scale of 1 for
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">priors_student_1</span>  <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">prior</span><span class="p">(</span><span class="nf">student_t</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span> <span class="p">,</span> <span class="n">class</span> <span class="o">=</span> <span class="s">&#34;Intercept&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                       <span class="nf">prior</span><span class="p">(</span><span class="nf">student_t</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">2.5</span><span class="p">)</span> <span class="p">,</span> <span class="n">class</span> <span class="o">=</span> <span class="s">&#34;b&#34;</span><span class="p">))</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In a second simulation, I contrasted the results with a scale of 1 for
 the Student’s distribution (5000 iterations per condition).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>priors_student_1  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">prior</span>(<span style="color:#a6e22e">student_t</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>) , class <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Intercept&#34;</span>),
-</span></span><span style="display:flex;"><span>                       <span style="color:#a6e22e">prior</span>(<span style="color:#a6e22e">student_t</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>) , class <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)) 
-</span></span></code></pre></div><p>In both simulations I used the following df of 3, 4, 5, 6 and 7. The
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">priors_student_1</span>  <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">prior</span><span class="p">(</span><span class="nf">student_t</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span> <span class="p">,</span> <span class="n">class</span> <span class="o">=</span> <span class="s">&#34;Intercept&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                       <span class="nf">prior</span><span class="p">(</span><span class="nf">student_t</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="p">,</span> <span class="n">class</span> <span class="o">=</span> <span class="s">&#34;b&#34;</span><span class="p">))</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In both simulations I used the following df of 3, 4, 5, 6 and 7. The
 simulations included simulated sample size of 100 for all simulations.
 The BRMS model that was used for fitting was this one:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">brm</span>(y <span style="color:#f92672">~</span> s_x,
-</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> df,
-</span></span><span style="display:flex;"><span>    prior <span style="color:#f92672">=</span> priors_student_1,
-</span></span><span style="display:flex;"><span>    family <span style="color:#f92672">=</span> <span style="color:#a6e22e">bernoulli</span>(),
-</span></span><span style="display:flex;"><span>    chains <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
-</span></span><span style="display:flex;"><span>    save_all_pars <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>,
-</span></span><span style="display:flex;"><span>    sample_prior <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>,
-</span></span><span style="display:flex;"><span>    save_dso <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, 
-</span></span><span style="display:flex;"><span>    seed <span style="color:#f92672">=</span> <span style="color:#ae81ff">6353</span>) 
-</span></span></code></pre></div><h1 id="analyse-simulation">Analyse simulation</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">brm</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span> <span class="n">s_x</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prior</span> <span class="o">=</span> <span class="n">priors_student_1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">family</span> <span class="o">=</span> <span class="nf">bernoulli</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chains</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">save_all_pars</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sample_prior</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">save_dso</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">seed</span> <span class="o">=</span> <span class="m">6353</span><span class="p">)</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="analyse-simulation">Analyse simulation</h1>
 <h2 id="simulation-1-scale--25">Simulation 1 (Scale = 2.5)</h2>
 <p>In this first simulation, I used $\beta_1$ between 0 and 0.7. The
 average FPR for a $BF_{10}$ &gt; 6 for the priors with this scale is
@@ -301,8 +520,15 @@ difference in the BF that we get using both scales.</p>
 Bayesian models are I also quickly run the same simulation with a
 frequentist model (10,000 iteration per $\beta_1$ value).</p>
 <p>The model that I used was:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">glm</span>(y <span style="color:#f92672">~</span> s_x, data <span style="color:#f92672">=</span> df, family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;binomial&#34;</span>)
-</span></span></code></pre></div><h1 id="full-simulation">Full simulation</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">glm</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span> <span class="n">s_x</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="s">&#34;binomial&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="full-simulation">Full simulation</h1>
 <p><img src="/post/2021-01-19-the-priors-that-i-use-for-logistic-regression-now/plot5-1.png" style="width: auto; height: auto; max-width: 700px"><!-- --></p>
 <p>Above the power curves of this simulation can be found. The black line
 represents the power curve for equivalent frequentist model and shows

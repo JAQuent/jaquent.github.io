@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "Analysing normative data",
   "url": "https://jaquent.github.io/2018/01/analysing-normative-data/",
-  "wordCount": "1202",
+  "wordCount": "1299",
   "datePublished": "2018-01-10T00:00:00+00:00",
   "dateModified": "2018-01-10T00:00:00+00:00",
   "author": {
@@ -61,6 +61,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -68,16 +234,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -139,117 +305,256 @@
 <p>In order to be able to present object at locations with a range of expectancy values, which is crucial to show that this has U-shaped relationship, I asked six member of my research group. to rate all combinations of objects and location that exist in the virtual environment for the schemaVR task. There were twenty possible objects and twenty possible locations (i.e. 400 object/location ratings in total).</p>
 <p>After the completing these ratings, the participants were asked to rate the overall expectancy of those objects for a kitchen. In both cases, the scale ranged from -100 (unexpected) to 100 (expected) and was continuous. Here I will visualise and interpret the results. The code for the task can be found <a href="https://github.com/JAQuent/ratingStudy">https://github.com/JAQuent/ratingStudy</a>.</p>
 <h2 id="used-libraries-and-functions">Used libraries and functions</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(gridExtra)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>pValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x, sign <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;=&#39;</span>){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
-</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary.lm</span>(x)
-</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pf</span>(s<span style="color:#f92672">$</span>fstatistic[1L], s<span style="color:#f92672">$</span>fstatistic[2L], s<span style="color:#f92672">$</span>fstatistic[3L], lower.tail <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
-</span></span><span style="display:flex;"><span>    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
-</span></span><span style="display:flex;"><span>    } else{
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>  } else {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
-</span></span><span style="display:flex;"><span>    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
-</span></span><span style="display:flex;"><span>    } else{
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(x.converted)
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>rValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
-</span></span><span style="display:flex;"><span>    r.squared <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(x)<span style="color:#f92672">$</span>r.squared
-</span></span><span style="display:flex;"><span>    x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(r.squared, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
-</span></span><span style="display:flex;"><span>  } else {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if </span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>){
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;= -&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>), sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) 
-</span></span><span style="display:flex;"><span>    } else {
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(x.converted) 
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="loading-the-rating-data">Loading the rating data</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pValue</span> <span class="o">&lt;-</span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sign</span> <span class="o">=</span> <span class="s">&#39;=&#39;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">if </span><span class="p">(</span><span class="nf">inherits</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#34;lm&#34;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">&lt;-</span> <span class="nf">summary.lm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">pf</span><span class="p">(</span><span class="n">s</span><span class="o">$</span><span class="n">fstatistic[1L]</span><span class="p">,</span> <span class="n">s</span><span class="o">$</span><span class="n">fstatistic[2L]</span><span class="p">,</span> <span class="n">s</span><span class="o">$</span><span class="n">fstatistic[3L]</span><span class="p">,</span> <span class="n">lower.tail</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">stop</span><span class="p">(</span><span class="s">&#34;There is no p-value greater than 1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="m">0.001</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="s">&#39;&lt; .001&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">stop</span><span class="p">(</span><span class="s">&#34;There is no p-value greater than 1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="m">0.001</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="s">&#39;&lt; .001&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">return</span><span class="p">(</span><span class="n">x.converted</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rValue</span> <span class="o">&lt;-</span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">if </span><span class="p">(</span><span class="nf">inherits</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#34;lm&#34;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r.squared</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">r.squared</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if </span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="m">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;= -&#39;</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">3</span><span class="p">))),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">),</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">3</span><span class="p">))),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">return</span><span class="p">(</span><span class="n">x.converted</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="loading-the-rating-data">Loading the rating data</h2>
 <p>I start with loading the data and creating a 20 x 20 x N matrix holding all 400 location ratings for all participants. Similarly, I create a 20 x N matrix to hold the 20 objects ratings. After that, I shuffle the data because people in the group could otherwise infer the identity of the other participants.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Prepare</span>
-</span></span><span style="display:flex;"><span>subNo           <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>
-</span></span><span style="display:flex;"><span>N               <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">length</span>(subNo)
-</span></span><span style="display:flex;"><span>locationRatings <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">array</span>(data <span style="color:#f92672">=</span> <span style="color:#66d9ef">NA</span>, dim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>, N))
-</span></span><span style="display:flex;"><span>objectRatings   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#66d9ef">NA</span>, <span style="color:#ae81ff">20</span>, N)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sequently loading data</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>N){
-</span></span><span style="display:flex;"><span>  locationRatings[,,i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">scan</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;U:/Projects/schemaVR/normativeStudy/normativeData/locationRatings_&#39;</span>, <span style="color:#a6e22e">as.character</span>(subNo[i]) ,<span style="color:#e6db74">&#39;.dat&#39;</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>)), byrow <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>)
-</span></span><span style="display:flex;"><span>  objectRatings[,i]    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scan</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;U:/Projects/schemaVR/normativeStudy/normativeData/objectRatings_&#39;</span>, <span style="color:#a6e22e">as.character</span>(subNo[i]) ,<span style="color:#e6db74">&#39;.dat&#39;</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>))
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Shuffle to anonymise the data</span>
-</span></span><span style="display:flex;"><span>shuffle         <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>N)
-</span></span><span style="display:flex;"><span>locationRatings <span style="color:#f92672">&lt;-</span> locationRatings[,,shuffle]
-</span></span><span style="display:flex;"><span>objectRatings   <span style="color:#f92672">&lt;-</span> objectRatings[,shuffle]
-</span></span></code></pre></div><p>After successfully loading the data and saving it in the matrices, I want to look at distribution of the location ratings. I collapse the data across all 6 participants and create a histogram:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Create a data frame and split by participant</span>
-</span></span><span style="display:flex;"><span>locationRatingsDF <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(ID <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>N, each <span style="color:#f92672">=</span> <span style="color:#ae81ff">400</span>)), ratings <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(locationRatings))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create plot</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(locationRatingsDF, <span style="color:#a6e22e">aes</span>(ratings)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>(binwidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(panel.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;cm&#34;</span>), text <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>)) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Number of ratings&#39;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Unexpected to expected&#39;</span>) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-100</span>, <span style="color:#ae81ff">100</span>), expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
-</span></span></code></pre></div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-3-1.png" style="width: auto; height: auto; max-width: 700px">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Prepare</span>
+</span></span><span class="line"><span class="cl"><span class="n">subNo</span>           <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">N</span>               <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">subNo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">locationRatings</span> <span class="o">&lt;-</span> <span class="nf">array</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="kc">NA</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">objectRatings</span>   <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sequently loading data</span>
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">locationRatings[</span><span class="p">,,</span><span class="n">i]</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">scan</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#39;U:/Projects/schemaVR/normativeStudy/normativeData/locationRatings_&#39;</span><span class="p">,</span> <span class="nf">as.character</span><span class="p">(</span><span class="n">subNo[i]</span><span class="p">)</span> <span class="p">,</span><span class="s">&#39;.dat&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">)),</span> <span class="n">byrow</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">objectRatings[</span><span class="p">,</span><span class="n">i]</span>    <span class="o">&lt;-</span> <span class="nf">scan</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#39;U:/Projects/schemaVR/normativeStudy/normativeData/objectRatings_&#39;</span><span class="p">,</span> <span class="nf">as.character</span><span class="p">(</span><span class="n">subNo[i]</span><span class="p">)</span> <span class="p">,</span><span class="s">&#39;.dat&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Shuffle to anonymise the data</span>
+</span></span><span class="line"><span class="cl"><span class="n">shuffle</span>         <span class="o">&lt;-</span> <span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">locationRatings</span> <span class="o">&lt;-</span> <span class="n">locationRatings[</span><span class="p">,,</span><span class="n">shuffle]</span>
+</span></span><span class="line"><span class="cl"><span class="n">objectRatings</span>   <span class="o">&lt;-</span> <span class="n">objectRatings[</span><span class="p">,</span><span class="n">shuffle]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After successfully loading the data and saving it in the matrices, I want to look at distribution of the location ratings. I collapse the data across all 6 participants and create a histogram:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Create a data frame and split by participant</span>
+</span></span><span class="line"><span class="cl"><span class="n">locationRatingsDF</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="nf">as.factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="m">400</span><span class="p">)),</span> <span class="n">ratings</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">locationRatings</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create plot</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="n">locationRatingsDF</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">ratings</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_histogram</span><span class="p">(</span><span class="n">binwidth</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">panel.margin</span> <span class="o">=</span> <span class="nf">unit</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="s">&#34;cm&#34;</span><span class="p">),</span> <span class="n">text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">12</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">        <span class="nf">labs</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="s">&#39;Number of ratings&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;Unexpected to expected&#39;</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">        <span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">xlim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-100</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> <span class="n">expand</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-3-1.png" style="width: auto; height: auto; max-width: 700px">
 <p>The ratings are indeed spread across the whole scale, which is good. However it is also interesting to look at the individual distributions. There were I plot one histograms for each participant.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(locationRatingsDF, <span style="color:#a6e22e">aes</span>(ratings)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">facet_grid</span>(. <span style="color:#f92672">~</span> ID) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(panel.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;cm&#34;</span>), text <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>)) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Number of ratings&#39;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Unexpected to expected&#39;</span>) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-100</span>, <span style="color:#ae81ff">100</span>), expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
-</span></span></code></pre></div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-4-1.png" style="width: auto; height: auto; max-width: 700px">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="n">locationRatingsDF</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">ratings</span><span class="p">))</span> <span class="o">+</span> <span class="nf">facet_grid</span><span class="p">(</span><span class="n">. </span><span class="o">~</span> <span class="n">ID</span><span class="p">)</span> <span class="o">+</span> <span class="nf">geom_histogram</span><span class="p">()</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">panel.margin</span> <span class="o">=</span> <span class="nf">unit</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="s">&#34;cm&#34;</span><span class="p">),</span> <span class="n">text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">12</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">        <span class="nf">labs</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="s">&#39;Number of ratings&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;Unexpected to expected&#39;</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">        <span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">xlim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-100</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> <span class="n">expand</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-4-1.png" style="width: auto; height: auto; max-width: 700px">
 <p>Looking at the individual data, it is quite apparent that the distributions differ quite profoundly in terms how their responses are spread. On looks a bit Gaussian with a small dip around zero, while other distributions tended to include many extreme responses.</p>
 <p>As I want to use this data to create a distribution to draw a combination of objects and locations from, I average the matrices and calculate the standard deviations to have an idea how the raters differed from each other. Here you can see the heatmaps:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>objectNames <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;microwave&#39;</span>,<span style="color:#e6db74">&#39;kitchen roll&#39;</span>,<span style="color:#e6db74">&#39;saucepan&#39;</span>, <span style="color:#e6db74">&#39;toaster&#39;</span>,<span style="color:#e6db74">&#39;fruit bowl&#39;</span>,<span style="color:#e6db74">&#39;tea pot&#39;</span>,<span style="color:#e6db74">&#39;knife&#39;</span>,<span style="color:#e6db74">&#39;mixer&#39;</span>,<span style="color:#e6db74">&#39;bread&#39;</span>,<span style="color:#e6db74">&#39;glass jug&#39;</span>,<span style="color:#e6db74">&#39;mug&#39;</span>,<span style="color:#e6db74">&#39;dishes&#39;</span>,<span style="color:#e6db74">&#39;towels&#39;</span>,<span style="color:#e6db74">&#39;toy&#39;</span>,<span style="color:#e6db74">&#39;pile of books&#39;</span>,<span style="color:#e6db74">&#39;umbrella&#39;</span>,<span style="color:#e6db74">&#39;hat&#39;</span>,<span style="color:#e6db74">&#39;helmet&#39;</span>,<span style="color:#e6db74">&#39;calendar&#39;</span>,<span style="color:#e6db74">&#39;fan&#39;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate metrics</span>
-</span></span><span style="display:flex;"><span>averageLocationRatings <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">apply</span>(locationRatings, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>, mean)
-</span></span><span style="display:flex;"><span>sdLocationRatings      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">apply</span>(locationRatings, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>, sd)
-</span></span><span style="display:flex;"><span>averageObjectRatings   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">apply</span>(objectRatings, <span style="color:#ae81ff">1</span>, mean)
-</span></span><span style="display:flex;"><span>sdObjectRatings        <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">apply</span>(objectRatings, <span style="color:#ae81ff">1</span>, sd)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create dataframes to plot</span>
-</span></span><span style="display:flex;"><span>averageLocationRatingsDF <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Object <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">factor</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, labels <span style="color:#f92672">=</span> objectNames), <span style="color:#ae81ff">20</span>), Location <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, each <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>)), Ratings <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(averageLocationRatings))
-</span></span><span style="display:flex;"><span>sdLocationRatingsDF      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Object <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">factor</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, labels <span style="color:#f92672">=</span> objectNames), <span style="color:#ae81ff">20</span>), Location <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, each <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>)), SD <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(sdLocationRatings))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>averageObjectRatingsDF  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Object <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, labels <span style="color:#f92672">=</span> objectNames), Ratings <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(averageObjectRatings))
-</span></span><span style="display:flex;"><span>sdObjectRatingsDF       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Object <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, labels <span style="color:#f92672">=</span> objectNames), SD <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(sdObjectRatings))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create average heatmaps</span>
-</span></span><span style="display:flex;"><span>plot1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(averageLocationRatingsDF, <span style="color:#a6e22e">aes</span>(Location, Object)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_tile</span>(<span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> Ratings)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_fill_gradient</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>, high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_x_discrete</span>(expand <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span>  <span style="color:#a6e22e">scale_y_discrete</span>(expand <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">labs</span>(title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Average: Object/location&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plot2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(averageObjectRatingsDF, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, y <span style="color:#f92672">=</span> Object)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_tile</span>(<span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> Ratings)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_fill_gradient</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>, high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_x_discrete</span>(expand <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span>  <span style="color:#a6e22e">scale_y_discrete</span>(expand <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>, title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Overall&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(axis.title.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(), axis.text.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(), axis.ticks.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(), plot.margin<span style="color:#f92672">=</span><span style="color:#a6e22e">unit</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.62</span>, <span style="color:#ae81ff">0</span>),<span style="color:#e6db74">&#34;cm&#34;</span>))
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">grid.arrange</span>(plot1, plot2, ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, widths <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">5.5</span>, <span style="color:#ae81ff">1</span>))
-</span></span></code></pre></div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-5-1.png" style="width: auto; height: auto; max-width: 700px">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">objectNames</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;microwave&#39;</span><span class="p">,</span><span class="s">&#39;kitchen roll&#39;</span><span class="p">,</span><span class="s">&#39;saucepan&#39;</span><span class="p">,</span> <span class="s">&#39;toaster&#39;</span><span class="p">,</span><span class="s">&#39;fruit bowl&#39;</span><span class="p">,</span><span class="s">&#39;tea pot&#39;</span><span class="p">,</span><span class="s">&#39;knife&#39;</span><span class="p">,</span><span class="s">&#39;mixer&#39;</span><span class="p">,</span><span class="s">&#39;bread&#39;</span><span class="p">,</span><span class="s">&#39;glass jug&#39;</span><span class="p">,</span><span class="s">&#39;mug&#39;</span><span class="p">,</span><span class="s">&#39;dishes&#39;</span><span class="p">,</span><span class="s">&#39;towels&#39;</span><span class="p">,</span><span class="s">&#39;toy&#39;</span><span class="p">,</span><span class="s">&#39;pile of books&#39;</span><span class="p">,</span><span class="s">&#39;umbrella&#39;</span><span class="p">,</span><span class="s">&#39;hat&#39;</span><span class="p">,</span><span class="s">&#39;helmet&#39;</span><span class="p">,</span><span class="s">&#39;calendar&#39;</span><span class="p">,</span><span class="s">&#39;fan&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Calculate metrics</span>
+</span></span><span class="line"><span class="cl"><span class="n">averageLocationRatings</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">locationRatings</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sdLocationRatings</span>      <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">locationRatings</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> <span class="n">sd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">averageObjectRatings</span>   <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">objectRatings</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sdObjectRatings</span>        <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">objectRatings</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">sd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create dataframes to plot</span>
+</span></span><span class="line"><span class="cl"><span class="n">averageLocationRatingsDF</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">Object</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">factor</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">objectNames</span><span class="p">),</span> <span class="m">20</span><span class="p">),</span> <span class="n">Location</span> <span class="o">=</span> <span class="nf">as.factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="m">20</span><span class="p">)),</span> <span class="n">Ratings</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">averageLocationRatings</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">sdLocationRatingsDF</span>      <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">Object</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">factor</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">objectNames</span><span class="p">),</span> <span class="m">20</span><span class="p">),</span> <span class="n">Location</span> <span class="o">=</span> <span class="nf">as.factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="m">20</span><span class="p">)),</span> <span class="n">SD</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">sdLocationRatings</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">averageObjectRatingsDF</span>  <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">Object</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">objectNames</span><span class="p">),</span> <span class="n">Ratings</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">averageObjectRatings</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">sdObjectRatingsDF</span>       <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">Object</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">objectNames</span><span class="p">),</span> <span class="n">SD</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">sdObjectRatings</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create average heatmaps</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot1</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">averageLocationRatingsDF</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">Location</span><span class="p">,</span> <span class="n">Object</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_tile</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">Ratings</span><span class="p">))</span> <span class="o">+</span> <span class="nf">scale_fill_gradient</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="s">&#34;white&#34;</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="s">&#34;red&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">scale_x_discrete</span><span class="p">(</span><span class="n">expand</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">+</span>  <span class="nf">scale_y_discrete</span><span class="p">(</span><span class="n">expand</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">+</span> <span class="nf">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">&#39;Average: Object/location&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#39;none&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plot2</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">averageObjectRatingsDF</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Object</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_tile</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">Ratings</span><span class="p">))</span> <span class="o">+</span> <span class="nf">scale_fill_gradient</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="s">&#34;white&#34;</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="s">&#34;red&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">scale_x_discrete</span><span class="p">(</span><span class="n">expand</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">+</span>  <span class="nf">scale_y_discrete</span><span class="p">(</span><span class="n">expand</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">+</span> <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#39;Overall&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">axis.title.y</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span> <span class="n">axis.text.y</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span> <span class="n">axis.ticks.y</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span> <span class="n">plot.margin</span><span class="o">=</span><span class="nf">unit</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0.62</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span><span class="s">&#34;cm&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nf">grid.arrange</span><span class="p">(</span><span class="n">plot1</span><span class="p">,</span> <span class="n">plot2</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">widths</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">5.5</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-5-1.png" style="width: auto; height: auto; max-width: 700px">
 <p>The first twelve objects (from microwave to dishes) are supposed to be expected in a kitchen. This is also visible in the heatmaps both in the heatmap showing the average ratings for every object/location combination and in the overall heatmap showing the average ratings for the overall expectancy of a particular object in kitchen. From the white vertical stripes, it is also apparent that no object is really expected for some locations. One of those location for instance is on the floor in a corner of the room.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Create Sd heatmap</span>
-</span></span><span style="display:flex;"><span>plot3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(sdLocationRatingsDF, <span style="color:#a6e22e">aes</span>(Location, Object)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_tile</span>(<span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> SD)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_fill_gradient</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>, high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_x_discrete</span>(expand <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span>  <span style="color:#a6e22e">scale_y_discrete</span>(expand <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">labs</span>(title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SD: Object/location&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plot4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(sdObjectRatingsDF, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, y <span style="color:#f92672">=</span> Object)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_tile</span>(<span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> SD)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_fill_gradient</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>, high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_x_discrete</span>(expand <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span>  <span style="color:#a6e22e">scale_y_discrete</span>(expand <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>, title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Overall&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(axis.title.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(), axis.text.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(), axis.ticks.y <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>(), plot.margin<span style="color:#f92672">=</span><span style="color:#a6e22e">unit</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.62</span>, <span style="color:#ae81ff">0</span>),<span style="color:#e6db74">&#34;cm&#34;</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">grid.arrange</span>(plot3, plot4, ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, widths <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">5.5</span>, <span style="color:#ae81ff">1</span>))
-</span></span></code></pre></div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-6-1.png" style="width: auto; height: auto; max-width: 700px">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Create Sd heatmap</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot3</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">sdLocationRatingsDF</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">Location</span><span class="p">,</span> <span class="n">Object</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_tile</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">SD</span><span class="p">))</span> <span class="o">+</span> <span class="nf">scale_fill_gradient</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="s">&#34;white&#34;</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="s">&#34;red&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">scale_x_discrete</span><span class="p">(</span><span class="n">expand</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">+</span>  <span class="nf">scale_y_discrete</span><span class="p">(</span><span class="n">expand</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">+</span> <span class="nf">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">&#39;SD: Object/location&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#39;none&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plot4</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">sdObjectRatingsDF</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Object</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_tile</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span> <span class="o">=</span> <span class="n">SD</span><span class="p">))</span> <span class="o">+</span> <span class="nf">scale_fill_gradient</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="s">&#34;white&#34;</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="s">&#34;red&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">scale_x_discrete</span><span class="p">(</span><span class="n">expand</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">+</span>  <span class="nf">scale_y_discrete</span><span class="p">(</span><span class="n">expand</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">+</span> <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#39;Overall&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">axis.title.y</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span> <span class="n">axis.text.y</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span> <span class="n">axis.ticks.y</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span> <span class="n">plot.margin</span><span class="o">=</span><span class="nf">unit</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0.62</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span><span class="s">&#34;cm&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">grid.arrange</span><span class="p">(</span><span class="n">plot3</span><span class="p">,</span> <span class="n">plot4</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">widths</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">5.5</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-6-1.png" style="width: auto; height: auto; max-width: 700px">
 <p>The SD are quite high in general. This stems from the fact that participants seem to have used difference response criterions. It is notable there is a lot of disagreement among the participant with regard to expectancy of the towel. This definitely needs more attention and I am considering not to use the towels.</p>
 <p>Finally, I am also interest to see whether there is a relationship between the average expectancy across all locations and the overall expectancy rated at the end of the experiment.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>objectAverageLocation <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rowMeans</span>(averageLocationRatings)
-</span></span><span style="display:flex;"><span>correlationDF         <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Object <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, labels <span style="color:#f92672">=</span> objectNames), Location <span style="color:#f92672">=</span> objectAverageLocation, Overall <span style="color:#f92672">=</span> averageObjectRatings)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>correlation <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(<span style="color:#f92672">~</span> Overall <span style="color:#f92672">+</span> Location, data <span style="color:#f92672">=</span> correlationDF)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(correlationDF, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Location, y <span style="color:#f92672">=</span> Overall)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_point</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_smooth</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;lm&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-25</span>, <span style="color:#ae81ff">35</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-75</span>, <span style="color:#ae81ff">150</span>), expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">labs</span>(title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Average rating across locations vs. overall ratings&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">annotate</span>(<span style="color:#e6db74">&#34;text&#34;</span>, x <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">-50</span>, label <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;r &#39;</span>, <span style="color:#a6e22e">rValue</span>(correlation<span style="color:#f92672">$</span>estimate), <span style="color:#e6db74">&#39;, p &#39;</span> , <span style="color:#a6e22e">pValue</span>(correlation<span style="color:#f92672">$</span>p.value), sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) , size <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
-</span></span></code></pre></div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-7-1.png" style="width: auto; height: auto; max-width: 700px">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">objectAverageLocation</span> <span class="o">&lt;-</span> <span class="nf">rowMeans</span><span class="p">(</span><span class="n">averageLocationRatings</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">correlationDF</span>         <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">Object</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">objectNames</span><span class="p">),</span> <span class="n">Location</span> <span class="o">=</span> <span class="n">objectAverageLocation</span><span class="p">,</span> <span class="n">Overall</span> <span class="o">=</span> <span class="n">averageObjectRatings</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">correlation</span> <span class="o">&lt;-</span> <span class="nf">cor.test</span><span class="p">(</span><span class="o">~</span> <span class="n">Overall</span> <span class="o">+</span> <span class="n">Location</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">correlationDF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="n">correlationDF</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Location</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Overall</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_point</span><span class="p">()</span> <span class="o">+</span> <span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="s">&#39;lm&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">xlim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-25</span><span class="p">,</span> <span class="m">35</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-75</span><span class="p">,</span> <span class="m">150</span><span class="p">),</span> <span class="n">expand</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span> <span class="nf">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">&#39;Average rating across locations vs. overall ratings&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">annotate</span><span class="p">(</span><span class="s">&#34;text&#34;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="m">20</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="m">-50</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;r &#39;</span><span class="p">,</span> <span class="nf">rValue</span><span class="p">(</span><span class="n">correlation</span><span class="o">$</span><span class="n">estimate</span><span class="p">),</span> <span class="s">&#39;, p &#39;</span> <span class="p">,</span> <span class="nf">pValue</span><span class="p">(</span><span class="n">correlation</span><span class="o">$</span><span class="n">p.value</span><span class="p">),</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">)</span> <span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">5</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/post/2018-01-10-analysing-normative-data-set_files/figure-html/unnamed-chunk-7-1.png" style="width: auto; height: auto; max-width: 700px">
 <p>As it turns out, there is a significant positive correlation between the average ratings across locations and the overall ratings r, <em>r</em> = .556, <em>p</em> = .011.</p>
 
 

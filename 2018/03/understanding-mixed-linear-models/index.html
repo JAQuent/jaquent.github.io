@@ -30,7 +30,7 @@ This work documents my attempt to understand the model structure of mixed linear
   "@type": "BlogPosting",
   "headline": "Understanding mixed linear models",
   "url": "https://jaquent.github.io/2018/03/understanding-mixed-linear-models/",
-  "wordCount": "4975",
+  "wordCount": "5268",
   "datePublished": "2018-03-14T00:00:00+00:00",
   "dateModified": "2018-03-14T00:00:00+00:00",
   "author": {
@@ -63,6 +63,172 @@ This work documents my attempt to understand the model structure of mixed linear
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -70,16 +236,16 @@ This work documents my attempt to understand the model structure of mixed linear
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -143,46 +309,91 @@ This work documents my attempt to understand the model structure of mixed linear
 <p>The design of the fictive experiment that 100 subjects see 20 objects and provide a continuous measure of memory for each objects. The expectancy of the objects (<em>X</em>) servers as a predictor for the memory performance (<em>Y</em>).</p>
 <p>I start with very easy models and add more effects in order to finally arrive at my target model (model 5).</p>
 <h2 id="libraries--functions">Libraries &amp; functions</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lmerTest)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>pValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x, sign <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;=&#39;</span>){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
-</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary.lm</span>(x)
-</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pf</span>(s<span style="color:#f92672">$</span>fstatistic[1L], s<span style="color:#f92672">$</span>fstatistic[2L], s<span style="color:#f92672">$</span>fstatistic[3L], lower.tail <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
-</span></span><span style="display:flex;"><span>    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
-</span></span><span style="display:flex;"><span>    } else{
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>  } else {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>){
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;There is no p-value greater than 1&#34;</span>)
-</span></span><span style="display:flex;"><span>    } else <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>){
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;&lt; .001&#39;</span>
-</span></span><span style="display:flex;"><span>    } else{
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(sign,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>))
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(x.converted)
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>rValue <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(x){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">inherits</span>(x, <span style="color:#e6db74">&#34;lm&#34;</span>)){
-</span></span><span style="display:flex;"><span>    r.squared <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(x)<span style="color:#f92672">$</span>r.squared
-</span></span><span style="display:flex;"><span>    x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">round</span>(r.squared, <span style="color:#ae81ff">3</span>)), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
-</span></span><span style="display:flex;"><span>  } else {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if </span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>){
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;= -&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>), sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>) 
-</span></span><span style="display:flex;"><span>    } else {
-</span></span><span style="display:flex;"><span>      x.converted <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;=&#39;</span>,<span style="color:#a6e22e">substr</span>(<span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">round</span>(x, <span style="color:#ae81ff">3</span>))), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>)) 
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(x.converted) 
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="model-1-simple-regression-model-with-1-level">Model 1: Simple regression model with 1 level</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">lmerTest</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pValue</span> <span class="o">&lt;-</span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sign</span> <span class="o">=</span> <span class="s">&#39;=&#39;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">if </span><span class="p">(</span><span class="nf">inherits</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#34;lm&#34;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">&lt;-</span> <span class="nf">summary.lm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">pf</span><span class="p">(</span><span class="n">s</span><span class="o">$</span><span class="n">fstatistic[1L]</span><span class="p">,</span> <span class="n">s</span><span class="o">$</span><span class="n">fstatistic[2L]</span><span class="p">,</span> <span class="n">s</span><span class="o">$</span><span class="n">fstatistic[3L]</span><span class="p">,</span> <span class="n">lower.tail</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">stop</span><span class="p">(</span><span class="s">&#34;There is no p-value greater than 1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="m">0.001</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="s">&#39;&lt; .001&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">stop</span><span class="p">(</span><span class="s">&#34;There is no p-value greater than 1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="m">0.001</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="s">&#39;&lt; .001&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">return</span><span class="p">(</span><span class="n">x.converted</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rValue</span> <span class="o">&lt;-</span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">if </span><span class="p">(</span><span class="nf">inherits</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#34;lm&#34;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r.squared</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">$</span><span class="n">r.squared</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">r.squared</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if </span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="m">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;= -&#39;</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">3</span><span class="p">))),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">),</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">x.converted</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">,</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">3</span><span class="p">))),</span> <span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">return</span><span class="p">(</span><span class="n">x.converted</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="model-1-simple-regression-model-with-1-level">Model 1: Simple regression model with 1 level</h2>
 <p>Assume that expectancy and memory performance was aggregated across subjects.In this model, objects&rsquo; memorability is predicted by their average expectancy values. The corresponding formula looks like this:
 <em>Y</em><sub><em>i</em></sub> = <em>β</em><sub>0</sub> + <em>β</em><sub>1</sub><em>X</em><sub><em>i</em></sub> + <em>e</em><sub><em>i</em></sub></p>
 <ul>
@@ -192,26 +403,51 @@ This work documents my attempt to understand the model structure of mixed linear
 <li><em>β</em><sub>1</sub> refers to the linear slope.</li>
 <li><em>e</em><sub><em>i</em></sub> refers to the random errors of prediction.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generating data set</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># General values and variables</span>
-</span></span><span style="display:flex;"><span>numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>))
-</span></span><span style="display:flex;"><span>y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Coefficients</span>
-</span></span><span style="display:flex;"><span>beta0  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">8</span>
-</span></span><span style="display:flex;"><span>beta1  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.3</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
-</span></span><span style="display:flex;"><span>  y[i] <span style="color:#f92672">&lt;-</span> beta0 <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x[i] <span style="color:#f92672">+</span> e[i]
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dataFrame1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, x <span style="color:#f92672">=</span> x, objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>)) 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(y <span style="color:#f92672">~</span>  x, data <span style="color:#f92672">=</span> dataFrame1)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(model1)
-</span></span></code></pre></div><pre><code>## 
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Generating data set</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># General values and variables</span>
+</span></span><span class="line"><span class="cl"><span class="n">numObj</span> <span class="o">&lt;-</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span>      <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-100</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span>      <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Coefficients</span>
+</span></span><span class="line"><span class="cl"><span class="n">beta0</span>  <span class="o">&lt;-</span> <span class="m">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">beta1</span>  <span class="o">&lt;-</span> <span class="m">0.3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">y[i]</span> <span class="o">&lt;-</span> <span class="n">beta0</span> <span class="o">+</span> <span class="n">beta1</span><span class="o">*</span><span class="n">x[i]</span> <span class="o">+</span> <span class="n">e[i]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dataFrame1</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">objNum</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span>  <span class="n">x</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dataFrame1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">model1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## 
 ## Call:
 ## lm(formula = y ~ x, data = dataFrame1)
 ## 
@@ -248,36 +484,71 @@ Level 2:
 <li><em>W</em><sub><em>j</em></sub> refers to the level 2 predictor.</li>
 <li><em>u</em><sub>0<em>j</em></sub> refers to the random error component for the deviation of the intercept of a subject from the overall intercept.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generating data set</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># General values and variables</span>
-</span></span><span style="display:flex;"><span>numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span>e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj <span style="color:#f92672">*</span> numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>))
-</span></span><span style="display:flex;"><span>y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-</span></span><span style="display:flex;"><span>index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Coefficients</span>
-</span></span><span style="display:flex;"><span>gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">18</span>
-</span></span><span style="display:flex;"><span>gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
-</span></span><span style="display:flex;"><span>beta1   <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-100</span>
-</span></span><span style="display:flex;"><span>w       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-3</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
-</span></span><span style="display:flex;"><span>u0      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>meanBeta0 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w <span style="color:#f92672">+</span> u0) <span style="color:#75715e"># I should be able to retrieve that parameter. </span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
-</span></span><span style="display:flex;"><span>    y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w[j]<span style="color:#f92672">+</span> u0[j] <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x[index] <span style="color:#f92672">+</span> e[index]
-</span></span><span style="display:flex;"><span>    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  } 
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dataFrame2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, x <span style="color:#f92672">=</span> x, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub))) 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                 (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo), data <span style="color:#f92672">=</span> dataFrame2)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(model2)
-</span></span></code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Generating data set</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># General values and variables</span>
+</span></span><span class="line"><span class="cl"><span class="n">numObj</span> <span class="o">&lt;-</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">numSub</span> <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span>      <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-100</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span>      <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Coefficients</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma00</span> <span class="o">&lt;-</span> <span class="m">18</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma01</span> <span class="o">&lt;-</span> <span class="m">0.5</span>
+</span></span><span class="line"><span class="cl"><span class="n">beta1</span>   <span class="o">&lt;-</span> <span class="m">-100</span>
+</span></span><span class="line"><span class="cl"><span class="n">w</span>       <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-3</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u0</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">meanBeta0</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">gamma00</span> <span class="o">+</span> <span class="n">gamma01</span><span class="o">*</span><span class="n">w</span> <span class="o">+</span> <span class="n">u0</span><span class="p">)</span> <span class="c1"># I should be able to retrieve that parameter. </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y[index]</span> <span class="o">&lt;-</span> <span class="n">gamma00</span> <span class="o">+</span> <span class="n">gamma01</span><span class="o">*</span><span class="n">w[j]</span><span class="o">+</span> <span class="n">u0[j]</span> <span class="o">+</span> <span class="n">beta1</span><span class="o">*</span><span class="n">x[index]</span> <span class="o">+</span> <span class="n">e[index]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">&lt;-</span> <span class="n">index</span> <span class="o">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dataFrame2</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">subNo</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="n">numObj</span><span class="p">)),</span> <span class="n">objNum</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">,</span> <span class="n">numSub</span><span class="p">)))</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model2</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span>  <span class="n">x</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">subNo</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dataFrame2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + (1 | subNo)
 ##    Data: dataFrame2
@@ -305,15 +576,29 @@ Level 2:
 ##   (Intr)
 ## x 0.000
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">anova</span>(model2)
-</span></span></code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">anova</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##     Sum Sq  Mean Sq NumDF  DenDF    F value    Pr(&gt;F)    
 ## x 19123395 19123395     1 1899.1 1970854622 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Extract intercept for each subject by coef(model2). </span>
-</span></span></code></pre></div><p>As you can see above (fixed effects), $\hat{\beta_{0.}} =$ 18.0612368 is approximating the true (18.0601846). The same is true for $\hat{\beta_{1}} =$ -100.0019619 (vs -100). The estimated level 1 intercept for subject 1 was also close to the true value (18.8278538 vs 18.8320122).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Extract intercept for each subject by coef(model2). </span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>As you can see above (fixed effects), $\hat{\beta_{0.}} =$ 18.0612368 is approximating the true (18.0601846). The same is true for $\hat{\beta_{1}} =$ -100.0019619 (vs -100). The estimated level 1 intercept for subject 1 was also close to the true value (18.8278538 vs 18.8320122).</p>
 <h2 id="model-3-random-intercept-and-slope-for-each-subject">Model 3: Random intercept and slope for each subject</h2>
 <p>In the next model, I am additionally allowing the slope randomly different for each subject. This means that the strength of the relationship between the level 1 predictor <em>X</em> and the memory scores <em>Y</em> varies across subjects.</p>
 <p>Level 1:
@@ -334,37 +619,73 @@ Level 2:
 <li><em>γ</em><sub>10</sub> overall slope of the level 2.</li>
 <li><em>u</em><sub>1<em>j</em></sub> refers to the random error component for the deviation of the slope of a subject from the overall intercept.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generating data set</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># General values and variables</span>
-</span></span><span style="display:flex;"><span>numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span>e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj <span style="color:#f92672">*</span> numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>))
-</span></span><span style="display:flex;"><span>y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-</span></span><span style="display:flex;"><span>index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Coefficients</span>
-</span></span><span style="display:flex;"><span>gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">18</span>
-</span></span><span style="display:flex;"><span>gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
-</span></span><span style="display:flex;"><span>gamma10 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-100</span>
-</span></span><span style="display:flex;"><span>w       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-3</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
-</span></span><span style="display:flex;"><span>u0      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>u1      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>meanBeta0 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w <span style="color:#f92672">+</span> u0) <span style="color:#75715e"># I should be able to retrieve that parameter. </span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
-</span></span><span style="display:flex;"><span>    y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w[j]<span style="color:#f92672">+</span> u0[j] <span style="color:#f92672">+</span> (gamma10 <span style="color:#f92672">+</span> u1[j])<span style="color:#f92672">*</span>x[index] <span style="color:#f92672">+</span> e[index]
-</span></span><span style="display:flex;"><span>    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  } 
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dataFrame3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, x <span style="color:#f92672">=</span> x, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub))) 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                 (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> x <span style="color:#f92672">|</span> subNo), data <span style="color:#f92672">=</span> dataFrame3)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(model3)
-</span></span></code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Generating data set</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># General values and variables</span>
+</span></span><span class="line"><span class="cl"><span class="n">numObj</span> <span class="o">&lt;-</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">numSub</span> <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span>      <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-100</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span>      <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Coefficients</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma00</span> <span class="o">&lt;-</span> <span class="m">18</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma01</span> <span class="o">&lt;-</span> <span class="m">0.5</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma10</span> <span class="o">&lt;-</span> <span class="m">-100</span>
+</span></span><span class="line"><span class="cl"><span class="n">w</span>       <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-3</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u0</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u1</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">meanBeta0</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">gamma00</span> <span class="o">+</span> <span class="n">gamma01</span><span class="o">*</span><span class="n">w</span> <span class="o">+</span> <span class="n">u0</span><span class="p">)</span> <span class="c1"># I should be able to retrieve that parameter. </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y[index]</span> <span class="o">&lt;-</span> <span class="n">gamma00</span> <span class="o">+</span> <span class="n">gamma01</span><span class="o">*</span><span class="n">w[j]</span><span class="o">+</span> <span class="n">u0[j]</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma10</span> <span class="o">+</span> <span class="n">u1[j]</span><span class="p">)</span><span class="o">*</span><span class="n">x[index]</span> <span class="o">+</span> <span class="n">e[index]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">&lt;-</span> <span class="n">index</span> <span class="o">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dataFrame3</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">subNo</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="n">numObj</span><span class="p">)),</span> <span class="n">objNum</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">,</span> <span class="n">numSub</span><span class="p">)))</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model3</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span>  <span class="n">x</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">|</span> <span class="n">subNo</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dataFrame3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">model3</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + (1 + x | subNo)
 ##    Data: dataFrame3
@@ -393,8 +714,15 @@ Level 2:
 ##   (Intr)
 ## x 0.106
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">anova</span>(model3)
-</span></span></code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">anova</span><span class="p">(</span><span class="n">model3</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##    Sum Sq Mean Sq NumDF  DenDF   F value    Pr(&gt;F)    
 ## x 1114376 1114376     1 99.528 114532908 &lt; 2.2e-16 ***
 ## ---
@@ -421,39 +749,77 @@ Level 2:
 <li><em>W</em><sub>2<em>j</em></sub> refers to the level 2 predictor for subjects.</li>
 <li><em>u</em><sub>02<em>j</em></sub> refers to the random error component for the deviation of the intercept of a subject from the overall intercept.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generating data set</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># General values and variables</span>
-</span></span><span style="display:flex;"><span>numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span>e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj <span style="color:#f92672">*</span> numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>))
-</span></span><span style="display:flex;"><span>y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-</span></span><span style="display:flex;"><span>index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Coefficients</span>
-</span></span><span style="display:flex;"><span>gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">18</span>
-</span></span><span style="display:flex;"><span>gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
-</span></span><span style="display:flex;"><span>gamma02 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-10</span>
-</span></span><span style="display:flex;"><span>beta1    <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-100</span>
-</span></span><span style="display:flex;"><span>w1       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
-</span></span><span style="display:flex;"><span>w2       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-3</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
-</span></span><span style="display:flex;"><span>u01       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>u02       <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
-</span></span><span style="display:flex;"><span>    y[index] <span style="color:#f92672">&lt;-</span>gamma00 <span style="color:#f92672">+</span> gamma01<span style="color:#f92672">*</span>w1[i] <span style="color:#f92672">+</span> u01[i] <span style="color:#f92672">+</span> gamma02<span style="color:#f92672">*</span>w2[j] <span style="color:#f92672">+</span> u02[j] <span style="color:#f92672">+</span> beta1<span style="color:#f92672">*</span>x[index] <span style="color:#f92672">+</span> e[index]
-</span></span><span style="display:flex;"><span>    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  } 
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dataFrame4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, x <span style="color:#f92672">=</span> x, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub))) 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                 (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                 (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> objNum), data <span style="color:#f92672">=</span> dataFrame4)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(model4)
-</span></span></code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Generating data set</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># General values and variables</span>
+</span></span><span class="line"><span class="cl"><span class="n">numObj</span> <span class="o">&lt;-</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">numSub</span> <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span>      <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-100</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span>      <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Coefficients</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma00</span> <span class="o">&lt;-</span> <span class="m">18</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma01</span> <span class="o">&lt;-</span> <span class="m">0.5</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma02</span> <span class="o">&lt;-</span> <span class="m">-10</span>
+</span></span><span class="line"><span class="cl"><span class="n">beta1</span>    <span class="o">&lt;-</span> <span class="m">-100</span>
+</span></span><span class="line"><span class="cl"><span class="n">w1</span>       <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">w2</span>       <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-3</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u01</span>       <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u02</span>       <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y[index]</span> <span class="o">&lt;-</span><span class="n">gamma00</span> <span class="o">+</span> <span class="n">gamma01</span><span class="o">*</span><span class="n">w1[i]</span> <span class="o">+</span> <span class="n">u01[i]</span> <span class="o">+</span> <span class="n">gamma02</span><span class="o">*</span><span class="n">w2[j]</span> <span class="o">+</span> <span class="n">u02[j]</span> <span class="o">+</span> <span class="n">beta1</span><span class="o">*</span><span class="n">x[index]</span> <span class="o">+</span> <span class="n">e[index]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">&lt;-</span> <span class="n">index</span> <span class="o">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dataFrame4</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">subNo</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="n">numObj</span><span class="p">)),</span> <span class="n">objNum</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">,</span> <span class="n">numSub</span><span class="p">)))</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model4</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span>  <span class="n">x</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">subNo</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">objNum</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dataFrame4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + (1 | subNo) + (1 | objNum)
 ##    Data: dataFrame4
@@ -482,8 +848,15 @@ Level 2:
 ##   (Intr)
 ## x 0.000
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">anova</span>(model4)
-</span></span></code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">anova</span><span class="p">(</span><span class="n">model4</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##     Sum Sq  Mean Sq NumDF DenDF    F value    Pr(&gt;F)    
 ## x 18621423 18621423     1  1880 1939423508 &lt; 2.2e-16 ***
 ## ---
@@ -519,50 +892,99 @@ Level 2:
 <li><em>γ</em><sub>20</sub> overall quadratic slope of the level 2.</li>
 <li><em>u</em><sub>2<em>j</em></sub> refers to the random error component for the deviation from the quadratic slope of a subject from the overall intercept.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generating data set</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># General values</span>
-</span></span><span style="display:flex;"><span>numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span>index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-</span></span><span style="display:flex;"><span>x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj <span style="color:#f92672">*</span> numSub, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)) <span style="color:#75715e"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
-</span></span><span style="display:flex;"><span>x2     <span style="color:#f92672">&lt;-</span> x<span style="color:#f92672">*</span>x
-</span></span><span style="display:flex;"><span>e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>) 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Coefficients</span>
-</span></span><span style="display:flex;"><span>gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
-</span></span><span style="display:flex;"><span>gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>gamma02 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">8</span>
-</span></span><span style="display:flex;"><span>gamma10 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>gamma20 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Varying stuff</span>
-</span></span><span style="display:flex;"><span>w1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-4</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>w2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span>  <span style="color:#ae81ff">0</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>u01 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>u02 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>u1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>u2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Long format</span>
-</span></span><span style="display:flex;"><span>    y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01 <span style="color:#f92672">*</span> w1[i]  <span style="color:#f92672">+</span> u01[i] <span style="color:#f92672">+</span> gamma02 <span style="color:#f92672">*</span> w2[j] <span style="color:#f92672">+</span> u02[j] <span style="color:#f92672">+</span> (gamma10 <span style="color:#f92672">+</span> u1[j]) <span style="color:#f92672">*</span> x[index] <span style="color:#f92672">+</span> (gamma20 <span style="color:#f92672">+</span> u2[j]) <span style="color:#f92672">*</span> x2[index] <span style="color:#f92672">+</span> e[index]
-</span></span><span style="display:flex;"><span>    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dataFrame5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub)), x <span style="color:#f92672">=</span> x, x2 <span style="color:#f92672">=</span> x2)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                    x2 <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                    (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                    (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> objNum) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                    (x2<span style="color:#f92672">|</span>subNo) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    (x<span style="color:#f92672">|</span>subNo), data <span style="color:#f92672">=</span> dataFrame5)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(model5)
-</span></span></code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Generating data set</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># General values</span>
+</span></span><span class="line"><span class="cl"><span class="n">numObj</span> <span class="o">&lt;-</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">numSub</span> <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span>      <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span>      <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-100</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span> <span class="c1"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
+</span></span><span class="line"><span class="cl"><span class="n">x2</span>     <span class="o">&lt;-</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Coefficients</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma00</span> <span class="o">&lt;-</span> <span class="m">0.5</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma01</span> <span class="o">&lt;-</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma02</span> <span class="o">&lt;-</span> <span class="m">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma10</span> <span class="o">&lt;-</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma20</span> <span class="o">&lt;-</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Varying stuff</span>
+</span></span><span class="line"><span class="cl"><span class="n">w1</span> <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-4</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">w2</span> <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span>  <span class="m">0</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u01</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u02</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u1</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u2</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Long format</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y[index]</span> <span class="o">&lt;-</span> <span class="n">gamma00</span> <span class="o">+</span> <span class="n">gamma01</span> <span class="o">*</span> <span class="n">w1[i]</span>  <span class="o">+</span> <span class="n">u01[i]</span> <span class="o">+</span> <span class="n">gamma02</span> <span class="o">*</span> <span class="n">w2[j]</span> <span class="o">+</span> <span class="n">u02[j]</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma10</span> <span class="o">+</span> <span class="n">u1[j]</span><span class="p">)</span> <span class="o">*</span> <span class="n">x[index]</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma20</span> <span class="o">+</span> <span class="n">u2[j]</span><span class="p">)</span> <span class="o">*</span> <span class="n">x2[index]</span> <span class="o">+</span> <span class="n">e[index]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">&lt;-</span> <span class="n">index</span> <span class="o">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dataFrame5</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">subNo</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="n">numObj</span><span class="p">)),</span> <span class="n">objNum</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">,</span> <span class="n">numSub</span><span class="p">)),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">x2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model5</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span>  <span class="n">x</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                    <span class="n">x2</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">subNo</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">objNum</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">x2</span><span class="o">|</span><span class="n">subNo</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">x</span><span class="o">|</span><span class="n">subNo</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dataFrame5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + x2 + (1 | subNo) + (1 | objNum) + (x2 | subNo) + (x |  
 ##     subNo)
@@ -601,16 +1023,30 @@ Level 2:
 ## unable to evaluate scaled gradient
 ## Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">anova</span>(model5)
-</span></span></code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">anova</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##    Sum Sq Mean Sq NumDF  DenDF    F value Pr(&gt;F)    
 ## x       0       0     1 98.790 4.5100e-02 0.8322    
 ## x2  10492   10492     1 98.504 1.0593e+06 &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>corrResult <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(<span style="color:#a6e22e">coef</span>(model5)<span style="color:#f92672">$</span>subNo<span style="color:#f92672">$</span><span style="color:#a6e22e">`</span>(Intercept)`, gamma00 <span style="color:#f92672">+</span> <span style="color:#a6e22e">mean</span>(gamma01<span style="color:#f92672">*</span>w1 <span style="color:#f92672">+</span> u01) <span style="color:#f92672">+</span> gamma02<span style="color:#f92672">*</span>w2 <span style="color:#f92672">+</span> u02)
-</span></span></code></pre></div><p>The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ 16.4906087 (vs 16.4837433), while subject&rsquo;s 1 performance across all objects was $\hat{\beta_{0.1}} =$ 17.3720882 (vs 15.6800431). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .185, <em>p</em> = .065. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ -0.0244874 (vs -0.0174013), while the quadratic slope was $\hat{\beta_{21}} =$ 9.9571944 (vs 9.970709).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">corrResult</span> <span class="o">&lt;-</span> <span class="nf">cor.test</span><span class="p">(</span><span class="nf">coef</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span><span class="o">$</span><span class="n">subNo</span><span class="o">$</span><span class="nf">`</span><span class="p">(</span><span class="n">Intercept</span><span class="p">)</span><span class="n">`</span><span class="p">,</span> <span class="n">gamma00</span> <span class="o">+</span> <span class="nf">mean</span><span class="p">(</span><span class="n">gamma01</span><span class="o">*</span><span class="n">w1</span> <span class="o">+</span> <span class="n">u01</span><span class="p">)</span> <span class="o">+</span> <span class="n">gamma02</span><span class="o">*</span><span class="n">w2</span> <span class="o">+</span> <span class="n">u02</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ 16.4906087 (vs 16.4837433), while subject&rsquo;s 1 performance across all objects was $\hat{\beta_{0.1}} =$ 17.3720882 (vs 15.6800431). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .185, <em>p</em> = .065. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ -0.0244874 (vs -0.0174013), while the quadratic slope was $\hat{\beta_{21}} =$ 9.9571944 (vs 9.970709).</p>
 <h3 id="model-52">Model 5.2</h3>
 <p>This model is basically the same than the previous except one different. <em>X</em> varies only across objects like as if it was aggregated values from a different population. This is case in the experiment, in which one could use the normative data instead of participants&rsquo; ratings to predict the memory score.</p>
 <p>Level 1:
@@ -639,50 +1075,99 @@ Level 2:
 <li><em>γ</em><sub>20</sub> overall quadratic slope of the level 2.</li>
 <li><em>u</em><sub>2<em>j</em></sub> refers to the random error component for the deviation from the quadratic slope of a subject from the overall intercept.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Generating data set</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># General values</span>
-</span></span><span style="display:flex;"><span>numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span>index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-</span></span><span style="display:flex;"><span>x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)) <span style="color:#75715e"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
-</span></span><span style="display:flex;"><span>x2     <span style="color:#f92672">&lt;-</span> x<span style="color:#f92672">*</span>x
-</span></span><span style="display:flex;"><span>e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>) 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Coefficients</span>
-</span></span><span style="display:flex;"><span>gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
-</span></span><span style="display:flex;"><span>gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>gamma02 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">8</span>
-</span></span><span style="display:flex;"><span>gamma10 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>gamma20 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Varying stuff</span>
-</span></span><span style="display:flex;"><span>w1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-4</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>w2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span>  <span style="color:#ae81ff">0</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>u01 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>u02 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>u1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>u2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Long format</span>
-</span></span><span style="display:flex;"><span>    y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01 <span style="color:#f92672">*</span> w1[i]  <span style="color:#f92672">+</span> u01[i] <span style="color:#f92672">+</span> gamma02 <span style="color:#f92672">*</span> w2[j] <span style="color:#f92672">+</span> u02[j] <span style="color:#f92672">+</span> (gamma10 <span style="color:#f92672">+</span> u1[j]) <span style="color:#f92672">*</span> x[i] <span style="color:#f92672">+</span> (gamma20 <span style="color:#f92672">+</span> u2[j]) <span style="color:#f92672">*</span> x2[i] <span style="color:#f92672">+</span> e[index]
-</span></span><span style="display:flex;"><span>    index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dataFrame5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub)), x <span style="color:#f92672">=</span> x, x2 <span style="color:#f92672">=</span> x2)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                    x2 <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                    (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                    (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> objNum) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                    (x2<span style="color:#f92672">|</span>subNo) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    (x<span style="color:#f92672">|</span>subNo), data <span style="color:#f92672">=</span> dataFrame5)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(model5)
-</span></span></code></pre></div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Generating data set</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># General values</span>
+</span></span><span class="line"><span class="cl"><span class="n">numObj</span> <span class="o">&lt;-</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">numSub</span> <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span>      <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span>      <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-100</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span> <span class="c1"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
+</span></span><span class="line"><span class="cl"><span class="n">x2</span>     <span class="o">&lt;-</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Coefficients</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma00</span> <span class="o">&lt;-</span> <span class="m">0.5</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma01</span> <span class="o">&lt;-</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma02</span> <span class="o">&lt;-</span> <span class="m">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma10</span> <span class="o">&lt;-</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma20</span> <span class="o">&lt;-</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Varying stuff</span>
+</span></span><span class="line"><span class="cl"><span class="n">w1</span> <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-4</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">w2</span> <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span>  <span class="m">0</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u01</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u02</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u1</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">u2</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Long format</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y[index]</span> <span class="o">&lt;-</span> <span class="n">gamma00</span> <span class="o">+</span> <span class="n">gamma01</span> <span class="o">*</span> <span class="n">w1[i]</span>  <span class="o">+</span> <span class="n">u01[i]</span> <span class="o">+</span> <span class="n">gamma02</span> <span class="o">*</span> <span class="n">w2[j]</span> <span class="o">+</span> <span class="n">u02[j]</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma10</span> <span class="o">+</span> <span class="n">u1[j]</span><span class="p">)</span> <span class="o">*</span> <span class="n">x[i]</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma20</span> <span class="o">+</span> <span class="n">u2[j]</span><span class="p">)</span> <span class="o">*</span> <span class="n">x2[i]</span> <span class="o">+</span> <span class="n">e[index]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">&lt;-</span> <span class="n">index</span> <span class="o">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dataFrame5</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">subNo</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="n">numObj</span><span class="p">)),</span> <span class="n">objNum</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">,</span> <span class="n">numSub</span><span class="p">)),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">x2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model5</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span>  <span class="n">x</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                    <span class="n">x2</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">subNo</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">objNum</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">x2</span><span class="o">|</span><span class="n">subNo</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="n">x</span><span class="o">|</span><span class="n">subNo</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dataFrame5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: y ~ x + x2 + (1 | subNo) + (1 | objNum) + (x2 | subNo) + (x |  
 ##     subNo)
@@ -718,70 +1203,146 @@ Level 2:
 ## x  -0.272       
 ## x2 -0.709  0.383
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">anova</span>(model5)
-</span></span></code></pre></div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">anova</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>## Type III Analysis of Variance Table with Satterthwaite's method
 ##     Sum Sq Mean Sq NumDF  DenDF F value   Pr(&gt;F)    
 ## x  0.00023 0.00023     1 17.006  0.0217   0.8845    
 ## x2 0.49531 0.49531     1 16.980 47.6909 2.56e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </code></pre>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>corrResult <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(<span style="color:#a6e22e">coef</span>(model5)<span style="color:#f92672">$</span>subNo<span style="color:#f92672">$</span><span style="color:#a6e22e">`</span>(Intercept)`, gamma00 <span style="color:#f92672">+</span> <span style="color:#a6e22e">mean</span>(gamma01<span style="color:#f92672">*</span>w1 <span style="color:#f92672">+</span> u01) <span style="color:#f92672">+</span> gamma02<span style="color:#f92672">*</span>w2 <span style="color:#f92672">+</span> u02)
-</span></span></code></pre></div><p>The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ 16.6529841 (vs 16.6423956), while subject&rsquo;s 1 performance across all objects was $\hat{\beta_{0.1}} =$ 17.139073 (vs 20.5890653). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .094, <em>p</em> = .352. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ 0.0037117 (vs -0.1519748), while the quadratic slope was $\hat{\beta_{21}} =$ 9.9792044 (vs 10.2879503).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">corrResult</span> <span class="o">&lt;-</span> <span class="nf">cor.test</span><span class="p">(</span><span class="nf">coef</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span><span class="o">$</span><span class="n">subNo</span><span class="o">$</span><span class="nf">`</span><span class="p">(</span><span class="n">Intercept</span><span class="p">)</span><span class="n">`</span><span class="p">,</span> <span class="n">gamma00</span> <span class="o">+</span> <span class="nf">mean</span><span class="p">(</span><span class="n">gamma01</span><span class="o">*</span><span class="n">w1</span> <span class="o">+</span> <span class="n">u01</span><span class="p">)</span> <span class="o">+</span> <span class="n">gamma02</span><span class="o">*</span><span class="n">w2</span> <span class="o">+</span> <span class="n">u02</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The intercept of object 1 across all subjects is $\hat{\beta_{01.}} =$ 16.6529841 (vs 16.6423956), while subject&rsquo;s 1 performance across all objects was $\hat{\beta_{0.1}} =$ 17.139073 (vs 20.5890653). Compared to the other estimates, the last estimate is quite far off. However the estimates are still highly correlated with the true values, <em>r</em> = .094, <em>p</em> = .352. However on some simulations they are not, which I realised after running this script a couple of times. I have no idea why this is the case. On level 2, the linear slope for subject 1 was $\hat{\beta_{11}} =$ 0.0037117 (vs -0.1519748), while the quadratic slope was $\hat{\beta_{21}} =$ 9.9792044 (vs 10.2879503).</p>
 <h3 id="inaccurate-estimations-of-the-random-intercepts-for-each-subject">Inaccurate estimations of the random intercepts for each subject</h3>
 <p>There seems to be a problem in both simulation above that the estimate of $\hat{\beta_{0.j}}$ was quite inaccurate sometimes, but this could be due the fact that I used 16 subjects in previous analyses. To test this, I run number of simulation with the same parameters.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>n <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fixed values:</span>
-</span></span><span style="display:flex;"><span>  numObj <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>  numSub <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span>  gamma00 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.5</span>
-</span></span><span style="display:flex;"><span>  gamma01 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>  gamma02 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">8</span>
-</span></span><span style="display:flex;"><span>  gamma10 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>  gamma20 <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
-</span></span><span style="display:flex;"><span>  corrResults <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loop for n simulations</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(run in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>n){
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Generating data set</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># General values</span>
-</span></span><span style="display:flex;"><span>  index  <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  y      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-</span></span><span style="display:flex;"><span>  x      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">scale</span>(<span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-100</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)) <span style="color:#75715e"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
-</span></span><span style="display:flex;"><span>  x2     <span style="color:#f92672">&lt;-</span> x<span style="color:#f92672">*</span>x
-</span></span><span style="display:flex;"><span>  e      <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj <span style="color:#f92672">*</span> numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>) 
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Varying stuff</span>
-</span></span><span style="display:flex;"><span>  w1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numObj, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">-4</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>  w2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">runif</span>(numSub, min <span style="color:#f92672">=</span>  <span style="color:#ae81ff">0</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>  u01 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numObj, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>  u02 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>  u1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>  u2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(numSub, mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for</span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub){
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj){
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># Long format</span>
-</span></span><span style="display:flex;"><span>      y[index] <span style="color:#f92672">&lt;-</span> gamma00 <span style="color:#f92672">+</span> gamma01 <span style="color:#f92672">*</span> w1[i]  <span style="color:#f92672">+</span> u01[i] <span style="color:#f92672">+</span> gamma02 <span style="color:#f92672">*</span> w2[j] <span style="color:#f92672">+</span> u02[j] <span style="color:#f92672">+</span> (gamma10 <span style="color:#f92672">+</span> u1[j]) <span style="color:#f92672">*</span> x[i] <span style="color:#f92672">+</span> (gamma20 <span style="color:#f92672">+</span> u2[j]) <span style="color:#f92672">*</span> x2[i] <span style="color:#f92672">+</span> e[index]
-</span></span><span style="display:flex;"><span>      index <span style="color:#f92672">&lt;-</span> index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  dataFrame5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(y <span style="color:#f92672">=</span> y, subNo <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numSub, each <span style="color:#f92672">=</span> numObj)), objNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>numObj, numSub)), x <span style="color:#f92672">=</span> x, x2 <span style="color:#f92672">=</span> x2)
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">try</span>(model5 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span>  x <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                      x2 <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                      (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> subNo) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                      (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> objNum) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>                      (x2<span style="color:#f92672">|</span>subNo) <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                      (x<span style="color:#f92672">|</span>subNo), data <span style="color:#f92672">=</span> dataFrame5))
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  corrResults[run] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor.test</span>(<span style="color:#a6e22e">coef</span>(model5)<span style="color:#f92672">$</span>subNo<span style="color:#f92672">$</span><span style="color:#a6e22e">`</span>(Intercept)`, gamma00 <span style="color:#f92672">+</span> <span style="color:#a6e22e">mean</span>(gamma01<span style="color:#f92672">*</span>w1 <span style="color:#f92672">+</span> u01) <span style="color:#f92672">+</span> gamma02<span style="color:#f92672">*</span>w2 <span style="color:#f92672">+</span> u02)<span style="color:#f92672">$</span>estimate
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Even when increasing the number of subjects to 100, there were models that couldn&rsquo;t be estimated or had every low correlations coefficients. See the histogram below for the distribution.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">data.frame</span>(corrResults), <span style="color:#a6e22e">aes</span>(corrResults)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(panel.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;cm&#34;</span>), text <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>), plot.margin <span style="color:#f92672">=</span> <span style="color:#a6e22e">margin</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>)) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Frequency&#39;</span>, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Correlation coefficients&#39;</span>) <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">coord_cartesian</span>(xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
-</span></span></code></pre></div><p><img src="2018-03-14-mixed-linear-models_files/figure-markdown_github/unnamed-chunk-10-1.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">n</span> <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Fixed values:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">numObj</span> <span class="o">&lt;-</span> <span class="m">20</span>
+</span></span><span class="line"><span class="cl">  <span class="n">numSub</span> <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl">  <span class="n">gamma00</span> <span class="o">&lt;-</span> <span class="m">0.5</span>
+</span></span><span class="line"><span class="cl">  <span class="n">gamma01</span> <span class="o">&lt;-</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">  <span class="n">gamma02</span> <span class="o">&lt;-</span> <span class="m">8</span>
+</span></span><span class="line"><span class="cl">  <span class="n">gamma10</span> <span class="o">&lt;-</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">  <span class="n">gamma20</span> <span class="o">&lt;-</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">  <span class="n">corrResults</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># Loop for n simulations</span>
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">run</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Generating data set</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># General values</span>
+</span></span><span class="line"><span class="cl">  <span class="n">index</span>  <span class="o">&lt;-</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">y</span>      <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">x</span>      <span class="o">&lt;-</span> <span class="nf">scale</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-100</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">100</span><span class="p">))</span> <span class="c1"># randomly varies across object and subjects as post ratings, but the problem here could be that this assumes that the ratings for the objects across subjects are completely uncorrelated</span>
+</span></span><span class="line"><span class="cl">  <span class="n">x2</span>     <span class="o">&lt;-</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl">  <span class="n">e</span>      <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span> <span class="o">*</span> <span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">  <span class="c1"># Varying stuff</span>
+</span></span><span class="line"><span class="cl">  <span class="n">w1</span> <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="m">-4</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">w2</span> <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span>  <span class="m">0</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">u01</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numObj</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">u02</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">u1</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">u2</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">numSub</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="nf">for</span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># Long format</span>
+</span></span><span class="line"><span class="cl">      <span class="n">y[index]</span> <span class="o">&lt;-</span> <span class="n">gamma00</span> <span class="o">+</span> <span class="n">gamma01</span> <span class="o">*</span> <span class="n">w1[i]</span>  <span class="o">+</span> <span class="n">u01[i]</span> <span class="o">+</span> <span class="n">gamma02</span> <span class="o">*</span> <span class="n">w2[j]</span> <span class="o">+</span> <span class="n">u02[j]</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma10</span> <span class="o">+</span> <span class="n">u1[j]</span><span class="p">)</span> <span class="o">*</span> <span class="n">x[i]</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma20</span> <span class="o">+</span> <span class="n">u2[j]</span><span class="p">)</span> <span class="o">*</span> <span class="n">x2[i]</span> <span class="o">+</span> <span class="n">e[index]</span>
+</span></span><span class="line"><span class="cl">      <span class="n">index</span> <span class="o">&lt;-</span> <span class="n">index</span> <span class="o">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">dataFrame5</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">subNo</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numSub</span><span class="p">,</span> <span class="n">each</span> <span class="o">=</span> <span class="n">numObj</span><span class="p">)),</span> <span class="n">objNum</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">numObj</span><span class="p">,</span> <span class="n">numSub</span><span class="p">)),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">x2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="nf">try</span><span class="p">(</span><span class="n">model5</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span>  <span class="n">x</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                      <span class="n">x2</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                      <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">subNo</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                      <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">objNum</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                      <span class="p">(</span><span class="n">x2</span><span class="o">|</span><span class="n">subNo</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">(</span><span class="n">x</span><span class="o">|</span><span class="n">subNo</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dataFrame5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">corrResults[run]</span> <span class="o">&lt;-</span> <span class="nf">cor.test</span><span class="p">(</span><span class="nf">coef</span><span class="p">(</span><span class="n">model5</span><span class="p">)</span><span class="o">$</span><span class="n">subNo</span><span class="o">$</span><span class="nf">`</span><span class="p">(</span><span class="n">Intercept</span><span class="p">)</span><span class="n">`</span><span class="p">,</span> <span class="n">gamma00</span> <span class="o">+</span> <span class="nf">mean</span><span class="p">(</span><span class="n">gamma01</span><span class="o">*</span><span class="n">w1</span> <span class="o">+</span> <span class="n">u01</span><span class="p">)</span> <span class="o">+</span> <span class="n">gamma02</span><span class="o">*</span><span class="n">w2</span> <span class="o">+</span> <span class="n">u02</span><span class="p">)</span><span class="o">$</span><span class="n">estimate</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Even when increasing the number of subjects to 100, there were models that couldn&rsquo;t be estimated or had every low correlations coefficients. See the histogram below for the distribution.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">corrResults</span><span class="p">),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">corrResults</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_histogram</span><span class="p">()</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">panel.margin</span> <span class="o">=</span> <span class="nf">unit</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="s">&#34;cm&#34;</span><span class="p">),</span> <span class="n">text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">12</span><span class="p">),</span> <span class="n">plot.margin</span> <span class="o">=</span> <span class="nf">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">        <span class="nf">labs</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="s">&#39;Frequency&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;Correlation coefficients&#39;</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">        <span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">xlim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">expand</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="2018-03-14-mixed-linear-models_files/figure-markdown_github/unnamed-chunk-10-1.png" alt=""></p>
 <h1 id="conclusion">Conclusion</h1>
 <p>All models except the last two can be estimated with a decent accuracy. The problem for the last two models is that on rare occasions the model fails to converge or the correlation coefficients for $\hat{\beta_{0.j}}$ and their true value is very low. At the moment, I don&rsquo;t really know what to do about it.</p>
 

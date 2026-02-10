@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "Bayesian sequential designs are superior",
   "url": "https://jaquent.github.io/2020/07/bayesian-sequential-designs-are-superior/",
-  "wordCount": "1991",
+  "wordCount": "2022",
   "datePublished": "2020-07-29T00:00:00+00:00",
   "dateModified": "2020-07-29T00:00:00+00:00",
   "author": {
@@ -61,6 +61,172 @@
     
 
 
+
+<link rel="stylesheet" href="https://jaquent.github.io/css/syntax.css">
+
+
+<style>
+ 
+pre, .chroma {
+  background-color: #2d2d2d !important;
+  margin: 2px 0 !important;
+  padding: 2px 0 !important;  
+  border: 1px solid #2d2d2d !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  line-height: 1 !important;
+  position: relative;  
+}
+
+ 
+pre code, .chroma .code {
+  display: block !important;
+  color: #f8f8f2 !important;
+  background-color: transparent !important;
+  font-size: 14px !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  line-height: 1.4 !important;  
+  padding: 0 15px !important;  
+  margin: 0 !important;
+}
+
+ 
+.copy-code-btn {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: #555 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 100 !important;
+}
+
+.copy-code-btn:hover {
+  opacity: 1 !important;
+  background-color: #666 !important;
+}
+
+ 
+pre:hover .copy-code-btn,
+.chroma:hover .copy-code-btn {
+  opacity: 0.8 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function findCodeContainer(container) {
+    
+    
+    
+    const codeColumn = container.querySelector('.lntd:last-child');
+    if (codeColumn) {
+      const codePre = codeColumn.querySelector('pre:not(.lnt)');
+      if (codePre) return codePre;
+      return codeColumn.querySelector('pre, code, .code') || codeColumn;
+    }
+    
+    
+    const allPres = container.querySelectorAll('pre');
+    for (let pre of allPres) {
+      if (!pre.classList.contains('lnt')) {
+        return pre;
+      }
+    }
+    
+    
+    const codeElement = container.querySelector('code');
+    if (codeElement) return codeElement;
+    
+    
+    return container;
+  }
+  
+  
+  function extractCodeText(container) {
+    const codeContainer = findCodeContainer(container);
+    
+    
+    let rawText = codeContainer.textContent || codeContainer.innerText;
+    
+    
+    rawText = rawText.replace(/^\s*\d+\s*/gm, '');
+    
+    
+    rawText = rawText.trim();
+    
+    return rawText;
+  }
+  
+  
+  function addCopyButton(container) {
+    
+    if (container.querySelector('.copy-code-btn')) {
+      return;
+    }
+    
+    
+    if (container.closest('.lntd') && container !== document.querySelector('.chroma')) {
+      return;
+    }
+    
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.textContent = 'Copy';
+    button.title = 'Copy to clipboard';
+    
+    
+    container.style.position = 'relative';
+    container.appendChild(button);
+    
+    
+    const codeText = extractCodeText(container);
+    
+    
+    console.log('Code extracted:', codeText.substring(0, 50) + '...');
+    
+    
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        button.textContent = '✓ Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+        button.textContent = '✗ Error';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      }
+    });
+  }
+  
+  
+  
+  const chromaContainers = document.querySelectorAll('.chroma:not(.lntd .chroma)');
+  
+  if (chromaContainers.length > 0) {
+    chromaContainers.forEach(addCopyButton);
+  } else {
+    
+    const preElements = document.querySelectorAll('pre:not(.lnt):not(td pre)');
+    preElements.forEach(addCopyButton);
+  }
+});
+</script>
+
 <script src="//yihui.org/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -68,16 +234,16 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],
+            displayMath: [ [\'$$\',\'$$\'], ["\\\\[","\\\\]"] ],
             processEscapes: true,
             processEnvironments: true
         },
         // Center justify equations in code and markdown cells. Elsewhere
         // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
+        displayAlign: \'center\',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {\'.MathJax_Display\': {"margin": 0}},
             linebreaks: { automatic: true }
         }
     });
@@ -179,38 +345,75 @@ collecting data until reach the one of the pre-specified evidence
 criteria for instance a $BF_{10} &gt; 10$ or $BF_{10} &lt; 1/6$. Below you
 see an piece of code that can run this kind of simulation in simple a
 loop.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Setting seed</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Parameters</span>
-</span></span><span style="display:flex;"><span>minN      <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
-</span></span><span style="display:flex;"><span>batchSize <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">5</span>
-</span></span><span style="display:flex;"><span>crit1     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
-</span></span><span style="display:flex;"><span>crit2     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">6</span>
-</span></span><span style="display:flex;"><span>maxN      <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">300</span>
-</span></span><span style="display:flex;"><span>nIter     <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span>d         <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>nIter){
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># First iteration</span>
-</span></span><span style="display:flex;"><span>  data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(minN, d, <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>  n    <span style="color:#f92672">&lt;-</span> minN
-</span></span><span style="display:flex;"><span>  bf   <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">reportBF</span>(<span style="color:#a6e22e">ttestBF</span>(data))
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Loop</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">while</span>(bf<span style="color:#a6e22e">[length</span>(bf)] <span style="color:#f92672">&lt;</span> crit1 <span style="color:#f92672">&amp;</span> bf<span style="color:#a6e22e">[length</span>(bf)] <span style="color:#f92672">&gt;</span> crit2){
-</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(data, <span style="color:#a6e22e">rnorm</span>(minN, d, <span style="color:#ae81ff">1</span>))
-</span></span><span style="display:flex;"><span>    bf<span style="color:#a6e22e">[length</span>(bf) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">reportBF</span>(<span style="color:#a6e22e">ttestBF</span>(data))
-</span></span><span style="display:flex;"><span>    n<span style="color:#a6e22e">[length</span>(n) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]   <span style="color:#f92672">&lt;-</span> n<span style="color:#a6e22e">[length</span>(n)] <span style="color:#f92672">+</span> batchSize
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if</span>(i <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>){
-</span></span><span style="display:flex;"><span>    df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(id <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(i, <span style="color:#a6e22e">length</span>(bf)), n <span style="color:#f92672">=</span> n, bf <span style="color:#f92672">=</span> bf)
-</span></span><span style="display:flex;"><span>  } else {
-</span></span><span style="display:flex;"><span>    df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbind</span>(df, <span style="color:#a6e22e">data.frame</span>(id <span style="color:#f92672">=</span>  <span style="color:#a6e22e">rep</span>(i, <span style="color:#a6e22e">length</span>(bf)), n <span style="color:#f92672">=</span> n, bf <span style="color:#f92672">=</span> bf))
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>In this example we start with a sample size of 10 and then keep adding 5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Setting seed</span>
+</span></span><span class="line"><span class="cl"><span class="nf">set.seed</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Parameters</span>
+</span></span><span class="line"><span class="cl"><span class="n">minN</span>      <span class="o">&lt;-</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">batchSize</span> <span class="o">&lt;-</span> <span class="m">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">crit1</span>     <span class="o">&lt;-</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">crit2</span>     <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="m">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">maxN</span>      <span class="o">&lt;-</span> <span class="m">300</span>
+</span></span><span class="line"><span class="cl"><span class="n">nIter</span>     <span class="o">&lt;-</span> <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">d</span>         <span class="o">&lt;-</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nIter</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># First iteration</span>
+</span></span><span class="line"><span class="cl">  <span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">minN</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">n</span>    <span class="o">&lt;-</span> <span class="n">minN</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bf</span>   <span class="o">&lt;-</span> <span class="nf">reportBF</span><span class="p">(</span><span class="nf">ttestBF</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># Loop</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">while</span><span class="p">(</span><span class="n">bf</span><span class="nf">[length</span><span class="p">(</span><span class="n">bf</span><span class="p">)</span><span class="n">]</span> <span class="o">&lt;</span> <span class="n">crit1</span> <span class="o">&amp;</span> <span class="n">bf</span><span class="nf">[length</span><span class="p">(</span><span class="n">bf</span><span class="p">)</span><span class="n">]</span> <span class="o">&gt;</span> <span class="n">crit2</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">minN</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bf</span><span class="nf">[length</span><span class="p">(</span><span class="n">bf</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="nf">reportBF</span><span class="p">(</span><span class="nf">ttestBF</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n</span><span class="nf">[length</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="n">]</span>   <span class="o">&lt;-</span> <span class="n">n</span><span class="nf">[length</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="n">]</span> <span class="o">+</span> <span class="n">batchSize</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="nf">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="m">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">id</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nf">length</span><span class="p">(</span><span class="n">bf</span><span class="p">)),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">bf</span> <span class="o">=</span> <span class="n">bf</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">id</span> <span class="o">=</span>  <span class="nf">rep</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nf">length</span><span class="p">(</span><span class="n">bf</span><span class="p">)),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">bf</span> <span class="o">=</span> <span class="n">bf</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In this example we start with a sample size of 10 and then keep adding 5
 more data points until we either reach <code>crit1</code> or <code>crit2</code>. The true
 effect size here is 0.0. This simulation of 100 iterations is
 illustrated in this animation highlighting the sequential nature of the
