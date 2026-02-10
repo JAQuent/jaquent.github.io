@@ -28,7 +28,7 @@
   "@type": "BlogPosting",
   "headline": "Creating actually publication-ready figures for journals using `ggplot2`",
   "url": "https://jaquent.github.io/2026/02/creating-actually-publication-ready-figures-for-journals-using-ggplot2/",
-  "wordCount": "1804",
+  "wordCount": "1825",
   "datePublished": "2026-02-10T00:00:00+00:00",
   "dateModified": "2026-02-10T00:00:00+00:00",
   "author": {
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </p>
   </header>
   <p>If you’ve ever used <code>ggplot2</code> to create figures for a journal article, you’ve probably experienced this: your plot looks perfect in RStudio, but when you save it at the required dimensions (e.g. relative to an A4 page), the proportions look completely off (e.g. lines too thin/big, the font doesn&rsquo;t look right). I used to spend hours tweaking each plot individually, trial after trial, until it finally looks acceptable. This is nightmare especially if you want to update figures after changing something in the analysis.</p>
-<p>This guide walks through my workflow for creating figures that are actually publication-ready, without writing custom code for every plot or endlessly fiddling with parameters. The goal is to spend less time adjusting figures and more time doing science.</p>
+<p>This guide walks through my workflow for creating figures that are actually publication-ready, without writing custom code for every plot or endlessly fiddling with parameters. The goal is to spend less time adjusting figures.</p>
 <h2 id="journal-requirements-start-with-the-right-dimensions">Journal requirements: start with the right dimensions</h2>
 <p>Before you even start plotting, check your target journal’s figure guidelines. Common width limits range from 177.8 mm to 200 mm (e.g., Elsevier, Science, Cell). The width is usually the constraining factor, so design with that in mind.</p>
 <p>Useful resources:</p>
@@ -312,9 +312,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <li><a href="https://spj.science.org/pb-assets/SPJ/CustomPages/Misc/SPJ_Figure_Preparation_Guide-1691522222.pdf">Science Figure Preparation Guide</a></li>
 <li><a href="https://www.cell.com/information-for-authors/figure-guidelines">Cell Figure Guidelines</a></li>
 </ul>
-<h2 id="the-problem-why-figures-look-different-when-exported">The Problem: why figures look different When exported</h2>
-<p>Here’s a typical scenario: you create a multi-panel figure in RStudio, set fig.width and fig.height in inches, and everything looks fine. But when you save it at the required millimeter dimensions, the result is disappointing.</p>
-<p>Let’s illustrate with an example—a 1×4 panel figure using the classic iris dataset. Settings used for the chunk: <code>fig.width = 9,  fig.height = 2.25</code>. In my mind, the results looks pretty decent (e.g. font &amp; geom sizes) even without any further styling.</p>
+<h2 id="the-problem-why-figures-look-different-when-exported">The Problem: Why figures look different when exported?</h2>
+<p>Here’s a typical scenario: you create a multi-panel figure in RStudio, set fig.width and fig.height in inches and everything looks fine. But when you save it at the required millimeter dimensions, the result is disappointing.</p>
+<p>Let’s illustrate with an example—a 1×4 panel figure using the classic iris dataset. Settings used for the chunk: <code>fig.width = 9,  fig.height = 2.25</code>.</p>
+<p>In my mind, the results looks pretty decent (e.g. font &amp; geom sizes) even without any further styling.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -421,9 +422,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div><p><img src="/post/2026-02-10-create-publication-ready-figures/fig1.png" alt=""></p>
 <p>Some elements look okay, but many are out of proportion. So, here is how I deal with this.</p>
-<h2 id="my-current-approach-a-custom-theme-and-updated-defaults">My current approach: A custom Theme and updated defaults</h2>
+<h2 id="my-current-approach-a-custom-theme-and-updated-defaults">My current approach: A custom theme and updated defaults</h2>
 <h3 id="1-create-a-custom-theme-function">1. Create a custom theme function</h3>
-<p>Instead of adjusting each plot’s theme individually, I define a reusable <code>theme_journal()</code> function. It standardizes text sizes, line widths, and other elements based on a chosen base theme.</p>
+<p>Instead of adjusting each plot’s theme individually, I define a reusable <code>theme_journal()</code> function. It standardizes text sizes, line widths and other elements based on a chosen base theme but you can go much further with this, which I won&rsquo;t cover.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -505,7 +506,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="2-update-default-aesthetics-for-geoms">2. Update default aesthetics for geoms</h3>
-<p>Finding the default aesthetic values for each geom can be annoying. Fortunately, you can inspect them directly (e.g., <code>GeomPoint$default_aes</code>) and then set new defaults globally using <code>update_geom_defaults()</code>.</p>
+<p>To do this, you also have to know the default values but finding the default aesthetic values for each geom can be annoying. Fortunately, you can inspect them directly (e.g., <code>GeomPoint$default_aes</code>) and then set new defaults globally using <code>update_geom_defaults()</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -520,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </span></span><span class="line"><span class="cl"><span class="nf">update_geom_defaults</span><span class="p">(</span><span class="s">&#34;boxplot&#34;</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">linewidth</span> <span class="o">=</span> <span class="m">0.25</span><span class="p">))</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>This way, every subsequent plot uses these updated defaults—no need to manually set <code>size</code> or <code>linewidth</code> in each <code>geom_*()</code> call.</p>
+</div><p>This way, every subsequent plot uses these updated defaults - no need to manually set <code>size</code> or <code>linewidth</code> in each <code>geom_*()</code> call.</p>
 <h3 id="3-recreate-the-figure-with-the-new-settings">3. Recreate the figure with the new settings</h3>
 <p>Now, let’s rebuild the same four-panel figure using our custom theme and updated defaults:</p>
 <div class="highlight"><div class="chroma">
@@ -625,13 +626,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </span></span><span class="line"><span class="cl">       <span class="n">scaling</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>  <span class="n">fix_text_size</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>When importing into Inkscape, select the option “Include SVG image as editable object(s) in the current file.” When I exported my .svg files without <code>svglite</code>, the figures that very odd artefacts in them.</p>
-<h3 id="additional-tips">Additional Tips</h3>
+</div><p>When importing into Inkscape, select the option “Include SVG image as editable object(s) in the current file.” When I exported my .svg files without <code>svglite</code>, the figures have very odd artefacts in them.</p>
+<h3 id="additional-tips">Additional tips</h3>
 <ul>
 <li><strong>PowerPoint users</strong>: You can convert SVG images into editable PowerPoint objects.</li>
 <li><strong>Preview tools</strong>: Check out <code>ggview::canvas()</code> to set your RStudio viewing pane to match export proportions and <code>ggpreview()</code> from the <code>nflplotr</code> package for quick previews.</li>
 </ul>
-<h2 id="final-thoughts">Final Thoughts</h2>
+<h2 id="final-thoughts">Final thoughts</h2>
 <p>Creating publication-ready figures in R doesn’t have to be a painful process of trial and error. By defining a custom theme, updating geom defaults globally, and choosing the right export format, you can produce consistent, journal-compliant figures with minimal repetitive code.</p>
 <h2 id="session-details">Session details</h2>
 <details>
@@ -641,7 +642,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sessioninfo::session_info()
+<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">sessioninfo</span><span class="o">::</span><span class="nf">session_info</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
