@@ -10,7 +10,7 @@
 <meta property="og:description" content="where I share semi-interesting stuff from my work" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jaquent.github.io/" />
-<meta property="og:updated_time" content="2025-06-12T00:00:00+00:00" />
+<meta property="og:updated_time" content="2026-02-10T00:00:00+00:00" />
 
 
 
@@ -31,8 +31,8 @@
     "@type": "Person",
     "name": "Alex Quent"
   },
-  "dateModified": "2025-06-12T00:00:00+00:00",
-  "keywords": "experiments, general, bayesian-stats, brms, cifti, computing, fmri, glm, hcp, ijk, json, logistic-regression, matlab, mixed-linear-models, mni, noveltyvr, parallelisation, r, schemavr, scientific-computing, sequential-design, stats, textures, u-shape, unity, unity3d, voxel-index-coordinates",
+  "dateModified": "2026-02-10T00:00:00+00:00",
+  "keywords": "experiments, general, tutorials, bayesian-stats, brms, cifti, computing, data-visualisation, data-visualization, figures, fmri, ggplot2, glm, hcp, ijk, json, logistic-regression, matlab, mixed-linear-models, mni, noveltyvr, parallelisation, r, schemavr, scientific-computing, sequential-design, stats, textures, tutorial, u-shape, unity, unity3d, voxel-index-coordinates",
   "description":"where I share semi-interesting stuff from my work"
 }
 </script>
@@ -127,6 +127,26 @@
 
 <article class="blog-post">
   <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/">The priors that I use for logistic regression now</a></h2>
+    <p class="blog-post-meta"><time datetime="2021-01-19T00:00:00Z">Tue Jan 19, 2021</time> by Jörn Alexander Quent in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/bayesian-stats/" rel="tag">Bayesian Stats</a>, <a href="/tags/logistic-regression/" rel="tag">logistic regression</a>
+
+</p>
+  </header>
+  Problem In my power simulation of the U-shape experiment, I noticed that the suggested priors (click here) actually do not work very well for Bayes Factor (BF) analysis as they are too flat and hence BF are too conservative. That is because uniform or very flat priors lead to less evidence in favour of the alternative hypothesis.
+  <a href='https://jaquent.github.io/2021/01/the-priors-that-i-use-for-logistic-regression-now/'>Read more →</a>
+</article> 
+
+
+
+
+
+
+<article class="blog-post">
+  <header>
     <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2020/07/bayesian-sequential-designs-are-superior/">Bayesian sequential designs are superior</a></h2>
     <p class="blog-post-meta"><time datetime="2020-07-29T00:00:00Z">Wed Jul 29, 2020</time> by Alex Quent in 
 <span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/general/" rel="category tag">general</a>
@@ -206,31 +226,11 @@ This work documents my attempt to understand the model structure of mixed linear
 
 
 
-
-<article class="blog-post">
-  <header>
-    <h2 class="blog-post-title" dir="auto"><a href="https://jaquent.github.io/2018/01/analysing-normative-data/">Analysing normative data</a></h2>
-    <p class="blog-post-meta"><time datetime="2018-01-10T00:00:00Z">Wed Jan 10, 2018</time> by Alex Quent in 
-<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/experiments/" rel="category tag">experiments</a>
-
-
-<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/schemavr/" rel="tag">schemaVR</a>
-
-</p>
-  </header>
-  Introduction In order to be able to present object at locations with a range of expectancy values, which is crucial to show that this has U-shaped relationship, I asked six member of my research group. to rate all combinations of objects and location that exist in the virtual environment for the schemaVR task.
-  <a href='https://jaquent.github.io/2018/01/analysing-normative-data/'>Read more →</a>
-</article> 
-
-
-
-
-
 <nav class="blog-pagination">
   
-  
   <a class="btn btn-outline-primary" href="/page/2/" rel="prev" role="button">Previous page</a>
-  <a class="btn btn-outline-primary disabled" href="#" role="button" aria-disabled="true">Next page</a>
+  <a class="btn btn-outline-primary" href="/page/4/" rel="next" role="button">Next page</a>
+  
   
   
 </nav>
@@ -255,6 +255,8 @@ This work documents my attempt to understand the model structure of mixed linear
     <ol class="list-unstyled">
 
 
+<li><a href="/2026/02/creating-actually-publication-ready-figures-for-journals-using-ggplot2/">Creating actually publication-ready figures for journals using <code>ggplot2</code></a></li>
+
 <li><a href="/2025/06/visualise-your-surface-based-neuroimaging-data-on-flat-maps-using-ciftitools/">Visualise your surface-based neuroimaging data on flat maps using <code>ciftiTools</code></a></li>
 
 <li><a href="/2023/10/running-large-simulations-on-a-desktop-computer-with-r-tips-tricks/">Running large simulations on a desktop computer with R (tips &amp; tricks)</a></li>
@@ -262,8 +264,6 @@ This work documents my attempt to understand the model structure of mixed linear
 <li><a href="/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/">A way to get MNI coordinates for subcortical voxels of a CIFTI file</a></li>
 
 <li><a href="/2023/02/understanding-the-basics-of-the-general-linear-model-glm-in-the-context-of-fmri/">Understanding the basics of the general linear model (GLM) in the context of fMRI</a></li>
-
-<li><a href="/2022/09/how-to-change-uxfs-start-up-menu-using-a-.json-input-file/">How to change UXF&rsquo;s start up menu using a .json input file</a></li>
 
     </ol>
   </section>
@@ -292,6 +292,8 @@ This work documents my attempt to understand the model structure of mixed linear
             
             <a class="badge badge-secondary" href="/categories/general">general</a>
             
+            <a class="badge badge-secondary" href="/categories/tutorials">tutorials</a>
+            
         </p>
         
     
@@ -307,7 +309,15 @@ This work documents my attempt to understand the model structure of mixed linear
             
             <a class="badge badge-secondary" href="/tags/computing">computing</a>
             
+            <a class="badge badge-secondary" href="/tags/data-visualisation">data-visualisation</a>
+            
+            <a class="badge badge-secondary" href="/tags/data-visualization">data-visualization</a>
+            
+            <a class="badge badge-secondary" href="/tags/figures">figures</a>
+            
             <a class="badge badge-secondary" href="/tags/fmri">fmri</a>
+            
+            <a class="badge badge-secondary" href="/tags/ggplot2">ggplot2</a>
             
             <a class="badge badge-secondary" href="/tags/glm">glm</a>
             
@@ -340,6 +350,8 @@ This work documents my attempt to understand the model structure of mixed linear
             <a class="badge badge-secondary" href="/tags/stats">stats</a>
             
             <a class="badge badge-secondary" href="/tags/textures">textures</a>
+            
+            <a class="badge badge-secondary" href="/tags/tutorial">tutorial</a>
             
             <a class="badge badge-secondary" href="/tags/u-shape">u-shape</a>
             

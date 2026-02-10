@@ -3,7 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://jaquent.github.io/categories/</loc>
-    <lastmod>2025-06-12T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/2026/02/creating-actually-publication-ready-figures-for-journals-using-ggplot2/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/data-visualisation/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/data-visualization/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/figures/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/ggplot2/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/posts/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/tags/tutorial/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jaquent.github.io/categories/tutorials/</loc>
+    <lastmod>2026-02-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jaquent.github.io/tags/cifti/</loc>
     <lastmod>2025-06-12T00:00:00+00:00</lastmod>
@@ -15,15 +45,6 @@
     <lastmod>2025-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jaquent.github.io/tags/hcp/</loc>
-    <lastmod>2025-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jaquent.github.io/</loc>
-    <lastmod>2025-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jaquent.github.io/posts/</loc>
-    <lastmod>2025-06-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://jaquent.github.io/tags/</loc>
     <lastmod>2025-06-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://jaquent.github.io/2025/06/visualise-your-surface-based-neuroimaging-data-on-flat-maps-using-ciftitools/</loc>
